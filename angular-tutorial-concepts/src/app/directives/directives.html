@@ -1,1 +1,119 @@
-<p>directives works!</p>
+<div class="section">
+    <h1>Directives in Angular</h1>
+
+    <div class="subSection">
+        <h2>Structural Directives</h2>
+        <div>
+            <ul>
+                <li>*ngIf</li>
+                <li>*ngFor</li>
+                <li>*ngSwitch</li>
+            </ul>
+        </div>
+        <div class="subSection">
+            <h2>*ngIf Examples</h2>
+            <h4 *ngIf="showTitle">*ngIf Title show</h4>
+
+            <div>
+                <h4>if there no data show loading</h4>
+                <div *ngIf="!data">Loading...1</div>
+                <div *ngIf="data">
+                    {{data}}
+                </div>
+            </div>
+
+            <div>
+                <h4 *ngIf="!data1; else showTemplate" >Loading...2</h4>
+                <ng-template #showTemplate>
+                    {{data1}}
+                </ng-template>
+            </div>
+
+            <div>
+                <div *ngIf="data1; then dataSample; else load"></div>
+                <ng-template #load>Loading</ng-template>
+                <ng-template #dataSample>{{data1}} </ng-template>
+            </div>
+
+            <div>
+                <h4 *ngIf="showHeadOnClick">Show Heading on click</h4>
+                <button (click)="showData()">Show</button>
+            </div>
+
+            <div>
+                <h4 *ngIf="ifElseData; else noData">If data then show me else show template message</h4>
+                <div><ng-template #noData>Template Message No Data Here</ng-template></div>
+                <button (click)="showIfElseData()">Show If Else</button>
+            </div>
+        </div>
+
+        <div class="subSection">
+            <h2>*ngFor Examples</h2>
+            <div *ngFor="let item of numbers">
+                Paragraph ({{item}})
+            </div>
+            <table>
+                <h4>Table Data ({{ tableData.length }})</h4>
+                <tr>
+                    <th *ngFor="let header of tableHeaders">{{header}}</th>
+                </tr>
+                <tr *ngFor="let row of tableData">
+                    <td *ngFor="let col of row">{{ col }}</td>
+                </tr>
+            </table>
+
+            <div *ngFor="let name of names; index as i">
+                <p> data {{name}} {{i+1}}</p>
+            </div>
+
+            <div>
+                <table>
+                    <tr>
+                        <th *ngFor="let header of table">{{header}}</th>
+                    </tr>
+                    <tr *ngFor="let m of mobiles; index as i; even as e; odd as o; first as f; last as l">
+                        <td>{{m}}</td>
+                        <td>{{i}}</td>
+                        <td>{{e}}</td>
+                        <td>{{o}}</td>
+                        <td>{{f}}</td>
+                        <td>{{l}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <h3>Mobile List ({{ mobileObject.length }})</h3>
+                <table>
+                <tr>
+                    <th *ngFor="let key of mobileTableHeader">{{ key }}</th>
+                </tr>
+                <tr *ngFor="let mobile of mobileObject">
+                    <td *ngFor="let key of mobileTableHeader">{{ mobile[key] }}</td>
+                </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="subSection">
+            <h2>*ngSwitch Examples</h2>
+            <div [ngSwitch]="operation">
+                <div *ngSwitchCase="'+'">{{num1+num2}}</div>
+                <div *ngSwitchCase="'-'">{{num1-num2}}</div>
+                <div *ngSwitchCase="'*'">{{num1*num2}}</div>
+                <div *ngSwitchCase="'/'">{{num1/num2}}</div>
+                <div *ngSwitchDefault="''">No Operations Found</div>
+            </div>
+            <div>
+                <input type="text" [(ngModel)]="operation1">
+                <div [ngSwitch]="operation1">
+                <div *ngSwitchCase="'+'">{{num3}}+{{num4}}={{num3+num4}}</div>
+                <div *ngSwitchCase="'-'">{{num3}}-{{num4}}={{num3-num4}}</div>
+                <div *ngSwitchCase="'*'">{{num3}}*{{num4}}={{num3*num4}}</div>
+                <div *ngSwitchCase="'/'">{{num3}}/{{num4}}={{num3/num4}}</div>
+                <div *ngSwitchDefault="''">No Operations Found</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

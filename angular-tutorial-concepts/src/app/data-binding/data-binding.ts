@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-data-binding',
-  imports: [[CommonModule],],
+  imports: [CommonModule, FormsModule],
   templateUrl: './data-binding.html',
   styleUrl: './data-binding.scss'
 })
@@ -25,14 +26,10 @@ functionValue = "fnValue"
   isDisable: boolean =true;
   isHidden: boolean = false;
 
-  
-
   // Class Binding
   isActive: boolean=true;
   isClassApply: boolean=true;
-
   cval:string='red';
-
   styleObject: object={
     color: 'white',
     background: 'grey',
@@ -41,11 +38,9 @@ functionValue = "fnValue"
   hasError: boolean=true;
 
   // Event Binding
-
   OnSubmit() {
     alert('Button Event fired')
   }
-
   counterValue: number=0
   increment() {
     this.counterValue+=1; //counterValue=counterValue+1
@@ -53,11 +48,18 @@ functionValue = "fnValue"
   decrement() {
     this.counterValue-=1; //counterValue=counterValue-1
   }
-
   userName='xyz';
   changeName(e:any) {
     console.log(e);
-    console.log(e.trarget);
-    console.log(e.trarget.value);
+    console.log(e.target);
+    console.log(e.target.value);
+    this.userName=e.target.value;
   }
+
+  // Two Way Data Binding - ngModel;
+  city="Hyderabad";
+  updateCity() {
+    this.city="Bengalore"
+  }
+
 }

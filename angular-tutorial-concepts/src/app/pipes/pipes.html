@@ -1,1 +1,26 @@
-<p>pipes works!</p>
+<div class="section">
+    <h1>Angular Pipes</h1>
+    <div class="subSection">
+        <h2>Built in Pipes</h2>
+        <h4>{{pipeName | uppercase}}</h4>
+        <h4>{{pipeName | lowercase}}</h4>
+        <h4>{{pipeName | titlecase}}</h4>
+        <h4>{{salary | currency}}</h4>
+        <h4>{{salary | currency: 'INR'}}</h4> <!--PIPE PARAMETERS-->
+        <h4>{{salary | currency: 'INR': 'code'}}</h4> <!--PIPE PARAMETERS-->
+        <h4>{{salary | currency: 'INR': 'symbol'}}</h4> <!--PIPE PARAMETERS-->
+        <h4>{{pipeJson | json}}</h4>
+        <h4>{{DOB | date}}</h4>
+        <h4>{{DOB | date: 'dd/MM/yyyy'}}</h4>
+        <h4>{{percentage | percent}}</h4>
+        <h4>{{sliceText}}</h4>
+        <h4>{{sliceText|slice: 0:5}}</h4>
+    </div>
+    <div class="subSection">
+        <h2>Custom Pipes</h2>
+
+        <div>
+            <h4>{{person | customPipes: wish}}</h4>
+        </div>
+    </div>
+</div>

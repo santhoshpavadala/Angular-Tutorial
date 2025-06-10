@@ -13,7 +13,7 @@ import { Pipes } from './pipes/pipes';
   styleUrl: './app.scss'
 })
 export class App {
-  title = 'angular-tutorial-concepts';
+  title = 'Angular Input Decerator Title';
   pnumber = [10, 30, 50, 70, 90];
 
   childData:string='';

@@ -1,8 +1,15 @@
-<h2>{{ parentTitle }}</h2>
-<div *ngFor="let n of parentNumber">
-    {{ n }}
-</div>
+<div class="section">
+    <h1>Decerators</h1>
+    <div class="subSection">
+        <h2>Input Decerators</h2>
+    <h4>{{ parentTitle }}</h4>
+    <div *ngFor="let n of parentNumber">
+        {{ n }}
+    </div>
+    </div>
 
-<div>
-    <button class="btn btn-primary" (click)="onClick()">Send</button>
+    <div class="subSection">
+        <h2>Output Decerators</h2>
+        <button class="btn btn-primary" (click)="onClick()">Send</button>
+    </div>
 </div>

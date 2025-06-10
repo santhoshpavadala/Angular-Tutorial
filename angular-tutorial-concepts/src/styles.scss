@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+.section { border: 2px solid gray; border-radius: 4px; padding: 10px; margin: 10px; background: lightblue;
+    h1 { color: #0070d2; text-align: center; }
+    h2 { color: #0070d2; }
+    .subSection { border: 1px solid white; border-radius: 4px; padding: 5px; margin: 5px 0;  }
+}
+
+// Table Global Scss
+table { font-family: arial, sans-serif; border-collapse: collapse; width: 100%; margin: 10px 0;
+    th, td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+    }
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+}
+
+
+

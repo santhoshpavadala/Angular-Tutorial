@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './angular-basics.scss'
 })
 export class AngularBasics {
-title="Angular-Basics"
+title="Angular-Basics";
+alertFn() { 
+  alert("Welcome to Angular Tutorial")
+}
 }
