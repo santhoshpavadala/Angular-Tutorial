@@ -1,0 +1,12 @@
+<header>
+    <div class="leftHeader">My Logo</div>
+    <div class="rightHeader">
+        <a routerLink="/products" routerLinkActive="active">All</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Laptops'}">Laptops</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Tabs'}">Tabs</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Mobiles'}">Mobiles</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Electronics'}">Electronics</a>
+
+        <button class="btn btn-secondary" (click)="navigate()">Btn Route</button>
+    </div>
+</header>

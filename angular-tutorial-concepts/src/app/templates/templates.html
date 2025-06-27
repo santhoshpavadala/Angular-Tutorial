@@ -1,0 +1,13 @@
+<div class="section">
+    <h1>Templates</h1>
+    <div class="suubSection">
+        <h2>Template Reference Variable</h2>
+        <div>
+            <input type="text" placeholder="Enter Text" value="abc@gmail.com" #e>
+            <button (click)="updateEmail(e.value)">Update</button>
+            <div id="special" class="emailBlock emailHeader" #divReference>{{email}}</div>
+            <div>{{divReference.classList}}</div>
+            <div>{{divReference.id}}</div>
+        </div>
+    </div>
+</div>

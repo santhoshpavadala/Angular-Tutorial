@@ -1,0 +1,13 @@
+<h2>Route Parameters Examples with number of Ids</h2>
+<div class="cardContainer">
+<div *ngFor="let user of users" class="card">
+    <span>{{user.name}}</span>
+    <span>
+        <a [routerLink]="['/usercard', user.id]" routerLinkActive="active">Profile</a>
+    </span>
+</div>
+</div>
+
+<h2>Query Parameters Example '? condition (Key & Value)' syntax</h2>
+    <p><b>Syntax: </b>routerLink="/users" routerLinkActive="active" [queryParams]='category': 'Admin' check syntax correctly
+    </p>

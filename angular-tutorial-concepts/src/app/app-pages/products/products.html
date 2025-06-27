@@ -1,0 +1,11 @@
+<div class="cardContainer">
+    <div class="card" *ngFor="let product of products">
+        <div class="cardHeader">Product Name : {{product.name}}</div>
+            <div class="card-body">
+                <img src="{{product.imgLink}}" alt="">
+                <p class="card-text">Product Price : {{product.price}}</p>
+                <button class="btn btn-primary">Buy</button>
+            </div>
+
+    </div>
+</div>

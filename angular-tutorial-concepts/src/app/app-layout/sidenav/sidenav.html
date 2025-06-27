@@ -1,0 +1,15 @@
+<aside>
+  <nav>
+    <a routerLink="/basics" routerLinkActive="active">Basics</a>
+    <a routerLink="/decerators" routerLinkActive="active">Decerators</a>
+    <a routerLink="/data_binding" routerLinkActive="active">Data Binding</a>
+    <a routerLink="/directives" routerLinkActive="active">Directives</a>
+    <a routerLink="/pipes" routerLinkActive="active">Pipes</a>
+    <a routerLink="/templates" routerLinkActive="active">Templates</a>
+
+    <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    <a routerLink="/users" routerLinkActive="active" [queryParams]="{'category': 'Admin', 'size': 8}">Users</a>
+  </nav>
+</aside>

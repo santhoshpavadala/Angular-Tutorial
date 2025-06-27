@@ -1,7 +1,29 @@
-<router-outlet />
-<app-angular-basics/>
-{{childData}}
-<app-decerators [parentTitle]="title" [parentNumber]="pnumber" (childData)="childData=$event"></app-decerators>
-<app-data-binding/>
-<app-directives/>
-<app-pipes/>
+<!-- <app-angular-basics/> -->
+
+<!--Output Decerator-->
+<div>{{childData}}</div>
+<!--Template Reference-->
+<div>{{templateId.templateData}}</div>
+<div>{{templateId.templateFunction()}}</div>
+<div>{{templateId.ngModelData}}</div>
+<!--ViewChild Decerator-->
+<button (click)="getChildData()">Get Child Data</button>
+<div>{{cdata}}</div>
+<app-decerators [parentTitle]="title" [parentNumber]="pnumber" (childData)="childData=$event" #templateId></app-decerators>
+
+<!-- <app-data-binding/> -->
+<!-- <app-directives/> -->
+<!-- <app-pipes/> -->
+<!-- <app-templates/> -->
+
+
+
+<app-header/>
+<div style="display: flex;">
+    <app-sidenav/>
+    <main style="flex: 1;">
+        <router-outlet/>
+    </main>
+</div>
+
+
