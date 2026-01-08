@@ -9,17 +9,26 @@ import { Templates } from './templates/templates';
 import { Header } from './app-layout/header/header';
 import { Sidenav } from './app-layout/sidenav/sidenav';
 import { Pagenotfound } from './pagenotfound/pagenotfound';
+import { CardComponent } from './card-component/card-component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AngularBasics, DataBinding, Directives, Decerators, Pipes, Templates, Header, Sidenav, Pagenotfound],
+  imports: [RouterOutlet, AngularBasics, Decerators, Templates, Header, Sidenav, Pagenotfound, CardComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
+  // Input Decerators
   title = 'Angular Input Decerator Title';
   pnumber = [10, 30, 50, 70, 90];
+  userData = { name: 'Alice', age: 30 };
+  
+// Output Decerators
   childData:string='';
+  message = '';
+  receiveMessage(msg: string) {
+    this.message = msg;
+  }
 
   @ViewChild(Decerators) parentDecerator!: Decerators;
   cdata='';

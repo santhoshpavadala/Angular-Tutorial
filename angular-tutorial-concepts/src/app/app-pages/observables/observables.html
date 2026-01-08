@@ -1,0 +1,19 @@
+<div class="section">
+    <h1>Angular - Observables</h1>
+
+    <div class="sub-section">
+        <h2>Obeservable Examples</h2>
+        <p>Observables are a core part of RxJS (Reactive Extensions for JavaScript), which Angular uses extensively under the hood. <br>
+            Think of an Observable as:<br>
+            A stream of data that arrives over time<br>
+            Something you can subscribe to<br>
+            An elegant way to handle asynchronous operations (HTTP calls, user events, WebSockets, etc.)</p>
+
+            <button class="btn btn-success" (click)="getObservable()">Get Observable</button>
+            <button class="btn btn-success" (click)="getObservable2()">Get Observable2</button>
+            <button class="btn btn-success" (click)="getObservable3()">Get Observable3</button>
+            {{data3}}
+            <div>{{error3}}</div>
+            <button class="btn btn-success" (click)="unsub()">UnSubscribe</button>
+    </div>
+</div>

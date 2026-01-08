@@ -1,0 +1,47 @@
+<div class="section">
+    <h1>Routing Examples Component</h1>
+
+    <div class="sub-section">
+        <h2>This is Child/Nested Routing Examples</h2>
+
+        <ul>
+            <li><a routerLink="/routings/childroute1">Child1</a></li>
+            <li><a routerLink="/routings/childroute2">Child2</a></li>
+            <li><a routerLink="/routings/childroute3">Child3</a></li>
+            <li><a routerLink="/routings/childroute4">Child4</a></li>
+            <li><a routerLink="/routings/childroute5">Child5</a></li>
+        </ul>
+
+        <router-outlet></router-outlet>
+    </div>
+
+    <div class="sub-section">
+        <h2>Angular Route Gaurds Examples</h2>
+        <p>Route guards are interfaces that let you control navigation in your Angular app. For example: <br>
+            Should the user be allowed to enter this route?<br>
+            Should the user leave the current route?<br>
+            Should a module load at all?</p>
+            
+        <p>This is useful for:<br>
+            Authentication (allow only logged-in users)<br>
+            Authorization (allow only admins)<br>
+            Confirming navigation (unsaved changes)<br>
+            Lazy-loading control</p>
+
+        <p>Angular provides these guard interfaces: <br>
+            Guard Interface	Purpose<br>
+            CanActivate - Check if the route can be activated <br>
+            CanActivateChild - Check if child routes can be activated<br>
+            CanDeactivate - Check if user can leave the current route<br>
+            CanLoad - Check if a lazy-loaded module can be loaded<br>
+            CanMatch - Check if the route should match (Angular 15+)</p>
+
+            <div>
+                <b>Steps:</b>
+                <ul>
+                    <li>In which service file.ts we need to get the interface of canActive in export class as <b>implements CanActivate</b></li>
+                    <li>We need to write a method of canActivate inside of interface</li>
+                </ul>
+            </div>
+    </div>
+</div>

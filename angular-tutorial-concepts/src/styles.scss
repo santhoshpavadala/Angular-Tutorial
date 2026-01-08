@@ -1,8 +1,50 @@
+// Project Main css structure;
+@import './styles/variables.scss';
+@import './styles/typography.scss';
+@import './styles/mixin.scss';
+@import './styles/layout.scss';
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $color-text;
+    background-color: $color-bg;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: $color-text;
+}
+
+// LINKS
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* You can add global styles to this file, and also import other style files */
 .section { border: 2px solid gray; border-radius: 4px; padding: 10px; margin: 10px; background: lightblue;
     h1 { color: #0070d2; text-align: center; }
     h2 { color: #0070d2; }
-    .subSection { border: 1px solid white; border-radius: 4px; padding: 5px; margin: 5px 0;  }
+    .sub-section { border: 1px solid white; border-radius: 4px; padding: 5px; margin: 5px 0;  }
 }
 
 // Table Global Scss
@@ -43,8 +85,50 @@ header { background: blue; color: white; display: flex; justify-content: space-b
     .card { padding: 20px; }
 }
 
-.row { --bs-gutter-x: 0rem !important; }
+// .row { --bs-gutter-x: 0rem !important; }
 
 img {
     max-width: 100%;
+}
+
+.tooltipContainer { position: relative; display: inline-block;
+    .tooltiptext { visibility: hidden; position: absolute; width: 50vw; top: 100%; right: 0%; background: whitesmoke; color: black; padding: 10px; border-radius: 4px; z-index: 1; }
+    &:hover {
+        .tooltiptext { visibility: visible; }
+    }
+}
+
+.cardflexContainer {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  margin: 10px;
+  gap: 10px;
+  // justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .cards {
+    padding: 10px;
+    width: calc(33.33% - 10px);
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: blue;
+  }
+}
+
+@media (max-width: 400px) {
+  .cardflexContainer {
+      .cards {
+        width: calc(100% - 10px);
+        background-color: red;
+      }
+  }
+}
+
+@media (min-width: 400px) and (max-width: 768px) {
+  .cardflexContainer {
+      .cards {
+        width: calc(50% - 10px);
+      }
+    }
 }

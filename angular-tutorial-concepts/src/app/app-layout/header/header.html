@@ -7,6 +7,9 @@
         <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Mobiles'}">Mobiles</a>
         <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Electronics'}">Electronics</a>
 
-        <button class="btn btn-secondary" (click)="navigate()">Btn Route</button>
+        <div class="tooltipContainer">
+            <button class="btn btn-secondary" (click)="navigate()">Btn Route</button>
+            <p class="tooltiptext">Navigate function is used to route the compoent with the help of angular router service</p>
+        </div>
     </div>
 </header>
