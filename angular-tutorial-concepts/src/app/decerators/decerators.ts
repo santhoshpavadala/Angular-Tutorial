@@ -11,13 +11,22 @@ import { FormsModule } from '@angular/forms';
 export class Decerators {
   @Input() parentTitle:string = '';
   @Input() parentNumber:number[] = [];
+  @Input() user: { name: string; age: number } | null = null;
+  @Input('parentMsg') almessage: string='';
 
   @Output() childData = new EventEmitter<string>();
   message:string ="Child Data Message Pass to Parent";
 
+  @Output() messageEvent = new EventEmitter<string>();
+
   onClick () {
     console.log('onclick');
     this.childData.emit(this.message);
+  }
+
+  sendMsg() {
+    this.messageEvent.emit('Hello Iam from child')
+
   }
 
 // Template Reference

@@ -1,25 +1,37 @@
 <div class="section">
     <h1>Decerators</h1>
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Input Decerators</h2>
-    <h4>{{ parentTitle }}</h4>
-    <div *ngFor="let n of parentNumber">
-        {{ n }}
-    </div>
+        <h4>{{ parentTitle }}</h4>
+        <div *ngFor="let n of parentNumber">
+            {{ n }}
+        </div>
+
+        <div>
+            <h4>Passing Objects</h4>
+            <p>User Name: {{ user?.name }}</p>
+            <p>User Age: {{ user?.age }}</p>
+        </div>
+
+        <div>
+            <h4>Aliase Messages</h4>
+            <p>{{almessage}}</p>
+        </div>
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Output Decerators</h2>
         <button class="btn btn-primary" (click)="onClick()">Send</button>
+        <button class="btn btn-primary" (click)="sendMsg()">Send Message</button>
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Template Reference Variable</h2>
         <H4>In child i have templateData need to show in App component using template reference</H4>
         <input type="text" [(ngModel)]="ngModelData">
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>View Child Decerator</h2>
         <input type="text" [(ngModel)]="passChildToParentData">
 

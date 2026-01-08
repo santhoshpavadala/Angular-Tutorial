@@ -1,0 +1,20 @@
+<div class="section">
+    <h1 class="text-center text-primary">ToDo List - Angular</h1>
+    <div class="sub-section">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="valueText">Add New</label>
+                    <input type="text" id="valueText" class="form-control" [(ngModel)]="todoInput">
+                </div>
+            </div>
+            <div class="col-3 mt-4">
+                <button class="btn btn-success" style="width: 100%;" (click)="addTodo()" [disabled]=!todoInput.length>Add</button>
+            </div>
+
+            <div class="col-3 mt-4">
+                <button class="btn btn-danger" style="width: 100%;" (click)="resetTodo()" [disabled]=!todoInput.length>Reset</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 <div class="section">
     <h1>Data Binding Examples</h1>
-    <div class="subSection">
+    <div class="sub-section">
         <h2>String Interpolation</h2>
         <p>{{stringInterpolation}}</p>
         <div>{{functionCall()}}</div>
@@ -11,14 +11,14 @@
         <p>{{Date}}</p>
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Property Binding</h2>
         <div> Name: <input type="text"> <button [disabled]="isDisable">Submit</button></div>
         <div> Number: <input type="number"> <button [hidden]=isHidden>Ok</button></div>
         <div><img [src]="srcPath" alt="" width="200px" height="200px"></div>
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Class Binding</h2>
         <h4 [class]="isActive?'active': 'inactive'">Chaniging the header is properties using class binding</h4>
         <h4 [class]="{'active': true}">class example</h4> <!--CONDITIONAL-->
@@ -27,7 +27,7 @@
         <h4 [class.active]=isActive>class.classname</h4> <!--Multiple-->
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Style Binding</h2>
         <h4 [style]="{color: cval}">Style Binding with property value</h4>
         <h4 [style.background]="cval">Style.Binding1</h4>
@@ -35,7 +35,7 @@
         <h4 [style.color]="hasError ? 'red' : 'green'">Error and Succes Messages</h4>
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Event Binding</h2>
         <div>
             <button class="btn btn-primary" (click)="OnSubmit()">Submit</button>
@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div class="subSection">
+    <div class="sub-section">
         <h2>Two Way Data Binding</h2>
         <div>
             <label>Name</label>

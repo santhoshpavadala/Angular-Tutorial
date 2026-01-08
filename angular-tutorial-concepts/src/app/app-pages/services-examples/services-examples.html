@@ -1,0 +1,41 @@
+<div class="section">
+    <h1>Angular Services Examples</h1>
+    <div class="sub-section">
+        <h2>Mobile List - Example of services</h2>
+        <div *ngFor="let m of mobileList">
+            {{m}}
+        </div>
+
+        <button (click)="addMobile()">Add Mobile</button>
+    </div>
+
+    <div class="sub-section">
+        <h2>Services - HttpClientModules</h2>
+        <p>Need to import provideHttpClient() in app-config.ts in latest angular 17+</p>
+        <p>Need to import HttpClientModule in app-module.ts below 17 versions</p>
+
+        <p>We need to import 6httpClient servive using dependency injection through constructor and use the online api call <br>
+        constructor(
+            private http: HttpClient
+        )
+        </p>
+
+        <button class="btn btn-danger" (click)="getHttpData()">HTTP Data</button>
+        @if(httpData) {
+        <div>
+            <table>
+                <h4>Table Data ({{ httpData.length }})</h4>
+                <tr>
+                    <th *ngFor="let header of tableHeaders">{{header}}</th>
+                </tr>
+                <tr *ngFor="let row of httpData">
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.price }}</td>
+                </tr>
+            </table>
+        </div>
+        }
+        
+    </div>
+</div>
