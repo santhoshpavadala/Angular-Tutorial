@@ -11,9 +11,80 @@
 
             <button class="btn btn-success" (click)="getObservable()">Get Observable</button>
             <button class="btn btn-success" (click)="getObservable2()">Get Observable2</button>
-            <button class="btn btn-success" (click)="getObservable3()">Get Observable3</button>
-            {{data3}}
-            <div>{{error3}}</div>
+            {{data2}}
+            <div>{{error2}}</div>
             <button class="btn btn-success" (click)="unsub()">UnSubscribe</button>
     </div>
+
+
+    <div class="sub-section">
+        <h2>Rxjs Library</h2>
+        <ul>
+            <li>Obseravbles</li>
+            <li>Subjects</li>
+            <li>Operators</li>
+        </ul>
+        <h2>Subjects</h2>
+        <ul>
+            <li>Subject</li>
+            <li>Async Subject</li>
+            <li>Behaviour Subject</li>
+            <li>Replay Subject</li>
+        </ul>
+
+        <h2>Operators</h2>
+        <ul>
+            <li>of, from, create</li>
+            <li>fromEvent</li>
+            <li>interval</li>
+            <li>timer</li>
+            <li><b>map, filter, reduce</b></li>
+            <li><b>merge, join, forkjoin</b></li>
+            <li>debounceTime</li>
+        </ul>
+
+
+        <h2>What Is Observables</h2>
+        <p>An Observable is a data stream that emits values over time.<br>
+        You can subscribe to it to receive data, errors, or completion notifications.</p>
+
+        
+
+        <h2>Basic Observable Flow</h2>
+        <p>Observable → Subscribe → Data / Error / Complete</p>
+
+        <h2>Obeservable Callback Functions</h2>
+        <ul>
+            <li>next()</li>
+            <li>error()</li>
+            <li>complete</li>
+        </ul>
+
+        <h2>Syntax for Obseravle</h2>
+        <p>Observable is a class</p>
+        <p><b>let o = new observable()</b></p>
+
+        <!-- <p>To create object of this type, we have provide a callback function</p>
+        <p><b>let o = new observable(function(){} or =>{})</b></p> -->
+
+        <!-- <p>To that callback function we need to pass an argument</p>
+        <p><b>let o = new observable(function(arg){})</b></p> -->
+
+        <!-- <p>This object emmits some data continously or error with the help of next(), error() methods</p>
+        <p>let myobs = new observable( function(ob){ 
+            ob.next(1);
+            ob.next(2);
+            ob.error('Error');
+            }) 
+        </p> -->
+
+        <!-- <p>myobs.subscribe(
+            data=> {console.log(data)}
+            err=> {console.log(err)}
+            ()=> {console.log("completed")}
+        )</p> -->
+
+    </div>
+
+
 </div>
