@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../../services/todo';
+import { Todolist } from '../todolist/todolist';
 
 @Component({
   selector: 'app-todoform',
-  imports: [FormsModule],
+  imports: [FormsModule, Todolist],
   templateUrl: './todoform.html',
   styleUrl: './todoform.scss'
 })
@@ -21,7 +22,11 @@ export class Todoform {
 
   resetTodo() {
     this.todoInput = "";
+  }
 
+  // Subjects examples - CS World Youtube
+  addTodoList(t:string) {
+    this.ts.addNewTodo(t);
   }
 
 }

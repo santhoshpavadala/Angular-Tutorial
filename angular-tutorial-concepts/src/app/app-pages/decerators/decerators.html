@@ -3,14 +3,17 @@
     <div class="sub-section">
         <h2>Input Decerators</h2>
         <h4>{{ parentTitle }}</h4>
+        <h4>{{ pdata }}</h4>
+        <h4>{{ pname }}</h4>
+        
         <div *ngFor="let n of parentNumber">
             {{ n }}
         </div>
 
         <div>
             <h4>Passing Objects</h4>
-            <p>User Name: {{ user?.name }}</p>
-            <p>User Age: {{ user?.age }}</p>
+            <p>User Name: {{ puser?.name }}</p>
+            <p>User Age: {{ puser?.age }}</p>
         </div>
 
         <div>

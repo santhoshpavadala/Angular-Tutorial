@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ObserableData } from '../../services/obserable-data';
 
 @Component({
   selector: 'app-observables',
@@ -7,46 +8,25 @@ import { Observable } from 'rxjs';
   templateUrl: './observables.html',
   styleUrl: './observables.scss'
 })
-export class Observables {
+export class Observables implements OnInit{
+
   myObs=new Observable((listener)=>{
     listener.next(1);
     listener.next(2);
     setTimeout(()=> listener.next(3), 1000);
-    setTimeout(()=> listener.next(4), 2000);
-    setTimeout(()=> listener.error("some error"), 2000);
-    setTimeout(()=> listener.next(6), 3000);
-    setTimeout(()=> listener.complete(), 4000);
+    setTimeout(()=> listener.next(4), 1000);
+    setTimeout(()=> listener.error("some error"), 1000);
+    setTimeout(()=> listener.next(5), 1000);
+    setTimeout(()=> listener.complete(), 1000);
   })
   getObservable() {
     this.myObs.subscribe(
-      data=> {console.log(data)},
-      err=> {console.log('Error:', err)},
-      () => {console.log('completed')}  
+      data=> {console.log(data)}, //first callback
+      err=> {console.log('Error:', err)}, //second callback
+      () => {console.log('completed')} //Third callback
     )
   }
-
-   myObs2 = new Observable((listener2)=>{
-    listener2.next(1);
-    listener2.next(2);
-    setTimeout(()=> listener2.next(3), 1000);
-    setTimeout(()=> {listener2.next(4)},1000);
-    // listener2.complete(); if gives like this its directly hitting with out time set
-    setTimeout(()=> listener2.error('some error occured'), 2000)
-    setTimeout(()=> listener2.complete(), 1000);
-  })
-  getObservable2() {
-    this.myObs2.subscribe(
-      data2=> {console.log(data2,'data')},
-      err2=> {console.log('Error: ',err2)},
-      () => {console.log('completed2');
-      }
-    )
-  }
-
-
-  data3:any;
-  error3:any;
-  myobs3 = new Observable((intimate)=> {
+  myobs2 = new Observable((intimate)=> {
     intimate.next("first");
     setTimeout(()=>{
       intimate.next("second")
@@ -62,17 +42,68 @@ export class Observables {
     },1000);
   })
   subscriberef:any;
-  getObservable3() {
-    this.subscriberef = this.myobs3.subscribe(  //call back function
-      d3 => {this.data3=d3}, // it call first data of in next
-      e3 => {this.error3=e3}, // if ant error then it calls
-      ()=> {console.log('done3');
+  data2:any;
+  error2:any;
+  getObservable2() {
+    this.subscriberef = this.myobs2.subscribe(  //call back function
+      d2 => {this.data2=d2}, // it call first data of in next
+      e2 => {this.error2=e2}, // if ant error then it calls
+      ()=> {console.log('done2');
       }
     )
   }
-
   unsub() {
     this.subscriberef.unsubscribe();
   }
+
+
+  //Other example- With Subject services
+  constructor(private dataService: ObserableData) {}
+  myObserver = {
+    next : (data:any)=>{
+      console.log('This is observable data: ', data);
+    },
+    error : (err:any)=> {
+      console.log('This is Obs Error:', err);
+    },
+    complete: () => {
+      console.log('Your Subscription is Completed');
+    }
+  }
+
+  ngOnInit(): void {
+    this.dataService.obsData.subscribe(this.myObserver);
+    this.dataService.getData();
+
+    // other way
+    this.dataService.obsData2.subscribe({
+      next: (data:any)=> {
+        console.log(data, 'This is ngoninit Data');
+      },
+      error: (err:any)=> {
+        console.log(err, 'This is error');
+      },
+      complete: ()=>{
+        console.log('Subscription Completed');
+        
+      }
+    })
+    this.dataService.getData2();
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { CustomPipesPipe } from '../custom-pipes-pipe';
+import { CustomPipesPipe } from '../../Pipes/custom-pipes-pipe';
 
 @Component({
   selector: 'app-pipes',

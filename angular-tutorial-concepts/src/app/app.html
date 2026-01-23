@@ -7,19 +7,6 @@
 </div>
 
 
-<!--Template Reference-->
-<div>{{templateId.templateData}}</div>
-<div>{{templateId.templateFunction()}}</div>
-<div>{{templateId.ngModelData}}</div>
-
-<button (click)="getChildData()">Get View Child Data</button>
-<div>{{cdata}}</div>
-
-<div>{{childData}}</div>
-<div>{{message}}</div>
-<app-decerators [parentTitle]="title" [parentNumber]="pnumber" [user]="userData" [parentMsg]="'Aliased Input!'"
- (childData)="childData=$event" (messageEvent)="receiveMessage($event)" #templateId></app-decerators>
-
 
 
 

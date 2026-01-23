@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, input, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,8 +10,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class Decerators {
   @Input() parentTitle:string = '';
+  @Input() pdata:string = '';
+  @Input() pname: string = '';
   @Input() parentNumber:number[] = [];
-  @Input() user: { name: string; age: number } | null = null;
+  @Input() puser: { name: string; age: number } | null = null;
   @Input('parentMsg') almessage: string='';
 
   @Output() childData = new EventEmitter<string>();

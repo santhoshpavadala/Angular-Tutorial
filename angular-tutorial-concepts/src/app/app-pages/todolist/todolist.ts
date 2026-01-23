@@ -10,10 +10,20 @@ import { CommonModule } from '@angular/common';
 })
 export class Todolist implements OnInit {
   tododata:any;
+
+  // Subjects examples - CS World Youtube
+  todos:any = [];
   constructor(private ts: Todo) {}
 
   ngOnInit(): void {
-    this.tododata=this.ts.todolist
+    this.tododata=this.ts.todolist;
+
+    // Subjects examples - CS World Youtube
+    this.ts.todoSubject.subscribe((data)=>{
+      console.log(data, 'data');
+      this.todos= data;
+    });
+    this.ts.sendTodos();
   }
 
   removeTodo(indexNumber: number) {

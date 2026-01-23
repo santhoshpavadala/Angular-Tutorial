@@ -1,0 +1,16 @@
+<!--Template Reference-->
+<div>{{templateId.templateData}}</div>
+<div>{{templateId.templateFunction()}}</div>
+<div>{{templateId.ngModelData}}</div>
+
+<!-- OutPut Decorators Examples getting the data from child -->
+<button (click)="getChildData()">Get View Child Data</button>
+<div>{{childData}}</div>
+<div>{{message}}</div>
+
+
+<app-decerators [parentTitle]="title" [parentNumber]="pnumber" [puser]="userData" 
+[parentMsg]="'Aliased Input!'" [pdata]="data" [pname]="name"
+
+(childData)="childData=$event" (messageEvent)="receiveMessage($event)" #templateId></app-decerators>
+
