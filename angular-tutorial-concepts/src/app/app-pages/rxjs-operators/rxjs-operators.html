@@ -64,5 +64,54 @@
         <P>interval(timeInMs)</P>
         <div>{{intervalValue}}</div>
         <div *ngFor="let item of intervalData">{{item}}</div>
+
+        <h2>Transformation & Filtering  Operators Examples: </h2>
+        <h4>Map Operator</h4>
+        <p>map() transforms each emitted value from an Observable into a new value.</p>
+        <p>source$.pipe(map(value => newValue))</p>
+
+        <p *ngFor="let item of mapData">{{item}}</p>
+
+        <h4>Filter Operator</h4>
+        <p>filter() allows only the values that satisfy a condition to pass through the stream.</p>
+        <p *ngFor="let item of filterData">{{item}}</p>
+
+        <h4>fromEvent Operator</h4>
+        <p>fromEvent() creates an Observable from DOM events (click, keyup, scroll, etc.).</p>
+        <button class="btn btn-primary" #viewChildBtn>Click</button>
+        <p>Click Count: {{ clickCount }}</p>
+        <input type="text" #eventInput placeholder="Type something..." >
+        <div>
+            Typed Value: {{ typedValue }}
+        </div>
+
+        <h4>debounceTime Operator</h4>
+        <p>debounceTime() waits for a pause in emissions and then emits only the latest value.</p>
+        <p>Syntax: debounceTime(timeInMs)</p>
+        <input type="text" #debounceInput>
+
+
+        <h4>Merge Operator</h4>
+        <p>merge() combines multiple Observables into one Observable and emits values as soon as any source emits.</p>
+        <p>Syntax: merge(obs1$, obs2$, obs3$)</p>
+        <div *ngFor="let item of mergedData">
+            {{ item }}
+        </div>
+
+
+        <h4>Take Operator</h4>
+        <p>take() limits the number of values emitted by an Observable and then automatically completes it.</p>
+        <p>Syntax: take(count)</p>
+        <div *ngFor="let item of takeData">{{item}}</div>
+
+        <h4>Pluck Operator</h4>
+        <p>pluck() extracts a specific property (or nested property) from each emitted object.</p>
+        <p>“Pick this field from every emitted object”</p>
+        <p>Syntax: pluck('propertyName') <br>
+                    pluck('prop1', 'prop2') // nested</p>
+        <div *ngFor="let username of pluckData">{{username}}</div>
+        <h4>Distinct Operator</h4>
+        <p>pluck() removed duplicate data of previous.</p>
+        <div *ngFor="let item of distinctData">{{item}}</div>
     </div>
 </div>
