@@ -25,6 +25,7 @@ import { Todolist } from './app-pages/todolist/todolist';
 import { Todoform } from './app-pages/todoform/todoform';
 import { Subjects } from './app-pages/subjects/subjects';
 import { RxjsOperators } from './app-pages/rxjs-operators/rxjs-operators';
+import { HttpInterceptors } from './app-pages/http-interceptors/http-interceptors';
 
 export const routes: Routes = [
     { path:'basics/:id/:test', component:AngularBasics },
@@ -34,12 +35,6 @@ export const routes: Routes = [
     { path:'directives', component:Directives },
     { path:'pipes', component:Pipes },
     { path:'templates', component:Templates },
-    { path:'routings', component:Routings, 
-        children: [
-            {path:'childroute1', component: Childroute1},
-            {path:'childroute2', component: Childroute2}
-        ]
-    },
 
     {path:'ngcontent', component: NgContent},
     { path:'services', component:ServicesExamples },
@@ -48,7 +43,15 @@ export const routes: Routes = [
     {path:'observables', component: Observables},
     {path:'subject', component: Subjects},
     {path:'rxjs-operators', component: RxjsOperators},
+    {path:'http-interceptors', component: HttpInterceptors},
     
+    
+    { path:'routings', component:Routings, 
+        children: [
+            {path:'childroute1', component: Childroute1},
+            {path:'childroute2', component: Childroute2}
+        ]
+    },
     { path:'', pathMatch: 'full', redirectTo: 'home' },
     { path:'login', component: Login },
     { path:'home', component: Home },
