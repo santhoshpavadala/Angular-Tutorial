@@ -1,0 +1,34 @@
+<div class="section">
+    <h1 class="text-center text-primary">HTTP Interceptor</h1>
+    <div class="sub-section">
+        <h2>HTTP Interceptor in Angular</h2>
+        <p>An HTTP Interceptor is a special Angular service that sits between your app and the backend API.</p>
+        <p>It can inspect, modify, or handle: <br>
+            Outgoing HTTP requests <br>
+            Incoming HTTP responses <br>
+            Errors globally <br>
+            Think of it as a middleware layer for all HTTP calls.</p>
+
+        <h4>Why do we use HTTP Interceptors? (Real-Time Use Cases)</h4>
+        <p>In real projects, interceptors are used for:</p>
+        <ul>
+            <li>Add Auth Token (JWT) to headers</li>
+            <li>Handle API errors globally</li>
+            <li>Show / hide loader (spinner)</li>
+            <li>Log API requests & responses</li>
+            <li>Modify request URLs or headers</li>
+            <li>Retry failed requests</li>
+        </ul>
+        <p>Instead of repeating code in every service, interceptor does it once globally</p>
+
+        <h4>How HTTP Interceptor Works (Flow)</h4>
+        <ul>
+            <li>Component calls API via <b>HttpClient</b></li>
+            <li>Request goes to Interceptor</li>
+            <li>Interceptor modifies request (if needed)</li>
+            <li>Request hits backend</li>
+            <li>Response comes back through Interceptor</li>
+            <li>Component receives final response</li>
+        </ul>
+    </div>
+</div>
