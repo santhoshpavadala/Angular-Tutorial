@@ -26,6 +26,7 @@ import { Todoform } from './app-pages/todoform/todoform';
 import { Subjects } from './app-pages/subjects/subjects';
 import { RxjsOperators } from './app-pages/rxjs-operators/rxjs-operators';
 import { HttpInterceptors } from './app-pages/http-interceptors/http-interceptors';
+import { Forms } from './app-pages/forms/forms';
 
 export const routes: Routes = [
     { path:'basics/:id/:test', component:AngularBasics },
@@ -44,6 +45,8 @@ export const routes: Routes = [
     {path:'subject', component: Subjects},
     {path:'rxjs-operators', component: RxjsOperators},
     {path:'http-interceptors', component: HttpInterceptors},
+
+    {path:'forms', component: Forms},
     
     
     { path:'routings', component:Routings, 
