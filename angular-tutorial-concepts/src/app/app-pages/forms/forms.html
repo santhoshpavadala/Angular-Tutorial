@@ -1,0 +1,314 @@
+<div class="section">
+    <h1>Angular Forms</h1>
+    <div class="sub-section">
+        <h2>Forms</h2>
+        <p>In Angular, Forms are used to collect, validate, track, and submit user input.</p>
+        <ul>Think of:
+            <li>Login / Signup</li>
+            <li>Search filters</li>
+            <li>Profile update</li>
+            <li>Checkout & payment</li>
+            <li>Admin dashboards</li>
+        </ul>
+
+        <h4>Types of Angular Forms:</h4>
+        <ul>
+            <li>1.Template-Driven Forms (TDF)</li>
+            <p>HTML-first, logic mostly in template</p>
+            <li>2.Reactive Forms (RDF)</li>
+            <p>Code-first, logic in TypeScript (MOST USED)</p>
+        </ul>
+
+        <p>Form control properties</p>
+        <ul>
+            <li>Value</li>
+            <li>Touched</li>
+            <li>Untouched</li>
+            <li>Dirty</li>
+            <li>Pristine</li>
+            <li>Valid</li>
+            <li>Error</li>
+            <li>Status</li>
+        </ul>
+
+        <h4>Form Group & Form Controls</h4>
+        <h4>Directives(ngModel, ngModelGroup)</h4>
+
+        <h4>We need to import FormsModule in component</h4>
+
+        <h1>Template Driven Forms</h1>
+        <h4>What are Template-Driven Forms (TDF)?</h4>
+        <p>Template-Driven Forms in Angular are forms where most of the logic, validation, and structure are written in
+            the HTML template,
+            and Angular automatically creates the form model behind the scenes.</p>
+        <p>Simple Definition (Interview Friendly) <br>
+            Template-Driven Forms are Angular forms where form controls are defined in the HTML using directives like
+            ngModel, and Angular automatically manages the form model and validation.</p>
+
+        <h4>Core Building Blocks (VERY IMPORTANT)</h4>
+        <p>1. ngModel <br>
+            Binds input value to Angular form model <br>
+            Enables two-way data binding</p>
+        <p>2. ngForm <br>
+            Automatically created when you use "form html tag" <br>
+            Represents the entire form</p>
+        <p>form #loginForm="ngForm" form</p>
+
+        <p>3. name attribute<br>
+            Mandatory for every form control <br>
+            Used to register the control in ngForm</p>
+        <p>input ngModel name="email"</p>
+
+        <h4>Validators are added using HTML attributes</h4>
+        <ul>
+            <li>required</li>
+            <li>minlength="4"</li>
+            <li>maxlength="10"</li>
+            <li>email</li>
+            <li>pattern="[0-9]+"</li>
+        </ul>
+
+        <form>
+            <div ngModelGroup #grp="ngModelGroup">
+                <label for="">Username</label>
+                <input type="text" class="form-control w-50" ngModel name="uname" #un="ngModel" required minlength="4">
+
+                <label for="">Password</label>
+                <input type="password" class="form-control w-50" ngModel name="pwd" #pd="ngModel" required>
+            </div>
+            <button (click)="submit(un, pd, grp)" class="btn btn-primary">Click</button>
+        </form>
+        <div>{{grp.value |json}}</div>
+        <div>{{un.value |json}}</div>
+        <div>{{pd.value |json}}</div>
+
+        <h2>Template Driven Forms Validations & Error Handling</h2>
+        <form action="">
+            <label for="">Username</label>
+            <input type="text" class="form-control w-50" ngModel name="userError" #uErr="ngModel" minlength="4"
+                required>
+            <ng-container *ngIf="uErr.touched">
+                <p class="form-error" *ngIf="uErr.errors?.['required']">Username Required</p>
+                <p class="form-error" *ngIf="uErr.errors?.['minlength']">Username Contains Min 4 characters</p>
+            </ng-container>
+
+            <label for="">Password</label>
+            <input type="text" class="form-control w-50" ngModel name="passwordError" #pErr="ngModel" minlength="8"
+                required>
+            <p class="form-error" *ngIf="pErr.touched && pErr.errors?.['required']">Pawword Required</p>
+            <p class="form-error" *ngIf="pErr.touched && pErr.errors?.['minlength']">Username Contains Min 8 characters
+            </p>
+            <button class="btn btn-primary" (click)="showErr(uErr, pErr)">Show Error</button>
+        </form>
+
+        <h2>ngForm & ngSubmit</h2>
+        <h2>Set Value & Patch Value</h2>
+
+        <form action="" ngForm #loginForm="ngForm" (ngSubmit)="loginSubmit(loginForm)">
+            <label for="">Username</label>
+            <input type="text" name="userName" id="" ngModel #loginUser="ngModel" class="form-control w-50">
+
+            <label for="">Password</label>
+            <input type="password" name="password" id="" ngModel #loginPwd="ngModel" class="form-control w-50">
+            <button [disabled]="loginForm.invalid" class="btn btn-primary">Submit & Set</button>
+        </form>
+    </div>
+
+    <div class="sub-section">
+        <h1>Reactive Forms </h1>
+
+        <h2>What are Reactive Forms?</h2>
+        <p>Reactive Forms in Angular are model-driven forms,
+            where the form structure, validation, and logic are defined in TypeScript, not HTML. <br>
+            The UI only reflects what the form model says.</p>
+
+        <p>Reactive Forms are Angular forms where form controls are created and managed
+            in the component class using FormControl, FormGroup, and FormArray, providing better control, scalability,
+            and testability.</p>
+
+        <h4>Core Building Blocks (VERY IMPORTANT)</h4>
+        <p>1.FormControl: Represents one input field</p>
+        <p>syntax: new FormControl('', Validators.required)</p>
+        <p>Example: Username, Email, Password</p>
+
+        <div>
+            <p>2. FormGroup: A collection of form controls</p>
+            new FormGroup(
+            username: new FormControl(''),
+            password: new FormControl('')
+            )
+        </div>
+
+        <div>
+            <p>3. FormArray: Used for dynamic fields</p>
+            new FormArray([
+            new FormControl('')
+            ]);
+        </div>
+
+        <div>
+            <p>4. Validators</p>
+            <p>Validators.required <br>
+                Validators.minLength(6) <br>
+                Validators.email <br>
+                Validators.pattern()</p>
+        </div>
+
+        <h4>Reactive Forms Example:</h4>
+        <form action="" [formGroup]="login">
+            <label for="">User Name</label>
+            <input type="text" class="form-control w-50" formControlName="usname">
+
+            <label for="">Password</label>
+            <input type="text" class="form-control w-50" formControlName="pswd">
+
+            <button class="btn btn-primary" (click)="formGrp()">Show Controls</button>
+        </form>
+
+        <h2>Reactive forms Validations</h2>
+        <form action="" [formGroup]="register">
+            <label for="">Username</label>
+            <input type="text" class="form-control w-50" formControlName="userName">
+            <div class="form-error"
+                *ngIf="register.get('userName')?.touched && register.get('userName')?.hasError('required')">
+                <!-- *ngIf="userName?.hasError('required')" -->
+                <!-- *ngIf="userName?.controls['userName'].errors['minlength']" -->
+                User name required
+            </div>
+            <div class="form-error"
+                *ngIf="register.get('userName')?.touched && register.get('userName')?.hasError('minlength')">
+                Username should be 8 characters
+            </div>
+
+
+            <label for="">Email</label>
+            <input type="email" class="form-control w-50" formControlName="email">
+
+            <button class="btn btn-primary" (click)="valid()">Validation</button>
+        </form>
+    </div>
+
+    <div class="sub-section">
+        <h1>Forms Array</h1>
+        <h2>What is FormArray?</h2>
+        <p>FormArray represents an array (list) of form controls or form groups where the number of controls is dynamic.
+            <br>
+            Controls are accessed by index, not name.</p>
+        <p>syntax: 'new formGroup([])'</p> <!-- new formGroup([]) -->
+        <h4>Real Use Cases (FormArray)</h4>
+        <ul>
+            <li>Add multiple skills</li>
+            <li>Multiple phone numbers</li>
+            <li>Multiple addresses</li>
+            <li>Product variants</li>
+            <li>Dynamic questionnaires</li>
+        </ul>
+        <p>Structure changes at runtime</p>
+
+        <h2>What is FormGroup?</h2>
+        <p>FormGroup represents a group of named form controls where the structure is known and fixed. <br>
+            Each control is accessed by a key.</p>
+        <p>syntax: 'new formGroup()'</p> <!-- new formGroup({}) -->
+        <h4>Real Use Cases (FormGroup)</h4>
+        <ul>
+            <li>Login form</li>
+            <li>Registration form</li>
+            <li>Profile update form</li>
+            <li>Settings page</li>
+            <li>Address form (single address)</li>
+        </ul>
+        <p>Structure does NOT change at runtime</p>
+
+        <h4>One-Line Killer Answer (Use This)</h4>
+        <p><b>“FormGroup is used for fixed form structures, while FormArray is used for dynamic and repeatable form
+                controls that can be added or removed at runtime.”</b></p>
+
+        <!-- // Reactive Forms: formArrays -->
+        <form [formGroup]="testMobile">
+            <div formArrayName="mobileNumbers">
+                <div *ngFor="let m of mobileNumbers.controls; let i = index" class="d-flex align-items-center">
+                    <!-- let m of testMobile.get('mobileNumbers')[controls]; let i = index
+            formControlName="{{i}}" -->
+                    <label>Mobile Number {{ i + 1 }}</label>
+                    <input type="text" class="form-control w-50 m-2" [formControlName]="i">
+
+                    <!-- Remove button -->
+                    <button type="button" class="btn btn-danger btn-sm ms-2" (click)="removeMobileNumber(i)"
+                        *ngIf="mobileNumbers.length > 1">
+                        Remove
+                    </button>
+                </div>
+            </div>
+        </form>
+        <button class="btn btn-primary" (click)="addMobileNumber()">Add Mobile Number</button>
+        <!-- <button matButton="filled">Basic</button> -->
+    </div>
+
+    <div class="sub-section">
+        <h2>What is FormBuilder?</h2>
+        <p>FormBuilder is a service in Angular that provides shortcut methods to create:</p>
+        <ul>
+            <li><b>FormGroup</b></li>
+            <li><b>FormControl</b></li>
+            <li><b>FormArray</b></li>
+        </ul>
+        <p>It helps you write less code, cleaner code, and more readable Reactive Forms.</p>
+        <p><b>FormBuilder is a service that simplifies the creation of Reactive Forms by reducing boilerplate code for FormGroup, FormControl, and FormArray.</b></p>
+
+        <h4>FormBuilder Example</h4>
+        <form action="" [formGroup]="fbForm">
+            <label for="">UserName</label>
+            <input type="text" formControlName="uname" class="form-control w-50 m-2">
+
+            <label for="">Email</label>
+            <input type="email" formControlName="fbEmail" class="form-control w-50 m-2">
+
+            <label for="">Mobile</label>
+            <ng-container *ngFor="let m of fbMobile.controls; let i = index" formArrayName="fbMobile">
+                <label for="">Mobile Numbers {{i+1}}</label>
+            <input type="number" [formControlName]="i" class="form-control w-50 m-2">
+            </ng-container>
+        </form>
+        
+    </div>
+
+    <div class="sub-section">
+        <h2>What are Custom Validators in Reactive Forms?</h2>
+        <p>Custom Validators in Angular are user-defined validation functions that allow you to apply business 
+            rules which are not covered by built-in validators.</p>
+
+        <h4>CustomValidation example</h4>
+        <form action="" [formGroup]="custValidForm">
+            <label for="">Password:</label>
+            <input type="password" formControlName="password" class="form-control w-50 m-2">
+            <p class="form-error"
+            *ngIf="this.custValidForm.get('password')?.touched 
+            && this.custValidForm.get('password')?.errors?.['noUppercase']">
+            Password contains atleast one uppercase letter</p>
+        </form>
+        <button mat-button class="btn-primary" (click)="showCustom()">Show Custom Validation</button>
+    </div>
+
+    <div class="sub-section">
+        <h2>What are Async Validators?</h2>
+        <p>Async Validators in Reactive Forms (in Angular) 
+            are used when validation depends on asynchronous operations like:</p>
+        <ul>
+            <li>HTTP API calls</li>
+            <li>Server-side checks</li>
+            <li>Database lookups</li>
+        </ul>
+        <p>They return an Observable or Promise, not a value immediately.</p>
+        <p>An async validator is a function that performs asynchronous validation and returns an Observable or Promise that emits either null (valid) or a validation error object.</p>
+        <p>Async validators are used when validation depends on server responses and return an Observable or Promise that resolves to either a validation error or null.</p>
+    
+        <form action="" [formGroup]="asyncValidForm">
+            <label for="">User Name:</label>
+            <input type="text" formControlName="ascuname" class="form-control w-50 m-2">
+            <p class="form-error"
+            *ngIf="this.asyncValidForm.get('ascuname')?.touched 
+            && this.asyncValidForm.get('ascuname')?.errors?.['duplicateUser']">
+            User Name already exist</p>
+        </form>
+    </div>
+</div>
