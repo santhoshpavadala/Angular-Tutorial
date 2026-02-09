@@ -27,6 +27,7 @@ import { Subjects } from './app-pages/subjects/subjects';
 import { RxjsOperators } from './app-pages/rxjs-operators/rxjs-operators';
 import { HttpInterceptors } from './app-pages/http-interceptors/http-interceptors';
 import { Forms } from './app-pages/forms/forms';
+import { SignupForm } from './app-pages/signup-form/signup-form';
 
 export const routes: Routes = [
     { path:'basics/:id/:test', component:AngularBasics },
@@ -47,6 +48,7 @@ export const routes: Routes = [
     {path:'http-interceptors', component: HttpInterceptors},
 
     {path:'forms', component: Forms},
+    {path: 'signup', component: SignupForm},
     
     
     { path:'routings', component:Routings, 

@@ -6,7 +6,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   let token="4567abcd"
 
   let interceptReq = req.clone({
-    method: 'POST', // We can change the methods of inspect elements network request headers
+    method: 'GET', // We can change the methods of inspect elements network request headers
     body: { product: "Interceptor body" }, // we can also change the request respose body also
     headers: new HttpHeaders(
       {
