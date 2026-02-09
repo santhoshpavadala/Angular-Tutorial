@@ -23,4 +23,24 @@
             <h4>{{person | customPipes: wish}}</h4>
         </div>
     </div>
+
+    <div class="sub-section">
+        <h2>Async Pipes</h2>
+
+        <table>
+            <thead>
+                <tr >
+                    <th *ngFor="let item of tableHeaders">{{item}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of usersData | async">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
 </div>
