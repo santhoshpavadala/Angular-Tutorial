@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { AngularBasics } from './app-pages/angular-basics/angular-basics';
-import { Decerators } from './app-pages/decerators/decerators';
-import { Templates } from './app-pages/templates/templates';
+import { RouterOutlet } from '@angular/router';
 import { Header } from './app-layout/header/header';
 import { Sidenav } from './app-layout/sidenav/sidenav';
-import { Pagenotfound } from './app-pages/pagenotfound/pagenotfound';
-import { CardComponent } from './app-pages/card-component/card-component';
-import { DecoratorParent } from './app-pages/decorator-parent/decorator-parent';
+import { LifecycleHooks } from './app-pages/lifecycle-parent/lifecycle-hooks/lifecycle-hooks';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +10,4 @@ import { DecoratorParent } from './app-pages/decorator-parent/decorator-parent';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  
-
-}
+export class App {}

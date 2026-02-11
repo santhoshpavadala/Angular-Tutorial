@@ -1,3 +1,4 @@
+// @use 'styles/index' as *;
 
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
@@ -36,10 +37,16 @@ body {
 /* ================================
    Project Main CSS Structure
 ================================ */
+
 @import './styles/variables.scss';
 @import './styles/typography.scss';
 @import './styles/mixin.scss';
 @import './styles/layout.scss';
+
+// @forward 'variables';
+// @forward 'typography';
+// @forward 'mixin';
+// @forward 'layout';
 
 /* ================================
    CSS RESET & BASE

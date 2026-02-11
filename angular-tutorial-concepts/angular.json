@@ -6,8 +6,18 @@
     "angular-tutorial-concepts": {
       "projectType": "application",
       "schematics": {
+        "@schematics/angular:application": {
+          "standalone": true
+        },
         "@schematics/angular:component": {
+          "standalone": true,
           "style": "scss"
+        },
+        "@schematics/angular:directive": {
+          "standalone": true
+        },
+        "@schematics/angular:pipe": {
+          "standalone": true
         }
       },
       "root": "",

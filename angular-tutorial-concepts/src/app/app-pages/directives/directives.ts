@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ArrayType } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Customdir } from '../../custom-directives/customdir';
 
 @Component({
   selector: 'app-directives',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Customdir],
   templateUrl: './directives.html',
   styleUrl: './directives.scss'
 })
@@ -63,6 +64,8 @@ operation:string='/';
 operation1:string='';
 
 
+// This is Custom Structural ngIf example
+showIf: boolean = true;
 
 
 }
