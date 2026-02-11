@@ -6,7 +6,7 @@ import { Pagenotfound } from './app-pages/pagenotfound/pagenotfound';
 import { Users } from './app-pages/users/users';
 import { Usercard } from './app-pages/users/usercard/usercard';
 import { Products } from './app-pages/products/products';
-import { Decerators } from './app-pages/decerators/decerators';
+import { Decerators } from './app-pages/decorator-parent/decerators/decerators';
 import { DataBinding } from './app-pages/data-binding/data-binding';
 import { Directives } from './app-pages/directives/directives';
 import { Pipes } from './app-pages/pipes/pipes';
@@ -28,43 +28,53 @@ import { RxjsOperators } from './app-pages/rxjs-operators/rxjs-operators';
 import { HttpInterceptors } from './app-pages/http-interceptors/http-interceptors';
 import { Forms } from './app-pages/forms/forms';
 import { SignupForm } from './app-pages/signup-form/signup-form';
+import { LifecycleHooks } from './app-pages/lifecycle-parent/lifecycle-hooks/lifecycle-hooks';
+import { LifecycleParent } from './app-pages/lifecycle-parent/lifecycle-parent';
 
 export const routes: Routes = [
-    { path:'basics/:id/:test', component:AngularBasics },
-    { path:'decerators', component:Decerators },
-    { path:'decerators_parent', component:DecoratorParent },
-    { path:'data_binding', component:DataBinding },
-    { path:'directives', component:Directives },
-    { path:'pipes', component:Pipes },
-    { path:'templates', component:Templates },
+  { path: 'basics/:id/:test', component: AngularBasics },
+  // { path: 'decerators', component: Decerators },
+  { path: 'decerators_parent', component: DecoratorParent },
+  { path: 'data_binding', component: DataBinding },
+  { path: 'directives', component: Directives },
+  { path: 'pipes', component: Pipes },
+  { path: 'templates', component: Templates },
+  { path: 'ngcontent', component: NgContent },
+  { path: 'services', component: ServicesExamples },
+  { path: 'todo-form', component: Todoform },
+  { path: 'todo-list', component: Todolist },
+  { path: 'observables', component: Observables },
+  { path: 'subject', component: Subjects },
+  { path: 'rxjs-operators', component: RxjsOperators },
+  { path: 'http-interceptors', component: HttpInterceptors },
+  { path: 'forms', component: Forms },
+  { path: 'signup', component: SignupForm },
+  // Lazy Loading Module Concept
+  {
+    path: 'users-list',
+    loadChildren: () =>
+      import('./users-module/users-module').then((m) => m.UsersModule),
+  },
 
-    {path:'ngcontent', component: NgContent},
-    { path:'services', component:ServicesExamples },
-    {path:'todo-form', component: Todoform},
-    {path:'todo-list', component: Todolist},
-    {path:'observables', component: Observables},
-    {path:'subject', component: Subjects},
-    {path:'rxjs-operators', component: RxjsOperators},
-    {path:'http-interceptors', component: HttpInterceptors},
+  // {path: 'lifecycle-hooks', component: LifecycleHooks},
+  {path: 'lifecycle-parent', component: LifecycleParent},
 
-    {path:'forms', component: Forms},
-    {path: 'signup', component: SignupForm},
-    
-    
-    { path:'routings', component:Routings, 
-        children: [
-            {path:'childroute1', component: Childroute1},
-            {path:'childroute2', component: Childroute2}
-        ]
-    },
-    { path:'', pathMatch: 'full', redirectTo: 'home' },
-    { path:'login', component: Login },
-    { path:'home', component: Home },
-    { path:'about', component:About },
-    // Route gaurd exapmle implemented only for contacts
-    { path:'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
-    { path:'users', component: Users },
-    { path:'usercard/:id', component: Usercard },
-    { path:'products', component: Products },
-    { path:'**', component: Pagenotfound }
+  {
+    path: 'routings',
+    component: Routings,
+    children: [
+      { path: 'childroute1', component: Childroute1 },
+      { path: 'childroute2', component: Childroute2 },
+    ],
+  },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'login', component: Login },
+  { path: 'home', component: Home },
+  { path: 'about', component: About },
+  // Route gaurd exapmle implemented only for contacts
+  { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
+  { path: 'users', component: Users },
+  { path: 'usercard/:id', component: Usercard },
+  { path: 'products', component: Products },
+  { path: '**', component: Pagenotfound },
 ];

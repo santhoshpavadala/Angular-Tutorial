@@ -1,7 +1,7 @@
 <aside>
   <nav>
     <a routerLink="/basics" routerLinkActive="active">Basics</a>
-    <a routerLink="/decerators" routerLinkActive="active">Decerators</a>
+    <!-- <a routerLink="/decerators" routerLinkActive="active">Decerators</a> -->
     <a routerLink="/decerators_parent" routerLinkActive="active">Decerators Parent</a>
     <a routerLink="/data_binding" routerLinkActive="active">Data Binding</a>
     <a routerLink="/directives" routerLinkActive="active">Directives</a>
@@ -22,11 +22,18 @@
     <!-- Angular Forms -->
     <a routerLink="/forms" routerLinkActive="active">Forms</a>
     <a routerLink="/signup" routerLinkActive="active">Signup-Forms</a>
+    <!-- USERS MODULES LAZY LOADING PARENT CHILD -->
+     <a routerLink="/users-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Users Module List</a> <!--// Shows exact link only if its parent and then child then its active state only for parent :routerLinkActiveOptions -->
+    <a routerLink="/users-list/users-edit" routerLinkActive="active">Users Module Edit</a>
+
+    <a routerLink="/lifecycle-parent" routerLinkActive="active">Lifecycle Hooks</a>
 
 
     <a routerLink="/home" routerLinkActive="active">Home</a>
     <a routerLink="/about" routerLinkActive="active">About</a>
     <a routerLink="/contact" routerLinkActive="active">Contact</a>
     <a routerLink="/users" routerLinkActive="active" [queryParams]="{'category': 'Admin', 'size': 8}">Users</a>
+
+
   </nav>
 </aside>

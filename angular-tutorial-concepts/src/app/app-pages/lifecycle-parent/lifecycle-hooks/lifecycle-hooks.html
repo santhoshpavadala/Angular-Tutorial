@@ -1,0 +1,66 @@
+<div class="section">
+    <h1>Lifecycle-Hooks</h1>
+
+    <div class="subsection">
+        <h2>What are Lifecycle Hooks in Angular?</h2>
+
+        <p>In Angular, a component is born, updated, and destroyed. <br>
+        Angular gives us lifecycle hooks — special methods that let us tap into each stage of that component’s life. <br>
+        Think of them like checkpoints: <br>
+        “Component created” → “Data changed” → “View rendered” → “Component destroyed”</p>
+
+        <p>Lifecycle hooks are special methods that Angular calls at specific moments in a component's life - from creation to destruction. They let you tap into key moments and run custom logic.</p>
+
+        <h4>Full Lifecycle Order (Big Picture)</h4>
+        <ul>
+            <li>constructor()  → Component instance created</li>
+            <li>ngOnChanges() → Input() properties change</li>
+            <li>ngOnInit() → Component initialized (called once)</li>
+            <li>ngDoCheck() → Custom change detection</li>
+            <li>ngAfterContentInit() → Content projection initialized</li>
+            <li>ngAfterContentChecked() → Content projection checked</li>
+            <li>ngAfterViewInit() → View initialized</li>
+            <li>ngAfterViewChecked() → View checked</li>
+            <li>ngOnDestroy() → Component destroyed</li>
+        </ul>
+
+        <div class="sub-section">
+
+
+            <h4>1. constructor() (NOT a lifecycle hook)</h4>
+            <p><b>What it really is</b></p>
+            <p>This is TypeScript / JavaScript, not Angular lifecycle.</p>
+            <p><b>When it runs</b></p>
+            <p>When the class instance is created or When: Class instantiation (before Angular initializes the component)</p>
+            <p>Before Angular binds data</p>
+            <p><b>What to do here</b></p>
+            <p>✅ Dependency Injection only</p>
+            <p>NO API calls, NO logic, NO DOM access</p>
+            <p>constructor(private userService: UserService)</p>
+
+            <p><b>Why shouldn't we use constructor for initialization logic?</b></p>
+            <p>A: Constructor is called before Angular initializes the component. Input() properties, DOM elements, and child components aren't available. Use ngOnInit() instead for initialization logic.</p>
+        </div>
+
+        <div class="sub-section">
+            <h4>2. ngOnChanges() (Input watcher)</h4>
+            <p>To react to parent → child data changes</p>
+            <p><b> When it runs</b></p>
+            <ul>
+                <li>Runs whenever Input() data changes</li>
+                <li>Runs before ngOnInit()</li>
+                <li>Runs multiple times</li>
+            </ul>
+
+            <div>
+                <h4>LifeCycle Example component Parent to child data passing</h4>
+                <p>{{title}}</p>
+            </div>
+
+            <h4><b>Interview Question:</b> Q: When does ngOnChanges NOT get called?</h4>
+            <p>A: ngOnChanges only fires for Input() properties. It doesn't detect changes inside objects/arrays (reference change only).
+                 For primitive types, it fires on every change. For objects/arrays, it only fires when the reference changes.</p>
+            
+        </div>
+    </div>
+</div>

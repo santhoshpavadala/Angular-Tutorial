@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Decerators } from '../decerators/decerators';
+import { Decerators } from './decerators/decerators';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-decorator-parent',
-  imports: [RouterOutlet, Decerators],
+  imports: [Decerators],
   templateUrl: './decorator-parent.html',
   styleUrl: './decorator-parent.scss'
 })

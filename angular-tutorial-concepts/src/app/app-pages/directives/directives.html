@@ -2,7 +2,33 @@
     <h1>Directives in Angular</h1>
 
     <div class="sub-section">
+        <h2>What are Directives in Angular?</h2>
+        <p>In Angular, directives are instructions in the DOM. <br>
+        They tell Angular how to change the appearance or behavior of an element.</p>
+        <p>In short: <br>
+        Directives = DOM manipulation + behavior control</p>
+
+        <h4>Why Directives?</h4>
+        <p>Without directives → HTML is static 😴 <br>
+        With directives → HTML becomes dynamic, reactive, and powerful ⚡</p>
+
+        <p>Examples:</p>
+        <ul>
+            <li>Show / hide elements</li>
+            <li>Loop data</li>
+            <li>Change styles dynamically</li>
+            <li>Create reusable DOM behavior</li>
+        </ul>
+
+        <h4>Types of directives:</h4>
+        <ul>
+            <li>Structural Directives</li>
+            <li>Attribute Directives</li>
+            <li>Custom Directives</li>
+        </ul>
+
         <h2>Structural Directives</h2>
+        <p>Change the DOM structure (add/remove elements)</p>
         <div>
             <ul>
                 <li>*ngIf</li>
@@ -10,6 +36,8 @@
                 <li>*ngSwitch</li>
             </ul>
         </div>
+    </div>
+
         <div class="sub-section">
             <h2>*ngIf Examples</h2>
             <h4 *ngIf="showTitle">*ngIf Title show</h4>
@@ -102,7 +130,7 @@
                 <div *ngSwitchCase="'-'">{{num1-num2}}</div>
                 <div *ngSwitchCase="'*'">{{num1*num2}}</div>
                 <div *ngSwitchCase="'/'">{{num1/num2}}</div>
-                <div *ngSwitchDefault="''">No Operations Found</div>
+                <!-- <div *ngSwitchDefault="''">No Operations Found</div> -->
             </div>
             <div>
                 <input type="text" [(ngModel)]="operation1">
@@ -111,9 +139,51 @@
                 <div *ngSwitchCase="'-'">{{num3}}-{{num4}}={{num3-num4}}</div>
                 <div *ngSwitchCase="'*'">{{num3}}*{{num4}}={{num3*num4}}</div>
                 <div *ngSwitchCase="'/'">{{num3}}/{{num4}}={{num3/num4}}</div>
-                <div *ngSwitchDefault="''">No Operations Found</div>
+                <!-- <div *ngSwitchDefault="''">No Operations Found</div> -->
                 </div>
             </div>
         </div>
-    </div>
+
+
+        <div class="sub-section">
+            <h2>Attribute Directives</h2>
+            <p>Change appearance or behavior of an existing element <br>
+            DOM element stays — only attributes/styles/classes change</p>
+
+            <p>Common Attribute Directives</p>
+            <ul>
+                <li>ngClass</li>
+                <li>ngStyle</li>
+                <li>ngModel</li>
+            </ul>
+        </div>
+
+        <div class="sub-section">
+            <h2>Custom Directives - (attribute)</h2>
+            <p>When built-in directives aren’t enough <br>
+            You create your own reusable behavior</p>
+            <h4>When to Use Custom Directive?</h4>
+            <ul>
+                <li>Highlight elements</li>
+                <li>Role-based UI control</li>
+                <li>Auto-focus inputs</li>
+                <li>Permission handling</li>
+            </ul>
+
+            <div>
+                <h4>Custom Directive Examples:</h4>
+                <div>
+                    <h4 appCustomdir>This is Custom Directive style attribute chaging css though custom directive</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-section">
+            <h2>Custom Directives - (structurral) - custom ngIf structurral directive in angular</h2>
+
+            <ng-template [appCutomdirIf]="showIf"> <!--we can also pass custom if directive *appCutomdirIf="showIf" -->
+                <h4>This is Custom Structural ngIf example</h4>
+                <p>This is Paragraph</p>
+            </ng-template>
+        </div>
 </div>
