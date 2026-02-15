@@ -1,0 +1,111 @@
+<div class="section">
+    <h1>Angular NGRX</h1>
+    <div class="sub-section">
+        <h2>What is NgRx?</h2>
+        <p>NgRx is a state management library for Angular applications based on the Redux pattern and powered by RxJS Observables.</p>
+        <h2>Why Do We Need NgRx?</h2>
+        <p>In small apps:</p>
+        <ul>
+            <li>We use Input(), Output()</li>
+            <li>Services with BehaviorSubject</li>
+            <li>Direct data sharing</li>
+        </ul>
+        <p>In large apps:</p>
+        <ul>
+            <li>Multiple components need same data</li>
+            <li>Complex API flows</li>
+            <li>State must persist across routes</li>
+            <li>Debugging becomes hard</li>
+        </ul>
+        <p>NgRx solves:</p>
+        <ul>
+            <li>Centralized state</li>
+            <li>One-way data flow</li>
+            <li>Predictable state updates</li>
+            <li>Easy debugging with DevTools</li>
+        </ul>
+
+        <div>
+            <h2>Data Flow (One-Way)</h2>
+            <ul>
+                <li>Component dispatches Action</li>
+                <li>Action goes to Reducer</li>
+                <li>Reducer updates Store (state)</li>
+                <li>Component selects data from Store</li>
+                <li>If API needed → handled by Effects</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Core Concepts of NgRx:</h2>
+            <h4>1. Store</h4>
+            <ul>
+                <li>Central state container</li>
+                <li>Immutable</li>
+                <li>Read-only (can only change via actions)</li>
+            </ul>
+            <h4>2. Actions</h4>
+            <p>Actions describe what happened</p>
+
+            <h4>3. Reducer</h4>
+            <p>Reducer defines how state changes</p>
+
+            <h4>4. Selectors</h4>
+            <p>Used to read data from store</p>
+
+            <h4>5. Effects (For API Calls)</h4>
+            <p>Effects handle:</p>
+            <ul>
+                <li>HTTP requests</li>
+                <li>Side effects</li>
+                <li>Async operations</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Installing NgRx</h2>
+            <p>
+                ng add ngrx/store <br> <!--ng add @ngrx/store -->
+                ng add ngrx/effects <br> <!--ng add @ngrx/effects -->
+                ng add ngrx/store-devtools <!--ng add @ngrx/store-devtools -->
+            </p>
+        </div>
+
+        <div>
+            <ul>Steps:
+                <li>1. ng add ngrx/store</li> <!--1. ng add @ngrx/store-->
+                <li>Create Reduces function</li>
+                <li>Configure Store module with Reducer function in app module</li>
+                <li>How to use (select) store data</li>
+                <li>How to update state using dispatch method.</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>NGRX Example: Create Reducer, Create Action, Create Model for State in Ngrx</h2>
+
+            <div>
+                <app-ngrx-child></app-ngrx-child>
+
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{usersData.name}}</td>
+                                <td>{{usersData.email}}</td>
+                                <td>{{usersData.mobile}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
