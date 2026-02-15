@@ -30,6 +30,7 @@ import { Forms } from './app-pages/forms/forms';
 import { SignupForm } from './app-pages/signup-form/signup-form';
 import { LifecycleHooks } from './app-pages/lifecycle-parent/lifecycle-hooks/lifecycle-hooks';
 import { LifecycleParent } from './app-pages/lifecycle-parent/lifecycle-parent';
+import { Ngrx } from './app-pages/ngrx-parent/ngrx';
 
 export const routes: Routes = [
   { path: 'basics/:id/:test', component: AngularBasics },
@@ -57,7 +58,8 @@ export const routes: Routes = [
   },
 
   // {path: 'lifecycle-hooks', component: LifecycleHooks},
-  {path: 'lifecycle-parent', component: LifecycleParent},
+  { path: 'lifecycle-parent', component: LifecycleParent },
+  { path: 'ngrx', component: Ngrx },
 
   {
     path: 'routings',

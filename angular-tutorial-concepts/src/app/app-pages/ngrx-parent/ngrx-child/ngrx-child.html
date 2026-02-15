@@ -1,0 +1,29 @@
+<div class="sub-section">
+    <div class="row align-items-center gap-2 mb-2">
+        <div class="col-2">Username: </div>
+        <div class="col-6">
+            <input type="text" class="form-control" #name>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-warning" (click)="editName(name)">Update</button>
+        </div>
+    </div>
+    <div class="row align-items-center gap-2 mb-2">
+        <div class="col-2">Email: </div>
+        <div class="col-6">
+            <input type="text" class="form-control" #email>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-warning" (click)="editEmail(email)">Update</button>
+        </div>
+    </div>
+    <div class="row align-items-center gap-2">
+        <div class="col-2">Mobile: </div>
+        <div class="col-6">
+            <input type="text" class="form-control" #mobile>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-warning" (click)="editMobile(mobile)">Update</button>
+        </div>
+    </div>
+</div>
