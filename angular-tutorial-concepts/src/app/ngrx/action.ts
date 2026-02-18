@@ -1,5 +1,11 @@
 import { createAction, props } from "@ngrx/store";
 
+export const getUsers = createAction('get-users');
+export const updateUsers = createAction(
+  'update-users',
+  props<{users: any[]}>()
+)
+
 // Need to import createAction method in Ngrx.
 // Need to import props from ngrx
 

@@ -1,14 +1,7 @@
-import { Action, createReducer, on } from "@ngrx/store";
-import { updateEmail, updateMobile, updateName } from "./action";
+import { Action, createReducer, on, State } from "@ngrx/store";
+import { updateEmail, updateMobile, updateName, updateUsers } from "./action";
 import { AppState } from "./model";
 
-
-
-
-/*
-  initialState → default state of this feature.
-  Store will use this when app loads first time.
-*/
 let initialState:AppState = {
     name: "",
     email: "",
@@ -16,6 +9,12 @@ let initialState:AppState = {
     id:0,
     posts:[{id:2, title:"asdf", description: "fgh"}]
 }
+// NGRX Effects Example
+// let initialState = {
+//   users: []
+// }
+
+
 
 // // dispatch({type: 'name-edit', payload: "san"})
 // export function userReducer (state=initialState,action: Action) {
@@ -32,34 +31,15 @@ let initialState:AppState = {
 // }
 
 
-
-
-/*
-  createReducer()
-
-  1️⃣ First parameter → initialState
-  2️⃣ Then multiple on() functions
-*/
-
 export const userReducer = createReducer (initialState, 
     on(updateName, (state, data)=>({...state, name: data.name})),
     on(updateEmail, (state, data)=>({...state, email: data.email})),
     on(updateMobile, (state, data)=>({...state,mobile: data.mobile}))
 )
 
-/*
-    on(actionName, callback)
-
-    When updateName action is dispatched,
-    this function runs.
-
-    state → current state
-    data → action payload
-  */
-
-    
-/*
-  IMPORTANT:
-  Reducer NEVER modifies state directly.
-  It always returns a NEW object (immutable pattern).
-*/
+// NGRX Effects Example
+// export const userReducer = createReducer (initialState,
+//   on(updateUsers, (state, {users}) => {
+//     return {...state, users}
+//   })
+// )

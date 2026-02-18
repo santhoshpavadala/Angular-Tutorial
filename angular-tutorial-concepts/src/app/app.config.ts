@@ -7,6 +7,8 @@ import { RoutegaurdAuth } from './services/routegaurd-auth';
 import { authInterceptor } from './interceptors/auth-interceptor';
 import { provideStore } from '@ngrx/store';
 import { userReducer } from './ngrx/userReducer';
+import { provideEffects } from '@ngrx/effects';
+import { UserEffects } from './ngrx/userEffects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
-    provideStore({user: userReducer}) //ngrx reducer imports
+    provideStore({ user: userReducer }), //ngrx reducer imports
+    provideEffects([UserEffects])
 ]
 };
