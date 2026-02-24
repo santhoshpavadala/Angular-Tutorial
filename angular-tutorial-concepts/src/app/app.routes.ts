@@ -35,6 +35,7 @@ import { Signals } from './app-pages/signals/signals';
 import { TemplateForms } from './app-pages/template-forms/template-forms';
 import { ReactiveForms } from './app-pages/reactive-forms/reactive-forms';
 import { ReactiveFormsApiComponent } from './app-pages/reactive-forms-api/reactive-forms-api';
+import { CrudOperations } from './app-pages/crud-operations/crud-operations';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -77,6 +78,11 @@ export const routes: Routes = [
   {
     path: 'reactive-forms-api',
     component: ReactiveFormsApiComponent
+  },
+
+  {
+    path: 'crud-users',
+    component: CrudOperations
   },
 
   // Lazy Loading Module Concept
