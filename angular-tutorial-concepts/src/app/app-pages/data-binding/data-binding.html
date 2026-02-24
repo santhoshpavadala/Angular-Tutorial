@@ -49,6 +49,15 @@
             <label>User Name</label><input type="text" (input)="changeName($event)">
             <p>User Name Data: {{userName}}</p>
         </div>
+        <div>
+            <select name="" id="" (change)="onCityChange()">
+                <option value="">Hyd</option>
+                <option value="">Miyapur</option>
+                <option value="">Kukatpally</option>
+                <option value="">KPHB</option>
+            </select>
+        </div>
+
     </div>
 
     <div class="sub-section">
@@ -60,4 +69,54 @@
             <button class="btn btn-primary" (click)="updateCity()">Update City</button>
         </div>
     </div>
+</div>
+
+
+<div class="section">
+    <h1>Databinding New examples</h1>
+    <p> Date Variable </p>
+    <p>{{currentDate}}</p>
+
+    <p> Array String and Number Variable </p>
+    <div *ngFor="let item of cityName">
+        <div>{{item}}</div>
+    </div>
+    <div *ngFor="let item of rollNumber">
+        <div>{{item}}</div>
+    </div>
+
+    <h3>Object Student List</h3>
+    <div>
+        <div>{{students.name}}</div>
+        <div>{{students.email}}</div>
+        <div>{{students.mobile}}</div>
+    </div>
+    <div>{{students | json}}</div>
+
+    <!-- WHile forloop its used of keyvalue present forloop -->
+    <div *ngFor="let student of students | keyvalue">
+        <strong>{{ student.key }}:</strong> {{ student.value }}
+    </div>
+
+    @for (student of students | keyvalue; track student.key) {
+  <div>
+    <strong>{{ student.key }}:</strong> {{ student.value }}
+  </div>
+    }
+
+
+    <h3>Array Of ObhectStudent List</h3>
+
+    @for (student of studentList; track student.id; let i = $index) {
+    <div>
+        <p>Index: {{ i }}</p>
+        <p>Id: {{student.id}}</p>
+        <p>Name: {{ student.name }}</p>
+        <p>Email: {{ student.email }}</p>
+        <p>Mobile: {{ student.mobile }}</p>
+        <hr />
+    </div>
+    } @empty {
+    <p>No students found</p>
+    }
 </div>

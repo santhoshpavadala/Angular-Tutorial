@@ -1,0 +1,30 @@
+<div class="section">
+    <h2>Angular Signals(16+)</h2>
+    <div class="sub-section">
+        <div class="row">
+            <div class="col-12">
+                <h2>What are Signals in Angular?</h2>
+                <p>Signals are a new reactive state management primitive introduced in Angular 16.</p>
+
+                <ul>They allow you to:
+                    <li>Store reactive values</li>
+                    <li>Automatically track dependencies</li>
+                    <li>Update the UI when data changes</li>
+                    <li>Avoid manual subscriptions (like RxJS subscribe())</li>
+                </ul>
+                <p>Think of Signals as a reactive variable that automatically notifies Angular when it changes.</p>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-3">{{signalVariable}}</div>
+        <div class="col-3">{{signalVariable2()}}</div>
+        <div class="col-3">{{rollno()}}</div>
+        <div class="col-3">{{city()}}</div>
+        <div class="col-3">
+            <button (click)="changesCity()">Change Course</button>
+        </div>
+        <div class="col-3">{{courseDuration()}}</div>
+    </div>
+    </div>
+</div>
+

@@ -31,10 +31,25 @@ import { SignupForm } from './app-pages/signup-form/signup-form';
 import { LifecycleHooks } from './app-pages/lifecycle-parent/lifecycle-hooks/lifecycle-hooks';
 import { LifecycleParent } from './app-pages/lifecycle-parent/lifecycle-parent';
 import { Ngrx } from './app-pages/ngrx-parent/ngrx';
+import { Signals } from './app-pages/signals/signals';
+import { TemplateForms } from './app-pages/template-forms/template-forms';
+import { ReactiveForms } from './app-pages/reactive-forms/reactive-forms';
+import { ReactiveFormsApiComponent } from './app-pages/reactive-forms-api/reactive-forms-api';
 
 export const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'login', component: Login },
+  { path: 'home', component: Home },
+  { path: 'about', component: About },
+  
+  // Route gaurd exapmle implemented only for contacts
+  { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
+  { path: 'users', component: Users },
+  { path: 'usercard/:id', component: Usercard },
+  { path: 'products', component: Products },
+
+
   { path: 'basics/:id/:test', component: AngularBasics },
-  // { path: 'decerators', component: Decerators },
   { path: 'decerators_parent', component: DecoratorParent },
   { path: 'data_binding', component: DataBinding },
   { path: 'directives', component: Directives },
@@ -50,6 +65,20 @@ export const routes: Routes = [
   { path: 'http-interceptors', component: HttpInterceptors },
   { path: 'forms', component: Forms },
   { path: 'signup', component: SignupForm },
+  {
+    path: 'templete-form',
+    component: TemplateForms
+  },
+  {
+    path: 'reactive-forms',
+    component: ReactiveForms
+  },
+
+  {
+    path: 'reactive-forms-api',
+    component: ReactiveFormsApiComponent
+  },
+
   // Lazy Loading Module Concept
   {
     path: 'users-list',
@@ -60,6 +89,7 @@ export const routes: Routes = [
   // {path: 'lifecycle-hooks', component: LifecycleHooks},
   { path: 'lifecycle-parent', component: LifecycleParent },
   { path: 'ngrx', component: Ngrx },
+  { path: 'signals', component: Signals},
 
   {
     path: 'routings',
@@ -69,14 +99,10 @@ export const routes: Routes = [
       { path: 'childroute2', component: Childroute2 },
     ],
   },
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'login', component: Login },
-  { path: 'home', component: Home },
-  { path: 'about', component: About },
-  // Route gaurd exapmle implemented only for contacts
-  { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
-  { path: 'users', component: Users },
-  { path: 'usercard/:id', component: Usercard },
-  { path: 'products', component: Products },
+
+  
+
   { path: '**', component: Pagenotfound },
+
+  
 ];

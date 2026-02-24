@@ -1,0 +1,95 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">User Reactive Form</h2>
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="id" class="form-label">ID:</label>
+              <input type="text" class="form-control" id="id" 
+              formControlName="id" required>
+
+              @if (userForm.get('id')?.invalid && (userForm.get('id')?.touched || userForm.get('id')?.dirty)) {
+              <div class="text-danger mt-1">ID is required</div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Name:</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter Your Name" 
+              formControlName="name" required>
+              @if (userForm.get('name')?.invalid && (userForm.get('name')?.touched || userForm.get('name')?.dirty)) {
+              <div class="text-danger mt-1">
+                @if (userForm.get('name')?.errors?.['required']) {
+                <span>This is required</span>
+                } @else if (userForm.get('name')?.errors?.['minlength']) {
+                <span>Min 5 characters needed</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Username:</label>
+              <input type="text" class="form-control" id="username" formControlName="username" required>
+              @if (userForm.get('username')?.invalid && (userForm.get('username')?.touched || userForm.get('username')?.dirty)) {
+              <div class="text-danger mt-1">
+                @if (userForm.get('username')?.errors?.['required']) {
+                <span>This is required</span>
+                } @else if (userForm.get('username')?.errors?.['minlength']) {
+                <span>Min 5 characters needed</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" class="form-control" id="email" 
+              formControlName="email" required>
+              @if (userForm.get('email')?.invalid && (userForm.get('email')?.touched || userForm.get('email')?.dirty)) {
+              <div class="text-danger mt-1">
+                @if (userForm.get('email')?.errors?.['required']) {
+                <span>Email is required</span>
+                } @else if (userForm.get('email')?.errors?.['email']) {
+                <span>Invalid email format</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password:</label>
+              <input type="password" class="form-control" id="password" formControlName="password" required>
+              @if (userForm.get('password')?.invalid && (userForm.get('password')?.touched || userForm.get('password')?.dirty)) {
+              <div class="text-danger mt-1">
+                @if (userForm.get('password')?.errors?.['required']) {
+                <span>Password is required</span>
+                } @else if (userForm.get('password')?.errors?.['minlength']) {
+                <span>Min 6 characters needed</span>
+                }
+              </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="city" class="form-label">City:</label>
+              <input type="text" class="form-control" id="city" formControlName="city">
+            </div>
+
+            <div class="mb-3">
+              <label for="state" class="form-label">State:</label>
+              <input type="text" class="form-control" id="state" formControlName="state">
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+              <button type="button" class="btn btn-secondary" (click)="onReset()">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
