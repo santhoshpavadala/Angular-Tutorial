@@ -156,6 +156,48 @@
                 <li>ngStyle</li>
                 <li>ngModel</li>
             </ul>
+
+            <h2>ngClass Directive Examples</h2>
+            <div class="row">
+                <div class="col-3 m-2">
+                    <div class="p-4" [ngClass]="ngClassDir">NgClass Directive</div>
+                </div>
+
+                <div class="col-3 m-2">
+                    <input type="text" [(ngModel)]="ngClassDir">
+                </div>
+
+                <div class="col-6 m-2">
+                    <button class="btn" [ngClass]="isActive ? 'btn-success':'btn-danger'" (click)="isActive=!isActive">Status</button>
+                </div>
+
+                <div class="col-6">
+                    <input type="text" [(ngModel)]="productPrice" class="form-control">
+                    <p class="fw-bold" [ngClass]="productPrice > 500 ? 'text-danger':'text-success'">Price : {{productPrice}}</p>
+                </div>
+
+                <div class="col-6">
+                @for (product of productList; track $index) {
+                    <div class="p-2 text-white" [ngClass]="product.isActive == true ? 'bg-success':'bg-danger'">
+                        {{product.isActive == true? 'Active': 'De-Active'}}
+                    </div>
+                }
+                </div>
+            </div>
+
+            <h2>ngStyle Directive Examples</h2>
+            <div class="row">
+                <div class="col-6">
+                    <p>This is pure css class</p>
+                    <input type="text" [(ngModel)]="divBgColor">
+                    <div class="p-2" [ngStyle]="{background: divBgColor, color: 'blue'}">Bg Blocks</div>
+                </div>
+
+                <div [ngStyle]="myCssTheme">
+                    <div>This is Div NgStyle</div>
+                </div>
+            </div>
+
         </div>
 
         <div class="sub-section">
@@ -185,5 +227,115 @@
                 <h4>This is Custom Structural ngIf example</h4>
                 <p>This is Paragraph</p>
             </ng-template>
+        </div>
+</div>
+
+<div class="section">
+     <h1>Control Flow Statements (If, Else, Else If, for) </h1>
+     <div class="sub-section">
+        <h2>ngIf to controlflow: if</h2> <!--@if(){}-->
+        <div class="row mb-4">
+            <div class="col-3">
+                <input type="checkbox" [(ngModel)]="isOffercodeAvailable"> Do you have the Offer Code
+            </div>
+            --{{isOffercodeAvailable}}
+            @if(isOffercodeAvailable) {
+                <div class="col-3">
+                    <input type="text" class="form-control" placeholder="Enter Offer code">
+                </div>
+            }
+        </div>
+
+
+        <div class="row mb-4">
+            <div class="col-12">
+                @if(isSuccesDivVisible() == true) {
+                    <div class="bg-success p-2 m-2">Success</div>
+                } @else {
+                    <div class="bg-danger p-2 m-2">Error</div>
+                }
+            </div>
+            <div class="col-3">
+                <button class="btn btn-success" (click)="toggleVisible()">Toggle</button>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <input type="text" class="form-control" placeholder="% Marks"
+                [(ngModel)]="studentTotalMarks">
+            </div>
+            <div class="col-6">
+                @if(studentTotalMarks >= 75) {
+                    <strong class="text-success">Student has A Grade</strong>
+                }
+                @else if(studentTotalMarks <= 75 && studentTotalMarks >= 50) {
+                    <span class="text-warning">Student has B Grade</span>
+                }
+                @else if(studentTotalMarks <= 50 && studentTotalMarks >= 35) {
+                <span class="text-secondary">Student has C Grade</span>
+                }
+                @else {
+                    @if (studentTotalMarks == 0) {
+                        <span class="text-primary">Enter the Marks</span>
+                    } @else {
+                        <span class="text-danger">Student has Failed</span>
+                    }
+                }
+            </div>
+        </div>
+     </div>
+
+      <div class="sub-section">
+        <h2>ngFor to controlflow: for</h2> <!--@if(){}-->
+        <div class="row mb-4">
+            <div class="col-6">
+                <ul>
+                    @for (offer of offerList; track $index) {
+                        <li>{{offer}}</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="col-6">
+                @for (product of prouctList; track $index) {
+                    <button class="btn btn-primary mx-2">{{product}}</button>
+                }
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr. No</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (emp of employeeList; track $index) {
+                    <tr>
+                        <td>{{$index+1}}</td>
+                        <td>{{emp.name}}</td>
+                        <td>{{emp.city}}</td>
+                        <td>
+                            @if(emp.isActive == true) {
+                            <strong class="text-success">Active</strong>
+                            }
+                            @else {
+                            <strong class="text-danger">In-Active</strong>
+                            }
+
+                            <!-- {{emp.isActive}} -->
+                        </td>
+
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
         </div>
 </div>

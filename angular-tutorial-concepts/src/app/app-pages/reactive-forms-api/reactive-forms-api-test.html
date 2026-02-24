@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="alert alert-info">
+    <h3>Debug Info:</h3>
+    <p>Loading: {{ loading }}</p>
+    <p>Mode: {{ mode }}</p>
+    <p>Users count: {{ users.length }}</p>
+    <p>Error: {{ error }}</p>
+  </div>
+
+  @if (loading) {
+  <div class="alert alert-warning">Loading data... ({{ loading }})</div>
+  } @else {
+  <div class="alert alert-success">
+    Data loaded! Showing {{ users.length }} users
+  </div>
+
+  @if (users.length > 0) {
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user.id) {
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  } @else {
+  <div class="alert alert-danger">No users found!</div>
+  }
+  }
+</div>

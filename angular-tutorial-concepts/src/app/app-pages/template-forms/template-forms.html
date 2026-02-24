@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">User Template Form</h2>
+          <form #userForm="ngForm"> <!--#userForm="ngForm" to access the form-->
+            <div class="mb-3">
+              <label for="id" class="form-label">ID:</label>
+              <input type="text" class="form-control" id="id" name="id" [(ngModel)]="userObj.id" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Name:</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Name" 
+              [(ngModel)]="userObj.name" #name="ngModel" required minlength="5">
+               @if (name.touched || name.dirty) {
+                <div class="form-error">
+                    @if (name.errors?.['required']) {
+                    <span>This is required</span>
+                    } @else if (name.errors?.['minlength']) {
+                    <span>Min 5 characters needed</span>
+                    }
+                </div>
+               }
+            </div>
+
+              <!-- name attribute should be present when using ngmodel
+               #name="ngModel"  [(ngModel)]="userObj.name" -->
+
+
+            <div class="mb-3">
+              <label for="username" class="form-label">Username:</label>
+              <input type="text" class="form-control" id="username" name="username" 
+              [(ngModel)]="userObj.username" #username="ngModel" required minlength="5">
+              @if(username.touched || username.dirty) {
+                <div>
+                    @if(username.errors?.['required']) {
+                        <span>This is required</span>
+                    } @else if (username.errors?.['minlength']) {
+                        <span>Min 5 characters needed</span>
+                    }
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" class="form-control" id="email" name="email" 
+              [(ngModel)]="userObj.email" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Password:</label>
+              <input type="password" class="form-control" id="password" name="password" 
+              [(ngModel)]="userObj.password" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="city" class="form-label">City:</label>
+              <input type="text" class="form-control" id="city" name="city" 
+              [(ngModel)]="userObj.city">
+            </div>
+
+            <div class="mb-3">
+              <label for="state" class="form-label">State:</label>
+              <input type="text" class="form-control" id="state" name="state" 
+              [(ngModel)]="userObj.state">
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
