@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   AfterViewInit,
   Component,
@@ -28,7 +28,7 @@ import {
 @Component({
   selector: 'app-rxjs-operators',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './rxjs-operators.html',
   styleUrl: './rxjs-operators.scss'
 })

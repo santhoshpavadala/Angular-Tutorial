@@ -79,10 +79,10 @@
     <h2>What is ngOnInit()?</h2>
     <p>ngOnInit() is a lifecycle hook that:</p>
     <ul>
-        <li>Runs once</li>
-        <li>Runs after Angular sets all Input() values</li>
-        <li>Runs after the first ngOnChanges()</li>
-        <li>Is used for component initialization logic</li>
+      <li>Runs once</li>
+      <li>Runs after Angular sets all Input() values</li>
+      <li>Runs after the first ngOnChanges()</li>
+      <li>Is used for component initialization logic</li>
     </ul>
 
     <h2>Interview Questions & Answers</h2>
@@ -101,33 +101,35 @@
     <p>In Angular, ngDoCheck() is a lifecycle hook that allows you to manually detect and react to changes. <br>
     Runs during every change detection cycle.</p>
     <ul>
-        That means:
-        <li>Runs during every change detection cycle</li>
-        <li>Runs after ngOnChanges()</li>
-        <li>Runs very frequently</li>
-        <li>Is used for custom change detection</li>
+      That means:
+      <li>Runs during every change detection cycle</li>
+      <li>Runs after ngOnChanges()</li>
+      <li>Runs very frequently</li>
+      <li>Is used for custom change detection</li>
     </ul>
 
     <h2>When does Angular run Change Detection?</h2>
     <p>Angular runs it when:</p>
     <ul>
-        <li>User clicks</li>
-        <li>Input field changes</li>
-        <li>HTTP response returns</li>
-        <li>Timer / setTimeout runs</li>
-        <li>Promise resolves</li>
-        <li>Observable emits</li>
-        <li>Parent changes input</li>
-        <li>Any event occurs</li>
+      <li>User clicks</li>
+      <li>Input field changes</li>
+      <li>HTTP response returns</li>
+      <li>Timer / setTimeout runs</li>
+      <li>Promise resolves</li>
+      <li>Observable emits</li>
+      <li>Parent changes input</li>
+      <li>Any event occurs</li>
     </ul>
 
     <div>
-        <h4>ngDoCheck Example:</h4>
-        <ul>
-           <li *ngFor="let mobile of mobiles">
-              {{ mobile }}
-           </li>
-        </ul>
+      <h4>ngDoCheck Example:</h4>
+      <ul>
+        @for (mobile of mobiles; track mobile) {
+          <li>
+            {{ mobile }}
+          </li>
+        }
+      </ul>
     </div>
   </div>
 
@@ -173,91 +175,91 @@
     <p>In Angular, Content refers to: <br>
     The projected content passed into a component using < ng-content >.</p>
     <!-- <app-card>
-      <p>This is projected content</p>
-    </app-card>
-     <p>Inside app-card:</p>
-    <div class="card">
-      <ng-content></ng-content>
-    </div> -->
-    <p>That p is content, not view.</p>
+    <p>This is projected content</p>
+  </app-card>
+  <p>Inside app-card:</p>
+  <div class="card">
+    <ng-content></ng-content>
+  </div> -->
+  <p>That p is content, not view.</p>
 
-    <div>
-      <h2>What is ngAfterContentInit()</h2>
-      <ul>
-        <li>Runs after Angular projects external content into the component</li>
-        <li>Runs only once</li>
-        <li>Runs after ngAfterContentInit() is triggered</li>
-        <li>Used with ContentChild</li>
-      </ul>
-
-      <p>Why not ngOnInit?</p>
-      <p>Because projected content is not available in ngOnInit(). <br>
-      ContentChild is ready only in ngAfterContentInit().</p>
-
-      <ul>
-        <li>Modify projected content</li>
-        <li>Read projected child components</li>
-        <li>Create wrapper components (cards, modals, tabs)</li>
-        <li>Build reusable layout components</li>
-        <li>Dynamic template rendering</li>
-      </ul>
-
-      <h2>ngAfterContentInit Example:</h2>
-      <p>ng content is the place holder to prent the data in child component which coming from parent component. Below data is parent data. </p>
-      <ng-content></ng-content>
-
-      <h4>Interview Questions</h4>
-      <p><b>Q1: What is projected content?</b></p>
-      <p>Content passed from parent to child using ng-content.</p>
-
-      <p><b>Q2: Difference between ViewChild and ContentChild?</b></p>
-      <p>ViewChild accesses component’s own template. <br>
-      ContentChild accesses projected content.</p>
-
-      <p><b>Q3: When does ngAfterContentInit run?</b></p>
-      <p>After Angular projects external content into the component.</p>
-
-      <p><b>Q4: Does ngAfterContentChecked run once?</b></p>
-      <p>No, it runs after every change detection cycle.</p>
-
-      <p>Q5: Why are content hooks needed?</p>
-      <p>To interact with projected content safely after it is initialized.</p>
-    </div>
-
-    <div>
-      <h2>What is ngAfterContentChecked()</h2>
-      <ul>
-        <li>Runs after Angular checks projected content</li>
-        <li>Runs after ngAfterContentInit()</li>
-        <li>Runs on every change detection cycle</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="sub-section">
-    <h2>ng on destroy Lifecycle hook in Angular</h2>
-    <p>In Angular, <br>
-    ngOnDestroy() runs just before Angular destroys a component instance.</p>
-    <h4>When does it run?</h4>
-    <p>It runs when:</p>
+  <div>
+    <h2>What is ngAfterContentInit()</h2>
     <ul>
-      <li>You navigate to another route</li>
-      <li>Component is removed with *ngIf</li>
-      <li>Parent component gets destroyed</li>
-      <li>Page reloads</li>
-      <li>Dynamic component is removed</li>
+      <li>Runs after Angular projects external content into the component</li>
+      <li>Runs only once</li>
+      <li>Runs after ngAfterContentInit() is triggered</li>
+      <li>Used with ContentChild</li>
     </ul>
 
-    <h4>🧠 Why is it IMPORTANT?</h4>
-    <p>Because Angular does NOT automatically clean up:</p>
+    <p>Why not ngOnInit?</p>
+    <p>Because projected content is not available in ngOnInit(). <br>
+    ContentChild is ready only in ngAfterContentInit().</p>
+
     <ul>
-      <li>Subscriptions</li>
-      <li>Timers</li>
-      <li>Intervals</li>
-      <li>WebSocket connections</li>
-      <li>Event listeners</li>
+      <li>Modify projected content</li>
+      <li>Read projected child components</li>
+      <li>Create wrapper components (cards, modals, tabs)</li>
+      <li>Build reusable layout components</li>
+      <li>Dynamic template rendering</li>
     </ul>
 
-    <p><b>If you don’t clean them → memory leaks.</b></p>
+    <h2>ngAfterContentInit Example:</h2>
+    <p>ng content is the place holder to prent the data in child component which coming from parent component. Below data is parent data. </p>
+    <ng-content></ng-content>
+
+    <h4>Interview Questions</h4>
+    <p><b>Q1: What is projected content?</b></p>
+    <p>Content passed from parent to child using ng-content.</p>
+
+    <p><b>Q2: Difference between ViewChild and ContentChild?</b></p>
+    <p>ViewChild accesses component’s own template. <br>
+    ContentChild accesses projected content.</p>
+
+    <p><b>Q3: When does ngAfterContentInit run?</b></p>
+    <p>After Angular projects external content into the component.</p>
+
+    <p><b>Q4: Does ngAfterContentChecked run once?</b></p>
+    <p>No, it runs after every change detection cycle.</p>
+
+    <p>Q5: Why are content hooks needed?</p>
+    <p>To interact with projected content safely after it is initialized.</p>
   </div>
+
+  <div>
+    <h2>What is ngAfterContentChecked()</h2>
+    <ul>
+      <li>Runs after Angular checks projected content</li>
+      <li>Runs after ngAfterContentInit()</li>
+      <li>Runs on every change detection cycle</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sub-section">
+  <h2>ng on destroy Lifecycle hook in Angular</h2>
+  <p>In Angular, <br>
+  ngOnDestroy() runs just before Angular destroys a component instance.</p>
+  <h4>When does it run?</h4>
+  <p>It runs when:</p>
+  <ul>
+    <li>You navigate to another route</li>
+    <li>Component is removed with *ngIf</li>
+    <li>Parent component gets destroyed</li>
+    <li>Page reloads</li>
+    <li>Dynamic component is removed</li>
+  </ul>
+
+  <h4>🧠 Why is it IMPORTANT?</h4>
+  <p>Because Angular does NOT automatically clean up:</p>
+  <ul>
+    <li>Subscriptions</li>
+    <li>Timers</li>
+    <li>Intervals</li>
+    <li>WebSocket connections</li>
+    <li>Event listeners</li>
+  </ul>
+
+  <p><b>If you don’t clean them → memory leaks.</b></p>
+</div>
 </div>

@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-ng-content',
-  imports: [ CommonModule],
+  imports: [],
   templateUrl: './ng-content.html',
   styleUrl: './ng-content.scss'
 })

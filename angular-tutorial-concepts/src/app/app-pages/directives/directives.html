@@ -1,341 +1,396 @@
 <div class="section">
-    <h1>Directives in Angular</h1>
+  <h1>Directives in Angular</h1>
 
-    <div class="sub-section">
-        <h2>What are Directives in Angular?</h2>
-        <p>In Angular, directives are instructions in the DOM. <br>
-        They tell Angular how to change the appearance or behavior of an element.</p>
-        <p>In short: <br>
-        Directives = DOM manipulation + behavior control</p>
+  <div class="sub-section">
+    <h2>What are Directives in Angular?</h2>
+    <p>In Angular, directives are instructions in the DOM. <br>
+    They tell Angular how to change the appearance or behavior of an element.</p>
+    <p>In short: <br>
+    Directives = DOM manipulation + behavior control</p>
 
-        <h4>Why Directives?</h4>
-        <p>Without directives → HTML is static 😴 <br>
-        With directives → HTML becomes dynamic, reactive, and powerful ⚡</p>
+    <h4>Why Directives?</h4>
+    <p>Without directives → HTML is static 😴 <br>
+    With directives → HTML becomes dynamic, reactive, and powerful ⚡</p>
 
-        <p>Examples:</p>
-        <ul>
-            <li>Show / hide elements</li>
-            <li>Loop data</li>
-            <li>Change styles dynamically</li>
-            <li>Create reusable DOM behavior</li>
-        </ul>
+    <p>Examples:</p>
+    <ul>
+      <li>Show / hide elements</li>
+      <li>Loop data</li>
+      <li>Change styles dynamically</li>
+      <li>Create reusable DOM behavior</li>
+    </ul>
 
-        <h4>Types of directives:</h4>
-        <ul>
-            <li>Structural Directives</li>
-            <li>Attribute Directives</li>
-            <li>Custom Directives</li>
-        </ul>
+    <h4>Types of directives:</h4>
+    <ul>
+      <li>Structural Directives</li>
+      <li>Attribute Directives</li>
+      <li>Custom Directives</li>
+    </ul>
 
-        <h2>Structural Directives</h2>
-        <p>Change the DOM structure (add/remove elements)</p>
+    <h2>Structural Directives</h2>
+    <p>Change the DOM structure (add/remove elements)</p>
+    <div>
+      <ul>
+        <li>*ngIf</li>
+        <li>*ngFor</li>
+        <li>*ngSwitch</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <h2>*ngIf Examples</h2>
+    @if (showTitle) {
+      <h4>*ngIf Title show</h4>
+    }
+
+    <div>
+      <h4>if there no data show loading</h4>
+      @if (!data) {
+        <div>Loading...1</div>
+      }
+      @if (data) {
         <div>
-            <ul>
-                <li>*ngIf</li>
-                <li>*ngFor</li>
-                <li>*ngSwitch</li>
-            </ul>
+          {{data}}
         </div>
+      }
     </div>
 
-        <div class="sub-section">
-            <h2>*ngIf Examples</h2>
-            <h4 *ngIf="showTitle">*ngIf Title show</h4>
+    <div>
+      @if (!data1) {
+        <h4 >Loading...2</h4>
+      } @else {
+        {{data1}}
+      }
+    </div>
 
-            <div>
-                <h4>if there no data show loading</h4>
-                <div *ngIf="!data">Loading...1</div>
-                <div *ngIf="data">
-                    {{data}}
-                </div>
-            </div>
+    <div>
+      @if (data1) {
+        {{data1}}
+      } @else {
+        Loading
+      }
+    </div>
 
-            <div>
-                <h4 *ngIf="!data1; else showTemplate" >Loading...2</h4>
-                <ng-template #showTemplate>
-                    {{data1}}
-                </ng-template>
-            </div>
+    <div>
+      @if (showHeadOnClick) {
+        <h4>Show Heading on click</h4>
+      }
+      <button (click)="showData()">Show</button>
+    </div>
 
-            <div>
-                <div *ngIf="data1; then dataSample; else load"></div>
-                <ng-template #load>Loading</ng-template>
-                <ng-template #dataSample>{{data1}} </ng-template>
-            </div>
+    <div>
+      @if (ifElseData) {
+        <h4>If data then show me else show template message</h4>
+      } @else {
+        Template Message No Data Here
+      }
+      <div></div>
+      <button (click)="showIfElseData()">Show If Else</button>
+    </div>
+  </div>
 
-            <div>
-                <h4 *ngIf="showHeadOnClick">Show Heading on click</h4>
-                <button (click)="showData()">Show</button>
-            </div>
+  <div class="sub-section">
+    <h2>*ngFor Examples</h2>
+    @for (item of numbers; track item) {
+      <div>
+        Paragraph ({{item}})
+      </div>
+    }
+    <table>
+      <h4>Table Data ({{ tableData.length }})</h4>
+      <tr>
+        @for (header of tableHeaders; track header) {
+          <th>{{header}}</th>
+        }
+      </tr>
+      @for (row of tableData; track row) {
+        <tr>
+          @for (col of row; track col) {
+            <td>{{ col }}</td>
+          }
+        </tr>
+      }
+    </table>
 
-            <div>
-                <h4 *ngIf="ifElseData; else noData">If data then show me else show template message</h4>
-                <div><ng-template #noData>Template Message No Data Here</ng-template></div>
-                <button (click)="showIfElseData()">Show If Else</button>
-            </div>
-        </div>
+    @for (name of names; track name; let i = $index) {
+      <div>
+        <p> data {{name}} {{i+1}}</p>
+      </div>
+    }
 
-        <div class="sub-section">
-            <h2>*ngFor Examples</h2>
-            <div *ngFor="let item of numbers">
-                Paragraph ({{item}})
-            </div>
-            <table>
-                <h4>Table Data ({{ tableData.length }})</h4>
-                <tr>
-                    <th *ngFor="let header of tableHeaders">{{header}}</th>
-                </tr>
-                <tr *ngFor="let row of tableData">
-                    <td *ngFor="let col of row">{{ col }}</td>
-                </tr>
-            </table>
+    <div>
+      <table>
+        <tr>
+          @for (header of table; track header) {
+            <th>{{header}}</th>
+          }
+        </tr>
+        @for (m of mobiles; track m; let i = $index; let e = $even; let o = $odd; let f = $first; let l = $last) {
+          <tr>
+            <td>{{m}}</td>
+            <td>{{i}}</td>
+            <td>{{e}}</td>
+            <td>{{o}}</td>
+            <td>{{f}}</td>
+            <td>{{l}}</td>
+          </tr>
+        }
+      </table>
+    </div>
 
-            <div *ngFor="let name of names; index as i">
-                <p> data {{name}} {{i+1}}</p>
-            </div>
+    <div>
+      <h3>Mobile List ({{ mobileObject.length }})</h3>
+      <table>
+        <tr>
+          @for (key of mobileTableHeader; track key) {
+            <th>{{ key }}</th>
+          }
+        </tr>
+        @for (mobile of mobileObject; track mobile) {
+          <tr>
+            @for (key of mobileTableHeader; track key) {
+              <td>{{ mobile[key] }}</td>
+            }
+          </tr>
+        }
+      </table>
+    </div>
+  </div>
 
-            <div>
-                <table>
-                    <tr>
-                        <th *ngFor="let header of table">{{header}}</th>
-                    </tr>
-                    <tr *ngFor="let m of mobiles; index as i; even as e; odd as o; first as f; last as l">
-                        <td>{{m}}</td>
-                        <td>{{i}}</td>
-                        <td>{{e}}</td>
-                        <td>{{o}}</td>
-                        <td>{{f}}</td>
-                        <td>{{l}}</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div>
-                <h3>Mobile List ({{ mobileObject.length }})</h3>
-                <table>
-                <tr>
-                    <th *ngFor="let key of mobileTableHeader">{{ key }}</th>
-                </tr>
-                <tr *ngFor="let mobile of mobileObject">
-                    <td *ngFor="let key of mobileTableHeader">{{ mobile[key] }}</td>
-                </tr>
-                </table>
-            </div>
-        </div>
-
-        <div class="sub-section">
-            <h2>*ngSwitch Examples</h2>
-            <div [ngSwitch]="operation">
-                <div *ngSwitchCase="'+'">{{num1+num2}}</div>
-                <div *ngSwitchCase="'-'">{{num1-num2}}</div>
-                <div *ngSwitchCase="'*'">{{num1*num2}}</div>
-                <div *ngSwitchCase="'/'">{{num1/num2}}</div>
-                <!-- <div *ngSwitchDefault="''">No Operations Found</div> -->
-            </div>
-            <div>
-                <input type="text" [(ngModel)]="operation1">
-                <div [ngSwitch]="operation1">
-                <div *ngSwitchCase="'+'">{{num3}}+{{num4}}={{num3+num4}}</div>
-                <div *ngSwitchCase="'-'">{{num3}}-{{num4}}={{num3-num4}}</div>
-                <div *ngSwitchCase="'*'">{{num3}}*{{num4}}={{num3*num4}}</div>
-                <div *ngSwitchCase="'/'">{{num3}}/{{num4}}={{num3/num4}}</div>
-                <!-- <div *ngSwitchDefault="''">No Operations Found</div> -->
-                </div>
-            </div>
-        </div>
+  <div class="sub-section">
+    <h2>*ngSwitch Examples</h2>
+    <div>
+      @switch (operation) {
+        @case ('+') {
+          <div>{{num1+num2}}</div>
+        }
+        @case ('-') {
+          <div>{{num1-num2}}</div>
+        }
+        @case ('*') {
+          <div>{{num1*num2}}</div>
+        }
+        @case ('/') {
+          <div>{{num1/num2}}</div>
+        }
+        <!-- <div *ngSwitchDefault="''">No Operations Found</div> -->
+      }
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="operation1">
+      <div>
+        @switch (operation1) {
+          @case ('+') {
+            <div>{{num3}}+{{num4}}={{num3+num4}}</div>
+          }
+          @case ('-') {
+            <div>{{num3}}-{{num4}}={{num3-num4}}</div>
+          }
+          @case ('*') {
+            <div>{{num3}}*{{num4}}={{num3*num4}}</div>
+          }
+          @case ('/') {
+            <div>{{num3}}/{{num4}}={{num3/num4}}</div>
+          }
+          <!-- <div *ngSwitchDefault="''">No Operations Found</div> -->
+        }
+      </div>
+    </div>
+  </div>
 
 
-        <div class="sub-section">
-            <h2>Attribute Directives</h2>
-            <p>Change appearance or behavior of an existing element <br>
-            DOM element stays — only attributes/styles/classes change</p>
+  <div class="sub-section">
+    <h2>Attribute Directives</h2>
+    <p>Change appearance or behavior of an existing element <br>
+    DOM element stays — only attributes/styles/classes change</p>
 
-            <p>Common Attribute Directives</p>
-            <ul>
-                <li>ngClass</li>
-                <li>ngStyle</li>
-                <li>ngModel</li>
-            </ul>
+    <p>Common Attribute Directives</p>
+    <ul>
+      <li>ngClass</li>
+      <li>ngStyle</li>
+      <li>ngModel</li>
+    </ul>
 
-            <h2>ngClass Directive Examples</h2>
-            <div class="row">
-                <div class="col-3 m-2">
-                    <div class="p-4" [ngClass]="ngClassDir">NgClass Directive</div>
-                </div>
+    <h2>ngClass Directive Examples</h2>
+    <div class="row">
+      <div class="col-3 m-2">
+        <div class="p-4" [ngClass]="ngClassDir">NgClass Directive</div>
+      </div>
 
-                <div class="col-3 m-2">
-                    <input type="text" [(ngModel)]="ngClassDir">
-                </div>
+      <div class="col-3 m-2">
+        <input type="text" [(ngModel)]="ngClassDir">
+      </div>
 
-                <div class="col-6 m-2">
-                    <button class="btn" [ngClass]="isActive ? 'btn-success':'btn-danger'" (click)="isActive=!isActive">Status</button>
-                </div>
+      <div class="col-6 m-2">
+        <button class="btn" [ngClass]="isActive ? 'btn-success':'btn-danger'" (click)="isActive=!isActive">Status</button>
+      </div>
 
-                <div class="col-6">
-                    <input type="text" [(ngModel)]="productPrice" class="form-control">
-                    <p class="fw-bold" [ngClass]="productPrice > 500 ? 'text-danger':'text-success'">Price : {{productPrice}}</p>
-                </div>
+      <div class="col-6">
+        <input type="text" [(ngModel)]="productPrice" class="form-control">
+        <p class="fw-bold" [ngClass]="productPrice > 500 ? 'text-danger':'text-success'">Price : {{productPrice}}</p>
+      </div>
 
-                <div class="col-6">
-                @for (product of productList; track $index) {
-                    <div class="p-2 text-white" [ngClass]="product.isActive == true ? 'bg-success':'bg-danger'">
-                        {{product.isActive == true? 'Active': 'De-Active'}}
-                    </div>
-                }
-                </div>
-            </div>
+      <div class="col-6">
+        @for (product of productList; track $index) {
+          <div class="p-2 text-white" [ngClass]="product.isActive == true ? 'bg-success':'bg-danger'">
+            {{product.isActive == true? 'Active': 'De-Active'}}
+          </div>
+        }
+      </div>
+    </div>
 
-            <h2>ngStyle Directive Examples</h2>
-            <div class="row">
-                <div class="col-6">
-                    <p>This is pure css class</p>
-                    <input type="text" [(ngModel)]="divBgColor">
-                    <div class="p-2" [ngStyle]="{background: divBgColor, color: 'blue'}">Bg Blocks</div>
-                </div>
+    <h2>ngStyle Directive Examples</h2>
+    <div class="row">
+      <div class="col-6">
+        <p>This is pure css class</p>
+        <input type="text" [(ngModel)]="divBgColor">
+        <div class="p-2" [ngStyle]="{background: divBgColor, color: 'blue'}">Bg Blocks</div>
+      </div>
 
-                <div [ngStyle]="myCssTheme">
-                    <div>This is Div NgStyle</div>
-                </div>
-            </div>
+      <div [ngStyle]="myCssTheme">
+        <div>This is Div NgStyle</div>
+      </div>
+    </div>
 
-        </div>
+  </div>
 
-        <div class="sub-section">
-            <h2>Custom Directives - (attribute)</h2>
-            <p>When built-in directives aren’t enough <br>
-            You create your own reusable behavior</p>
-            <h4>When to Use Custom Directive?</h4>
-            <ul>
-                <li>Highlight elements</li>
-                <li>Role-based UI control</li>
-                <li>Auto-focus inputs</li>
-                <li>Permission handling</li>
-            </ul>
+  <div class="sub-section">
+    <h2>Custom Directives - (attribute)</h2>
+    <p>When built-in directives aren’t enough <br>
+    You create your own reusable behavior</p>
+    <h4>When to Use Custom Directive?</h4>
+    <ul>
+      <li>Highlight elements</li>
+      <li>Role-based UI control</li>
+      <li>Auto-focus inputs</li>
+      <li>Permission handling</li>
+    </ul>
 
-            <div>
-                <h4>Custom Directive Examples:</h4>
-                <div>
-                    <h4 appCustomdir>This is Custom Directive style attribute chaging css though custom directive</h4>
-                </div>
-            </div>
-        </div>
+    <div>
+      <h4>Custom Directive Examples:</h4>
+      <div>
+        <h4 appCustomdir>This is Custom Directive style attribute chaging css though custom directive</h4>
+      </div>
+    </div>
+  </div>
 
-        <div class="sub-section">
-            <h2>Custom Directives - (structurral) - custom ngIf structurral directive in angular</h2>
+  <div class="sub-section">
+    <h2>Custom Directives - (structurral) - custom ngIf structurral directive in angular</h2>
 
-            <ng-template [appCutomdirIf]="showIf"> <!--we can also pass custom if directive *appCutomdirIf="showIf" -->
-                <h4>This is Custom Structural ngIf example</h4>
-                <p>This is Paragraph</p>
-            </ng-template>
-        </div>
+    <ng-template [appCutomdirIf]="showIf"> <!--we can also pass custom if directive *appCutomdirIf="showIf" -->
+      <h4>This is Custom Structural ngIf example</h4>
+      <p>This is Paragraph</p>
+    </ng-template>
+  </div>
 </div>
 
 <div class="section">
-     <h1>Control Flow Statements (If, Else, Else If, for) </h1>
-     <div class="sub-section">
-        <h2>ngIf to controlflow: if</h2> <!--@if(){}-->
-        <div class="row mb-4">
-            <div class="col-3">
-                <input type="checkbox" [(ngModel)]="isOffercodeAvailable"> Do you have the Offer Code
-            </div>
-            --{{isOffercodeAvailable}}
-            @if(isOffercodeAvailable) {
-                <div class="col-3">
-                    <input type="text" class="form-control" placeholder="Enter Offer code">
-                </div>
+  <h1>Control Flow Statements (If, Else, Else If, for) </h1>
+  <div class="sub-section">
+    <h2>ngIf to controlflow: if</h2> <!--@if(){}-->
+    <div class="row mb-4">
+      <div class="col-3">
+        <input type="checkbox" [(ngModel)]="isOffercodeAvailable"> Do you have the Offer Code
+      </div>
+      --{{isOffercodeAvailable}}
+      @if(isOffercodeAvailable) {
+        <div class="col-3">
+          <input type="text" class="form-control" placeholder="Enter Offer code">
+        </div>
+      }
+    </div>
+
+
+    <div class="row mb-4">
+      <div class="col-12">
+        @if(isSuccesDivVisible() == true) {
+          <div class="bg-success p-2 m-2">Success</div>
+        } @else {
+          <div class="bg-danger p-2 m-2">Error</div>
+        }
+      </div>
+      <div class="col-3">
+        <button class="btn btn-success" (click)="toggleVisible()">Toggle</button>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-6">
+        <input type="text" class="form-control" placeholder="% Marks"
+          [(ngModel)]="studentTotalMarks">
+        </div>
+        <div class="col-6">
+          @if(studentTotalMarks >= 75) {
+            <strong class="text-success">Student has A Grade</strong>
+          }
+          @else if(studentTotalMarks <= 75 && studentTotalMarks >= 50) {
+          <span class="text-warning">Student has B Grade</span>
+        }
+        @else if(studentTotalMarks <= 50 && studentTotalMarks >= 35) {
+        <span class="text-secondary">Student has C Grade</span>
+      }
+      @else {
+      @if (studentTotalMarks == 0) {
+        <span class="text-primary">Enter the Marks</span>
+      } @else {
+        <span class="text-danger">Student has Failed</span>
+      }
+    }
+  </div>
+</div>
+</div>
+
+<div class="sub-section">
+  <h2>ngFor to controlflow: for</h2> <!--@if(){}-->
+  <div class="row mb-4">
+    <div class="col-6">
+      <ul>
+        @for (offer of offerList; track $index) {
+          <li>{{offer}}</li>
+        }
+      </ul>
+    </div>
+
+    <div class="col-6">
+      @for (product of prouctList; track $index) {
+        <button class="btn btn-primary mx-2">{{product}}</button>
+      }
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <table>
+      <thead>
+        <tr>
+          <th>Sr. No</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Active</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (emp of employeeList; track $index) {
+          <tr>
+            <td>{{$index+1}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.city}}</td>
+            <td>
+              @if(emp.isActive == true) {
+                <strong class="text-success">Active</strong>
+              }
+              @else {
+              <strong class="text-danger">In-Active</strong>
             }
-        </div>
+
+            <!-- {{emp.isActive}} -->
+          </td>
 
 
-        <div class="row mb-4">
-            <div class="col-12">
-                @if(isSuccesDivVisible() == true) {
-                    <div class="bg-success p-2 m-2">Success</div>
-                } @else {
-                    <div class="bg-danger p-2 m-2">Error</div>
-                }
-            </div>
-            <div class="col-3">
-                <button class="btn btn-success" (click)="toggleVisible()">Toggle</button>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <div class="col-6">
-                <input type="text" class="form-control" placeholder="% Marks"
-                [(ngModel)]="studentTotalMarks">
-            </div>
-            <div class="col-6">
-                @if(studentTotalMarks >= 75) {
-                    <strong class="text-success">Student has A Grade</strong>
-                }
-                @else if(studentTotalMarks <= 75 && studentTotalMarks >= 50) {
-                    <span class="text-warning">Student has B Grade</span>
-                }
-                @else if(studentTotalMarks <= 50 && studentTotalMarks >= 35) {
-                <span class="text-secondary">Student has C Grade</span>
-                }
-                @else {
-                    @if (studentTotalMarks == 0) {
-                        <span class="text-primary">Enter the Marks</span>
-                    } @else {
-                        <span class="text-danger">Student has Failed</span>
-                    }
-                }
-            </div>
-        </div>
-     </div>
-
-      <div class="sub-section">
-        <h2>ngFor to controlflow: for</h2> <!--@if(){}-->
-        <div class="row mb-4">
-            <div class="col-6">
-                <ul>
-                    @for (offer of offerList; track $index) {
-                        <li>{{offer}}</li>
-                    }
-                </ul>
-            </div>
-
-            <div class="col-6">
-                @for (product of prouctList; track $index) {
-                    <button class="btn btn-primary mx-2">{{product}}</button>
-                }
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Sr. No</th>
-                        <th>Name</th>
-                        <th>City</th>
-                        <th>Active</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (emp of employeeList; track $index) {
-                    <tr>
-                        <td>{{$index+1}}</td>
-                        <td>{{emp.name}}</td>
-                        <td>{{emp.city}}</td>
-                        <td>
-                            @if(emp.isActive == true) {
-                            <strong class="text-success">Active</strong>
-                            }
-                            @else {
-                            <strong class="text-danger">In-Active</strong>
-                            }
-
-                            <!-- {{emp.isActive}} -->
-                        </td>
-
-
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        </div>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+</div>
 </div>

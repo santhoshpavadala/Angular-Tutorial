@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ElementRef, EventEmitter, input, Input, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-decerators',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './decerators.html',
   styleUrl: './decerators.scss'
 })

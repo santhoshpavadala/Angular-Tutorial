@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { Usersdata } from '../../../services/usersdata';
 
 @Component({
   selector: 'app-usercard',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './usercard.html',
   styleUrl: './usercard.scss'
 })
