@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CrudReactiveService } from './crud-reactive-service';
+import { BatchesService } from './batches-service';
 
-describe('CrudReactiveService', () => {
-  let service: CrudReactiveService;
+describe('BatchesService', () => {
+  let service: BatchesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CrudReactiveService);
+    service = TestBed.inject(BatchesService);
   });
 
   it('should be created', () => {

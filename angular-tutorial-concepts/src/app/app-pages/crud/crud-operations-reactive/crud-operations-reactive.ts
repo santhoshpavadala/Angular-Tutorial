@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { CrudService } from '../../../services/crud/crud-service';
-import { CrudReactiveService } from '../../../services/crud/crud-reactive-service';
 
 @Component({
   selector: 'app-crud-operations-reactive',
@@ -36,12 +34,8 @@ export class CrudOperationsReactive implements OnInit {
   http=inject(HttpClient) // dependency inj constructor
 
   userList$: Observable<any[]>;
-  constructor(private addnum: CrudReactiveService) {
+  constructor() {
     this.userList$ = this.http.get<any[]>('https://api.freeprojectapi.com/api/GoalTracker/getAllUsers');
-
-    // API INTEGRATION EXAMPLES
-    const sum = this.addnum.getAdditionOfTwoNo(44, 55);
-    debugger
   }
   ngOnInit(): void {
   }
