@@ -10,7 +10,6 @@ export class RoutegaurdAuth implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     // return true;
-
     let isloggedIn = false;
     if(isloggedIn) {
       return true;

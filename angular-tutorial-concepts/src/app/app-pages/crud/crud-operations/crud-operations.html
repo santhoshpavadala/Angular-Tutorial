@@ -1,0 +1,149 @@
+<form #photoForm="ngForm" (ngSubmit)="onSubmit(photoForm)" class="card p-3 mb-3 shadow-sm">
+
+  <h2 class="card-title text-center mb-4">CRUD Template Reference Form - Photos</h2>
+
+  <h5 class="mb-3">
+    {{ newPhoto.id === 0 ? 'Add Photo' : 'Update Photo' }}
+  </h5>
+
+  <div class="row">
+    <div class="col-6 mb-2">
+      <label class="form-label">Album ID</label>
+      <input
+        type="number"
+        class="form-control"
+        name="albumId"
+        [(ngModel)]="newPhoto.albumId"
+        #albumIdTemp="ngModel"
+        required>
+        <!-- #albumId="ngModel" this line is required to make validations in temp forms -->
+        @if (albumIdTemp.touched || albumIdTemp.dirty || isFormSubmitted) {
+          <div>
+            @if (albumIdTemp.errors?.['required']) {
+            <small class="text-danger">
+              Album ID is required
+            </small>
+            }
+          </div>
+        }
+    </div>
+
+    <div class="col-6 mb-2">
+      <label class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        name="title"
+        [(ngModel)]="newPhoto.title"
+        #title="ngModel"
+        required 
+        minlength="5">
+
+        @if (title.touched || title.dirty || isFormSubmitted) {
+          <div>
+            @if (title.errors?.['required']) {
+            <small class="text-danger">
+              Title is required
+            </small>
+            } @else if (title.errors?.['minlength']) {
+              <small class="text-danger">
+                Min 5 characters is required
+            </small>
+            }
+          </div>
+        }
+    </div>
+
+    <div class="col-6 mb-2">
+      <label class="form-label">URL</label>
+      <input
+        type="text"
+        class="form-control"
+        name="url"
+        [(ngModel)]="newPhoto.url"
+        #url="ngModel"
+        required
+        minlength="10"
+        >
+        @if (url.touched || url.dirty || isFormSubmitted) {
+        <div>
+          @if (url.errors?.['required']) {
+            <small class="text-danger">URL is required</small>
+          } @else if(url.errors?.['minlength']){
+            <small class="text-danger">Min 10 Characters needed</small>
+          }
+        </div>
+        }
+    </div>
+
+    <div class="col-6 mb-2">
+      <label class="form-label">Thumbnail URL</label>
+      <input
+        type="text"
+        class="form-control"
+        name="thumbnailUrl"
+        [(ngModel)]="newPhoto.thumbnailUrl"
+        #thumbnailUrl = "ngModel"
+        required>
+        @if (thumbnailUrl.touched || thumbnailUrl.dirty || isFormSubmitted) {
+        <div>
+          @if (thumbnailUrl.errors?.['required']) {
+          <small class="text-danger">thumbnailUrl is Required</small>
+          }
+        </div>
+        }
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end gap-2 mt-3">
+    <button type="button"
+            class="btn btn-secondary"
+            (click)="onReset(photoForm)">
+      Reset
+    </button>
+
+    <button type="submit"
+            class="btn btn-success"
+            >
+            <!-- [disabled]="photoForm.invalid" -->
+      {{ newPhoto.id === 0 ? 'Save' : 'Update' }}
+    </button>
+  </div>
+
+</form>
+
+<!-- Photos List -->
+<div class="card p-3 shadow-sm">
+  <h5 class="mb-3">Photos List</h5>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Album</th>
+        <th>Title</th>
+        <th width="150">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (photo of photosList; track photo.id) {
+        <tr>
+          <td>{{ photo.id }}</td>
+          <td>{{ photo.albumId }}</td>
+          <td>{{ photo.title }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2"
+                    (click)="onEditPhoto(photo)">
+              Edit
+            </button>
+
+            <button class="btn btn-sm btn-danger"
+                    (click)="onDeletePhoto(photo.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

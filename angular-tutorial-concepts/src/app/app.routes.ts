@@ -32,18 +32,19 @@ import { LifecycleHooks } from './app-pages/lifecycle-parent/lifecycle-hooks/lif
 import { LifecycleParent } from './app-pages/lifecycle-parent/lifecycle-parent';
 import { Ngrx } from './app-pages/ngrx-parent/ngrx';
 import { Signals } from './app-pages/signals/signals';
-import { TemplateForms } from './app-pages/template-forms/template-forms';
-import { ReactiveForms } from './app-pages/reactive-forms/reactive-forms';
-import { ReactiveFormsApiComponent } from './app-pages/reactive-forms-api/reactive-forms-api';
-import { CrudOperations } from './app-pages/crud-operations/crud-operations';
+import { TemplateForms } from './app-pages/crud/template-forms/template-forms';
+import { ReactiveForms } from './app-pages/crud/reactive-forms/reactive-forms';
+import { CrudOperations } from './app-pages/crud/crud-operations/crud-operations';
+import { CrudOperationsReactive } from './app-pages/crud/crud-operations-reactive/crud-operations-reactive';
+import { CrudApiMethods } from './app-pages/crud/crud-api-methods/crud-api-methods';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'login', component: Login },
   { path: 'home', component: Home },
   { path: 'about', component: About },
   
   // Route gaurd exapmle implemented only for contacts
+  { path: 'login', component: Login },
   { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
   { path: 'users', component: Users },
   { path: 'usercard/:id', component: Usercard },
@@ -76,14 +77,16 @@ export const routes: Routes = [
   },
 
   {
-    path: 'reactive-forms-api',
-    component: ReactiveFormsApiComponent
+    path: 'crud-operation-template',
+    component: CrudOperations
   },
 
   {
-    path: 'crud-users',
-    component: CrudOperations
+    path: 'crud-operation-reactive',
+    component: CrudOperationsReactive
   },
+
+  {path: 'crud-api-methods', component: CrudApiMethods},
 
   // Lazy Loading Module Concept
   {

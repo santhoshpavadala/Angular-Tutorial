@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserApiService } from './user-api.service';
+import { CrudReactiveService } from './crud-reactive-service';
 
-describe('UserApiService', () => {
-  let service: UserApiService;
+describe('CrudReactiveService', () => {
+  let service: CrudReactiveService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(UserApiService);
+    service = TestBed.inject(CrudReactiveService);
   });
 
   it('should be created', () => {
