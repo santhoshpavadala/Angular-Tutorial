@@ -1,32 +1,83 @@
 <div class="section">
     <h1>Angular Pipes</h1>
+
+    <div>
+        <h2>Angular Pipes</h2>
+        <p>In Angular, a Pipe is used to transform data in the template before displaying it in the UI. <br>
+            It does NOT change the original data, it only transforms it for display.</p>
+            <!-- <p>{{ value | pipeName }}</p>
+             {{ value | pipeName:arg1:arg2 }} -->
+
+        <ul>In enterprise Angular applications:Real-Time Use
+            <li>Format API date responses</li>
+            <li>Format currency values</li>
+            <li>Convert text cases</li>
+            <li>Filter/search data</li>
+            <li>Transform backend values for UI</li>
+        </ul>
+
+        <h2>Types of Angular Pipes</h2>
+        <p>There are 3 Main Types:</p>
+        <ul>
+            <li>Built-in Pipes</li>
+            <li>Custom Pipes</li>
+            <li>Pure vs Impure Pipes</li>
+        </ul>
+    </div>
+
+
     <div class="sub-section">
-        <h2>Built in Pipes</h2>
+        <h2>Built in Pipes Examples</h2>
         <h4>{{pipeName | uppercase}}</h4>
         <h4>{{pipeName | lowercase}}</h4>
+
         <h4>{{pipeName | titlecase}}</h4>
+
         <h4>{{salary | currency}}</h4>
         <h4>{{salary | currency: 'INR'}}</h4> <!--PIPE PARAMETERS-->
         <h4>{{salary | currency: 'INR': 'code'}}</h4> <!--PIPE PARAMETERS-->
         <h4>{{salary | currency: 'INR': 'symbol'}}</h4> <!--PIPE PARAMETERS-->
+
         <h4>{{pipeJson | json}}</h4>
+
         <h4>{{DOB | date}}</h4>
         <h4>{{DOB | date: 'dd/MM/yyyy'}}</h4>
+
         <h4>{{percentage | percent}}</h4>
+
         <h4>{{sliceText}}</h4>
         <h4>{{sliceText|slice: 0:5}}</h4>
-    </div>
-    <div class="sub-section">
-        <h2>Custom Pipes</h2>
 
         <div>
+            <div>
+                slice with number array: {{rollNumberList | slice: 0:7}}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="sub-section">
+        <h2>Custom Pipes</h2>
+        <div>
             <h4>{{person | customPipes: wish}}</h4>
+        </div>
+
+        <div>
+            <div>{{studentObj}}</div>
+            <div>{{studentObj | json}}</div>
+            <div>
+                name: {{studentObj.name}} <br>
+                city: {{studentObj.city | nodata}} <br>
+                state: {{studentObj.state}} <br>
+                phone: {{studentObj.contact.phone | nodata}} <br>
+                mobile: {{studentObj.contact.mobile}}
+                
+            </div>
         </div>
     </div>
 
     <div class="sub-section">
         <h2>Async Pipes</h2>
-
         <table>
             <thead>
                 <tr >

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReactiveFormsApiComponent } from './reactive-forms-api';
+import { CrudApiMethods } from './crud-api-methods';
 
-describe('ReactiveFormsApiComponent', () => {
-  let component: ReactiveFormsApiComponent;
-  let fixture: ComponentFixture<ReactiveFormsApiComponent>;
+describe('CrudApiMethods', () => {
+  let component: CrudApiMethods;
+  let fixture: ComponentFixture<CrudApiMethods>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsApiComponent]
+      imports: [CrudApiMethods]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ReactiveFormsApiComponent);
+    fixture = TestBed.createComponent(CrudApiMethods);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

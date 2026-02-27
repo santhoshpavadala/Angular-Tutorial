@@ -1,0 +1,174 @@
+<div class="container my-5">
+
+  <!-- Page Title -->
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h2 class="fw-bold">CRUD Template Reference Form - User Management</h2>
+      <p class="text-muted">Create, Update and Manage Users</p>
+    </div>
+  </div>
+
+  <!-- User Form Card -->
+  <div class="card shadow-lg border-0 mb-5">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">User Form</h5>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="userForm"> <!--Formgroup Binding-->
+        <div class="row g-3">
+          <!-- Full Name -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Full Name</label>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter full name"
+                   formControlName="fullName" required minlength>
+
+            @if (userForm.controls['fullName'].touched || userForm.controls['fullName'].dirty || isFormSubmitted) {
+              <div>
+                @if (userForm.controls['fullName'].errors?.['required']) {
+                  <small class="text-danger">Full Name is required</small>
+                } 
+              </div>
+            }
+          </div>
+
+          <!-- Email -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Email</label>
+            <input type="email"
+                   class="form-control"
+                   placeholder="Enter email"
+                   formControlName="emailId">
+
+            @if (userForm.controls['emailId'].touched || userForm.controls['emailId'].dirty || isFormSubmitted) {
+              <div>
+                @if (userForm.controls['emailId'].errors?.['required']) {
+                  <small class="text-danger">This Email is required</small>
+                } @else if(userForm.controls['emailId'].errors?.['email']) {
+                  <small class="text-danger">Email format is incorrect</small>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Mobile -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Mobile Number</label>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter mobile number"
+                   formControlName="mobileNo">
+
+            @if (userForm.controls['mobileNo'].touched || userForm.controls['mobileNo'].dirty || isFormSubmitted) {
+                <div>
+                    @if (userForm.controls['mobileNo'].errors?.['required']) {
+                      <small class="text-danger">This Mobile No is required</small>
+                    } @else if (userForm.controls['mobileNo'].errors?.['minlength']) {
+                      <small class="text-danger">Mobile no Min length should be 10 numbers</small>
+                    } @else if (userForm.controls['mobileNo'].errors?.['maxlength']) {
+                      <small class="text-danger">Mobile no Max length should be 10 numbers</small>
+                    }
+                </div>
+            }
+          </div>
+
+          <!-- Password -->
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Password</label>
+            <input type="password"
+                   class="form-control"
+                   placeholder="Enter password"
+                   formControlName="password">
+
+            @if (userForm.controls['password'].touched || userForm.controls['password'].dirty || isFormSubmitted) {
+              <div>
+                @if (userForm.controls['password'].errors?.['required']) {
+                  <span class="text-danger">Password is required</span>
+                } @else if (userForm.controls['password'].errors?.['minlength']) {
+                  <span class="text-danger">Min Length shoud be 5 characters</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="mt-4 text-end">
+          --{{userForm.controls['userId'].value}}
+          @if (userForm.controls['userId'].value === 0) {
+          <button type="button" class="btn btn-success px-4 me-2" (click)="onSave()">
+            Save
+          </button>
+          } @else {
+            <button type="button" class="btn btn-warning px-4 me-2" (click)="onSave()">
+              Update
+            </button>
+          }
+          <button type="reset" class="btn btn-secondary px-4" (click)="onReset()">
+            Reset
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- Users Display Section -->
+  <div class="row">
+
+    <div class="col-12 mb-3">
+      <h4 class="fw-bold">User List</h4>
+    </div>
+
+    <!-- Card Repeat *ngFor="let user of userForm"-->
+
+    @for (user of userList$ | async; track $index) {
+    <div class="col-md-4 mb-4" >
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-primary">
+            <strong>Full Name:</strong> 
+            {{ user.fullName }}
+          </h5>
+
+          <p class="card-text mb-1">
+            <strong>Email:</strong> 
+            {{ user.emailId }}
+          </p>
+
+          <p class="card-text mb-1">
+            <strong>Password:</strong> 
+            {{ user.password }}
+          </p>
+
+          <p class="card-text mb-1">
+            <strong>Mobile:</strong> 
+            {{ user.mobileNo }}
+          </p>
+
+          <p class="card-text text-muted small">
+            User ID: 
+            {{ user.userId }}
+          </p>
+        </div>
+
+        <div class="card-footer bg-white border-0 text-end">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="onEdit(user)">
+            Edit
+          </button>
+
+          <button class="btn btn-sm btn-outline-danger">
+            Delete
+          </button>
+        </div>
+
+      </div>
+    </div>
+    }
+
+
+  </div>
+
+</div>

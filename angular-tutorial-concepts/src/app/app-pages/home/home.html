@@ -1,8 +1,19 @@
-<div>
-    <h4>Mobile List</h4>
-    <div *ngFor="let m of mobileList">
-        {{m}}
+<div class="section">
+    <div class="sub-section">
+        <h1>Mobile List API Dependency Injections</h1>
+        <div *ngFor="let m of mobileList">
+            {{m}}
+        </div>
+        <button class="btn btn-primary" (click)="addMobile()">Add Mobile</button>
     </div>
+</div>
 
-    <button (click)="addMobile()">Add Mobile</button>
+<div class="section">
+    <h1>Reusable UI Components with Input Deceraotrs</h1> 
+    <div class="sub-section">
+        <app-alert [alertType]="altSuccess" [alertMessage]="altMsg"></app-alert>
+    </div>
+    <div class="sub-section">
+        <app-tabs [tabsList]="tabCount"></app-tabs>
+    </div>
 </div>
