@@ -2,94 +2,119 @@
 
 
 <div class="card w-50 mx-auto">
-    <h4 class="card-header text-center">Signup</h4>
+  <h4 class="card-header text-center">Signup</h4>
 
-    <div class="card-body">
-            <form action="" ngForm #signupForm="ngForm" (ngSubmit)="handleSubmit(signupForm)">
-                <div class="form-group my-4">
-                    <label for="">Full Name</label>
-                    <input type="text" ngModel name="fullName" class="form-control" required minlength="4">
-                    <div class="form-error" *ngIf="signupForm.controls['fullName']?.['touched'] && signupForm.controls['fullName']?.invalid">
-                        <div *ngIf="signupForm.controls['fullName']?.['errors']?.['required']">Full Name is required</div>
-                        <div *ngIf="signupForm.controls['fullName']?.['errors']?.['minlength']">Full Name atleast 4 letters</div>
-                    </div>
-                </div>
+  <div class="card-body">
+    <form action="" ngForm #signupForm="ngForm" (ngSubmit)="handleSubmit(signupForm)">
+      <div class="form-group my-4">
+        <label for="">Full Name</label>
+        <input type="text" ngModel name="fullName" class="form-control" required minlength="4">
+        @if (signupForm.controls['fullName']?.['touched'] && signupForm.controls['fullName']?.invalid) {
+          <div class="form-error">
+            @if (signupForm.controls['fullName']?.['errors']?.['required']) {
+              <div>Full Name is required</div>
+            }
+            @if (signupForm.controls['fullName']?.['errors']?.['minlength']) {
+              <div>Full Name atleast 4 letters</div>
+            }
+          </div>
+        }
+      </div>
 
-                <div class="form-group my-4">
-                    <label for="">Email</label>
-                    <input type="email" ngModel name="email" class="form-control" required email>
-                    <div class="form-error" *ngIf="signupForm.controls['email']?.['touched'] && signupForm.controls['email']?.invalid">
-                        <div *ngIf="signupForm.controls['email']?.['errors']?.['required']">Email is required</div>
-                        <div *ngIf="signupForm.controls['email']?.['errors']?.['email']">Invalid Email format</div>
-                    </div>
-                </div>
+      <div class="form-group my-4">
+        <label for="">Email</label>
+        <input type="email" ngModel name="email" class="form-control" required email>
+        @if (signupForm.controls['email']?.['touched'] && signupForm.controls['email']?.invalid) {
+          <div class="form-error">
+            @if (signupForm.controls['email']?.['errors']?.['required']) {
+              <div>Email is required</div>
+            }
+            @if (signupForm.controls['email']?.['errors']?.['email']) {
+              <div>Invalid Email format</div>
+            }
+          </div>
+        }
+      </div>
 
-                <div class="form-group my-4">
-                    <label for="">Password</label>
-                    <input type="password" ngModel name="password" class="form-control" minlength="8" required>
-                    <div class="form-error" *ngIf="signupForm.controls['password']?.['touched'] && signupForm.controls['password']?.invalid">
-                        <div *ngIf="signupForm.controls['password']?.['errors']?.['required']">Password is required</div>
-                        <div *ngIf="signupForm.controls['password']?.['errors']?.['minlength']">Password atleast 8 Characters</div>
-                    </div>
-                </div>
+      <div class="form-group my-4">
+        <label for="">Password</label>
+        <input type="password" ngModel name="password" class="form-control" minlength="8" required>
+        @if (signupForm.controls['password']?.['touched'] && signupForm.controls['password']?.invalid) {
+          <div class="form-error">
+            @if (signupForm.controls['password']?.['errors']?.['required']) {
+              <div>Password is required</div>
+            }
+            @if (signupForm.controls['password']?.['errors']?.['minlength']) {
+              <div>Password atleast 8 Characters</div>
+            }
+          </div>
+        }
+      </div>
 
-                <div class="form-group my-4">
-                    <label for="">Confirm Password</label>
-                    <input type="password" ngModel name="cpassword" class="form-control" required>
-                    <div class="form-error" 
-                    *ngIf="signupForm.controls['cpassword']?.['touched'] 
-                    && signupForm.controls['password']?.['value'] != signupForm.controls['cpassword']?.['value']">
-                        Password should match
-                    </div>
-                </div>
+      <div class="form-group my-4">
+        <label for="">Confirm Password</label>
+        <input type="password" ngModel name="cpassword" class="form-control" required>
+        @if (signupForm.controls['cpassword']?.['touched']
+          && signupForm.controls['password']?.['value'] != signupForm.controls['cpassword']?.['value']) {
+          <div class="form-error"
+            >
+            Password should match
+          </div>
+        }
+      </div>
 
-                <div class="form-group m-2">
-                    <label for="">Gender: </label>
-                    <input type="radio" ngModel name="gender" value="F">Female
-                    <input type="radio" ngModel name="gender" value="M">Male
-                </div>
+      <div class="form-group m-2">
+        <label for="">Gender: </label>
+        <input type="radio" ngModel name="gender" value="F">Female
+        <input type="radio" ngModel name="gender" value="M">Male
+      </div>
 
-                <div class="form-group m-2">
-                    <label for="">
-                        <input type="checkbox" ngModel name="subscribe"> Subscribe
-                    </label>
-                </div>
+      <div class="form-group m-2">
+        <label for="">
+          <input type="checkbox" ngModel name="subscribe"> Subscribe
+        </label>
+      </div>
 
-                <button class="btn btn-primary mb-4"  [disabled]="signupForm.invalid">Sign Up</button>
-                <!-- (click)="signup(signupForm)" -->
-                
-            </form>
+      <button class="btn btn-primary mb-4"  [disabled]="signupForm.invalid">Sign Up</button>
+      <!-- (click)="signup(signupForm)" -->
 
-            <div>{{signupForm.value | json}}</div>
-            <div>{{signupForm.valid}}</div>
+    </form>
 
-
-            <h4>Submitted Data</h4>
-            <div class="form-error" *ngIf="formSubmitedData.length == 0">No Data Submitted</div>
-            <div *ngFor="let item of formSubmitedData">
-                <div>Fullname: {{item.fullName}}</div>
-                <div>Email: {{item.email}}</div>
-                <div>Password: {{item.password}}</div>
-                <div>Confirm Password: {{item.cpassword}}</div>
-                <div>Gender: {{item.gender}}</div>
-                <div>Subscribe: {{item.subscribe}}</div>
-            </div>
+    <div>{{signupForm.value | json}}</div>
+    <div>{{signupForm.valid}}</div>
 
 
-            <ng-container *ngIf="formSubmitedData.length; else noData">
-                <div *ngFor="let item of formSubmitedData">
-                    <div>Fullname: {{item.fullName}}</div>
-                    <div>Email: {{item.email}}</div>
-                    <div>Password: {{item.password}}</div>
-                    <div>Confirm Password: {{item.cpassword}}</div>
-                    <div>Gender: {{item.gender}}</div>
-                    <div>Subscribe: {{item.subscribe}}</div>
-                </div>
-            </ng-container>
+    <h4>Submitted Data</h4>
+    @if (formSubmitedData.length == 0) {
+      <div class="form-error">No Data Submitted</div>
+    }
+    @for (item of formSubmitedData; track item) {
+      <div>
+        <div>Fullname: {{item.fullName}}</div>
+        <div>Email: {{item.email}}</div>
+        <div>Password: {{item.password}}</div>
+        <div>Confirm Password: {{item.cpassword}}</div>
+        <div>Gender: {{item.gender}}</div>
+        <div>Subscribe: {{item.subscribe}}</div>
+      </div>
+    }
 
-            <ng-template #noData>
-                <p class="form-error">No data submitted yet</p>
-            </ng-template>
 
-    </div>
+    @if (formSubmitedData.length) {
+      @for (item of formSubmitedData; track item) {
+        <div>
+          <div>Fullname: {{item.fullName}}</div>
+          <div>Email: {{item.email}}</div>
+          <div>Password: {{item.password}}</div>
+          <div>Confirm Password: {{item.cpassword}}</div>
+          <div>Gender: {{item.gender}}</div>
+          <div>Subscribe: {{item.subscribe}}</div>
+        </div>
+      }
+    } @else {
+      <p class="form-error">No data submitted yet</p>
+    }
+
+
+  </div>
 </div>

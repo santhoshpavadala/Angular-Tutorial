@@ -1,117 +1,137 @@
 <div class="section">
-    <h1 class="text-center text-primary">Rxjs-Operators</h1>
-    <div class="sub-section">
-        <h2>Opearors:</h2>
-        <p>RxJS operators are functions that transform, filter, combine, or control Observables.</p>
+  <h1 class="text-center text-primary">Rxjs-Operators</h1>
+  <div class="sub-section">
+    <h2>Opearors:</h2>
+    <p>RxJS operators are functions that transform, filter, combine, or control Observables.</p>
 
-        <h2>Types of Opearors:</h2>
-        <ul>
-            <li>1. Creation Operators</li>
-            <li>2. Pipeable / Transformation Operators</li>
-            <li>3. Filtering Operators</li>
-            <li>4. Combination Operators</li>
-            <li>5. Error Handling Operators</li>
-            <li>6. Utility / Multicasting Operators</li>
-        </ul>
+    <h2>Types of Opearors:</h2>
+    <ul>
+      <li>1. Creation Operators</li>
+      <li>2. Pipeable / Transformation Operators</li>
+      <li>3. Filtering Operators</li>
+      <li>4. Combination Operators</li>
+      <li>5. Error Handling Operators</li>
+      <li>6. Utility / Multicasting Operators</li>
+    </ul>
 
-        <h2>Creation Operators:</h2>
-        <ul>
-            <li>of()</li>
-            <li>from()</li>
-            <li>interval()</li>
-            <li>timer()</li>
+    <h2>Creation Operators:</h2>
+    <ul>
+      <li>of()</li>
+      <li>from()</li>
+      <li>interval()</li>
+      <li>timer()</li>
 
-            <li>range()</li>
-            <li>fromEvent()</li>
-        </ul>
+      <li>range()</li>
+      <li>fromEvent()</li>
+    </ul>
 
-        <h2>Transformation Operators:</h2>
-        <ul>
-            <li>map()</li>
-            <li>mergeMap() (flatMap)</li>
-            <li>switchMap()</li>
-            <li>concatMap()</li>
-            <li>exhaustMap()</li>
-        </ul>
-        <h2>Filtering Operators:</h2>
-        <ul>
-            <li>filter()</li>
-            <li>take()</li>
-            <li>takeUntil()</li>
-            <li>debounceTime()</li>
-            <li>distinctUntilChanged()</li>
-        </ul>
+    <h2>Transformation Operators:</h2>
+    <ul>
+      <li>map()</li>
+      <li>mergeMap() (flatMap)</li>
+      <li>switchMap()</li>
+      <li>concatMap()</li>
+      <li>exhaustMap()</li>
+    </ul>
+    <h2>Filtering Operators:</h2>
+    <ul>
+      <li>filter()</li>
+      <li>take()</li>
+      <li>takeUntil()</li>
+      <li>debounceTime()</li>
+      <li>distinctUntilChanged()</li>
+    </ul>
+  </div>
+
+  <div class="sub-section">
+    <h2>Creation Operators Examples: </h2>
+    <h4>of operator Example: of() → emits values as they are</h4>
+    @for (item of ofOperatorData; track item) {
+      <div>{{item}}</div>
+    }
+
+    <h4>from operator Example: from() → breaks a collection and emits items one by one</h4>
+    @for (item of fromOperatorData; track item) {
+      <div>{{item}}</div>
+    }
+
+    <p><b>Note: Interview-Perfect Answer (MEMORIZE THIS) <br>
+      of() emits the provided values as they are, while from() converts arrays, promises, or iterables into a stream
+    that emits each item individually.</b></p>
+
+    <h4>Range operator Example: </h4>
+    <p>range() creates an Observable that emits a sequence of numbers synchronously, starting from a given value.</p>
+    @for (item of rangeOperatorData; track item) {
+      <div>{{item}}</div>
+    }
+
+    <h4>Interval operator Example: </h4>
+    <p>interval() creates an Observable that emits numbers repeatedly after a fixed time gap.</p>
+    <P>interval(timeInMs)</P>
+    <div>{{intervalValue}}</div>
+    @for (item of intervalData; track item) {
+      <div>{{item}}</div>
+    }
+
+    <h2>Transformation & Filtering  Operators Examples: </h2>
+    <h4>Map Operator</h4>
+    <p>map() transforms each emitted value from an Observable into a new value.</p>
+    <p>source$.pipe(map(value => newValue))</p>
+
+    @for (item of mapData; track item) {
+      <p>{{item}}</p>
+    }
+
+    <h4>Filter Operator</h4>
+    <p>filter() allows only the values that satisfy a condition to pass through the stream.</p>
+    @for (item of filterData; track item) {
+      <p>{{item}}</p>
+    }
+
+    <h4>fromEvent Operator</h4>
+    <p>fromEvent() creates an Observable from DOM events (click, keyup, scroll, etc.).</p>
+    <button class="btn btn-primary" #viewChildBtn>Click</button>
+    <p>Click Count: {{ clickCount }}</p>
+    <input type="text" #eventInput placeholder="Type something..." >
+    <div>
+      Typed Value: {{ typedValue }}
     </div>
 
-    <div class="sub-section">
-        <h2>Creation Operators Examples: </h2>
-        <h4>of operator Example: of() → emits values as they are</h4>
-        <div *ngFor="let item of ofOperatorData">{{item}}</div>
-
-        <h4>from operator Example: from() → breaks a collection and emits items one by one</h4>
-        <div *ngFor="let item of fromOperatorData">{{item}}</div>
-        
-        <p><b>Note: Interview-Perfect Answer (MEMORIZE THIS) <br>
-        of() emits the provided values as they are, while from() converts arrays, promises, or iterables into a stream 
-        that emits each item individually.</b></p>
-
-        <h4>Range operator Example: </h4>
-        <p>range() creates an Observable that emits a sequence of numbers synchronously, starting from a given value.</p>
-        <div *ngFor="let item of rangeOperatorData">{{item}}</div>
-
-        <h4>Interval operator Example: </h4>
-        <p>interval() creates an Observable that emits numbers repeatedly after a fixed time gap.</p>
-        <P>interval(timeInMs)</P>
-        <div>{{intervalValue}}</div>
-        <div *ngFor="let item of intervalData">{{item}}</div>
-
-        <h2>Transformation & Filtering  Operators Examples: </h2>
-        <h4>Map Operator</h4>
-        <p>map() transforms each emitted value from an Observable into a new value.</p>
-        <p>source$.pipe(map(value => newValue))</p>
-
-        <p *ngFor="let item of mapData">{{item}}</p>
-
-        <h4>Filter Operator</h4>
-        <p>filter() allows only the values that satisfy a condition to pass through the stream.</p>
-        <p *ngFor="let item of filterData">{{item}}</p>
-
-        <h4>fromEvent Operator</h4>
-        <p>fromEvent() creates an Observable from DOM events (click, keyup, scroll, etc.).</p>
-        <button class="btn btn-primary" #viewChildBtn>Click</button>
-        <p>Click Count: {{ clickCount }}</p>
-        <input type="text" #eventInput placeholder="Type something..." >
-        <div>
-            Typed Value: {{ typedValue }}
-        </div>
-
-        <h4>debounceTime Operator</h4>
-        <p>debounceTime() waits for a pause in emissions and then emits only the latest value.</p>
-        <p>Syntax: debounceTime(timeInMs)</p>
-        <input type="text" #debounceInput>
+    <h4>debounceTime Operator</h4>
+    <p>debounceTime() waits for a pause in emissions and then emits only the latest value.</p>
+    <p>Syntax: debounceTime(timeInMs)</p>
+    <input type="text" #debounceInput>
 
 
-        <h4>Merge Operator</h4>
-        <p>merge() combines multiple Observables into one Observable and emits values as soon as any source emits.</p>
-        <p>Syntax: merge(obs1$, obs2$, obs3$)</p>
-        <div *ngFor="let item of mergedData">
-            {{ item }}
-        </div>
+    <h4>Merge Operator</h4>
+    <p>merge() combines multiple Observables into one Observable and emits values as soon as any source emits.</p>
+    <p>Syntax: merge(obs1$, obs2$, obs3$)</p>
+    @for (item of mergedData; track item) {
+      <div>
+        {{ item }}
+      </div>
+    }
 
 
-        <h4>Take Operator</h4>
-        <p>take() limits the number of values emitted by an Observable and then automatically completes it.</p>
-        <p>Syntax: take(count)</p>
-        <div *ngFor="let item of takeData">{{item}}</div>
+    <h4>Take Operator</h4>
+    <p>take() limits the number of values emitted by an Observable and then automatically completes it.</p>
+    <p>Syntax: take(count)</p>
+    @for (item of takeData; track item) {
+      <div>{{item}}</div>
+    }
 
-        <h4>Pluck Operator</h4>
-        <p>pluck() extracts a specific property (or nested property) from each emitted object.</p>
-        <p>“Pick this field from every emitted object”</p>
-        <p>Syntax: pluck('propertyName') <br>
-                    pluck('prop1', 'prop2') // nested</p>
-        <div *ngFor="let username of pluckData">{{username}}</div>
-        <h4>Distinct Operator</h4>
-        <p>pluck() removed duplicate data of previous.</p>
-        <div *ngFor="let item of distinctData">{{item}}</div>
-    </div>
+    <h4>Pluck Operator</h4>
+    <p>pluck() extracts a specific property (or nested property) from each emitted object.</p>
+    <p>“Pick this field from every emitted object”</p>
+    <p>Syntax: pluck('propertyName') <br>
+    pluck('prop1', 'prop2') // nested</p>
+    @for (username of pluckData; track username) {
+      <div>{{username}}</div>
+    }
+    <h4>Distinct Operator</h4>
+    <p>pluck() removed duplicate data of previous.</p>
+    @for (item of distinctData; track item) {
+      <div>{{item}}</div>
+    }
+  </div>
 </div>

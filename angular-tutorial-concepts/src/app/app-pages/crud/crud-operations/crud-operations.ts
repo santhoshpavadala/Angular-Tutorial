@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CrudService } from '../../../services/crud/crud-service';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,8 +9,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-crud-operations',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatSnackBarModule,
-    MatDialogModule, MatButtonModule],
+  imports: [FormsModule, MatSnackBarModule, MatDialogModule, MatButtonModule],
   templateUrl: './crud-operations.html',
   styleUrls: ['./crud-operations.scss']
 })

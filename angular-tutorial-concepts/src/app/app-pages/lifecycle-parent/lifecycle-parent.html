@@ -4,25 +4,29 @@
 
 <!-- ngDoCheck Example -->
 <div>
-    <input type="text" [(ngModel)]="mobiles" class="form-control m-2 w-50">
-    <button class="btn btn-primary" (click)="addMobile()">Add Mobiles</button>
+  <input type="text" [(ngModel)]="mobiles" class="form-control m-2 w-50">
+  <button class="btn btn-primary" (click)="addMobile()">Add Mobiles</button>
 </div>
 
 <h2>Example- ngOnDestroy parent Tabs example</h2>
 <div class="d-flex gap-2 m-2">
-    <!-- <button (click)="activeTab = 'hooks'">Hooks</button> -->
-    <button class="btn btn-primary" (click)="activeTab = 'examples'">Examples</button>
-    <button class="btn btn-primary" (click)="activeTab = 'practices'">Practice</button>
+  <!-- <button (click)="activeTab = 'hooks'">Hooks</button> -->
+  <button class="btn btn-primary" (click)="activeTab = 'examples'">Examples</button>
+  <button class="btn btn-primary" (click)="activeTab = 'practices'">Practice</button>
 </div>
 
 <div class="tab-content m-2">
-    <!-- <app-lifecycle-hooks *ngIf="activeTab === 'users'">Hooks</app-lifecycle-hooks> -->
-    <app-lifecycle-examples *ngIf="activeTab === 'examples'">Example</app-lifecycle-examples>
-    <app-lifecycle-practices *ngIf="activeTab === 'practices'">Practice</app-lifecycle-practices>
+  <!-- <app-lifecycle-hooks *ngIf="activeTab === 'users'">Hooks</app-lifecycle-hooks> -->
+  @if (activeTab === 'examples') {
+    <app-lifecycle-examples>Example</app-lifecycle-examples>
+  }
+  @if (activeTab === 'practices') {
+    <app-lifecycle-practices>Practice</app-lifecycle-practices>
+  }
 </div>
 
 <app-lifecycle-hooks [title]="maintitle" [mobiles]="mobilelist">
-    <p><b>{{lp}}</b></p>
+  <p><b>{{lp}}</b></p>
 </app-lifecycle-hooks>
 
 

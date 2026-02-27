@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Mobile } from '../../services/mobile';
-import { CommonModule } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-services-examples',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './services-examples.html',
   styleUrl: './services-examples.scss'
 })

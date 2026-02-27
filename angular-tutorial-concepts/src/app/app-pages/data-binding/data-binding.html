@@ -1,122 +1,128 @@
 <div class="section">
-    <h1>Data Binding Examples</h1>
-    <div class="sub-section">
-        <h2>String Interpolation</h2>
-        <p>{{stringInterpolation}}</p>
-        <div>{{functionCall()}}</div>
-        <p>{{title.name}}</p>
-        <p>{{title | json}}</p>
-        <img src="{{srcPath}}" alt="" width="200px" height="200px">
-        <h4 class="{{className}}">This heading</h4>
-        <p>{{Date}}</p>
+  <h1>Data Binding Examples</h1>
+  <div class="sub-section">
+    <h2>String Interpolation</h2>
+    <p>{{stringInterpolation}}</p>
+    <div>{{functionCall()}}</div>
+    <p>{{title.name}}</p>
+    <p>{{title | json}}</p>
+    <img src="{{srcPath}}" alt="" width="200px" height="200px">
+    <h4 class="{{className}}">This heading</h4>
+    <p>{{Date}}</p>
+  </div>
+
+  <div class="sub-section">
+    <h2>Property Binding</h2>
+    <div> Name: <input type="text"> <button [disabled]="isDisable">Submit</button></div>
+    <div> Number: <input type="number"> <button [hidden]=isHidden>Ok</button></div>
+    <div><img [src]="srcPath" alt="" width="200px" height="200px"></div>
+  </div>
+
+  <div class="sub-section">
+    <h2>Class Binding</h2>
+    <h4 [class]="isActive?'active': 'inactive'">Chaniging the header is properties using class binding</h4>
+    <h4 [class]="{'active': true}">class example</h4> <!--CONDITIONAL-->
+    <h4 [class]="{'active': isClassApply}">class apply example</h4> <!--CONDITIONAL-->
+    <h4 [class]="['active', 'inactive']">class apply example</h4> <!--Multiple-->
+    <h4 [class.active]=isActive>class.classname</h4> <!--Multiple-->
+  </div>
+
+  <div class="sub-section">
+    <h2>Style Binding</h2>
+    <h4 [style]="{color: cval}">Style Binding with property value</h4>
+    <h4 [style.background]="cval">Style.Binding1</h4>
+    <h4 [style]="styleObject">style Object- Multiple css properies can apply</h4>
+    <h4 [style.color]="hasError ? 'red' : 'green'">Error and Succes Messages</h4>
+  </div>
+
+  <div class="sub-section">
+    <h2>Event Binding</h2>
+    <div>
+      <button class="btn btn-primary" (click)="OnSubmit()">Submit</button>
+    </div>
+    <div>
+      <h4>Counter: {{counterValue}}</h4>
+      <button (click)="increment()">increment</button>
+      <button (click)="decrement()">decrement</button>
+    </div>
+    <div>
+      <label>User Name</label><input type="text" (input)="changeName($event)">
+      <p>User Name Data: {{userName}}</p>
+    </div>
+    <div>
+      <select name="" id="" (change)="onCityChange()">
+        <option value="">Hyd</option>
+        <option value="">Miyapur</option>
+        <option value="">Kukatpally</option>
+        <option value="">KPHB</option>
+      </select>
     </div>
 
-    <div class="sub-section">
-        <h2>Property Binding</h2>
-        <div> Name: <input type="text"> <button [disabled]="isDisable">Submit</button></div>
-        <div> Number: <input type="number"> <button [hidden]=isHidden>Ok</button></div>
-        <div><img [src]="srcPath" alt="" width="200px" height="200px"></div>
-    </div>
+  </div>
 
-    <div class="sub-section">
-        <h2>Class Binding</h2>
-        <h4 [class]="isActive?'active': 'inactive'">Chaniging the header is properties using class binding</h4>
-        <h4 [class]="{'active': true}">class example</h4> <!--CONDITIONAL-->
-        <h4 [class]="{'active': isClassApply}">class apply example</h4> <!--CONDITIONAL-->
-        <h4 [class]="['active', 'inactive']">class apply example</h4> <!--Multiple-->
-        <h4 [class.active]=isActive>class.classname</h4> <!--Multiple-->
+  <div class="sub-section">
+    <h2>Two Way Data Binding</h2>
+    <div>
+      <label>Name</label>
+      <input type="text" [(ngModel)]="city">
+      <p>{{city}}</p>
+      <button class="btn btn-primary" (click)="updateCity()">Update City</button>
     </div>
-
-    <div class="sub-section">
-        <h2>Style Binding</h2>
-        <h4 [style]="{color: cval}">Style Binding with property value</h4>
-        <h4 [style.background]="cval">Style.Binding1</h4>
-        <h4 [style]="styleObject">style Object- Multiple css properies can apply</h4>
-        <h4 [style.color]="hasError ? 'red' : 'green'">Error and Succes Messages</h4>
-    </div>
-
-    <div class="sub-section">
-        <h2>Event Binding</h2>
-        <div>
-            <button class="btn btn-primary" (click)="OnSubmit()">Submit</button>
-        </div>
-        <div>
-            <h4>Counter: {{counterValue}}</h4>
-            <button (click)="increment()">increment</button>
-            <button (click)="decrement()">decrement</button>
-        </div>
-        <div>
-            <label>User Name</label><input type="text" (input)="changeName($event)">
-            <p>User Name Data: {{userName}}</p>
-        </div>
-        <div>
-            <select name="" id="" (change)="onCityChange()">
-                <option value="">Hyd</option>
-                <option value="">Miyapur</option>
-                <option value="">Kukatpally</option>
-                <option value="">KPHB</option>
-            </select>
-        </div>
-
-    </div>
-
-    <div class="sub-section">
-        <h2>Two Way Data Binding</h2>
-        <div>
-            <label>Name</label>
-            <input type="text" [(ngModel)]="city">
-            <p>{{city}}</p>
-            <button class="btn btn-primary" (click)="updateCity()">Update City</button>
-        </div>
-    </div>
+  </div>
 </div>
 
 
 <div class="section">
-    <h1>Databinding New examples</h1>
-    <p> Date Variable </p>
-    <p>{{currentDate}}</p>
+  <h1>Databinding New examples</h1>
+  <p> Date Variable </p>
+  <p>{{currentDate}}</p>
 
-    <p> Array String and Number Variable </p>
-    <div *ngFor="let item of cityName">
-        <div>{{item}}</div>
-    </div>
-    <div *ngFor="let item of rollNumber">
-        <div>{{item}}</div>
-    </div>
-
-    <h3>Object Student List</h3>
+  <p> Array String and Number Variable </p>
+  @for (item of cityName; track item) {
     <div>
-        <div>{{students.name}}</div>
-        <div>{{students.email}}</div>
-        <div>{{students.mobile}}</div>
+      <div>{{item}}</div>
     </div>
-    <div>{{students | json}}</div>
-
-    <!-- WHile forloop its used of keyvalue present forloop -->
-    <div *ngFor="let student of students | keyvalue">
-        <strong>{{ student.key }}:</strong> {{ student.value }}
+  }
+  @for (item of rollNumber; track item) {
+    <div>
+      <div>{{item}}</div>
     </div>
+  }
 
-    @for (student of students | keyvalue; track student.key) {
+  <h3>Object Student List</h3>
   <div>
-    <strong>{{ student.key }}:</strong> {{ student.value }}
+    <div>{{students.name}}</div>
+    <div>{{students.email}}</div>
+    <div>{{students.mobile}}</div>
   </div>
-    }
+  <div>{{students | json}}</div>
 
-
-    <h3>Array Of ObhectStudent List</h3>
-
-    @for (student of studentList; track student.id; let i = $index) {
+  <!-- WHile forloop its used of keyvalue present forloop -->
+  @for (student of students | keyvalue; track student) {
     <div>
-        <p>Index: {{ i }}</p>
-        <p>Id: {{student.id}}</p>
-        <p>Name: {{ student.name }}</p>
-        <p>Email: {{ student.email }}</p>
-        <p>Mobile: {{ student.mobile }}</p>
-        <hr />
+      <strong>{{ student.key }}:</strong> {{ student.value }}
+    </div>
+  }
+
+  @for (student of students | keyvalue; track student.key) {
+    <div>
+      <strong>{{ student.key }}:</strong> {{ student.value }}
+    </div>
+  }
+
+
+  <h3>Array Of ObhectStudent List</h3>
+
+  @for (student of studentList; track student.id; let i = $index) {
+    <div>
+      <p>Index: {{ i }}</p>
+      <p>Id: {{student.id}}</p>
+      <p>Name: {{ student.name }}</p>
+      <p>Email: {{ student.email }}</p>
+      <p>Mobile: {{ student.mobile }}</p>
+      <hr />
     </div>
     } @empty {
     <p>No students found</p>
-    }
+  }
 </div>

@@ -1,66 +1,68 @@
 <div class="section">
-    <h1>Decerators</h1>
-    <div class="sub-section">
-        <h2>Input Decerators</h2>
-        <h4>{{ parentTitle }}</h4>
-        <h4>{{ pdata }}</h4>
-        <h4>{{ pname }}</h4>
-        
-        <div *ngFor="let n of parentNumber">
-            {{ n }}
-        </div>
+  <h1>Decerators</h1>
+  <div class="sub-section">
+    <h2>Input Decerators</h2>
+    <h4>{{ parentTitle }}</h4>
+    <h4>{{ pdata }}</h4>
+    <h4>{{ pname }}</h4>
 
-        <div>
-            <h4>Passing Objects</h4>
-            <p>User Name: {{ puser?.name }}</p>
-            <p>User Age: {{ puser?.age }}</p>
-        </div>
+    @for (n of parentNumber; track n) {
+      <div>
+        {{ n }}
+      </div>
+    }
 
-        <div>
-            <h4>Aliase Messages</h4>
-            <p>{{almessage}}</p>
-        </div>
+    <div>
+      <h4>Passing Objects</h4>
+      <p>User Name: {{ puser?.name }}</p>
+      <p>User Age: {{ puser?.age }}</p>
     </div>
 
-    <div class="sub-section">
-        <h2>Output Decerators</h2>
-        <button class="btn btn-primary" (click)="onClick()">Send</button>
-        <button class="btn btn-primary" (click)="sendMsg()">Send Message</button>
+    <div>
+      <h4>Aliase Messages</h4>
+      <p>{{almessage}}</p>
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <h2>Output Decerators</h2>
+    <button class="btn btn-primary" (click)="onClick()">Send</button>
+    <button class="btn btn-primary" (click)="sendMsg()">Send Message</button>
+  </div>
+
+  <div class="sub-section">
+    <h2>Template Reference Variable</h2>
+    <H4>In child i have templateData need to show in App component using template reference</H4>
+    <input type="text" [(ngModel)]="ngModelData">
+  </div>
+
+  <div class="sub-section">
+    <h2>View Child Decerator</h2>
+    <input type="text" [(ngModel)]="passChildToParentData">
+
+    <h2>DOM Manipulations in Angular</h2>
+    <div>
+      <div #domView>This is ViewChild Div content using viwchild change the elements of div data throght reference varibale</div>
+      <button (click)="domChange()">Dom Change</button>
+    </div>
+    <div>
+      <input type="text" #inputRef>
     </div>
 
-    <div class="sub-section">
-        <h2>Template Reference Variable</h2>
-        <H4>In child i have templateData need to show in App component using template reference</H4>
-        <input type="text" [(ngModel)]="ngModelData">
+    <h2>Differences between viewchild and viewchildren</h2>
+    <div>
+      <p>Conclucision: View child only shows frist viewchild data with same template reference names<br>
+      But View Children will show all the data with same tempate reference variables</p>
+
+      <p #paraViewchild>This is example template reference view child1</p>
+      <p #paraViewchild>This is example template reference view child2</p>
+
+      <h4 #paraViewchildren>This is example of View Children header1</h4>
+      <h4 #paraViewchildren>This is example of View Children header2</h4>
+      <h4 #paraViewchildren>This is example of View Children header3</h4>
+
+      <button (click)="paraTest()">Test Para</button>
     </div>
 
-    <div class="sub-section">
-        <h2>View Child Decerator</h2>
-        <input type="text" [(ngModel)]="passChildToParentData">
-
-        <h2>DOM Manipulations in Angular</h2>
-        <div>
-            <div #domView>This is ViewChild Div content using viwchild change the elements of div data throght reference varibale</div>
-            <button (click)="domChange()">Dom Change</button>
-        </div>
-        <div>
-            <input type="text" #inputRef>
-        </div>
-
-        <h2>Differences between viewchild and viewchildren</h2>
-        <div>
-            <p>Conclucision: View child only shows frist viewchild data with same template reference names<br>
-            But View Children will show all the data with same tempate reference variables</p>
-
-            <p #paraViewchild>This is example template reference view child1</p>
-            <p #paraViewchild>This is example template reference view child2</p>
-
-            <h4 #paraViewchildren>This is example of View Children header1</h4>
-            <h4 #paraViewchildren>This is example of View Children header2</h4>
-            <h4 #paraViewchildren>This is example of View Children header3</h4>
-
-            <button (click)="paraTest()">Test Para</button>
-        </div>
-
-    </div>
+  </div>
 </div>

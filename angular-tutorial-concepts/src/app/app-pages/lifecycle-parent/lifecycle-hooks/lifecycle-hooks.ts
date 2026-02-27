@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges, ViewChild, viewChild } from '@angular/core';
 
 @Component({
   selector: 'app-lifecycle-hooks',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './lifecycle-hooks.html',
   styleUrl: './lifecycle-hooks.scss'
 })

@@ -6,14 +6,14 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDialog } from '../../../app-shared/confirm-dialog/confirm-dialog';
-import { CommonModule } from '@angular/common';
+
 import { Competition } from '../../../models/competition';
 import { validateVerticalPosition } from '@angular/cdk/overlay';
 import { BatchesService } from '../../../services/crud/batches-service';
 
 @Component({
   selector: 'app-crud-api-methods',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatSnackBarModule, MatDialogModule, MatButtonModule],
+  imports: [FormsModule, ReactiveFormsModule, MatSnackBarModule, MatDialogModule, MatButtonModule],
   templateUrl: './crud-api-methods.html',
   styleUrl: './crud-api-methods.scss'
 })

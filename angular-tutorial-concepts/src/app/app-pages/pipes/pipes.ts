@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomPipesPipe } from '../../Pipes/custom-pipes-pipe';
 import { HttpClient } from '@angular/common/http';
 import { NodataPipe } from '../../Pipes/nodata-pipe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pipes',
@@ -45,7 +46,7 @@ export class Pipes implements OnInit {
 
 
   tableHeaders = ["Name", "Email", "Number"];
-  usersData: any;
+   usersData!: Observable<any[]>;
 
   constructor(private http: HttpClient) {}
 

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { LifecycleHooks } from './lifecycle-hooks/lifecycle-hooks';
 import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { LifecyclePractices } from './lifecycle-practices/lifecycle-practices';
 import { LifecycleExamples } from './lifecycle-examples/lifecycle-examples';
@@ -9,7 +9,7 @@ import { LifecycleExamples } from './lifecycle-examples/lifecycle-examples';
 @Component({
   selector: 'app-lifecycle-parent',
   standalone: true,
-  imports: [LifecycleHooks, LifecyclePractices, LifecycleExamples, CommonModule, FormsModule],
+  imports: [LifecycleHooks, LifecyclePractices, LifecycleExamples, FormsModule],
   templateUrl: './lifecycle-parent.html',
   styleUrl: './lifecycle-parent.scss'
 })

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Mobile } from '../../services/mobile';
-import { CommonModule } from '@angular/common';
+
 import { Alert } from '../../app-shared/alert/alert';
 import { Tabs } from "../../app-shared/tabs/tabs";
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, Alert, Tabs],
+  imports: [Alert, Tabs],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

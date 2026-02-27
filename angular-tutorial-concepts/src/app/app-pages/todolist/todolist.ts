@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../../services/todo';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-todolist',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './todolist.html',
   styleUrl: './todolist.scss'
 })
