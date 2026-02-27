@@ -1,6 +1,23 @@
 <div class="section">
     <h1>Angular Services Examples</h1>
     <div class="sub-section">
+        <h2>Angular Services – Brief Introduction</h2>
+        <p> In Angular, a Service is a class used to share data, logic, or functionality across multiple components. </p>
+        <p>It follows the Singleton pattern (when provided in root), meaning one shared instance across the application.</p>
+        <ul>We use services for:
+            <li>API calls (HTTP requests)</li>
+            <li>Business logic</li>
+            <li>State management</li>
+            <li>Data sharing between components</li>
+            <li>Reusable utility functions</li>
+            <li>Authentication & authorization logic</li>
+        </ul>
+    </div>
+
+
+
+
+    <div class="sub-section">
         <h2>Mobile List - Example of services</h2>
         <div *ngFor="let m of mobileList">
             {{m}}

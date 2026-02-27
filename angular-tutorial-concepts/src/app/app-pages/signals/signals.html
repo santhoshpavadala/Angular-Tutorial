@@ -14,6 +14,24 @@
                 </ul>
                 <p>Think of Signals as a reactive variable that automatically notifies Angular when it changes.</p>
             </div>
+
+            <div class="col-12">
+                <h2>Why Signals Were Introduced?</h2>
+                <p><b>Before Signals: </b><br>
+                    We used Input(), EventEmitter <br>
+                    RxJS BehaviorSubject, Subject <br>
+                    Manual subscribe() <br>
+                    ChangeDetectionStrategy tricks <br>
+
+                   <b> This often caused: </b><br>
+                    Memory leaks <br>
+                    Unnecessary change detection cycles <br>
+                    Complex state logic <br>
+                    Signals solve this by: <br>
+                    Being synchronous <br>
+                    Automatically tracking dependencies <br>
+                    Triggering fine-grained change detection</p>
+            </div>
         </div>
     <div class="row">
         <div class="col-3">{{signalVariable}}</div>

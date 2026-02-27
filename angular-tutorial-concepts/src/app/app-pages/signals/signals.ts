@@ -10,7 +10,6 @@ export class Signals {
   // Normal Way
   signalVariable: string = "This is Angular";
   signalVariable2 = signal("Thi is Angualr Signal");
-
   rollno=signal('123');
   students = signal({name: "Santhosh", email:"abc@gmail.com"})
   city = signal(["Hyd", "Mumbai", "Pune"]);
@@ -27,9 +26,20 @@ export class Signals {
       this.signalVariable2.set("This is React Data changed with Signal")
     }, 3000);
   }
-
   changesCity() {
     this.signalVariable2.set(".NET COURSE")
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
