@@ -1,6 +1,6 @@
 <aside>
   <nav>
-    <a routerLink="/basics" routerLinkActive="active">Basics</a>
+    <a routerLink="/basics/1/test" routerLinkActive="active">Basics</a>
     <!-- <a routerLink="/decerators" routerLinkActive="active">Decerators</a> -->
     <a routerLink="/decerators_parent" routerLinkActive="active">Decerators Parent</a>
     <a routerLink="/data_binding" routerLinkActive="active">Data Binding</a>
@@ -29,11 +29,11 @@
     <a routerLink="/crud-api-methods" routerLinkActive="active">CRUD-API-Methods</a>
 
     <!-- USERS MODULES LAZY LOADING PARENT CHILD -->
-    <a routerLink="/users-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Users Module List</a> <!--// Shows exact link only if its parent and then child then its active state only for parent :routerLinkActiveOptions -->
+    <a routerLink="/users-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Users Module List</a>
     <a routerLink="/users-list/users-edit" routerLinkActive="active">Users Module Edit</a>
     
     <a routerLink="/lifecycle-parent" routerLinkActive="active">Lifecycle Hooks</a>
-    <a routerLink="/ngrx", routerLinkActive="active">NGRX</a>
+    <a routerLink="/ngrx" routerLinkActive="active">NGRX</a>
 
 
     <a routerLink="/home" routerLinkActive="active">Home</a>
