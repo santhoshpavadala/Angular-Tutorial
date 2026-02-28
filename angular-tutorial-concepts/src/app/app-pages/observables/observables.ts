@@ -90,6 +90,24 @@ export class Observables implements OnInit{
     })
     this.dataService.getData2();
 
+
+
+
+    // Learning Partner Examples:
+    const myObs$ = new Observable(value=>{
+      value.next("This is Demo Text")
+    })
+    myObs$.subscribe(message=>{
+      debugger;
+      console.log(message, 'Obs emited data');
+      
+    })
+
+
+
+
+
+
   }
 
 

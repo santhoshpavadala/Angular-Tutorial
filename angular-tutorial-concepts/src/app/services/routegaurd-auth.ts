@@ -6,6 +6,7 @@ import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, R
 })
 export class RoutegaurdAuth implements CanActivate {
 
+  // This is the older version with in servie we have the acanactivate
   constructor(private r: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

@@ -1,0 +1,47 @@
+<div class="login-wrapper d-flex align-items-center justify-content-center">
+  <div class="login-card shadow-lg p-4">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Welcome Back</h2>
+      <p class="text-muted">Sign in to continue</p>
+    </div>
+
+    <div class="d-flex align-item-center flex-column gap-2 text-muted">
+      <!-- <p>Username: admin@gmail.com</p> -->
+      <p class="mb-0">Username: sant@gmail.com</p>
+      <p>Password: 112233</p>
+    </div>
+
+    <form >
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" placeholder="name@example.com"
+        [(ngModel)]="loginObj.emailId" name="email">
+        <label for="email">Email address</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="password" placeholder="Password"
+        [(ngModel)]="loginObj.password" name="password">
+        <label for="password">Password</label>
+      </div>
+
+      <div class="d-flex justify-content-between mb-3">
+        <div>
+          <input type="checkbox" id="remember">
+          <label for="remember" class="ms-1">Remember me</label>
+        </div>
+        <a href="#" class="text-decoration-none">Forgot password?</a>
+      </div>
+
+      <button class="btn btn-primary w-100 mb-3 login-btn"
+      (click)="onLogin()">
+        Login
+      </button>
+
+      <div class="text-center">
+        <small>Don't have an account? 
+          <a href="#" class="fw-bold text-decoration-none">Register</a>
+        </small>
+      </div>
+    </form>
+  </div>
+</div>

@@ -17,7 +17,6 @@ import { Routings } from './app-pages/routings/routings';
 import { Childroute1 } from './app-pages/routings/childroute1/childroute1';
 import { Childroute2 } from './app-pages/routings/childroute2/childroute2';
 import { RoutegaurdAuth } from './services/routegaurd-auth';
-import { Login } from './app-pages/login/login';
 import { Observables } from './app-pages/observables/observables';
 import { NgContent } from './app-pages/ng-content/ng-content';
 import { DecoratorParent } from './app-pages/decorator-parent/decorator-parent';
@@ -28,7 +27,6 @@ import { RxjsOperators } from './app-pages/rxjs-operators/rxjs-operators';
 import { HttpInterceptors } from './app-pages/http-interceptors/http-interceptors';
 import { Forms } from './app-pages/forms/forms';
 import { SignupForm } from './app-pages/signup-form/signup-form';
-import { LifecycleHooks } from './app-pages/lifecycle-parent/lifecycle-hooks/lifecycle-hooks';
 import { LifecycleParent } from './app-pages/lifecycle-parent/lifecycle-parent';
 import { Ngrx } from './app-pages/ngrx-parent/ngrx';
 import { Signals } from './app-pages/signals/signals';
@@ -37,81 +35,65 @@ import { ReactiveForms } from './app-pages/crud/reactive-forms/reactive-forms';
 import { CrudOperations } from './app-pages/crud/crud-operations/crud-operations';
 import { CrudOperationsReactive } from './app-pages/crud/crud-operations-reactive/crud-operations-reactive';
 import { CrudApiMethods } from './app-pages/crud/crud-api-methods/crud-api-methods';
+import { MainLayout } from './app-layout/main-layout/main-layout';
+import { Login } from './app-layout/login/login';
+import { authGuard } from './gaurds/auth-guard';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: Home },
-  { path: 'about', component: About },
-  
-  // Route gaurd exapmle implemented only for contacts
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: Login },
-  { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
-  { path: 'users', component: Users },
-  { path: 'usercard/:id', component: Usercard },
-  { path: 'products', component: Products },
-
-
-  { path: 'basics/:id/:test', component: AngularBasics },
-  { path: 'decerators_parent', component: DecoratorParent },
-  { path: 'data_binding', component: DataBinding },
-  { path: 'directives', component: Directives },
-  { path: 'pipes', component: Pipes },
-  { path: 'templates', component: Templates },
-  { path: 'ngcontent', component: NgContent },
-  { path: 'services', component: ServicesExamples },
-  { path: 'todo-form', component: Todoform },
-  { path: 'todo-list', component: Todolist },
-  { path: 'observables', component: Observables },
-  { path: 'subject', component: Subjects },
-  { path: 'rxjs-operators', component: RxjsOperators },
-  { path: 'http-interceptors', component: HttpInterceptors },
-  { path: 'forms', component: Forms },
-  { path: 'signup', component: SignupForm },
   {
-    path: 'templete-form',
-    component: TemplateForms
-  },
-  {
-    path: 'reactive-forms',
-    component: ReactiveForms
-  },
-
-  {
-    path: 'crud-operation-template',
-    component: CrudOperations
-  },
-
-  {
-    path: 'crud-operation-reactive',
-    component: CrudOperationsReactive
-  },
-
-  {path: 'crud-api-methods', component: CrudApiMethods},
-
-  // Lazy Loading Module Concept
-  {
-    path: 'users-list',
-    loadChildren: () =>
-      import('./users-module/users-module').then((m) => m.UsersModule),
-  },
-
-  // {path: 'lifecycle-hooks', component: LifecycleHooks},
-  { path: 'lifecycle-parent', component: LifecycleParent },
-  { path: 'ngrx', component: Ngrx },
-  { path: 'signals', component: Signals},
-
-  {
-    path: 'routings',
-    component: Routings,
+    path: '',
+    component: MainLayout,
+    canActivate: [authGuard],  // new gaurd based
     children: [
-      { path: 'childroute1', component: Childroute1 },
-      { path: 'childroute2', component: Childroute2 },
+      { path: 'home', component: Home,}, 
+      { path: 'about', component: About },
+      // Route guard example implemented only for contacts - old canActivate service based
+      { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
+      { path: 'users', component: Users },
+      { path: 'usercard/:id', component: Usercard },
+      { path: 'products', component: Products },
+      { path: 'basics/:id/:test', component: AngularBasics },
+      { path: 'decerators_parent', component: DecoratorParent },
+      { path: 'data_binding', component: DataBinding },
+      { path: 'directives', component: Directives },
+      { path: 'pipes', component: Pipes },
+      { path: 'templates', component: Templates },
+      { path: 'ngcontent', component: NgContent },
+      { path: 'services', component: ServicesExamples },
+      { path: 'todo-form', component: Todoform },
+      { path: 'todo-list', component: Todolist },
+      { path: 'observables', component: Observables },
+      { path: 'subject', component: Subjects },
+      { path: 'rxjs-operators', component: RxjsOperators },
+      { path: 'http-interceptors', component: HttpInterceptors },
+      { path: 'forms', component: Forms },
+      { path: 'signup', component: SignupForm },
+      { path: 'templete-form', component: TemplateForms },
+      { path: 'reactive-forms', component: ReactiveForms },
+      { path: 'crud-operation-template', component: CrudOperations },
+      { path: 'crud-operation-reactive', component: CrudOperationsReactive },
+      { path: 'crud-api-methods', component: CrudApiMethods },
+      { path: 'lifecycle-parent', component: LifecycleParent },
+      { path: 'ngrx', component: Ngrx },
+      { path: 'signals', component: Signals },
+
+      // Lazy Loading Module Concept
+      {
+        path: 'users-list',
+        loadChildren: () =>
+          import('./users-module/users-module').then((m) => m.UsersModule),
+      },
+      {
+        path: 'routings',
+        component: Routings,
+        children: [
+          { path: 'childroute1', component: Childroute1 },
+          { path: 'childroute2', component: Childroute2 },
+        ],
+      },
     ],
   },
-
-  
-
   { path: '**', component: Pagenotfound },
-
-  
 ];

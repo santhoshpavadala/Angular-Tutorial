@@ -1,5 +1,734 @@
 <div class="section">
-    <h1>{{title}}</h1>
-    <button class="btn btn-primary" (click)="alertFn()">Click To Start - Bootstrap</button>
-</div>
+    <h1>Angular Interview Questions and Answers:</h1>
 
+    <div class="sub-section">
+        <section>
+
+            <h1>Angular Interview Questions & Answers (5 Years Experience – Angular 13 to 21)</h1>
+
+            <hr />
+
+            <h2>CORE FUNDAMENTALS</h2>
+
+            <h3>1. What is Angular and why is it used?</h3>
+            <p>
+                Angular is a TypeScript-based front-end framework for building scalable Single Page Applications (SPAs).
+                It provides built-in solutions for routing, forms, HTTP communication, dependency injection, and state
+                management.
+                It is suitable for enterprise applications because of its structure and maintainability.
+            </p>
+
+            <h3>2. What are the main building blocks of Angular?</h3>
+            <ul>
+                <li>Components</li>
+                <li>Templates</li>
+                <li>Directives</li>
+                <li>Pipes</li>
+                <li>Services</li>
+                <li>Dependency Injection</li>
+                <li>Routing</li>
+                <li>Modules / Standalone Components</li>
+            </ul>
+
+            <h3>3. What is the difference between Angular 13 and Angular 14+?</h3>
+            <p>
+                Angular 13 removed View Engine and made Ivy default.
+                Angular 14 introduced Standalone Components.
+                Angular 16 introduced Signals.
+                Angular 17 introduced new Control Flow syntax.
+                Angular 18–21 improved zoneless support, hydration, and performance optimizations.
+            </p>
+
+            <h3>4. What is a component?</h3>
+            <p>
+                A component controls a part of the UI. It consists of:
+                - TypeScript class
+                - HTML template
+                - CSS styles
+                - Metadata decorator (@Component)
+            </p>
+
+            <h3>5. What are lifecycle hooks?</h3>
+            <ul>
+                <li>ngOnInit</li>
+                <li>ngOnChanges</li>
+                <li>ngAfterViewInit</li>
+                <li>ngOnDestroy</li>
+            </ul>
+            <p>
+                They allow execution of logic at specific stages of component life.
+            </p>
+
+            <hr />
+
+            <h2>DEPENDENCY INJECTION</h2>
+
+            <h3>6. What is Dependency Injection?</h3>
+            <p>
+                It is a design pattern where dependencies are injected instead of created manually.
+                It improves testability and maintainability.
+            </p>
+
+            <h3>7. What does providedIn: 'root' mean?</h3>
+            <p>
+                It makes the service a singleton available throughout the application.
+            </p>
+
+            <h3>8. Explain hierarchical injectors.</h3>
+            <p>
+                Angular creates injectors at root, module, and component levels.
+                If a dependency is not found locally, Angular searches upward.
+            </p>
+
+            <hr />
+
+            <h2>CHANGE DETECTION & PERFORMANCE</h2>
+
+            <h3>9. How does Angular change detection work?</h3>
+            <p>
+                Angular runs a top-down check of components to detect data changes.
+                Zone.js triggers detection when async tasks complete.
+            </p>
+
+            <h3>10. What is OnPush strategy?</h3>
+            <p>
+                OnPush runs change detection only when:
+                - Input reference changes
+                - Event occurs
+                - Observable emits
+                - markForCheck() is called
+            </p>
+
+            <h3>11. Why is OnPush better for large apps?</h3>
+            <p>
+                It reduces unnecessary DOM checks and improves performance.
+            </p>
+
+            <h3>12. What are common performance mistakes?</h3>
+            <ul>
+                <li>Not using trackBy</li>
+                <li>Mutating objects instead of replacing</li>
+                <li>Too many subscriptions</li>
+                <li>Heavy logic in templates</li>
+            </ul>
+
+            <hr />
+
+            <h2>SIGNALS (Angular 16+)</h2>
+
+            <h3>13. What are Signals?</h3>
+            <p>
+                Signals are reactive primitives for state management.
+                They provide fine-grained reactivity.
+            </p>
+
+            <h3>14. What is computed()?</h3>
+            <p>
+                It creates a derived signal from other signals.
+            </p>
+
+            <h3>15. What is effect()?</h3>
+            <p>
+                Runs side-effects when a signal changes.
+            </p>
+
+            <h3>16. Signals vs Observables?</h3>
+            <p>
+                Signals are synchronous and good for local UI state.
+                Observables are asynchronous and good for HTTP and streams.
+            </p>
+
+            <hr />
+
+            <h2>RXJS</h2>
+
+            <h3>17. What is Observable?</h3>
+            <p>
+                An Observable represents a stream of data over time.
+            </p>
+
+            <h3>18. Subject vs BehaviorSubject?</h3>
+            <p>
+                BehaviorSubject holds the latest value.
+                Subject does not.
+            </p>
+
+            <h3>19. switchMap vs mergeMap?</h3>
+            <p>
+                switchMap cancels previous request.
+                mergeMap runs parallel requests.
+            </p>
+
+            <h3>20. How do you prevent memory leaks?</h3>
+            <p>
+                Use takeUntil, async pipe, or takeUntilDestroyed() (Angular 16+).
+            </p>
+
+            <hr />
+
+            <h2>FORMS</h2>
+
+            <h3>21. Template vs Reactive Forms?</h3>
+            <p>
+                Reactive forms are scalable and testable.
+                Template forms are simple and suitable for small forms.
+            </p>
+
+            <h3>22. What is FormArray?</h3>
+            <p>
+                Used for dynamic forms where controls are added/removed dynamically.
+            </p>
+
+            <h3>23. How to create custom validator?</h3>
+            <p>
+                Create a function returning ValidationErrors or null.
+            </p>
+
+            <hr />
+
+            <h2>ROUTING</h2>
+
+            <h3>24. What are route guards?</h3>
+            <p>
+                Guards control navigation.
+                Examples: CanActivate, CanDeactivate, CanLoad, CanMatch.
+            </p>
+
+            <h3>25. What is lazy loading?</h3>
+            <p>
+                Loading modules only when needed to reduce initial bundle size.
+            </p>
+
+            <h3>26. What is PreloadAllModules?</h3>
+            <p>
+                Preloads lazy modules after initial load.
+            </p>
+
+            <hr />
+
+            <h2>HTTP & INTERCEPTORS</h2>
+
+            <h3>27. What is HttpInterceptor?</h3>
+            <p>
+                Intercepts HTTP requests globally.
+                Used for JWT token, logging, error handling.
+            </p>
+
+            <h3>28. How to handle global errors?</h3>
+            <p>
+                Use catchError in interceptor.
+            </p>
+
+            <h3>29. How to cancel HTTP requests?</h3>
+            <p>
+                Use switchMap or AbortController.
+            </p>
+
+            <hr />
+
+            <h2>STATE MANAGEMENT</h2>
+
+            <h3>30. When to use NgRx?</h3>
+            <p>
+                When application state becomes complex and shared across many modules.
+            </p>
+
+            <h3>31. What is Component Store?</h3>
+            <p>
+                Lightweight state management for local feature state.
+            </p>
+
+            <h3>32. What is optimistic update?</h3>
+            <p>
+                Update UI before API confirmation and rollback on failure.
+            </p>
+
+            <hr />
+
+            <h2>SSR & HYDRATION</h2>
+
+            <h3>33. What is Angular Universal?</h3>
+            <p>
+                Server Side Rendering solution for SEO and performance.
+            </p>
+
+            <h3>34. What is hydration?</h3>
+            <p>
+                Reusing server-rendered DOM on client side without re-rendering.
+            </p>
+
+            <hr />
+
+            <h2>SECURITY</h2>
+
+            <h3>35. How does Angular prevent XSS?</h3>
+            <p>
+                Angular sanitizes HTML automatically.
+            </p>
+
+            <h3>36. What is DomSanitizer?</h3>
+            <p>
+                Used to bypass security when rendering trusted HTML.
+            </p>
+
+            <hr />
+
+            <h2>ADVANCED ARCHITECTURE</h2>
+
+            <h3>37. How to structure enterprise Angular project?</h3>
+            <p>
+                Feature-based folders, shared components, core services, lazy routes.
+            </p>
+
+            <h3>38. Smart vs Dumb components?</h3>
+            <p>
+                Smart handles logic, Dumb handles UI only.
+            </p>
+
+            <h3>39. What is Micro Frontend?</h3>
+            <p>
+                Splitting large frontend into independent deployable apps.
+            </p>
+
+            <h3>40. How to reduce bundle size?</h3>
+            <ul>
+                <li>Lazy loading</li>
+                <li>Standalone components</li>
+                <li>Tree shaking</li>
+                <li>Remove unused libraries</li>
+            </ul>
+
+            <hr />
+
+            <h2>TESTING</h2>
+
+            <h3>41. How to test services?</h3>
+            <p>
+                Use TestBed and HttpTestingController.
+            </p>
+
+            <h3>42. What is mocking?</h3>
+            <p>
+                Replacing real dependency with fake implementation in testing.
+            </p>
+
+            <hr />
+
+            <h2>ADVANCED SCENARIOS (43–100)</h2>
+
+            <p>Prepare deeply for these advanced areas:</p>
+
+            <ul>
+                <li>Zone removal migration strategy</li>
+                <li>Signal-based architecture</li>
+                <li>WebSocket scaling</li>
+                <li>Large data grid optimization</li>
+                <li>Tree shaking internals</li>
+                <li>Angular compiler (Ivy) improvements</li>
+                <li>Custom structural directives</li>
+                <li>Dynamic component rendering</li>
+                <li>CDK deep usage</li>
+                <li>Accessibility best practices</li>
+                <li>Web Vitals optimization</li>
+                <li>Memory profiling</li>
+                <li>Error boundary implementation</li>
+                <li>Server-driven UI</li>
+                <li>Multi-language i18n strategy</li>
+                <li>Progressive migration planning</li>
+                <li>Angular 21 improvements</li>
+                <li>Strict mode benefits</li>
+                <li>Dependency graph optimization</li>
+                <li>Production monitoring</li>
+                <li>Performance budgets</li>
+                <li>Hydration debugging</li>
+                <li>Hybrid signals + RxJS architecture</li>
+                <li>Custom preloading strategies</li>
+                <li>Facade pattern implementation</li>
+                <li>CI/CD pipeline integration</li>
+                <li>Role-based feature toggling</li>
+                <li>Advanced interceptor chaining</li>
+                <li>Config-driven routing</li>
+                <li>Enterprise refactoring strategy</li>
+                <li>State normalization</li>
+                <li>Retry and exponential backoff</li>
+                <li>Web workers integration</li>
+                <li>Service worker & PWA</li>
+                <li>Large team architecture governance</li>
+                <li>API versioning handling</li>
+                <li>Edge rendering</li>
+                <li>SSR caching</li>
+                <li>High frequency UI optimization</li>
+                <li>DestroyRef usage</li>
+                <li>takeUntilDestroyed</li>
+                <li>Control flow syntax (if, for)</li>
+                <li>Zoneless performance comparison</li>
+                <li>Lazy route guards</li>
+                <li>Type-safe routing</li>
+                <li>Signal-based forms architecture</li>
+                <li>Dynamic form engines</li>
+                <li>Memory leak real case debugging</li>
+                <li>WebSocket reconnection strategy</li>
+                <li>Large enterprise scalability planning</li>
+            </ul>
+
+            <hr />
+
+            <h2>Final Advice</h2>
+            <p>
+                At 5 years experience, interviews focus on:
+                - Architecture decisions
+                - Performance optimization
+                - Trade-off analysis
+                - Debugging skills
+                - Real-world problem solving
+            </p>
+
+        </section>
+    </div>
+
+    <div class="sub-section">
+        <section>
+
+            <h1>Angular Interview Questions & Answers (Basic to Advanced - Angular 13 to 21)</h1>
+
+            <hr />
+
+            <h2>1. What is Angular?</h2>
+            <p>
+                Angular is a TypeScript-based front-end framework used to build scalable, enterprise-level Single Page
+                Applications (SPAs).
+                It follows a component-based architecture and provides built-in solutions for routing, HTTP, forms,
+                dependency injection,
+                and state management.
+            </p>
+
+            <hr />
+
+            <h2>2. What are the main building blocks of Angular?</h2>
+            <ul>
+                <li>Components</li>
+                <li>Modules / Standalone Components</li>
+                <li>Templates</li>
+                <li>Directives</li>
+                <li>Pipes</li>
+                <li>Services</li>
+                <li>Dependency Injection</li>
+                <li>Routing</li>
+            </ul>
+
+            <hr />
+
+            <h2>3. What is the difference between Angular 13 and Angular 14+?</h2>
+            <p><strong>Angular 13:</strong> Ivy fully enabled, View Engine removed.</p>
+            <p><strong>Angular 14:</strong> Introduced Standalone Components.</p>
+            <p><strong>Angular 15:</strong> Stable standalone APIs.</p>
+            <p><strong>Angular 16:</strong> Introduced Signals.</p>
+            <p><strong>Angular 17:</strong> Control Flow syntax (if, for).</p>
+            <p><strong>Angular 18-21:</strong> Improved zoneless support, performance optimization, signal-based
+                reactivity enhancements.</p>
+
+            <hr />
+
+            <h2>4. What are Standalone Components?</h2>
+            <p>
+                Standalone components remove the need for NgModules.
+                They simplify architecture and improve tree-shaking.
+            </p>
+
+            <hr />
+
+            <h2>5. What is Dependency Injection?</h2>
+            <p>
+                Dependency Injection (DI) is a design pattern where dependencies are injected into a class
+                instead of being created manually. It promotes loose coupling and testability.
+            </p>
+
+            <hr />
+
+            <h2>6. Explain providedIn: 'root'</h2>
+            <p>
+                When a service is provided in 'root', Angular creates a singleton instance
+                available throughout the application.
+            </p>
+
+            <hr />
+
+            <h2>7. What is Change Detection?</h2>
+            <p>
+                Change Detection is the mechanism by which Angular updates the DOM when component data changes.
+            </p>
+
+            <h3>Types:</h3>
+            <ul>
+                <li>Default</li>
+                <li>OnPush</li>
+            </ul>
+
+            <hr />
+
+            <h2>8. What is OnPush Strategy?</h2>
+            <p>
+                OnPush triggers change detection only when:
+            </p>
+            <ul>
+                <li>@Input reference changes</li>
+                <li>Observable emits</li>
+                <li>Manual markForCheck()</li>
+                <li>Event triggered</li>
+            </ul>
+            <p>
+                It improves performance in large applications.
+            </p>
+
+            <hr />
+
+            <h2>9. What is Zone.js?</h2>
+            <p>
+                Zone.js tracks asynchronous operations (like setTimeout, HTTP calls, promises)
+                and triggers change detection automatically.
+            </p>
+
+            <hr />
+
+            <h2>10. What is Zoneless Angular (Angular 16+)?</h2>
+            <p>
+                Zoneless Angular removes dependency on Zone.js and uses Signals for fine-grained reactivity.
+                It improves performance and gives developers more control.
+            </p>
+
+            <hr />
+
+            <h2>11. What are Signals (Angular 16+)?</h2>
+            <p>
+                Signals are reactive primitives used for managing state.
+                They provide fine-grained reactivity without full component re-rendering.
+            </p>
+
+            <pre>
+count = signal(0);
+count.update(v => v + 1);
+</pre>
+
+            <hr />
+
+            <h2>12. Difference between Signals and Observables?</h2>
+            <table>
+                <tr>
+                    <th>Signals</th>
+                    <th>Observables</th>
+                </tr>
+                <tr>
+                    <td>Synchronous</td>
+                    <td>Asynchronous</td>
+                </tr>
+                <tr>
+                    <td>No subscription required</td>
+                    <td>Requires subscription</td>
+                </tr>
+                <tr>
+                    <td>Local state management</td>
+                    <td>Async data streams</td>
+                </tr>
+            </table>
+
+            <hr />
+
+            <h2>13. What is RxJS?</h2>
+            <p>
+                RxJS is a library for reactive programming using Observables
+                to handle asynchronous data streams.
+            </p>
+
+            <hr />
+
+            <h2>14. Explain Subject vs BehaviorSubject vs ReplaySubject</h2>
+            <ul>
+                <li><strong>Subject:</strong> No initial value</li>
+                <li><strong>BehaviorSubject:</strong> Holds latest value</li>
+                <li><strong>ReplaySubject:</strong> Replays previous values</li>
+            </ul>
+
+            <hr />
+
+            <h2>15. What is switchMap?</h2>
+            <p>
+                switchMap cancels the previous observable when a new value is emitted.
+                Used in search and auto-suggestion scenarios.
+            </p>
+
+            <hr />
+
+            <h2>16. What is Lazy Loading?</h2>
+            <p>
+                Lazy loading loads modules only when needed, reducing initial bundle size
+                and improving performance.
+            </p>
+
+            <hr />
+
+            <h2>17. Difference between Template-driven and Reactive Forms?</h2>
+            <table>
+                <tr>
+                    <th>Template Driven</th>
+                    <th>Reactive Forms</th>
+                </tr>
+                <tr>
+                    <td>Simple</td>
+                    <td>Scalable</td>
+                </tr>
+                <tr>
+                    <td>Less control</td>
+                    <td>More control</td>
+                </tr>
+                <tr>
+                    <td>HTML-driven</td>
+                    <td>TypeScript-driven</td>
+                </tr>
+            </table>
+
+            <hr />
+
+            <h2>18. What is a Route Guard?</h2>
+            <p>
+                Route Guards control access to routes.
+                Types: CanActivate, CanDeactivate, CanLoad, CanMatch.
+            </p>
+
+            <hr />
+
+            <h2>19. What is HttpInterceptor?</h2>
+            <p>
+                Intercepts HTTP requests and responses globally.
+                Used for authentication tokens, logging, and error handling.
+            </p>
+
+            <hr />
+
+            <h2>20. How to optimize Angular application?</h2>
+            <ul>
+                <li>Use OnPush</li>
+                <li>Use trackBy in *ngFor</li>
+                <li>Lazy load modules</li>
+                <li>Use standalone components</li>
+                <li>Minimize subscriptions</li>
+                <li>Use Signals</li>
+            </ul>
+
+            <hr />
+
+            <h2>21. What is Angular Universal?</h2>
+            <p>
+                Angular Universal enables Server Side Rendering (SSR)
+                to improve SEO and initial load performance.
+            </p>
+
+            <hr />
+
+            <h2>22. What is State Management?</h2>
+            <p>
+                State management handles application data flow.
+                Options:
+            </p>
+            <ul>
+                <li>Services with BehaviorSubject</li>
+                <li>Signals</li>
+                <li>NgRx</li>
+                <li>Component Store</li>
+            </ul>
+
+            <hr />
+
+            <h2>23. What are Smart and Dumb Components?</h2>
+            <ul>
+                <li><strong>Smart Components:</strong> Handle business logic and API calls</li>
+                <li><strong>Dumb Components:</strong> Only UI and Input/Output bindings</li>
+            </ul>
+
+            <hr />
+
+            <h2>24. How do you handle memory leaks?</h2>
+            <ul>
+                <li>takeUntil</li>
+                <li>Async Pipe</li>
+                <li>DestroyRef (Angular 16+)</li>
+                <li>Unsubscribe in ngOnDestroy</li>
+            </ul>
+
+            <hr />
+
+            <h2>25. What are Angular lifecycle hooks?</h2>
+            <ul>
+                <li>ngOnInit</li>
+                <li>ngOnChanges</li>
+                <li>ngAfterViewInit</li>
+                <li>ngOnDestroy</li>
+            </ul>
+
+            <hr />
+
+            <h2>26. What is trackBy in *ngFor?</h2>
+            <p>
+                trackBy improves performance by tracking items uniquely
+                instead of recreating DOM elements.
+            </p>
+
+            <hr />
+
+            <h2>27. Explain new Control Flow syntax (Angular 17+)</h2>
+
+            <pre>
+                if (condition)
+
+                for (item of items; track item.id) 
+            </pre>
+
+            <p>
+                Improves readability and performance over traditional *ngIf and *ngFor.
+            </p>
+
+            <hr />
+
+            <h2>28. What is Web Vitals and why important?</h2>
+            <p>
+                Web Vitals measure performance metrics like LCP, CLS, and FID.
+                Important for performance and SEO.
+            </p>
+
+            <hr />
+
+            <h2>29. What is Micro Frontend Architecture?</h2>
+            <p>
+                Breaking large applications into smaller independently deployable frontend modules.
+                Useful in enterprise projects.
+            </p>
+
+            <hr />
+
+            <h2>30. How would you design a scalable Angular application?</h2>
+            <ul>
+                <li>Feature-based folder structure</li>
+                <li>Core & Shared modules</li>
+                <li>Lazy loading</li>
+                <li>State separation</li>
+                <li>Reusable UI components</li>
+                <li>Strict TypeScript rules</li>
+            </ul>
+
+            <hr />
+
+            <h2>31. What are the major improvements in Angular 20 & 21?</h2>
+            <ul>
+                <li>Enhanced signal-based reactivity</li>
+                <li>Improved zoneless performance</li>
+                <li>Better hydration support</li>
+                <li>Optimized compiler performance</li>
+                <li>Faster build times</li>
+            </ul>
+
+            <hr />
+
+            <h2>End of Angular Interview Preparation Guide</h2>
+
+        </section>
+    </div>
+</div>
