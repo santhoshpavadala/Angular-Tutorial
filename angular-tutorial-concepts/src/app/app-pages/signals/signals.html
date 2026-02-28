@@ -47,6 +47,36 @@
 
 
     <div class="sub-section">
+        <h2>Signal form Example</h2>
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <label for="">Email</label> 
+                <input type="text" class="form-control" >
+                <!-- [field]="loginForm.email" -->
+                <!--@if (loginForm.email.invalid()) {
+                    <div class="text-danger">Eamil is not valid</div>
+                } -->
+
+                @for (item of loginForm.email().errors(); track $index) {
+                    <span class="text-danger">{{item.message}}</span>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="">Password</label>
+                <input type="text" class="form-control" >
+                <!-- [field]="loginForm.password" -->
+            </div>
+        </div>
+
+        <div>
+            <button></button>
+        </div>
+
+        <div>
+            {{loginForm().value() | json}}
+        </div>
         
     </div>
 </div>

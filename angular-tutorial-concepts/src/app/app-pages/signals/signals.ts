@@ -1,8 +1,10 @@
+import { JsonPipe } from '@angular/common';
 import { Component, Signal, signal } from '@angular/core';
+import { email, form, FORM_FIELD, required} from '@angular/forms/signals';
 
 @Component({
   selector: 'app-signals',
-  imports: [],
+  imports: [ JsonPipe], //FieldDirective
   templateUrl: './signals.html',
   styleUrl: './signals.scss'
 })
@@ -32,13 +34,14 @@ export class Signals {
 
 
 
-
-
-
-
-
-
-
+// Signal Login form example:
+loginModel = signal({email: '', password: ''});
+// loginForm = form(this.loginModal);
+loginForm = form(this.loginModel, (schema)=>{
+  required(schema.email,{ message: 'This is required'}),
+  email(schema.email, {message: "Eamil format required"})
+  required(schema.password, {message: 'Passowrd is required'})
+})
 
 
 
