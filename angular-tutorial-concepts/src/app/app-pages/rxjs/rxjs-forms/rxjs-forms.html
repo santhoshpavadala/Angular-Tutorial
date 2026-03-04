@@ -1,0 +1,109 @@
+
+<div class="section">
+    <h1>Rxjs In Reactive form: ValueChanges | combineLatest | statusChanges</h1>
+
+    <h2>Value Changes</h2>
+    <p>valueChanges is an Observable that emits whenever the value of a form control or form group changes.
+    It emits the latest value.</p>
+
+    <h2>Status Change</h2>
+    <p>statusChanges emits whenever the validation status of a form changes.</p>
+
+    <h2>combineLatest</h2>
+    <p>combineLatest is an RxJS operator used to combine multiple observables and emit the latest values from all of them whenever any one changes. <br>
+    Since you are working with Angular Reactive Forms, it is very commonly used to listen to multiple form controls together.</p>
+
+    
+
+    <input type="text" class="form-control" placeholder="Search" [formControl]="searchControl">
+
+
+    <form [formGroup]="userform" class="container mt-4">
+
+    <!-- Name -->
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="name">
+        <div class="text-danger" *ngIf="userform.get('name')?.touched && userform.get('name')?.invalid">
+        Name is required
+        </div>
+    </div>
+
+    <!-- Subscribe -->
+    <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" formControlName="subscribe">
+        <label class="form-check-label">Subscribe to Newsletter</label>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email">
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" formControlName="password">
+        <div class="text-danger" *ngIf="userform.get('password')?.touched && userform.get('password')?.invalid">
+        Password is required
+        </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="mb-3">
+        <label class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" formControlName="confirmPassword">
+
+        <div class="text-danger" *ngIf="passwordMismatch">
+        Passwords do not match
+        </div>
+    </div>
+
+    <!-- Age -->
+    <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input type="number" class="form-control" formControlName="age">
+    </div>
+
+    <!-- Driving License -->
+    <div class="mb-3">
+        <label class="form-label">Driving License</label>
+        <input type="text" class="form-control" formControlName="drivingLicense">
+    </div>
+
+    <!-- Country -->
+    <div class="mb-3">
+        <label class="form-label">Country</label>
+        <select class="form-select" formControlName="country">
+        <option value="">Select Country</option>
+        <option value="india">India</option>
+        <option value="usa">USA</option>
+        <option value="uk">UK</option>
+        </select>
+    </div>
+
+    <!-- Currency -->
+    <div class="mb-3">
+        <label class="form-label">Currency</label>
+        <select class="form-select" formControlName="currency">
+        <option value="">Select Currency</option>
+        <option value="inr">INR</option>
+        <option value="usd">USD</option>
+        <option value="eur">EUR</option>
+        </select>
+    </div>
+
+    <!-- Search -->
+    <div class="mb-3">
+        <label class="form-label">Search</label>
+        <input type="text" class="form-control" formControlName="search" placeholder="Search here">
+    </div>
+
+    <!-- Submit -->
+    <button class="btn btn-primary" [disabled]="userform.invalid">
+        Submit
+    </button>
+
+    </form>
+</div>

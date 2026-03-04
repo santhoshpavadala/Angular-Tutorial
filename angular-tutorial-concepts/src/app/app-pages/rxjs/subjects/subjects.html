@@ -1,0 +1,35 @@
+<div class="section">
+    <h1 class="text-center text-primary">Subject</h1>
+    <div class="sub-section">
+        <h2>Subject: Take the reference of Todo List and form components</h2>
+        <h2>BehaviourSubject:</h2>
+        <p>let s = new BehavoiurSubject()</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="sub-section">
+        <div class="row">
+            <div class="col-12">
+                <h2>What is a Subject? </h2>
+                <ul> A Subject is:
+                    <li>An Observable</li>
+                    <li>An Observer</li>
+                </ul>
+                <ul> That means:
+                    <li>It can subscribe to other observables.</li>
+                    <li>It can emit values manually using next().</li>
+                </ul>
+                <p>Think of it like a data broadcaster 📡 — when it emits, all subscribers receive the value.</p>
+            </div>
+
+            <div class="col-12">
+
+                <!-- Share Replay Example -->
+                 <input type="text" [(ngModel)]="userId" placeholder="Enter ID">
+                 <button (click)="getUser()">Get Data</button>
+                
+            </div>
+        </div>
+    </div>
+</div>

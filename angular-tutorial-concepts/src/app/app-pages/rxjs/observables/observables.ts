@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ObserableData } from '../../services/obserable-data';
+import { from, interval, Observable, of, timer } from 'rxjs';
+import { ObserableData } from '../../../services/obserable-data';
 
 @Component({
   selector: 'app-observables',
@@ -91,37 +91,40 @@ export class Observables implements OnInit{
     this.dataService.getData2();
 
 
-
-
-    // Learning Partner Examples:
+    // Learning Partner Examples: observables
     const myObs$ = new Observable(value=>{
       value.next("This is Demo Text")
     })
     myObs$.subscribe(message=>{
       debugger;
       console.log(message, 'Obs emited data');
-      
+    });
+
+    this.cityList$.subscribe((cityData:string[])=>{
+      console.log(cityData, 'city data 1 of obseervar');
     })
 
+    this.cityLis2$.subscribe((cityData2:string)=>{
+      console.log(cityData2, 'city data 2 from observor');
+    })
 
+    this.myInterval$.subscribe((res:number)=>{
+      console.log(res, 'Interval Observar');
+    })
 
-
-
-
+    this.myTimer$.subscribe(time=>{
+      console.log(time, 'timer Observar');
+    })
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // Normal array declaration
+    cityList: string[] = ["Pune", "Mumbai", "Nagpur"]
+    // Observable declartion : of observable
+    cityList$ = of(["Pune", "Mumbai", "Nagpur"]);
+    // from observable: it excutes like a for loop executes one by one
+    cityLis2$= from(["Pune", "Mumbai", "Nagpur"]);
+    // iNTERVAL Observar
+    myInterval$ = interval(2000);
+    // Timer Observar
+    myTimer$ = timer(5000)
 }
