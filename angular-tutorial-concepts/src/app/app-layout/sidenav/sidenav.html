@@ -1,22 +1,37 @@
 <aside>
   <nav>
-    <a routerLink="/basics/1/test" routerLinkActive="active">Basics</a>
-    <!-- <a routerLink="/decerators" routerLinkActive="active">Decerators</a> -->
-    <a routerLink="/decerators_parent" routerLinkActive="active">Decerators Parent</a>
+    <a routerLink="/basics" routerLinkActive="active">Basics</a>
+    <a routerLink="/interview" routerLinkActive="active">Interview Preparations</a>
     <a routerLink="/data_binding" routerLinkActive="active">Data Binding</a>
+    <a routerLink="/decerators_parent" routerLinkActive="active">Decerators Parent</a>
     <a routerLink="/directives" routerLinkActive="active">Directives</a>
     <a routerLink="/pipes" routerLinkActive="active">Pipes</a>
     <a routerLink="/templates" routerLinkActive="active">Templates</a>
-    <a routerLink="/routings" routerLinkActive="active">Routings</a>
     <a routerLink="/ngcontent" routerLinkActive="active">Ng-Content</a>
+    <a routerLink="/change-detection" routerLinkActive="active">Change-Detection</a>
+
+
+    <!-- Angular Routings -->
+    <a routerLink="/routings" routerLinkActive="active">Routings</a>
+    <!-- USERS MODULES LAZY LOADING PARENT CHILD -->
+    <a routerLink="/users-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">UsersList-LAZY LOADING </a> <!--// Shows exact link only if its parent and then child then its active state only for parent :routerLinkActiveOptions -->
+    <a routerLink="/users-list/users-edit" routerLinkActive="active">Users Edit-LAZY LOADING </a>
+
+
+    <!-- Lifecycle Hooks -->
+    <a routerLink="/lifecycle-parent" routerLinkActive="active">Lifecycle Hooks</a>
+    <a routerLink="/unsubscribe" routerLinkActive="active">Unsubscribe</a>
+
+    <!--  -->
     <a routerLink="/signals" routerLinkActive="active">Signals</a>
+    <a routerLink="/services" routerLinkActive="active">Services</a>
 
     <!-- RXJS COMPONENTS -->
-    <a routerLink="/services" routerLinkActive="active">Services</a>
+    <a routerLink="/rxjs-operators" routerLinkActive="active">Rxjs - Operators</a>
     <a routerLink="/observables" routerLinkActive="active">Rxjs - Observables</a>
     <a routerLink="/todo-form" routerLinkActive="active">Rxjs - Todo Form</a>
     <a routerLink="/subject" routerLinkActive="active">Rxjs - Subject</a>
-    <a routerLink="/rxjs-operators" routerLinkActive="active">Rxjs - Operators</a>
+    <a routerLink="/rxjs-forms" routerLinkActive="active">Rxjs - form</a>
     <a routerLink="/http-interceptors" routerLinkActive="active">http-interceptors</a>
 
     <!-- Angular Forms -->
@@ -28,19 +43,13 @@
     <a routerLink="/crud-operation-reactive" routerLinkActive="active">CRUD-Operations - Reactive</a>
     <a routerLink="/crud-api-methods" routerLinkActive="active">CRUD-API-Methods</a>
 
-    <!-- USERS MODULES LAZY LOADING PARENT CHILD -->
-    <a routerLink="/users-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Users Module List</a>
-    <a routerLink="/users-list/users-edit" routerLinkActive="active">Users Module Edit</a>
     
-    <a routerLink="/lifecycle-parent" routerLinkActive="active">Lifecycle Hooks</a>
-    <a routerLink="/ngrx" routerLinkActive="active">NGRX</a>
+    <a routerLink="/ngrx", routerLinkActive="active">NGRX</a>
 
 
     <a routerLink="/home" routerLinkActive="active">Home</a>
     <a routerLink="/about" routerLinkActive="active">About</a>
     <a routerLink="/contact" routerLinkActive="active">Contact</a>
     <a routerLink="/users" routerLinkActive="active" [queryParams]="{'category': 'Admin', 'size': 8}">Users</a>
-
-
   </nav>
 </aside>

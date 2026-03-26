@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+// -------------------Hoisting Examples-----------------
+
+        // // Hoisture example with var, if use var then undefined error will comes
+        // console.log(x);
+        // var x = 10;
+        // // output: undefined
+
+        // console.log(y);
+        // let y = 20;
+        // // output: Uncaught ReferenceError: Cannot access 'z' before initialization
+
+        // console.log(z);
+        // const z = 30;
+        // // output: Uncaught ReferenceError: Cannot access 'z' before initialization
+
+        // let a;
+        // console.log(a);
+        // a=40;
+        // output: undefined
+
+// Hoisting Example with Functions
+        sayHello();
+        function sayHello() {
+            console.log('Hello Javascript', 'Because function declarations are fully hoisted.');
+        }
+// Hoisting with Functions Expresion
+        // Hello();
+        // var Hello = function sayHello() {
+        //     console.log('Hello Javascript', 'Because function expresion declarations are not fully hoisted.');
+        // }
+
+        //Output: Uncaught TypeError: Hello is not a function
+
+
+// -------------------Clouser Examples-----------------
+        function outer() {
+            let lang = "Javascript Language";
+            let counter = 0;
+
+            return function inner() {
+                console.log(lang); // here we can access outer function varibales called clouser
+                 counter++;
+                 console.log(counter);
+            }
+        }
+        let result = outer();
+        result();
+        result();
+
+// -------------------Null coalescing Operator-----------------
+// It defined as ?? works like if the left side value is null or undefined then it prints the right side value. it left side value is having the value then it prints only left side value only
+        let b = null;
+        let c = 20;
+        console.log(b??c);
+
+
+// -------------------Pure and Impure Functions in Javascript-----------------
+// Pure Functions
+        function pure(a, b){
+            return a*b
+        }
+        console.log(pure(5, 6), 'Pure function');
+
+        function add(a, b) {
+            return a + b;
+        }
+        console.log(add(2, 5));
+        console.log(add(2, 5));
+
+        function multiply(num) {
+            return num * 2;
+        }
+        console.log(multiply(5), 'Pure function');
+
+// ImPure Functions
+        let s = 10
+        function sum(a, b) {
+            s+=1
+            return a*b+Math.random();
+        }
+        console.log(sum(2, 3), "s:",s);
+        console.log(sum(2, 3), "s:",s);
+        console.log(sum(2, 3), "s:",s);
+
+        let total = 0;
+        function impure(num) {
+        total += num;
+        return total;
+        }
+        console.log(impure(5));
+        console.log(impure(5));
+
+
+// -------------------Call back function in JavaScript -----------------
+        function greet(name, callback) {
+        console.log("Hello " + name);
+        callback();
+        }
+        function sayBye() {
+        console.log("Goodbye!");
+        }
+        // A function passed as argument to another function
+        greet("Santhosh", sayBye);
+
+
+        // Callback with Anonymous Function - You don't always need a separate function.
+        function greet2(name, callback) {
+            console.log("Hello " + name);
+            callback();
+        }
+        greet2("Santhosh", function () {
+            console.log("Welcome!");
+        });
+
+        // Real World Example (setTimeout)
+        setTimeout(function () {
+        console.log("Executed after 2 seconds");
+        }, 2000);
+
+        // Callback with Array Methods
+        let numbers = [1, 2, 3];
+        let result1 = numbers.map(function(num) {
+        return num * 2;
+        });
+        console.log(result1);
+
+        // Callback in Asynchronous JavaScript
+        function fetchData(callback) {
+            setTimeout(()=>{
+                console.log("Data Fetched");
+                callback();
+            }, 2000)
+        }
+        function processedData() {
+            console.log("Processing the Data");
+        }
+        fetchData(processedData)
+
+        // Callback Hell (Important Interview Topic)
+        // login(function(){
+        //     getUser(function(){
+        //         getPosts(function(){
+        //         getComments(function(){
+        //             console.log("Done");
+        //         });
+        //         });
+        //     });
+        // });
+
+
+// -------------------Promise in JavaScript -----------------
+        const myPromise = new Promise((resolve, reject)=>{
+            let success = true;
+            if(success) {
+                resolve("Data Loaded Successfully")
+            } else  {
+                reject ("Error Loading data")
+            }
+        })
+        // Consuming a Promise
+        myPromise.then(result => {
+            console.log(result);
+        }).catch(error=>{
+            console.log(error);
+        })
+
+
+        // Real Example Using setTimeout
+        function fetchData() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                resolve("Data received");
+                }, 2000);
+            });
+        }
+        fetchData().then(data => console.log(data));
+
+
+        // Promise Chaining
+        function step1() {
+            return Promise.resolve("Step 1 done");
+        }
+        function step2() {
+            return Promise.resolve("Step 2 done");
+        }
+        step1().then(result => {
+            console.log(result);
+            return step2();
+        })
+        .then(result => console.log(result));
+
+
+        // Same Example Using Async/Await
+        // Async / Await (Modern Way) 
+        async function loadData() {
+            let response = await fetch('https://jsonplaceholder.typicode.com/users');
+            let data = await response.json();
+            console.log(data);
+        }
+        loadData();
+
+        // Example Without Async/Await (Using Promises)
+        function getData() {
+        return fetch("https://jsonplaceholder.typicode.com/users")
+            .then(response => response.json())
+            .then(data => console.log(data));
+        }
+        getData();
+        // This works, but it becomes harder to read with many .then().
+
+
+        // Error Handling with Async/Await: Use try / catch.
+        async function getData() {
+        try {
+            let response = await fetch("https://wrongapi.com/data");
+            let data = await response.json();
+            console.log(data);
+        } catch(error) {
+            console.log("Error:", error);
+        }
+        }
+        getData();
+
+
+// ------------------- Common array methods (map, filter, reduce, find. findIndex, includes etc.) -----------------
+// Map Operator
+        let numberMap = [1, 2, 3, 4];
+        let resultMap = numberMap.map(num => num*2);
+        console.log(resultMap, "Map operation Modify");
+
+        // Real Example - extracting the name from array
+        let users = [
+            {name: "Santhosh", age: 25},
+            {name: "Ram", age: 30}
+        ];
+        let names = users.map(user=>user.name);
+        let ages = users.map(userAge=>userAge.age)
+        console.log(names, 'Map operation: extracting the name');
+        console.log(ages, 'Map operation: extracting the ages');
+        
+// Filter Operator
+    let numberFilter = [1,2,3,4,5]
+    // filtering only even number with the condition
+    let evenNumber = numberFilter.filter(num => num % 2 === 0);
+    console.log(evenNumber, 'Filter Operator if number are even');
+
+    // Real Example
+    let userFilter = [
+        {name: 'santhosh', age: 25},
+        {name: 'Ram', age: 17}
+    ]
+    let adults = userFilter.filter(user=>user.age>=18);
+    console.log(adults, 'Filter Operator if user is adult');
+
+// Reduce Operator
+        let numReduce = [1,2,3,4,5];
+        let sumReduce = numReduce.reduce((acc, curr)=> acc + curr, 0)
+        console.log(sumReduce, 'reducer operator to sum array of values');
+
+        // Real Example
+        let cart = [
+            {price: 200},
+            {price: 300},
+            {price: 500}
+        ]
+        let totalCart = cart.reduce((sum, item)=> sum + item.price, 0);
+        console.log(totalCart, 'reducer operator to sum cart prices');
+
+
+// find() Method
+        let numberFind = [10,20,30,40,50];
+        let find = numberFind.find(num => num>20);
+        console.log(find, 'Find method to find  with condition gives first find only');
+
+        // Real Example
+        let userFind = [
+            {id:1, name:'santhosh'},
+            {id:2, name: 'ram'}
+        ]
+        let userIdFind = userFind.find(u=>u.id === 2);
+        console.log(userIdFind, 'Find method to find User with id');
+
+// findIndex() Method
+        let numberIndex = [10, 20, 30, 40, 50];
+        let index = numberIndex.findIndex(num=>num===30);
+        console.log(index, 'findIndex() Method: TO FIND THE INDEX OF ARRAY OF ELEMENT');
+        
+// includes() Method: returns true or false if exists in array
+        let incNumbers = [1,2,3,4,5];
+        let findValue = incNumbers.includes(6);
+        console.log(findValue, 'includes() Method');
+        // Another example
+        let fruits = ["apple","banana","orange"];
+        console.log(fruits.includes("grape"), 'includes() Method');
+
+
+// Difference between call, apply, and bind
+        let person = { name: 'santhosh' }
+        function greet() {
+            console.log("This is Hello " + this.name);
+        // Because this is not pointing to person. So we use call/apply/bind to control this.
+        }
+        greet();
+        
+    // call() Method
+    let personCall = { name: "Santhosh" };
+    function greet3(city) {
+        console.log(this.name + ' from ' + city);
+    }
+    greet3.call(personCall, "Hyderabad")
+
+    var salary = 30000;
+    function getSalary(a, b) {
+        console.log(salary, 'default call');
+        console.log(window.salary, 'Window call');
+        console.log(this.salary, 'this key points required obj call'); 
+        //here this is represents or manipulates from where to take the salary from var or object
+        console.log(a, b);
+    }
+    // getSalary();
+    console.log(window);
+
+    employee = {salary: 25000}
+    employee2 = {salary: 50000}
+    employee3 = {salary: 75000}
+    employee4 = {salary: 100000}
+    getSalary.call(employee, 10, 20)
+    getSalary.call(employee2, 30, 40);
+
+
+    // apply() Method passes args as array
+    getSalary.apply(employee3, [50,60])
+
+    // bind() Method passes args as array
+    var f1 = getSalary.bind(employee4, 70, 80);
+    f1();
+
+    // other example
+    function greet2(city) {
+        console.log(this.name + " from " + city);
+    }
+    let person2 = { name: "Santhosh" };
+    let newFunction = greet2.bind(person2);
+    newFunction("Hyderabad");
+
+
+    // LocalStorage Examples
+    localStorage.setItem("username", "Santhosh");
+    localStorage.setItem("username2", "Santhosh2");
+    localStorage.setItem("username3", "Santhosh3");
+    localStorage.removeItem("username2");
+    // localStorage.clear();
+    let name = localStorage.getItem("username");
+    console.log(name, 'This is Local storage name');
+
+    let user = {
+        name: "Santhosh",
+        age: 25
+    };
+    localStorage.setItem("user", JSON.stringify(user));
+        // Retrieve:
+    let data = JSON.parse(localStorage.getItem("user"));
+    console.log(data.name);
+
+    // sessionStorage Examples
+    sessionStorage.setItem("token", "12345");
+    let token = sessionStorage.getItem("token");
+    console.log(token, "This is session storage token");
+
+
+// Event loop in JavaScript: JavaScript is Single Threaded
+    function first() {
+        console.log("First Function");
+    }
+    function second() {
+        console.log("Second Function");
+    }
+    first();
+    second();
+
+    // Call Stack Examples
+    function one() {
+        two();
+    }
+    function two() {
+        console.log("this is second function console");
+    }
+    one();
+
+    // Web APIs
+    setTimeout(() => {
+        console.log("Hello Set Timeout");
+    }, 2000);
+
+    // Event loop 
+    console.log("Start"); //Call Stack → console.log("Start")
+    setTimeout(() => { //setTimeout → Web API
+    console.log("Timeout");
+    }, 0);
+    console.log("End");
+
+    // Timeout callback → Callback Queue  : Event Loop pushes it to stack.
+    // Final output: Start End Timeout
+
+
+    // Example with Promise
+    console.log("1");
+
+    setTimeout(() => console.log("2"), 0);
+
+    Promise.resolve().then(() => console.log("3"));
+
+    console.log("4");
+
+    // output: 1 4 3 2
+
+
+    
+
+
+    </script>
+    
+</body>
+</html>

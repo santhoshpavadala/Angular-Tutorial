@@ -1,16 +1,26 @@
+<!-- With reusable component -->
+ <app-alert [alertType]="alrtType" [alertMessage]="alertMsg"></app-alert>
+ <app-my-button [btnClass]="classBtn" [btnText]="textBtn" (onBtnClick)="onSave(data)"></app-my-button>
+
+ <!-- Output decerator getting data from child  -->
+<div>{{message}}</div>
+
 <!--Template Reference-->
+<h2></h2>
+<p>A Template Reference Variable is a reference to a DOM element, Angular component, or directive inside the template.
+It is declared using the # symbol.</p>
+<p>A Template Reference Variable is used to access a DOM element, component, or directive directly inside the Angular template using the # symbol.</p>
+
 <div>{{templateId.templateData}}</div>
 <div>{{templateId.templateFunction()}}</div>
 <div>{{templateId.ngModelData}}</div>
 
-<!-- OutPut Decorators Examples getting the data from child -->
+<!-- View child Decorators Examples getting the data from child -->
 <button (click)="getChildData()">Get View Child Data</button>
-<div>{{childData}}</div>
-<div>{{message}}</div>
-
+<div>{{cdata}}</div>
 
 <app-decerators [parentTitle]="title" [parentNumber]="pnumber" [puser]="userData" 
 [parentMsg]="'Aliased Input!'" [pdata]="data" [pname]="name"
-
-(childData)="childData=$event" (messageEvent)="receiveMessage($event)" #templateId></app-decerators>
+(childData)="childData=$event" (messageEvent)="receiveMessage($event)" 
+#templateId></app-decerators>
 

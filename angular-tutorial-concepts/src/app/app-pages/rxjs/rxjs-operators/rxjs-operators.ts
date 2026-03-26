@@ -1,34 +1,43 @@
 
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
   ElementRef,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core';
 import {
+  concatMap,
   debounceTime,
   distinctUntilChanged,
+  exhaustMap,
   filter,
+  forkJoin,
   from,
   fromEvent,
   interval,
   map,
   merge,
+  mergeMap,
   of,
   pluck,
   range,
   skip,
   Subject,
+  switchMap,
   take,
   takeUntil
 } from 'rxjs';
+import { ObserableData } from '../../../services/obserable-data';
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-rxjs-operators',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './rxjs-operators.html',
   styleUrl: './rxjs-operators.scss'
 })
@@ -44,6 +53,11 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
   /* ---------------- Transform / Filter ---------------- */
   mapData: number[] = [];
   filterData: number[] = [];
+
+  // LP Examples
+  numberList1$= of([11,12,13,14,15,16,17,18,19])
+  numberList2$= from([11,12,13,14,15,16,17,18,19])
+  
 
   /* ---------------- fromEvent ---------------- */
   @ViewChild('viewChildBtn') btn!: ElementRef<HTMLButtonElement>;
@@ -199,6 +213,129 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
+
+  // LP-Examples: From service realyime examples:
+  jsonUserdata=inject(ObserableData);
+  searchControl:any = new FormControl();
+
+  // ForkJoin Examples
+  $stateData = of(["TS", "AP", "KA"]);
+  $cityData = of(["Hyd", "Vizag", "Bengalur"]);
+  http = inject(HttpClient);
+  dashboardData: any[] = [];
+
+  // Switch Map examples
+  searchControlSwitch: FormControl = new FormControl('');
+  searchControlMerge: FormControl = new FormControl('');
+  searchControlConcat: FormControl = new FormControl('');
+
+  $loginClicks = new Subject<void>()
+
+
+
+
+  constructor(private dashboardService: ObserableData) {
+    this.jsonUserdata.getJsonData().subscribe({
+      next: (res)=>{
+        console.log(res, 'id & name mapping method');
+      },
+      error: ()=>{}
+    })
+
+    this.jsonUserdata.getSingleUser().subscribe({
+      next: (res)=>{
+        console.log(res, 'Signle User with only Address data');
+      },
+      error: (err)=>{
+      }
+    });
+
+    // this.searchControl.valueChanges.subscribe((res:any)=>{
+    //   console.log(res);
+    // })
+
+    this.searchControl.valueChanges.pipe(
+      filter((searchText:any) => searchText.length >= 3)
+    ).subscribe((res:any)=>{
+      console.log(res, 'search text subscribe after length 3 letters');
+    });
+
+
+    // ForkJoin Examples
+    forkJoin([this.$stateData, this.$cityData]).subscribe((res)=>{
+      // debugger;
+    });
+
+    this.$stateData.subscribe({
+      next: (res:any)=> {
+        // debugger;
+      },
+      error: (err: any)=>{}
+    })
+
+    this.$cityData.subscribe({
+      next: (res:any)=> {
+        // debugger;
+      },
+      error: (err: any)=>{}
+    })
+
+    // ForkJoin RealApi Example:
+    const userFork = this.http.get('https://jsonplaceholder.typicode.com/users')
+    const postsFork = this.http.get('https://jsonplaceholder.typicode.com/posts');
+
+    forkJoin([userFork, postsFork]).subscribe((fork)=>{
+      console.log(fork, 'forkjoin  multiple api joins');
+      // debugger;
+    })
+
+    this.dashboardService.getDashboardData().subscribe({
+      next: (res)=>{
+        this.dashboardData = res;
+      },
+      error: (error)=>{
+        console.error(error);
+      }
+    })
+
+  // Switch Map examples - 
+    this.searchControlSwitch.valueChanges.pipe(
+        switchMap((search:string) => this.http.get('https://dummyjson.com/products/search?q='+search))
+      ).subscribe((res:any)=>{
+        console.log(res, 'search inputs');
+      })
+
+    // Merge Map examples - 
+    this.searchControlMerge.valueChanges.pipe(
+        mergeMap((search:string) => this.http.get('https://dummyjson.com/products/search?q='+search))
+      ).subscribe((res:any)=>{
+        console.log(res, 'search inputs');
+      })
+
+      // concatMap  examples - 
+    this.searchControlConcat.valueChanges.pipe(
+        concatMap((search:string) => this.http.get('https://dummyjson.com/products/search?q='+search))
+      ).subscribe((res:any)=>{
+        console.log(res, 'search inputs');
+      })
+
+
+      this.$loginClicks.pipe(
+        exhaustMap(()=>{
+          return this.http.get('https://jsonplaceholder.typicode.com/users')
+        })
+      ).subscribe((res:any)=>{
+        console.log(res, 'exhaust login');
+      })
+  }
+
+
+
+  // Exhaust Map  examples - 
+  onLoginExhaust() {
+    this.$loginClicks.next();
+  }
+
   /* ---------------- ngOnInit ---------------- */
 
   ngOnInit(): void {
@@ -214,13 +351,13 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
       this.fromOperatorData.push(value);
     });
 
-    // range()
+  /* ---------------- Range Operator ---------------- */
     range(5, 7).subscribe(value => {
       console.log('range:', value);
       this.rangeOperatorData.push(value);
     });
 
-    // interval()
+  /* ---------------- Interval Operator ---------------- */
     interval(5000)
       .pipe(take(5))
       .subscribe(value => {
@@ -229,7 +366,7 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
         this.intervalData.push(value);
       });
 
-    // map()
+  /* ---------------- Map Operator ---------------- */
     of(1, 2, 3)
       .pipe(map(v => v * 3))
       .subscribe(value => {
@@ -237,13 +374,24 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
         this.mapData.push(value);
       });
 
-    // filter()
+  /* ---------------- Filter Operator ---------------- */
     of(7, 78, 89)
       .pipe(filter(v => v > 50))
       .subscribe(value => {
         console.log('filter:', value);
         this.filterData.push(value);
       });
+
+      // LP Examples
+      this.numberList1$.pipe(
+        map((result)=> result.filter(m=>m%2==0))
+      ).subscribe((res)=>{
+        console.log(res, 'of observable: map operator for even numbers');
+      })
+
+      this.numberList2$.pipe(filter(num=>num %2==0)).subscribe((filterNum:number)=>{
+        console.log(filterNum, 'from observable: filter operator for even numbers');
+      })
 
   /* ---------------- Merge Operator ---------------- */
     this.mergeObs3.subscribe(
@@ -275,6 +423,8 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
       }
     )
   }
+
+  
 
   /* ---------------- ngAfterViewInit ---------------- */
 
@@ -320,3 +470,4 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
     this.destroy$.complete();
   }
 }
+

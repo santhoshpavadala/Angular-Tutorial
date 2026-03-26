@@ -4,13 +4,16 @@
     <div class="sub-section">
         <h2>This is Child/Nested Routing Examples</h2>
 
-        <ul>
-            <li><a routerLink="/routings/childroute1">Child1</a></li>
-            <li><a routerLink="/routings/childroute2">Child2</a></li>
-            <li><a routerLink="/routings/childroute3">Child3</a></li>
-            <li><a routerLink="/routings/childroute4">Child4</a></li>
-            <li><a routerLink="/routings/childroute5">Child5</a></li>
+        <ul class="nav flex-row">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" routerLink="/routings/childroute1">Child1</a>
+                <a class="nav-link" routerLink="/routings/childroute2">Child2</a>
+                <a class="nav-link" routerLink="/routings/childroute3">Child3</a>
+            </li>
         </ul>
+
+        <!-- Thorugh buttn click navigate to another component -->
+         <button class="btn btn-primary" (click)="navigateComp()">Navigate</button>
 
         <router-outlet></router-outlet>
     </div>

@@ -134,4 +134,124 @@
       <div>{{item}}</div>
     }
   </div>
+
+
+  <div class="sub-section">
+    <label for="">Filter example with search with the condition after 3 characters api calls</label>
+    <input type="text" [formControl]="searchControl">
+  </div>
+
+  <div class="sub-section">
+    <h2>ForkJoin Operator</h2>
+    <p>forkJoin combines multiple observables and waits until ALL complete. <br>
+    It emits only once when all observables complete.</p>
+
+    <ul>Important Notes About forkJoin
+      <li>All observables must COMPLETE</li>
+      <li>If one API fails → entire forkJoin fails</li>
+      <li>Works perfectly for HTTP (because HTTP completes automatically)</li>
+    </ul>
+
+    <h4>ForkJoin Examples</h4>
+   
+    <div class="container">
+
+      @for (user of dashboardData; track $index) {
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5>{{ user.name }}</h5>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Company:</strong> {{ user.company }}</p>
+          <p><strong>Total Posts:</strong> {{ user.postCount }}</p>
+          <p><strong>Latest Post:</strong> {{ user.latestPost }}</p>
+        </div>
+      </div>
+      }
+
+    </div>
+
+  </div>
+
+  <div class="sub-section">
+    <h2>SwitchMap </h2>
+    <p>switchMap is a higher-order RxJS operator that maps a value to a new Observable and automatically cancels the previous Observable when a new value arrives.</p>
+    <ul>Simple meaning:
+      <li>When a new request comes</li>
+      <li>It cancels the previous request</li>
+      <li>And switches to the latest one</li>
+    </ul>
+    <p>That’s why it’s called switchMap.</p>
+
+    <div class="row">
+      <div class="col-12">
+        <h4>Why Do We Even Need switchMap?</h4>
+        <ul>Because sometimes:
+          <li>You trigger an API call based on user action</li>
+          <li>User triggers again before first API finishes</li>
+          <li>You don't want old response anymore</li>
+          <li>Without switchMap → both responses come</li>
+          <li>With switchMap → only latest response is kept</li>
+        </ul>
+      </div>
+
+      <div class="row">
+      <div class="col-12">
+        <h4>SwitchMap Examples</h4>
+        <input type="text" placeholder="Search Input" [formControl]="searchControlSwitch" class="form-control w-50">
+      </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <h2>MergeMap Operator</h2>
+    <p>mergeMap maps each emitted value to an inner Observable and subscribes to all of them simultaneously without cancelling previous ones.</p>
+    <ul>
+      <li>Every input triggers an API</li>
+      <li>All API calls run</li>
+      <li>All responses are processed</li>
+    </ul>
+
+      <h4>MergeMap Examples</h4>
+      <input type="text" placeholder="Search Input" [formControl]="searchControlMerge" class="form-control w-50">
+  </div>
+
+  <div class="sub-section">
+    <h2>concatMap</h2>
+    <p>concatMap maps each emitted value to an inner Observable and executes them sequentially, waiting for each one to complete before starting the next.</p>
+    <ul>
+      <li>One request at a time</li>
+      <li>Next starts only after previous completes</li>
+      <li>Maintains order</li>
+    </ul>
+
+    <h4>ConcatMap Examples</h4>
+    <input type="text" placeholder="Search Input" [formControl]="searchControlConcat" class="form-control w-50">
+  </div>
+
+  <div>
+    <h2>exhaustMap</h2>
+    <p>exhaustMap maps each emitted value to an inner Observable, but ignores new emissions while the current inner Observable is still running.</p>
+  
+  <ul>Simple meaning:
+    <li>If one request is running</li>
+    <li>Ignore new triggers</li>
+    <li>Until current completes</li>
+    <li>It “exhausts” the current observable before accepting new ones.</li>
+  </ul>
+
+  <p><b>Easy Mental Model: Imagine</b>
+    <b>You click a Submit button. <br>
+      While submission is in progress: <br>
+      Further clicks are ignored <br>
+      Until request completes. <br>
+      That’s exhaustMap.
+    </b>
+  </p>
+
+  <h4>exhaustMap example</h4>
+  <button class="btn btn-success" (click)="onLoginExhaust()">Login with Exhaust map</button>
+
+</div>
 </div>

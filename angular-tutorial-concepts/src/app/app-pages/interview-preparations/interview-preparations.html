@@ -1,0 +1,388 @@
+<div class="section">
+    <div class="h1">Angular Interview Questions</div>
+
+    <div class="sub-section">
+        <h2>What is Angular</h2>
+    </div>
+
+    <div class="sub-section">
+        <h2>CHANGE DETECTION & PERFORMANCE</h2>
+
+            <h3>9. How does Angular change detection work?</h3>
+            <p>
+                Angular runs a top-down check of components to detect data changes.
+                Zone.js triggers detection when async tasks complete.
+            </p>
+
+            <h3>10. What is OnPush strategy?</h3>
+            <p>
+                OnPush runs change detection only when:
+                - Input reference changes
+                - Event occurs
+                - Observable emits
+                - markForCheck() is called
+            </p>
+
+            <h3>11. Why is OnPush better for large apps?</h3>
+            <p>
+                It reduces unnecessary DOM checks and improves performance.
+            </p>
+
+            <h3>12. What are common performance mistakes?</h3>
+            <ul>
+                <li>Not using trackBy</li>
+                <li>Mutating objects instead of replacing</li>
+                <li>Too many subscriptions</li>
+                <li>Heavy logic in templates</li>
+            </ul>
+    </div>
+</div>
+
+
+<div class="section">
+    <h1>Javascript Interview Questions</h1>
+    <div class="sub-section">
+        <h2>What is Hoisting?</h2>
+        <p>Hoisting is JavaScript's behavior where variable and function declarations are moved to the top of their scope during the compilation phase before code execution.</p>
+        <p>Only declarations are hoisted, not initializations. <br>
+        Happens during the memory creation phase of the Execution Context.</p>
+
+        <p><b>Hoisting is a JavaScript behavior where variable and function declarations are moved to the top of their scope during the compilation phase before execution. Variables declared with var are initialized with undefined, while let and const remain in the Temporal Dead Zone until initialized.</b></p>
+        <div>
+            <h4>How JavaScript Executes Code (Important for Hoisting)?</h4>
+            <p>JavaScript execution happens in two phases:</p>
+            <h4>1. Memory Creation Phase</h4>
+            <p>JavaScript scans the code and allocates memory.</p>
+            <ul>
+                <li>Variables → initialized as undefined</li>
+                <li>Functions → stored completely in memory</li>
+            </ul>
+
+            <h4>2. Execution Phase</h4>
+            <p>Code runs line by line.</p>
+
+        </div>
+
+        <div>
+           <h2>Hoisting Example (Variables)</h2> 
+           <p>
+            console.log(a); <br>
+            var a = 10;
+           </p>
+
+           <p>Output: undefined</p>
+           <p>console.log(a) → undefined</p>
+        </div>
+
+        <div>
+            <h2>Hoisting with let and const</h2>
+            <p>let and const are hoisted but not initialized.</p>
+            <p>They stay in something called Temporal Dead Zone (TDZ).</p>
+            <h4>Example</h4>
+            <p>
+                console.log(x);
+                let x = 10;
+            </p>
+            <h4>Output</h4>
+            <p>ReferenceError: Cannot access 'x' before initialization</p>
+            
+        </div>
+
+        <div>
+            <h2>Temporal Dead Zone (TDZ)</h2>
+            <p>The time between variable declaration and initialization where the variable cannot be accessed.</p>
+            <p>
+            console.log(a);
+            let a = 5;
+            </p>
+            <p>This throws an error because a is in the TDZ.</p>
+        </div>
+
+        <div>
+            <h2>Hoisting with Functions: Function Declaration (Fully Hoisted)</h2>
+            <p>Because function declarations are fully hoisted.</p>
+            <!-- <iframe src="../../javascript.html" width="100%" height="400"></iframe> -->
+        </div>
+
+        <div>
+            <h2>Interview Tip: Why var behaves differently than let/const?</h2>
+            <ul>
+                <li>var → function scoped</li>
+                <li>let/const → block scoped</li>
+                <li>let/const stay in Temporal Dead Zone</li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <div class="sub-section">
+        <h2>What is Closure?</h2>
+        <p>A closure is when a function remembers and accesses variables from its outer scope even after the outer function has finished executing.</p>
+        <p>Inner function has access to the outer function variables/functions even after outer function termination.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Null coalescing Operator</h2>
+        <p>It defined as ?? works like if the left side value is null or undefined then it prints the right side value. it left side value is having the value then it prints only left side value only
+        </p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Data types in Javascript</h2>
+        <p>A data type defines the type of value a variable can hold. <br>
+        In simple words: <br>
+        Data types tell JavaScript what kind of data is stored in a variable.</p>
+        <h4>Types of Data Types in JavaScript</h4>
+        <ul>
+            <li>Primitive Data Types</li>
+            <p>String, Number, Boolean, Undefined, Null, Symbol, BigInt</p>
+            <li>Non-Primitive Data Types</li>
+            <p>Object, Array, Function</p>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>What is a pure function? Pure and Impure functions in javascript</h2>
+        <h4>Pure Functions</h4>
+        <ul>
+            <li>It has no side effects </li>
+            <li>It is predictable</li>
+        </ul>
+        <p>A Pure Function is a function that:</p>
+        <ul>
+            <li>Always returns the same output for the same input</li>
+            <li>Does not modify anything outside the function (no side effects)</li>
+        </ul>
+        <p>A pure function is a function that always returns the same output for the same input and does not modify any external state or variables.</p>
+
+        <h4>Impure Functions</h4>
+        <p>An Impure Function is a function that:</p>
+        <ul>
+            <li>Produces different outputs for the same input OR</li>
+            <li>Modifies external variables or state</li>
+        </ul>
+        <p>If a function depends on or changes outside data, it is an impure function.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>What is a Callback Function?</h2>
+        <p>A callback function is a function that is passed as an argument to another function and is executed later.</p>
+        <p>In simple words: <b>A callback is a function that runs after another function finishes its task.</b></p>
+        <p>A callback function is a function passed as an argument to another function and executed after the main function finishes its task.</p>
+        <h4>Why are callbacks used?</h4>
+        <ul>
+            <li>Asynchronous operations</li>
+            <li>Event handling</li>
+            <li>Array methods</li>
+            <li>Handling API responses</li>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>What is a Promise in JavaScript?</h2>
+        <p>A Promise is an object that represents the eventual completion or failure of an asynchronous operation.</p>
+        <p>A Promise represents a value that may be available now, later, or never.</p>
+        <p>Fetching data from an API takes time. A Promise handles that asynchronous result.</p>
+        <h4>Why Promises Are Needed</h4>
+        <p>Before Promises, JavaScript used callbacks, which often led to callback hell.</p>
+        <h4>Why Promises Are Needed</h4>
+        <p>Before Promises, JavaScript used callbacks, which often led to callback hell.Promises make this cleaner and easier to manage.</p>
+        <h4>States of a Promise</h4>
+        <ul>
+            <li><b>Pending: </b>Initial state (operation not finished)</li>
+            <li><b>Fulfilled: </b>Operation completed successfully</li>
+            <li><b>Rejected: </b> Operation failed</li>
+        </ul>
+        <h4>Creating a Promise</h4>
+        <p>Syntax: new Promise((resolve, reject)=>)</p>
+
+        <h4>Async / Await (Modern Way)</h4>
+        <p>Promises are often used with async/await.</p>
+
+        <h4>Why Async/Await Exists</h4>
+        <p>In JavaScript, many operations are asynchronous (they take time):</p>
+        <p>Examples: API calls, Database requests, File reading, setTimeout</p>
+
+        <p>Earlier we used: <br>
+        Callbacks → Promises → Async/Await <br>
+        Async/Await is simply a cleaner way to work with Promises.</p>
+
+        <h4>What is async?</h4>
+        <p>The async keyword is used to declare a function that always returns a Promise. <br>
+        Even if you return a normal value, JavaScript automatically wraps it in a Promise.</p>
+        <h4>What is await?</h4>
+        <p>await pauses the execution of an async function until a Promise resolves.</p>
+        <p>await can only be used inside async functions</p>
+        <p>Example Without Async/Await (Using Promises)</p>
+
+        <h4>Error Handling with Async/Await</h4>
+        <p>Use try / catch.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Common array methods (map, filter, reduce, find. findIndex, includes etc.)</h2>
+
+        <h4>map() Method</h4>
+        <p>map() creates a new array by transforming each element of the original array.</p>
+        <ul>
+            <li>Returns new array</li>
+            <li>Does not modify original array</li>
+        </ul>
+
+        <h4>filter() Method</h4>
+        <p>filter() returns a new array containing elements that satisfy a condition.</p>
+
+        <h4>reduce() Method</h4>
+        <p>reduce() reduces an array to a single value.</p>
+
+        <h4>find() Method</h4>
+        <p>find() returns the first element that matches a condition.</p>
+        <p>Only first matching element is returned.</p>
+
+        <h4>findIndex() Method</h4>
+        <p>findIndex() returns the index of the first matching element.</p>
+
+        <h4>includes() Method</h4>
+        <p>includes() checks whether an array contains a specific value.It return with true or false only. If the required value finds in array it gives true else it gives false</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Why call, apply, and bind are Used</h2>
+        <p>In JavaScript, the value of this depends on how a function is called.
+        Sometimes we want to manually set this.</p>
+
+        <h2>call() Method</h2>
+        <p>call() invokes a function immediately and allows you to pass arguments one by one.</p>
+        <p>syntax: function.call(thisArg, arg1, arg2)</p>
+        <p>so here is call method is used to pointout which object have to print for 'this' keyword value</p>
+
+
+        <h2>apply() Method</h2>
+        <p>apply() is similar to call(), but arguments are passed as an array.</p>
+        <p>syntax: function.apply(thisArg, [argsArray])</p>
+
+
+        <h2>bind() Method</h2>
+        <p>bind() does not execute the function immediately. <br>
+        Instead, it returns a new function with this bound to the given object.</p>
+
+        <p><b>call, apply, and bind are methods used to control the value of this in JavaScript functions. call and apply execute the function immediately, but call takes arguments individually while apply takes arguments as an array. bind returns a new function with this bound and does not execute immediately.</b></p>
+
+
+    </div>
+
+    <div class="sub-section">
+        <h2>Difference between Local and Session storage</h2>
+        <h4>What is Web Storage?</h4>
+        <p>Web Storage API allows browsers to store data on the client side.</p>
+        <ul>There are two types:
+            <li>LocalStorage</li>
+            <li>SessionStorage</li>
+        </ul>
+        <p>Both store data as key-value pairs.</p>
+
+
+        <h4>What is LocalStorage?</h4>
+        <p>LocalStorage stores data permanently in the browser until it is manually deleted. <br>
+        Even if the browser is closed and reopened, the data remains.</p>
+
+        <p>
+            localStorage.setItem("username", "Santhosh"); <br>
+        localStorage.setItem("username2", "Santhosh"); <br>
+        localStorage.setItem("username3", "Santhosh"); <br>
+        localStorage.removeItem("username2"); <br>
+        // localStorage.clear(); <br>
+        let name = localStorage.getItem("username"); <br>
+        console.log(name, 'This is Local storage name');</p>
+
+
+        <h2>What is SessionStorage?</h2>
+        <p>SessionStorage stores data only for the current browser tab session. <br>
+        When the tab is closed, the data is automatically deleted.</p>
+
+        <p>sessionStorage.setItem("token", "12345");</p>
+        <p>let token = sessionStorage.getItem("token");
+        console.log(token);</p>
+
+
+        <h4>Common Interview Questions</h4>
+        <h4>Difference between LocalStorage and SessionStorage?</h4>
+        <p>LocalStorage stores data permanently until manually cleared, while SessionStorage stores data only for the duration of the browser tab session and is cleared when the tab closes.</p>
+        <h4>How much data can LocalStorage store?</h4>
+        <p>Approximately 5MB per domain</p>
+        <h4>Can LocalStorage store objects?</h4>
+        <p>No. It stores only strings.</p>
+        <p>We convert objects using: <br>
+            JSON.stringify() <br>
+            JSON.parse()
+        </p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Event loop in JavaScript </h2>
+        <p>The Event Loop is a mechanism in JavaScript that continuously checks the call stack and moves tasks from the microtask queue or callback queue to the call stack when it becomes empty, allowing JavaScript to handle asynchronous operations.</p>
+
+        <h4>JavaScript is Single Threaded</h4>
+        <p>JavaScript can execute only one task at a time. <br>
+        It has one main thread called the Call Stack.</p>
+
+
+        <h4>Components of JavaScript Runtime</h4>
+        <ul>To understand the Event Loop, we must know these parts:
+            <li>Call Stack</li>
+            <li>Web APIs</li>
+            <li>Callback Queue (Task Queue)</li>
+            <li>Microtask Queue</li>
+            <li>Event Loop</li>
+        </ul>
+
+        <h4>Call Stack</h4>
+        <p>The Call Stack is where JavaScript executes functions.</p>
+
+        <h4>Web APIs</h4>
+        <p>Browsers provide Web APIs for asynchronous operations.</p>
+        <p>Examples: Examples:setTimeout,fetch,DOM events,geolocation</p>
+        <p>These run outside the call stack.</p>
+
+        <h4>Callback Queue (Task Queue)</h4>
+        <p>When async operations finish, their callbacks go into the Callback Queue.</p>
+        <p>setTimeout → finishes → callback queue</p>
+
+        <h4>Microtask Queue</h4>
+        <p>Some async tasks go into Microtask Queue.</p>
+        <p>Examples: Promises (.then), MutationObserver, queueMicrotask</p>
+        <p>Microtasks have higher priority than callback queue.</p>
+
+        <h4>Event Loop</h4>
+        <p>The Event Loop constantly checks:</p>
+        <p>Is the Call Stack empty?</p>
+        <p>If yes:</p>
+        <p>Take task from queue → push to call stack</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Most Important ES6 Features for Interviews</h2>
+        <p>ES6 introduced many modern JavaScript features such as let and const, arrow functions, template literals, destructuring, spread and rest operators, classes, modules, promises, optional chaining, and default parameters, which make JavaScript more powerful and easier to write.</p>
+        <ul>
+            <li> let / const</li>
+            <li>Arrow functions</li>
+            <li>Template literals</li>
+            <li>Destructuring</li>
+            <li>Spread operator</li>
+            <li>Rest operator</li>
+            <li>Classes</li>
+            <li>Modules (import/export)</li>
+            <li>Promises</li>
+            <li>Optional chaining</li>
+        </ul>
+    </div>
+
+<div class="section">
+    <h1>CSS Interview Question</h1>
+    <div class="boxModel">
+        <p>200 + 10 + 10 + 2 + 2 = 224px</p>
+    </div>
+</div>
+    
+
+</div>

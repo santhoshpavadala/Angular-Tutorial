@@ -1,0 +1,61 @@
+<div class="section">
+    <h1>Angular Change Detection</h1>
+    <div class="sub-section">
+        <h2>What is Chnage Detection?</h2>
+        <p>Change Detection is the process Angular uses to detect data changes and update the DOM automatically. <br>
+        Angular continuously checks if component data has changed and updates the UI.</p>
+        <p>Change Detection checks whether component data has changed and updates the UI accordingly.</p>
+
+        <h2>2. How Angular Change Detection Works</h2>
+        <p>Angular uses Zone.js to detect async events.</p>
+        <ul>Zone.js tracks things like:
+            <li>Click events</li>
+            <li>HTTP requests</li>
+            <li>Timers (setTimeout)</li>
+            <li>Promises</li>
+            <li>Observables</li>
+        </ul>
+        <p>Whenever one of these happens, Angular triggers a Change Detection Cycle.</p>
+
+        <h2>Types of Change Detection Strategies</h2>
+        <p>Angular provides 2 strategies.</p>
+
+        <h4>1. Default Change Detection</h4>
+        <p>This is the default behavior. Angular checks every component whenever any event occurs.</p>
+
+        <h4>2. OnPush Change Detection</h4>
+        <p>More optimized strategy. <br> Angular checks component only when specific conditions occur.</p>
+        <p>changeDetection: ChangeDetectionStrategy.OnPush</p>
+        <p>Now Angular will NOT check this component on every cycle.</p>
+
+        <h4>OnPush triggers change detection only when:</h4>
+        <ul>
+            <li>Input reference changes</li>
+            <li>Event occurs in component</li>
+            <li>Observable emits value</li>
+            <li>Manual detection</li>
+        </ul>
+
+        <h4>Manual Change Detection</h4>
+        <p>Angular provides ChangeDetectorRef.</p>
+        <p>constructor(private cd: ChangeDetectorRef)</p>
+        <p>detectChanges()</p>
+        <p>this.cd.detectChanges();</p>
+        
+    </div>
+
+    <div class="sub-section">
+        <h4>"Why does OnPush still update UI when clicking button?"</h4>
+        <p>Even with ChangeDetectionStrategy.OnPush, Angular triggers change detection when events originate from the component such as click events. Therefore when the button click calls nameChange() and updates the value, Angular detects the change and updates the UI.</p>
+        <p>Button Click, Input Property Change, Observable / HTTP, Manual markForCheck, Reference change then onPush wont works</p>
+        <h2>Change detection examples</h2>
+        <p>{{name}}</p>
+        <button class="btn btn-primary" (click)="nameChange()">Change Name</button>
+
+        <p>{{apiResponse.length}}</p>
+
+        <app-my-ul-list [itemList]="cityList"></app-my-ul-list>
+
+    </div>
+
+</div>

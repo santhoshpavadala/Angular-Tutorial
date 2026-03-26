@@ -17,13 +17,13 @@ import { Routings } from './app-pages/routings/routings';
 import { Childroute1 } from './app-pages/routings/childroute1/childroute1';
 import { Childroute2 } from './app-pages/routings/childroute2/childroute2';
 import { RoutegaurdAuth } from './services/routegaurd-auth';
-import { Observables } from './app-pages/observables/observables';
+import { Observables } from './app-pages/rxjs/observables/observables';
 import { NgContent } from './app-pages/ng-content/ng-content';
 import { DecoratorParent } from './app-pages/decorator-parent/decorator-parent';
 import { Todolist } from './app-pages/todolist/todolist';
 import { Todoform } from './app-pages/todoform/todoform';
-import { Subjects } from './app-pages/subjects/subjects';
-import { RxjsOperators } from './app-pages/rxjs-operators/rxjs-operators';
+import { Subjects } from './app-pages/rxjs/subjects/subjects';
+import { RxjsOperators } from './app-pages/rxjs/rxjs-operators/rxjs-operators';
 import { HttpInterceptors } from './app-pages/http-interceptors/http-interceptors';
 import { Forms } from './app-pages/forms/forms';
 import { SignupForm } from './app-pages/signup-form/signup-form';
@@ -38,6 +38,10 @@ import { CrudApiMethods } from './app-pages/crud/crud-api-methods/crud-api-metho
 import { MainLayout } from './app-layout/main-layout/main-layout';
 import { Login } from './app-layout/login/login';
 import { authGuard } from './gaurds/auth-guard';
+import { RxjsForms } from './app-pages/rxjs/rxjs-forms/rxjs-forms';
+import { AngUnsubscribe } from './app-pages/ang-unsubscribe/ang-unsubscribe';
+import { InterviewPreparations } from './app-pages/interview-preparations/interview-preparations';
+import { ChangeDetection } from './app-pages/change-detection/change-detection';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -48,6 +52,7 @@ export const routes: Routes = [
     canActivate: [authGuard],  // new gaurd based
     children: [
       { path: 'home', component: Home,}, 
+      { path: 'interview', component: InterviewPreparations,}, 
       { path: 'about', component: About },
       // Route guard example implemented only for contacts - old canActivate service based
       { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
@@ -67,6 +72,8 @@ export const routes: Routes = [
       { path: 'observables', component: Observables },
       { path: 'subject', component: Subjects },
       { path: 'rxjs-operators', component: RxjsOperators },
+      { path: 'rxjs-forms', component: RxjsForms },
+      { path: 'unsubscribe', component: AngUnsubscribe },
       { path: 'http-interceptors', component: HttpInterceptors },
       { path: 'forms', component: Forms },
       { path: 'signup', component: SignupForm },
@@ -78,6 +85,7 @@ export const routes: Routes = [
       { path: 'lifecycle-parent', component: LifecycleParent },
       { path: 'ngrx', component: Ngrx },
       { path: 'signals', component: Signals },
+      { path: 'change-detection', component: ChangeDetection},
 
       // Lazy Loading Module Concept
       {

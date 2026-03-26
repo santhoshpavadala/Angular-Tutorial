@@ -55,6 +55,7 @@ functionValue = "fnValue"
   // Class Binding
   isActive: boolean=true;
   isClassApply: boolean=true;
+  
   cval:string='red';
   styleObject: object={
     color: 'white',

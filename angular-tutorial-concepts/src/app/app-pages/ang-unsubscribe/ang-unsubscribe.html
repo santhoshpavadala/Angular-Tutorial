@@ -1,0 +1,57 @@
+<div class="section">
+    <h1>Angular Unsubscribe</h1>
+
+    <div class="sub-section">
+        <div>
+            <h2>Memory Leak in Angular</h2>
+            <p>A memory leak happens when the application keeps objects in memory even after they are no longer needed.</p>
+            <p>A memory leak occurs when subscriptions or objects remain in memory after the component is destroyed, causing increased memory usage.</p>
+            <p>In Angular, this usually happens when:</p>
+            <ul>
+                <li>You subscribe to an Observable</li>
+                <li>But do not unsubscribe</li>
+                <li>Even after the component is destroyed</li>
+                <li>So the subscription keeps running in memory.</li>
+            </ul>
+
+            <p>Why it is a problem</p>
+            <ul>If many subscriptions remain active:
+                <li>Memory usage increases</li>
+                <li>App becomes slow</li>
+                <li>Unexpected API calls or events continue</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>unsubscribe() in Angular</h2>
+            <p>unsubscribe() is used to stop an Observable subscription when it is no longer needed. <br>
+            This prevents memory leaks.</p>
+
+            <h4>Why do we use unsubscribe()?</h4>
+            <p>To stop Observable execution and prevent memory leaks when a component is destroyed.</p>
+        </div>
+
+        <div>
+            <h2>OnDestroy Lifecycle Hook</h2>
+            <p>OnDestroy is an Angular lifecycle hook that runs just before the component is destroyed.</p>
+            <ul>It is mainly used for:
+                <li>Cleaning subscriptions</li>
+                <li>Removing event listeners</li>
+                <li>Clearing timers</li>
+                <li>Avoiding memory leaks</li>
+            </ul>
+
+            <h4>What is OnDestroy?</h4>
+            <p>OnDestroy is a lifecycle hook executed before Angular destroys a component, used to clean resources like subscriptions.</p>
+        </div>
+
+        <div>
+            <ul>
+                @for (item of userList$ | async; track $index) {
+                <li>{{item.username}}</li>
+                }
+            </ul>
+        </div>
+        
+    </div>
+</div>
