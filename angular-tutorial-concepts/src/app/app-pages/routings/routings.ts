@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-routings',
@@ -8,5 +8,12 @@ import { RouterModule } from '@angular/router';
   styleUrl: './routings.scss'
 })
 export class Routings {
+
+  constructor(private router: Router) {}
+
+  navigateComp() {
+    this.router.navigateByUrl("data_binding")
+    
+  }
 
 }

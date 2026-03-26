@@ -1,86 +1,135 @@
 <div class="section">
   <h1>Angular - Ng-Content</h1>
   <div class="sub-section">
-    <h2>ng-content Example</h2>
-    <!-- <p>It’s Angular’s way to project content from a parent into a child component.
-  It creates placeholders in the child template where Angular inserts external content.</p>
-  <p>ng-content is Angular’s way to project content from a parent into a child component. <br>
-    It’s like a “placeholder” in a child component’s template where Angular will insert content that comes from outside the component.
-  </p> -->
-  <!-- <div class="sub-section">
-  <h3>Interview Questions</h3>
-  <p>
-    <b>Q1. What is ng-content?</b> <br>
-    <span>It’s Angular’s way to project content from a parent into a child component. It creates placeholders in the child template where Angular inserts external content.</span>
-  </p>
+    <h2>ng-content</h2>
+    <p>ng-content is used to project content from a parent component into a child component template. <br>
+      It allows a component to accept external HTML content.</p>
 
-  <p>
-    <b>Q2. What is Content Projection?</b><br>
-    <span>Content projection is the technique of passing markup from a parent component into a child component for flexible layouts.</span>
-  </p>
+    <h2>ng-container</h2>
+    <p>ng-container is a logical container that does not create a DOM element.</p>
+    <p>ng-container tag will not appear in console and it is imaginary div and uses for conditions instread of writing in tr.</p>
+    <h4>Why ng-container is Needed</h4>
+    <p>Angular does not allow two structural directives on the same element.</p>
+    <p>for example: div *ngIf="user" *ngFor="let item of list" </p>
+    <p>so thats y in table we can use ng-Container</p>
 
-  <p>
-    <b>Q3. How do you handle multiple projection slots?</b><br>
-    <span>By using ng-content with the select attribute, e.g.: <br>
-      ng-content select="[header]"ng-content <br>
-      ng-content select="[body]"ng-content
-    </span>
-  </p>
-  <p>
-    <b>Q4. What happens if there’s no matching content for a slot?</b> <br>
-    <span>That slot remains empty.</span>
-  </p>
-  <p>
-    <b>Q5. Can you project components, not just HTML?</b> <br>
-    <span>Yes! You can project any valid Angular component or element.</span>
-  </p>
-</div> -->
+    <h2>ng-template</h2>
+    <p>ng-template defines a template that Angular does not render immediately.</p>
+    <p>It is rendered only when Angular explicitly tells it to render.</p>
+    <p>by default it wont display anything in ui. </p>
 
-<!-- <div>
-<h3>ng-content example</h3>
-<div>
-  <p>Here im taking parent component as Home</p>
-  <ng-content select=".grt"></ng-content> class selector
-  <ng-content select=".dta"></ng-content> class selector
-  <ng-content select="#dta"></ng-content>id selector
-  <ng-content></ng-content> default all content selection
-</div>
-</div> -->
+    <div class="row">
+      <div class="col-4">
+        <h4> ng-content Example:</h4> <!-- (app-my-card see )Here component selector: -->
+        <app-my-card [cardTitle]="'Card Header'">
+          <p>This content inside the component selector, there it will display if we use ng-content. ng-content acts as
+            a placeholder</p>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+              </tr>
+            </thead>
 
-<div>
-  <ng-content></ng-content>
-  <ul class="list-group">
-    @for (person of list; track person) {
-      <li class="list-group-item">
-        {{person}}
-      </li>
-    }
-  </ul>
-</div>
+            <tbody>
+              @for (student of studentList; track $index) {
+              <tr>
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.city}}</td>
+                <td>{{student.state}}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </app-my-card>
+      </div>
+      <div class="col-4">
+        <h4>ng-container Example:</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>City</th>
+              <th>State</th>
+            </tr>
+          </thead>
 
+          <tbody>
+            @if (isLoader) {
+            <ng-container>
+              <tr>
+                <td colspan="4">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+            }
+            @if(!isLoader) {
+            <ng-container>
+              @for (student of studentList; track $index) {
+              <tr>
+                <td>{{student.id}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.city}}</td>
+                <td>{{student.state}}</td>
+              </tr>
+              }
+            </ng-container>
+            }
+          </tbody>
+        </table>
 
-<div class="sub-section">
-  <h2>Differences between ng-container vs ng-content vas ng-template </h2>
-  <p><b>ng-container:</b> It is used to hide the element in browser dom to reduce the loading for large data iteration like in for loop</p>
-  @for (num of numbers; track num) {
-    @if (num%2==0) {
-      {{num}}
-    }
-    <!-- <div *ngIf="num%2==1">
-    {{num}}
-  </div> -->
-}
+      </div>
+      <div class="col-4 bg-secondary">
+        <h4>ng-template Example:</h4>
+        <div class="card" *ngTemplateOutlet="loader"> <!--new feauture in latest: *ngTemplateOutlet="loader"-->
 
-<p><b>ng-template:</b> By default it wont show any contet inside this element, it works only
-for structural direcive like template variable and ngif, ng for etc like then only its will appears the content</p>
+        </div> 
+          <ng-template #loader>
+            <div class="spinner-grow" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </ng-template>
 
-@if (login) {
-  <div>
-    Logged In Success
+          <div *ngIf="isLoaded; else loading">
+            Data Loaded
+          </div>
+
+          <ng-template #loading>
+            Loading...
+          </ng-template>
+      </div>
+    </div>
   </div>
-} @else {
-  logged In Failed
-}
-</div>
-</div>
+
+
+  <div class="sub-section">
+    <h2>Differences between ng-container vs ng-content vas ng-template </h2>
+    <p><b>ng-container:</b> It is used to hide the element in browser dom to reduce the loading for large data
+      iteration like in for loop</p>
+    @for (num of numbers; track num) {
+    @if (num%2==0) {
+    {{num}}
+    }
+    }
+
+    <p><b>ng-template:</b> By default it wont show any contet inside this element, it works only
+      for structural direcive like template variable and ngif, ng for etc like then only its will appears the content
+    </p>
+
+    @if (login) {
+    <div>
+      Logged In Success
+    </div>
+    } @else {
+    logged In Failed
+    }
+  </div>
 </div>

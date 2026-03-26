@@ -147,3 +147,303 @@
     </tbody>
   </table>
 </div>
+
+
+
+<!-- Practice template forms -->
+<div class="section">
+  <h1>Practicng the template forms</h1>
+  <div class="sub-section">
+    <h2>Goal Tracker app: https://api.freeprojectapi.com/api/GoalTracker/getAllUsers</h2>
+
+    <div class="row">
+      <div class="col-md-12 mb-4">
+        <form action="" #golaTrackerForm = "ngForm">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <label for="">Eamil Id</label>
+              <input type="email" class="form-control" placeholder="abc@email.com"
+              name="emailId" [(ngModel)]="goalObj.emailId" #emailId="ngModel" required email>
+              @if (emailId.touched || emailId.dirty) {
+                <div>
+                  @if (emailId.errors?.['required']) {
+                  <span class="text-danger">EmailId is Required</span>
+                  } @else if(emailId.errors?.['email']){
+                  <span class="text-danger">Eamil format is incorrect</span>
+                  }
+                </div>
+              }
+              
+            </div>
+            <div class="col-md-6">
+              <label for="">password</label>
+              <input type="password" class="form-control"
+              name="password" [(ngModel)]="goalObj.password" #password="ngModel" required minlength="5">
+              @if (password.touched || password.dirty) {
+                <div>
+                  @if (password.errors?.['required']) {
+                    <span class="text-danger">Password is required</span>
+                  } @else if (password.errors?.['minlength']) {
+                    <span>Password characters should be 5</span>
+                  }
+                </div>
+              }
+            </div>
+            <div class="col-md-6">
+              <label for="">Full Name</label>
+              <input type="text" class="form-control" placeholder="Full Name"
+              name="fullName" [(ngModel)] = "goalObj.fullName" #fullName="ngModel" required>
+              @if (fullName.touched || fullName.dirty) {
+                <div>
+                  @if(fullName.errors?.['required']) {
+                    <span class="text-danger">Full Name is required</span>
+                  }
+                </div>
+                }
+            </div>
+            <div class="col-md-6">
+              <label for="">Mobile No</label>
+              <input type="text" class="form-control" placeholder="Mobile Number"
+              name="mobileNo" [(ngModel)]="goalObj.mobileNo" #mobileNo="ngModel" required>
+              @if (mobileNo.touched || mobileNo.dirty) {
+                <div>
+                  @if (mobileNo.errors?.['required']) {
+                    <span class="text-danger">Mobile No is required</span>
+                  }
+                </div>
+                }
+            </div>
+          </div>
+
+          <div class="row ">
+            <div class="col-md-12 d-flex justify-content-end gap-4">
+              <!-- We need to pass form reference variable here as argument -->
+              <button class="btn btn-secondary"(click)="resetGoalList(golaTrackerForm)">Reset</button>
+              @if (goalObj.userId==0) {
+              <button class="btn btn-success" (click)="postGoalList(golaTrackerForm)"
+              [disabled]="golaTrackerForm.invalid">Save</button>
+              } @else {
+              <button class="btn btn-warning" (click)="putGoalList(golaTrackerForm)">Update</button>
+              }
+            </div>
+        </div>
+        </form>
+      </div>
+      <div class="col-md-12">
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Email Id</th>
+              <th>Password</th>
+              <th>Full Name</th>
+              <th>Mobile Number</th>
+              <th class="d-flex justify-content-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (goal of goalList; track $index) {
+            <tr>
+              <td>{{$index+1}}</td>
+              <td>{{goal.emailId}}</td>
+              <td>{{goal.password}}</td>
+              <td>{{goal.fullName}}</td>
+              <td>{{goal.mobileNo}}</td>
+              <td>
+                <div class="d-flex gap-2 align-items-center justify-content-center">
+                   <!-- @for (goal of goalList; track $index) { here what ever you take the item as goal use for edit those item -->
+                  <button class="btn btn-sm btn-warning" (click)="editGoalList(goal)">Edit</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteGoalList(goal.userId)">Delete</button>
+                </div>
+                
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <h2>Template forms:Employee App: link:https://www.freeprojectapi.com/api.html</h2>
+
+    <div class="row">
+      <div class="col-md-12 mb-4">
+        <form action="" #empForm="ngForm">
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <label for="">Full Name</label>
+              <input type="text" class="form-control" 
+              name="fullName" [(ngModel)]="employeeObj.fullName" #fullName="ngModel" [minlength]="5" required="">
+              @if (fullName.touched || fullName.dirty) {
+                <div>
+                  @if (fullName.errors?.["required"]) {
+                  <span class="text-danger">Full name is required</span>
+                  } @else if(fullName.errors?.["minlength"]) {
+                    <span class="text-danger">Min 5 characters Required</span>
+                  }
+              </div>
+              }
+            </div>
+            <div class="col-md-6">
+              <label for="">Email</label>
+              <input type="text" class="form-control" 
+              name="email" [(ngModel)]="employeeObj.email" #email="ngModel" required email>
+              @if (email.touched || email.dirty) {
+                <div>
+                  @if (email.errors?.["required"]) {
+                    <span class="text-danger">Email is required</span>
+                  } @else if (email.errors?.["email"]) {
+                    <span>Email format is incorrect</span>
+                  }
+                </div>
+              }
+            </div>
+            <div class="col-md-6">
+              <label for="">Phone</label>
+              <input type="text" class="form-control" name="phone"
+              [(ngModel)]="employeeObj.phone" #phone="ngModel" required minlength="10">
+              
+              @if (phone.touched || phone.dirty) {
+                <div>
+                  @if(phone.errors?.["required"]) {
+                    <span class="text-danger">Phone number is required</span>
+                  } @else if (phone.errors?.["minlength"]) {
+                    <span class="text-danger">Min 10 characters required</span>
+                  }
+                </div>
+              }
+              <div>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">Gender</label>
+              <input type="text" class="form-control" 
+              name="gender" [(ngModel)]="employeeObj.gender" #gender="ngModel">
+
+              @if (gender.touched || gender.dirty) {
+                @if (gender.errors?.["required"]) {
+                  <span class="text-danger">gender is required</span>
+                }
+              }
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 d-flex gap-4 justify-content-end">
+              <button class="btn btn-secondary">Reset</button>
+              <button class="btn btn-warning">Update</button>
+              <button class="btn btn-success" (click)="saveEmp()">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-12">
+        <h4>Employee App Employee list: ()</h4>
+        <table>
+          <thead>
+            <tr>
+              <td>Sr.No</td>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Gender</th>
+              <th>Date Of Joining</th>
+              <th>Employee Type</th>
+              <th>Salary</th>
+              <th>DepartmentName</th>
+              <th>DesignationName</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (emp of employeeList; track $index) {
+            <tr>
+              <td>{{$index+1}}</td>
+              <td>{{emp.fullName}}</td>
+              <td>{{emp.email}}</td>
+              <td>{{emp.phone}}</td>
+              <td>{{emp.gender}}</td>
+              <td>{{emp.dateOfJoining}}</td>
+              <td>{{emp.employeeType}}</td>
+              <td>{{emp.salary}}</td>
+              <td>{{emp.departmentName}}</td>
+              <td>{{emp.designationName}}</td>
+            </tr>
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div>
+  <form #golaTrackerForm="ngForm">
+    <div>
+      <label for="">UserName</label>
+      <input type="text" class="form-control" 
+      name="fullName" [(ngModel)]="goalObj.fullName" #fullName="ngModel" required minlength="5">
+      @if (fullName.touched || fullName.dirty) {
+      <div>
+        @if (fullName.errors?.['required']) {
+          <span>Full Name is required</span>
+        } @else if (fullName.errors?.['minlength']) {
+          <span>full name should be 5 Characters</span>
+        }
+      </div>
+      }
+    </div>
+    <div>
+      <label for="">Passowrd</label>
+      <input type="text" name="password" [(ngModel)]="goalObj.password" #password="ngModel">
+      <input type="text" name="password" [ngModel]="goalObj.password" #password="ngModel">
+      @if (password.touched || password.dirty) {
+        @if (password.errors?.['required']) {
+          <span>password required</span>
+        } @else if (password.errors?.['minlength']) {
+          <span>Minimum should be 5 characters</span>
+        }
+      }
+    </div>
+    <div class="row">
+      <button (click)="resetGoalList(golaTrackerForm)">Reset</button>
+      @if (goalObj.userId == 0) {
+        <button (click)="postGoalList(golaTrackerForm)">Save</button>
+      }
+      <button (click)="putGoalList(golaTrackerForm)">Update</button>
+    </div>
+  </form>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Full name</th>
+          <th>Password</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (goal of goalList; track $index) {
+        <tr>
+          <td>{{goal.fullName}}</td>
+          <td>{{goal.password}}</td>
+          <td>
+            <div>
+              <button class="btn btn-secondary" (click)="postGoalList(goal)">Edit</button>
+              <button class="btn btn-secondary" (click)="deleteGoalList(goal.userId)">Delete</button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

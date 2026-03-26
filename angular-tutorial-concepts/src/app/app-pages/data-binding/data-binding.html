@@ -1,7 +1,45 @@
 <div class="section">
-  <h1>Data Binding Examples</h1>
+  <h1>Angular - Data Binding Examples</h1>
+
   <div class="sub-section">
-    <h2>String Interpolation</h2>
+    <h2>What is Data Binding?</h2>
+    <p>Data Binding is the process of connecting component data with the template to keep the UI synchronized automatically.</p>
+
+    <ul>Data binding is two types in angular:
+      <li>One-Way Data Binding in Angular</li>
+      <li>Two-Way Data Binding</li>
+    </ul>
+
+    <div class="row">
+      <div class="col-12">
+        <h2>One-Way Data Binding</h2>
+        <p>One-Way Data Binding means data flows in only one direction between the component and the template.</p>
+        <p><b>component to template</b></p>
+        <p><b>templalate to component</b></p>
+        <p>But not both simultaneously.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <h4>Types of One-Way Data Binding</h4>
+        <ul>
+          <li>Interpolation</li>
+          <li>Property Binding</li>
+          <li>Event Binding</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="sub-section">
+    <h2> 1.1 Interpolation</h2>
+    <p>Interpolation is a one-way binding technique used to display data from the component to the template. <br>
+    It uses double curly braces.</p>
+    <p>Interpolation is a one-way data binding technique used to display component data in the template using double curly braces syntax.</p>
+    
+    <h4>Examples</h4>
     <p>{{stringInterpolation}}</p>
     <div>{{functionCall()}}</div>
     <p>{{title.name}}</p>
@@ -12,7 +50,12 @@
   </div>
 
   <div class="sub-section">
-    <h2>Property Binding</h2>
+    <h2>1.2 Property Binding</h2>
+    <p>Property Binding is used to bind component values to HTML element properties. <br>
+      It allows Angular to dynamically update DOM properties.</p>
+    <p>Property Binding is used to bind component values to DOM element properties using [property] syntax.</p>
+
+    <h4>Examples</h4>
     <div> Name: <input type="text"> <button [disabled]="isDisable">Submit</button></div>
     <div> Number: <input type="number"> <button [hidden]=isHidden>Ok</button></div>
     <div><img [src]="srcPath" alt="" width="200px" height="200px"></div>
@@ -20,6 +63,8 @@
 
   <div class="sub-section">
     <h2>Class Binding</h2>
+
+    <h4>Examples</h4>
     <h4 [class]="isActive?'active': 'inactive'">Chaniging the header is properties using class binding</h4>
     <h4 [class]="{'active': true}">class example</h4> <!--CONDITIONAL-->
     <h4 [class]="{'active': isClassApply}">class apply example</h4> <!--CONDITIONAL-->
@@ -29,6 +74,8 @@
 
   <div class="sub-section">
     <h2>Style Binding</h2>
+
+    <h4>Examples</h4>
     <h4 [style]="{color: cval}">Style Binding with property value</h4>
     <h4 [style.background]="cval">Style.Binding1</h4>
     <h4 [style]="styleObject">style Object- Multiple css properies can apply</h4>
@@ -37,6 +84,18 @@
 
   <div class="sub-section">
     <h2>Event Binding</h2>
+    <p>Event Binding allows the template to send user actions to the component.</p>
+
+    <ul>It listens to events such as:
+      <li>click</li>
+      <li>input</li>
+      <li>change</li>
+      <li>mouseover</li>
+      <li>keyup</li>
+    </ul>
+
+    <h4>Examples</h4>
+
     <div>
       <button class="btn btn-primary" (click)="OnSubmit()">Submit</button>
     </div>
@@ -46,7 +105,8 @@
       <button (click)="decrement()">decrement</button>
     </div>
     <div>
-      <label>User Name</label><input type="text" (input)="changeName($event)">
+      <label>User Name</label>
+      <input type="text" (input)="changeName($event)">
       <p>User Name Data: {{userName}}</p>
     </div>
     <div>
@@ -62,6 +122,14 @@
 
   <div class="sub-section">
     <h2>Two Way Data Binding</h2>
+    <p>Two-way data binding allows data to flow both directions between component and template.</p>
+    <p>Changes in the component update the UI. <br>
+      Changes in the UI update the component.</p>
+      
+      <pre>"ngModel"</pre>
+      This syntax is called Banana in a Box.
+
+    <h4>Examples</h4>
     <div>
       <label>Name</label>
       <input type="text" [(ngModel)]="city">
@@ -69,60 +137,59 @@
       <button class="btn btn-primary" (click)="updateCity()">Update City</button>
     </div>
   </div>
-</div>
 
+  <div class="sub-section">
+    <h1>Databinding New examples</h1>
+    <p> Date Variable </p>
+    <p>{{currentDate}}</p>
 
-<div class="section">
-  <h1>Databinding New examples</h1>
-  <p> Date Variable </p>
-  <p>{{currentDate}}</p>
+    <p> Array String and Number Variable </p>
+    @for (item of cityName; track item) {
+      <div>
+        <div>{{item}}</div>
+      </div>
+    }
+    @for (item of rollNumber; track item) {
+      <div>
+        <div>{{item}}</div>
+      </div>
+    }
 
-  <p> Array String and Number Variable </p>
-  @for (item of cityName; track item) {
+    <h3>Object Student List</h3>
     <div>
-      <div>{{item}}</div>
+      <div>{{students.name}}</div>
+      <div>{{students.email}}</div>
+      <div>{{students.mobile}}</div>
     </div>
-  }
-  @for (item of rollNumber; track item) {
-    <div>
-      <div>{{item}}</div>
-    </div>
-  }
+    <div>{{students | json}}</div>
 
-  <h3>Object Student List</h3>
-  <div>
-    <div>{{students.name}}</div>
-    <div>{{students.email}}</div>
-    <div>{{students.mobile}}</div>
+    <!-- WHile forloop its used of keyvalue present forloop -->
+    @for (student of students | keyvalue; track student) {
+      <div>
+        <strong>{{ student.key }}:</strong> {{ student.value }}
+      </div>
+    }
+
+    @for (student of students | keyvalue; track student.key) {
+      <div>
+        <strong>{{ student.key }}:</strong> {{ student.value }}
+      </div>
+    }
+
+
+    <h3>Array Of ObhectStudent List</h3>
+
+    @for (student of studentList; track student.id; let i = $index) {
+      <div>
+        <p>Index: {{ i }}</p>
+        <p>Id: {{student.id}}</p>
+        <p>Name: {{ student.name }}</p>
+        <p>Email: {{ student.email }}</p>
+        <p>Mobile: {{ student.mobile }}</p>
+        <hr />
+      </div>
+      } @empty {
+      <p>No students found</p>
+    }
   </div>
-  <div>{{students | json}}</div>
-
-  <!-- WHile forloop its used of keyvalue present forloop -->
-  @for (student of students | keyvalue; track student) {
-    <div>
-      <strong>{{ student.key }}:</strong> {{ student.value }}
-    </div>
-  }
-
-  @for (student of students | keyvalue; track student.key) {
-    <div>
-      <strong>{{ student.key }}:</strong> {{ student.value }}
-    </div>
-  }
-
-
-  <h3>Array Of ObhectStudent List</h3>
-
-  @for (student of studentList; track student.id; let i = $index) {
-    <div>
-      <p>Index: {{ i }}</p>
-      <p>Id: {{student.id}}</p>
-      <p>Name: {{ student.name }}</p>
-      <p>Email: {{ student.email }}</p>
-      <p>Mobile: {{ student.mobile }}</p>
-      <hr />
-    </div>
-    } @empty {
-    <p>No students found</p>
-  }
 </div>

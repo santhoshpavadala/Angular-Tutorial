@@ -59,7 +59,7 @@ export class RxjsForms implements OnInit {
     // StatusChange: whole form status changes example
     this.userform.statusChanges.subscribe((status:any)=>{
       console.log(status, 'form status changed');
-      debugger;
+      // debugger;
     })
 
     // CombineLatest examples:

@@ -1,5 +1,47 @@
+
+
 <div class="section">
   <h1>Decerators</h1>
+
+  <!-- By Using Reusable component -->
+  <app-alert [alertMessage]="msg" [alertType]="alrtType"></app-alert>
+  <app-my-button [btnClass]="classBtn" [btnText]="textBtn" (onBtnClick)="onUpdate($event)"></app-my-button>
+
+  <div class="sub-section">
+    <h2>What is a Decorator in Angular?</h2>
+    <p>A Decorator is a special TypeScript function that adds metadata to a class, method, property, or parameter. <br>
+    In Angular, decorators tell Angular how a class or property should behave.</p>
+    <p>A decorator is a function that adds metadata to a class, property, method, or parameter so Angular knows how to process and use it.</p>
+    <ul>Angular uses decorators to define things like:
+      <li>Components</li>
+      <li>Directives</li>
+      <li>Services</li>
+      <li>Modules</li>
+      <li>Input/Output bindings</li>
+      <li>Dependency Injection</li>
+    </ul>
+
+    <h4>Types of Angular Decorators</h4>
+    <p>Angular decorators are mainly 4 types:</p>
+    <ul>
+      <li>Class Decorators: <span>Applied to classes: </span> <span><b> @Component, @Directive, @Pipe, @Injectable, @NgModule</b></span></li>
+      <li>Property Decorators: <span>Applied to class properties: </span> <span><b> @Input, @Output, @ViewChild </b></span></li>
+      <li>Method Decorators: <span>Applied to methods: </span> <span><b>@HostListener </b></span></li>
+      <li>Parameter Decorators: <span>Applied to constructor parameters: </span> <span><b>@Inject, @Optional </b></span></li>
+    </ul>
+
+    <h2>Property Decorators: These decorators are applied to class properties.</h2>
+    <h4>@Input Decorators:</h4>
+    <p>@Input allows data from parent component to child component.</p>
+
+    <h4>@Output Decorators:</h4>
+    <p>@Output is used to send data from child component to parent component.</p>
+
+    <h4>@ViewChild</h4>
+    <p>Used to access a child component or DOM element from the parent component.</p>
+  </div>
+
+
   <div class="sub-section">
     <h2>Input Decerators</h2>
     <h4>{{ parentTitle }}</h4>
@@ -31,23 +73,45 @@
   </div>
 
   <div class="sub-section">
-    <h2>Template Reference Variable</h2>
-    <H4>In child i have templateData need to show in App component using template reference</H4>
-    <input type="text" [(ngModel)]="ngModelData">
-  </div>
-
-  <div class="sub-section">
     <h2>View Child Decerator</h2>
-    <input type="text" [(ngModel)]="passChildToParentData">
+    <p>@ViewChild is used to get a reference of a single child element, directive, or component from the template.</p>
+    <p>It returns only the first matching element.</p>
+    <p><b>@ViewChild is a decorator used to access a single DOM element, directive, or child component from the parent component's template.</b></p>
 
-    <h2>DOM Manipulations in Angular</h2>
-    <div>
-      <div #domView>This is ViewChild Div content using viwchild change the elements of div data throght reference varibale</div>
-      <button (click)="domChange()">Dom Change</button>
+    <h4>View Child examples: DOM Manipulations in Angular</h4>
+    <div class="mb-4">
+      <div class="mb-2">
+        <input type="text" #inputRef>
+      </div>
+      <div class="mb-2">
+        <input type="text" value="demo text"  #inputValue>
+        <button (click)="readInput()">Read Input Values</button>
+        <span>{{inpValue}}</span>
+      </div>
+      <div class="mb-2">
+        <input type="text" #inputFocus>
+        <button (click)="focusInput()">Focus Input</button>
+      </div>
+
+      <div>
+        <div #domView>This is ViewChild Div content using viwchild change the elements of div data throght reference varibale</div>
+        <button class="btn btn-primary" (click)="domChange()">Dom Change</button>
     </div>
-    <div>
-      <input type="text" #inputRef>
     </div>
+
+
+    <h4>Also we can pass the child data to parent by using View child </h4>
+    <input class="form-control m-2" type="text" [(ngModel)]="passChildToParentData">
+    <p>{{childCompData}}</p>
+
+    <div class="row">
+      <div class="col-12">
+        <!-- So this below companent became the child component -->
+        <app-alert [alertMessage]="'This is View Child  Success'" [alertType]="'Success'"></app-alert>
+      </div>
+    </div>
+    
+
 
     <h2>Differences between viewchild and viewchildren</h2>
     <div>
@@ -65,4 +129,11 @@
     </div>
 
   </div>
+
+  <div class="sub-section">
+    <h2>Template Reference Variable</h2>
+    <H4>In child i have templateData need to show in App component using template reference</H4>
+    <input type="text" [(ngModel)]="ngModelData">
+  </div>
 </div>
+

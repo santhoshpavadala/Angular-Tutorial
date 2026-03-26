@@ -1,14 +1,14 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Batch } from '../../../models/batch';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmDialog } from '../../../app-shared/confirm-dialog/confirm-dialog';
-
+// Batch Model
+import { Batch } from '../../../models/batch';
+// compitition Model
 import { Competition } from '../../../models/competition';
-import { validateVerticalPosition } from '@angular/cdk/overlay';
 import { BatchesService } from '../../../services/crud/batches-service';
 
 @Component({
@@ -18,6 +18,7 @@ import { BatchesService } from '../../../services/crud/batches-service';
   styleUrl: './crud-api-methods.scss'
 })
 export class CrudApiMethods implements OnInit {
+  // connect with model of empty state object
   newBatchObject: Batch = new Batch();
 
   http=inject(HttpClient);

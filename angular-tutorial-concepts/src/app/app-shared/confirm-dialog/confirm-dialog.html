@@ -1,15 +1,15 @@
-<h2 mat-dialog-title>Confirm Delete</h2>
+<h2 mat-dialog-title>{{ data.title || 'Confirm Action' }}</h2>
 
 <mat-dialog-content>
-    {{ data?.message || 'Are you sure you want to delete this item?' }}
+    {{ data.message || 'Are you sure you want to delete this item?' }}
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
     <button matButton="outlined" (click)="close(false)">
-    Cancel
+    {{ data.cancelText || 'Cancel' }}
     </button>
 
     <button matButton="filled" (click)="close(true)">
-    Delete
+    {{ data.confirmText || 'Delete' }}
     </button>
 </mat-dialog-actions>

@@ -40,6 +40,8 @@ import { Login } from './app-layout/login/login';
 import { authGuard } from './gaurds/auth-guard';
 import { RxjsForms } from './app-pages/rxjs/rxjs-forms/rxjs-forms';
 import { AngUnsubscribe } from './app-pages/ang-unsubscribe/ang-unsubscribe';
+import { InterviewPreparations } from './app-pages/interview-preparations/interview-preparations';
+import { ChangeDetection } from './app-pages/change-detection/change-detection';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -50,6 +52,7 @@ export const routes: Routes = [
     canActivate: [authGuard],  // new gaurd based
     children: [
       { path: 'home', component: Home,}, 
+      { path: 'interview', component: InterviewPreparations,}, 
       { path: 'about', component: About },
       // Route guard example implemented only for contacts - old canActivate service based
       { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
@@ -82,6 +85,7 @@ export const routes: Routes = [
       { path: 'lifecycle-parent', component: LifecycleParent },
       { path: 'ngrx', component: Ngrx },
       { path: 'signals', component: Signals },
+      { path: 'change-detection', component: ChangeDetection},
 
       // Lazy Loading Module Concept
       {
