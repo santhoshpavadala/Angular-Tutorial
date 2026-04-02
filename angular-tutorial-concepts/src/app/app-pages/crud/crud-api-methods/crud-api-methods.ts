@@ -191,7 +191,7 @@ export class CrudApiMethods implements OnInit {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            panelClass: ['error-snack']
+            panelClass: ['error-snackbar']
           
         })
       }
@@ -232,7 +232,7 @@ export class CrudApiMethods implements OnInit {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            panelClass: ['error-snack']
+            panelClass: ['error-snackbar']
         })
       }
     })
@@ -259,7 +259,7 @@ export class CrudApiMethods implements OnInit {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            panelClass: ['error-snack']
+            panelClass: ['error-snackbar']
         })
       }
     })

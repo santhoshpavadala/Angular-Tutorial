@@ -42,6 +42,8 @@ import { RxjsForms } from './app-pages/rxjs/rxjs-forms/rxjs-forms';
 import { AngUnsubscribe } from './app-pages/ang-unsubscribe/ang-unsubscribe';
 import { InterviewPreparations } from './app-pages/interview-preparations/interview-preparations';
 import { ChangeDetection } from './app-pages/change-detection/change-detection';
+import { MaterialReactiveForms } from './app-pages/crud/material-reactive-forms/material-reactive-forms';
+import { MaterialTemplateForms } from './app-pages/crud/material-template-forms/material-template-forms';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -82,6 +84,8 @@ export const routes: Routes = [
       { path: 'crud-operation-template', component: CrudOperations },
       { path: 'crud-operation-reactive', component: CrudOperationsReactive },
       { path: 'crud-api-methods', component: CrudApiMethods },
+      { path: 'material-reactive-forms', component: MaterialReactiveForms },
+      { path: 'material-template-forms', component: MaterialTemplateForms },
       { path: 'lifecycle-parent', component: LifecycleParent },
       { path: 'ngrx', component: Ngrx },
       { path: 'signals', component: Signals },

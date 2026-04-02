@@ -1,0 +1,19 @@
+<div class="section">
+    <h1>Angular Material components - Reactive forms</h1>
+    <div class="sub-section">
+        <form action="" [formGroup]="leaveForm">
+            <!-- Employee Name -->
+            <mat-form-field appearance="outline">
+                <mat-label>Employee Name</mat-label>
+                <input matInput formControlName="empName">
+                <mat-error>
+                Name is required
+                </mat-error>
+                <mat-error>
+                Minimum 5 characters required
+                </mat-error>
+            </mat-form-field>
+        </form>
+        <table></table>
+    </div>
+</div>
