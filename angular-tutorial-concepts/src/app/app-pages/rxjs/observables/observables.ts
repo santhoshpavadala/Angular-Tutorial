@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { from, interval, Observable, of, timer } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { from, interval, Observable, of, Subscription, timer } from 'rxjs';
 import { ObserableData } from '../../../services/obserable-data';
 
 @Component({
@@ -8,7 +8,7 @@ import { ObserableData } from '../../../services/obserable-data';
   templateUrl: './observables.html',
   styleUrl: './observables.scss'
 })
-export class Observables implements OnInit{
+export class Observables implements OnInit, OnDestroy{
 
   myObs=new Observable((listener)=>{
     listener.next(1);
@@ -100,6 +100,10 @@ export class Observables implements OnInit{
       console.log(message, 'Obs emited data');
     });
 
+
+    
+
+
     this.cityList$.subscribe((cityData:string[])=>{
       console.log(cityData, 'city data 1 of obseervar');
     })
@@ -108,12 +112,16 @@ export class Observables implements OnInit{
       console.log(cityData2, 'city data 2 from observor');
     })
 
-    this.myInterval$.subscribe((res:number)=>{
+    this.intervalDestroy = this.myInterval$.subscribe((res:number)=>{
       console.log(res, 'Interval Observar');
     })
 
     this.myTimer$.subscribe(time=>{
       console.log(time, 'timer Observar');
+    })
+
+    this.skillList$.subscribe((result:any)=>{
+      console.log(result, "skills observor");
     })
   }
 
@@ -127,4 +135,14 @@ export class Observables implements OnInit{
     myInterval$ = interval(2000);
     // Timer Observar
     myTimer$ = timer(5000)
+
+    intervalDestroy!: Subscription;
+
+    // creation of observale
+    skillList$ = of(["Ang", "React,", ".net", "Javascript", "HTML"]);
+    
+    ngOnDestroy(): void {
+      this.intervalDestroy.unsubscribe();
+    }
+  
 }

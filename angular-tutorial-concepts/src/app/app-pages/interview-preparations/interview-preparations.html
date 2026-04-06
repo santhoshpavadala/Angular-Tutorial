@@ -6,6 +6,31 @@
     </div>
 
     <div class="sub-section">
+        <h2>Angular Important Inerview questions</h2>
+        <p>What are the building blocks of Angular</p>
+        <p>What is Routing</p>
+        <p>What is directives & how to create custom directives and uses?</p>
+        <p>What are pipes and how to create custom pipe and uses?</p>
+        <p>What is service? and dependency injections also?</p>
+        <p>What is differences between Templ and Reactive forms?</p>
+        <p>What is Signals?</p>
+        <p>Waht is standalone application and modules ?</p>
+        <p>What is use of RXJS?</p>
+        <p>How to Unsubscribe? using ngOnDestroy and Async for memory optimizations</p>
+        <p>What is Authentication and Authorization? Role based questions and Gaurds</p>
+        <p>What is Decorators? view child</p>
+        <p>Waht is module?</p>
+        <p>Waht is the use of main.ts</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+
+    <div class="sub-section">
         <h2>CHANGE DETECTION & PERFORMANCE</h2>
 
             <h3>9. How does Angular change detection work?</h3>
@@ -36,16 +61,109 @@
                 <li>Heavy logic in templates</li>
             </ul>
     </div>
+
+    <div class="sub-section">
+        <h2>Directive vs Component</h2>
+        <p>@component decerator @directives</p>
+        <p>A component controls a view with its own template, while a directive changes behaviour or appearance of an existing element without defining a full view.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Module vs Standalone: Angular 15+ Modules optionals</h2>
+    </div>
+
+    <div class="sub-section">
+        <h2>Data Bindings in ANAGULAR</h2>
+        <p>Angular data binding connects component data with the template using interpolation, property binding, event binding, and two way data binding</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Service</h2>
+        <p>A service holds reusable business logic or shared data and its commonly injected into components or other services</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Dependency Injection</h2>
+        <p>constructor (private data: dataService) // old way <br>
+        data=inject(dataService) is new way Angular 16+</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Routing and wildcard</h2>
+        <p>Angular routing maps paths to components, and wildcard routes handles the unknown urls like 404 page</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Router outlets and multiple router-outlets </h2>
+    </div>
+
+    <div class="sub-section">
+        <h2>Life cycle hooks:</h2>
+        <p>Life cycle hooks let you runs the code at different stages of a componet life, such as initilization, change detections and destruction.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Lazy loading</h2>
+        <p>Lazy loading loads a feature only when its needed, which improves initial application performanance <br>
+        loadChildren & loadComponent</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Latest Angular Features</h2>
+        <p>standalone components || signals || Improved perfomanance new control flow @ if, @ for || Hydration SSR</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>CRUD Operations: Table with API </h2>
+    </div>
+
+    <div class="sub-section">
+        <h2>Custom Directive & custom pipe (important)</h2>
+    </div>
+
+    <div class="sub-section">
+        <h2>RXJS</h2>
+        <p>Operators: of from map filter switchMap, forkjoin, debounce</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Create Observables</h2>
+    </div>
+
+    <div class="sub-section">
+        <h2>Subjects and behaviour subject realted topics</h2>
+    </div>
 </div>
 
 
 <div class="section">
     <h1>Javascript Interview Questions</h1>
     <div class="sub-section">
+        <h2>JS Interview questions:</h2>
+        <p>What is Hoisting?</p>
+        <p>What is Clouser?</p>
+        <p>What are the new ES6 Feautures used ?</p>
+        <p>Difference between Arrow and Normal functions?</p>
+        <p>scopes in javascript? global scope block scope, function scope, </p>
+        <p>What is destructuring? Array & Object destructuring</p>
+        <p>what is callback function? its a function that is used to passed as an arugment to another function</p>
+        <p>What is pure and impure functions?</p>
+    </div>
+    <div class="sub-section">
+        <h2>var vs let vs const</h2>
+        <p>"var is function-scoped and allows re-declaration, while let and const are block-scoped. const cannot be reassigned, and let is used when values change. Also, let and const are hoisted but stay in temporal dead zone."</p>
+        <p>var leaks outside blocks, while let and const stay inside the block</p>
+        <p>const stops reassigning, but object properties inside a const object can still change</p>
+    </div>
+
+
+    <div class="sub-section">
         <h2>What is Hoisting?</h2>
         <p>Hoisting is JavaScript's behavior where variable and function declarations are moved to the top of their scope during the compilation phase before code execution.</p>
         <p>Only declarations are hoisted, not initializations. <br>
         Happens during the memory creation phase of the Execution Context.</p>
+        <p>Variables/functions moved to top of scope. Before initilization we can access variables declared with var and normal functions we can invoke. <br>
+        let and const and arrow functions doesnot supports Hoistings.</p>
 
         <p><b>Hoisting is a JavaScript behavior where variable and function declarations are moved to the top of their scope during the compilation phase before execution. Variables declared with var are initialized with undefined, while let and const remain in the Temporal Dead Zone until initialized.</b></p>
         <div>
@@ -119,7 +237,42 @@
         <h2>What is Closure?</h2>
         <p>A closure is when a function remembers and accesses variables from its outer scope even after the outer function has finished executing.</p>
         <p>Inner function has access to the outer function variables/functions even after outer function termination.</p>
+
+        <p>Function remember its outer scope even after execution. Clousere means function+its lexical environment <br>
+        Say the word remembers first.then point to the outer variable and show how the inner function still uses it later</p>
     </div>
+
+    <div class="sub-section">
+        <h2>Arrow vs Normal Function:</h2>
+        <p>Arrow: -> no 'this' keyword uses <br>
+        Normal: -> has this keyword can use</p>
+
+        <p>
+            <script>
+                console.log("This is js consele")
+                const obj = {
+                    name: "Santhosh",
+                    normal: function () {
+                        console.log(this.name);
+                    },
+                    arrow: ()=>{
+                        console.log(this.name); // undefined due to arrow doesnot  support this keyword
+                    }
+                }
+                obj.normal();
+                obj.arrow();
+            </script>
+        </p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Event Bubbling & Capturing</h2>
+        <h2>Event Delegation</h2>
+        <h2>Various ways to create an Arrays:</h2>
+        <h2>object keys</h2>
+    </div>
+
+
 
     <div class="sub-section">
         <h2>Null coalescing Operator</h2>
@@ -379,9 +532,35 @@
 
 <div class="section">
     <h1>CSS Interview Question</h1>
-    <div class="boxModel">
-        <p>200 + 10 + 10 + 2 + 2 = 224px</p>
+
+    <div class="sub-section">
+        <h2>Box Model: content+padding+border+margin</h2>
+        <div class="boxModel">
+            <p>200 + 10 + 10 + 2 + 2 = 224px</p>
+        </div>
+
+        <div class="boxWidth">
+            <p>This is box size</p>
+        </div>
     </div>
+
+    <div class="sub-section">
+        <h2>display: none vs visibility: hidden</h2>
+        <p>Display none removes the element from layout, while visibility hidden hides the element but it keeps the space reserved</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Media Queries:</h2>
+        <p>media queries apply different styles based on conditions like screen width, device size, or orientation.</p>
+        <p>@media (max-width: 768px) check in css file for example</p>
+    </div>
+
+    <div>
+        <h2>pseudo classes: </h2>
+        <p>A pseudo class style an element based on its state such as hover, focus, active, or its first child</p>
+    </div>
+
+
 </div>
     
 

@@ -1,1 +1,134 @@
-<p>material-template-forms works!</p>
+<div class="section">
+    <h1>Angular forms using Angular Material components</h1>
+    <div class="sub-section">
+        <h2>Employee Onboarding Form</h2>
+        <form action="" #empForm="ngForm" (ngSubmit)="postEmpList(empForm)">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Company Name</mat-label>
+                                <input matInput name="companyName" 
+                                [(ngModel)]="empObj.companyName" #companyName="ngModel" required minlength="5">
+                            @if (companyName.invalid && (companyName.dirty || companyName.touched)) {
+                                <ng-container>
+                                    @if (companyName.errors?.['required'] && companyName.touched) {
+                                    <mat-error>Company Name is Required</mat-error>
+                                    } 
+                                    @if (companyName.errors?.['minlength']) {
+                                    <mat-error>Min 5 characters Required</mat-error>
+                                    }
+                                </ng-container>
+                            }
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>PinCode</mat-label>
+                                <input matInput name="pinCode" 
+                                [(ngModel)]="empObj.pinCode" #pinCode="ngModel" required minlength="6">
+                                @if (pinCode.invalid && (pinCode.touched || pinCode.dirty)) {
+                                <ng-container>
+                                    @if (pinCode.errors?.['required']) {
+                                    <mat-error>Pincode is required</mat-error>
+                                    }
+                                    @if (pinCode.errors?.['minlength']) {
+                                    <mat-error>Min 6 digis required</mat-error>
+                                    }
+                                </ng-container>
+                                }
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Address</mat-label>
+                                <input matInput name="address"
+                                [(ngModel)]="empObj.address" #address="ngModel" required>
+                                 @if (address.invalid && (address.touched || address.dirty)) {
+                                <ng-container>
+                                    @if (address.errors?.['required']) {
+                                    <mat-error>Address is required</mat-error>
+                                    }
+                                </ng-container>
+                                }
+                            </mat-form-field>
+                        </div>
+                        <div class="col-6">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>phone</mat-label>
+                                <input matInput name="phone" [(ngModel)]="empObj.phone" #phone="ngModel" required>
+                                @if (phone.invalid && (phone.touched || phone.dirty)) {
+                                <ng-container>
+                                    @if (phone.errors?.['required']) {
+                                    <mat-error>Phone is required</mat-error>
+                                    }
+                                </ng-container>
+                                }
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end gap-4">
+                        <button  type="button" matButton="outlined" (click)="onReset(empForm)">Reset</button>
+                        @if (empObj.companyId === 0) {
+                        <button type="submit" matButton="filled">Save</button>
+                        } @else {
+                        <button type="button" matButton="tonal" (click)="onUpdate(empForm)">Update</button>
+                        }
+                    </div>
+                </div>
+                <div class="col-12">
+                    <table mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort >
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="companyName">
+                        <th mat-header-cell mat-sort-header sortActionDescription="Sort by name"
+                         *matHeaderCellDef> Company Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+                        </ng-container>
+
+                        <!-- Email Column -->
+                        <ng-container matColumnDef="pinCode">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Pincode </th>
+                        <td mat-cell *matCellDef="let element"> {{element.pinCode}} </td>
+                        </ng-container>
+
+                        <!-- Email Column -->
+                        <ng-container matColumnDef="address">
+                        <th mat-header-cell *matHeaderCellDef 
+                        mat-sort-header sortActionDescription="Sort by address"> Address </th>
+                        <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="phone">
+                        <th mat-header-cell *matHeaderCellDef> Phone </th>
+                        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                        </ng-container>
+
+                        <!-- Actions -->
+                        <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                        <td mat-cell *matCellDef="let element; let i = index">
+                            <button mat-button color="accent" (click)="onEdit(element)">
+                            Edit
+                            </button>
+
+                            <button mat-button color="warn" (click)="onDelete(element.companyId)">
+                            Delete
+                            </button>
+                        </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        
+                    </table>
+                    <mat-paginator 
+                            [pageSize]="5"
+                            [pageSizeOptions]="[5, 10, 20]"
+                            showFirstLastButtons>
+                        </mat-paginator>
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
