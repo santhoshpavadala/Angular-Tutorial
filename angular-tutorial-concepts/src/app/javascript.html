@@ -16,7 +16,7 @@
 
         // console.log(y);
         // let y = 20;
-        // // output: Uncaught ReferenceError: Cannot access 'z' before initialization
+        // // output: Uncaught ReferenceError: Cannot access 'y' before initialization
 
         // console.log(z);
         // const z = 30;
@@ -40,6 +40,37 @@
 
         //Output: Uncaught TypeError: Hello is not a function
 
+// ---------Hoisting - Practice -----------------
+// hoisting is a javascript behaviour,
+// where variable and function declarations are moved to the top of their scope during compilation
+// phase before execution;
+// Var hoisting
+console.log(a, 'variable hoisting');
+var a = 20;
+// output: undefined
+
+// // let Hoisting
+// console.log(g, 'Let Hoisting');
+// let g = 30;
+// // output: Uncaught ReferenceError: Cannot access 'g' before initialization, STAYS IN TDZ
+
+// const Hoisting
+    // console.log(d);
+    // const d = "This is Const Hoisting"
+    // // Output: Uncaught ReferenceError: Cannot access 'd' before initialization, stays in TDZ
+
+// Function Hoisting
+test();
+function test() {
+    console.log('This is Function Hoisting, functions are fully hoisted');
+    // output: This is Function Hoisting, functions are fully hoisted
+}
+
+// demo();
+// var demo = function() {
+//     console.log("This is var declarion function is not fully hoisted");
+//     // output: Uncaught TypeError: demo is not a function
+// }
 
 // -------------------Clouser Examples-----------------
         function outer() {
@@ -47,7 +78,7 @@
             let counter = 0;
 
             return function inner() {
-                console.log(lang); // here we can access outer function varibales called clouser
+                console.log(lang, 'Out function variable result'); // here we can access outer function varibales called clouser
                  counter++;
                  console.log(counter);
             }
@@ -55,6 +86,33 @@
         let result = outer();
         result();
         result();
+
+
+function out() {
+            let lang = "This is Outer function variable";
+
+            return function inn() {
+                console.log(lang, 'Out function variable console'); // here we can access outer function varibales called clouser
+            }
+        }
+        let results = out();
+        results();
+
+function firstFn() {
+    let val = "This is outer Value";
+    let count = 0;
+    return function secondFn() {
+        console.log(val, 'Second Console');
+        count++;
+        console.log(count, 'Counter Clouser');
+        
+    }
+}
+
+let thirdFn = firstFn();
+thirdFn();
+thirdFn();
+thirdFn();
 
 // -------------------Null coalescing Operator-----------------
 // It defined as ?? works like if the left side value is null or undefined then it prints the right side value. it left side value is having the value then it prints only left side value only
@@ -110,6 +168,19 @@
         }
         // A function passed as argument to another function
         greet("Santhosh", sayBye);
+
+
+        function login(userName, callBack) {
+            console.log('Hello', + userName);
+            callBack();
+        }
+        function loginStatus() {
+            console.log("User Logged Successfully");
+        }
+        login("Santhosh", loginStatus);
+
+        // output: Hello Santhosh,
+        // User LoggedIn Successfully
 
 
         // Callback with Anonymous Function - You don't always need a separate function.
@@ -200,7 +271,7 @@
 
 
         // Same Example Using Async/Await
-        // Async / Await (Modern Way) 
+        // Async / Await (Modern Way)
         async function loadData() {
             let response = await fetch('https://jsonplaceholder.typicode.com/users');
             let data = await response.json();
@@ -246,7 +317,7 @@
         let ages = users.map(userAge=>userAge.age)
         console.log(names, 'Map operation: extracting the name');
         console.log(ages, 'Map operation: extracting the ages');
-        
+
 // Filter Operator
     let numberFilter = [1,2,3,4,5]
     // filtering only even number with the condition
@@ -293,7 +364,7 @@
         let numberIndex = [10, 20, 30, 40, 50];
         let index = numberIndex.findIndex(num=>num===30);
         console.log(index, 'findIndex() Method: TO FIND THE INDEX OF ARRAY OF ELEMENT');
-        
+
 // includes() Method: returns true or false if exists in array
         let incNumbers = [1,2,3,4,5];
         let findValue = incNumbers.includes(6);
@@ -310,7 +381,7 @@
         // Because this is not pointing to person. So we use call/apply/bind to control this.
         }
         greet();
-        
+
     // call() Method
     let personCall = { name: "Santhosh" };
     function greet3(city) {
@@ -322,7 +393,7 @@
     function getSalary(a, b) {
         console.log(salary, 'default call');
         console.log(window.salary, 'Window call');
-        console.log(this.salary, 'this key points required obj call'); 
+        console.log(this.salary, 'this key points required obj call');
         //here this is represents or manipulates from where to take the salary from var or object
         console.log(a, b);
     }
@@ -401,7 +472,7 @@
         console.log("Hello Set Timeout");
     }, 2000);
 
-    // Event loop 
+    // Event loop
     console.log("Start"); //Call Stack → console.log("Start")
     setTimeout(() => { //setTimeout → Web API
     console.log("Timeout");
@@ -424,10 +495,10 @@
     // output: 1 4 3 2
 
 
-    
+
 
 
     </script>
-    
+
 </body>
 </html>

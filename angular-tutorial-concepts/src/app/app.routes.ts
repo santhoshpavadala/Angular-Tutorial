@@ -44,17 +44,21 @@ import { InterviewPreparations } from './app-pages/interview-preparations/interv
 import { ChangeDetection } from './app-pages/change-detection/change-detection';
 import { MaterialReactiveForms } from './app-pages/crud/material-reactive-forms/material-reactive-forms';
 import { MaterialTemplateForms } from './app-pages/crud/material-template-forms/material-template-forms';
+import { LoginRegister } from './app-layout/login-register/login-register';
+import { JavascriptInterview } from './app-pages/javascript-interview/javascript-interview';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: Login },
+  {path: 'register', component: LoginRegister},
   {
     path: '',
     component: MainLayout,
     canActivate: [authGuard],  // new gaurd based
     children: [
       { path: 'home', component: Home,}, 
-      { path: 'interview', component: InterviewPreparations,}, 
+      { path: 'ang-interview', component: InterviewPreparations,}, 
+      { path: 'js-interview', component: JavascriptInterview,}, 
       { path: 'about', component: About },
       // Route guard example implemented only for contacts - old canActivate service based
       { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },

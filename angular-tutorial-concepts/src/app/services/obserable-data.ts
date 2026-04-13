@@ -10,6 +10,7 @@ export class ObserableData {
   public obsData = new Subject<string>();
   public obsData2 = new Subject<any>();
 
+  // Behaviour Subject
   courseDuration$ = new BehaviorSubject<string>("2 Months");
 
   $roleBehaviour = new BehaviorSubject<string>("");
@@ -17,9 +18,6 @@ export class ObserableData {
 
   // share replay - storing the data which presented and not do api calls multiples once its received the data
   private userDetails = new Map<number, Observable<any>>();
-
-
-
 
 
   constructor() { }
@@ -58,6 +56,7 @@ export class ObserableData {
   }
 
   getUserById(id:number): any {
+    // Share reply is used to call existing id , to stop multiple api calls
     debugger
     // return this.http.get('https://jsonplaceholder.typicode.com/users/'+ id)
   if(!this.userDetails.has(id)) {
