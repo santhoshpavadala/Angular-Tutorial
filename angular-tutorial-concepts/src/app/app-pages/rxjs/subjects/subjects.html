@@ -1,17 +1,20 @@
 <div class="section">
     <h1 class="text-center text-primary">Subject</h1>
-    <div class="sub-section">
-        <h2>Subject: Take the reference of Todo List and form components</h2>
-        <h2>BehaviourSubject:</h2>
-        <p>let s = new BehavoiurSubject()</p>
-    </div>
-</div>
 
-<div class="section">
     <div class="sub-section">
         <div class="row">
             <div class="col-12">
                 <h2>What is a Subject? </h2>
+                <p>In Angular, a Subject (from RxJS) is a special type of Observable that: </p>
+                <ul>
+                    <li>✔ Can emit values (like Observable)</li>
+                    <li>✔ Can be subscribed to (like Observable)</li>
+                    <li>✔ Acts as both Observer + Observable</li>
+                </ul>
+
+                <p>A Subject is like a bridge or event bus that allows data to be shared between components/services.
+                </p>
+
                 <ul> A Subject is:
                     <li>An Observable</li>
                     <li>An Observer</li>
@@ -21,15 +24,66 @@
                     <li>It can emit values manually using next().</li>
                 </ul>
                 <p>Think of it like a data broadcaster 📡 — when it emits, all subscribers receive the value.</p>
-            </div>
 
-            <div class="col-12">
+                <h2>Why do we use Subjects?</h2>
+                <p>Normally: <br>
+                    Observables → only emit data <br>
+                    Subjects → emit + listen + share data</p>
 
-                <!-- Share Replay Example -->
-                 <input type="text" [(ngModel)]="userId" placeholder="Enter ID">
-                 <button (click)="getUser()">Get Data</button>
-                
+                <h4>Used when:</h4>
+                <ul>
+                    <li>You want real-time communication</li>
+                    <li>Share data between components</li>
+                    <li>Trigger events manually</li>
+                </ul>
+
+                <h3>Types of Subjects:</h3>
+                <ul>
+                    <li>Subject (Basic)</li>
+                    <li>BehaviorSubject ⭐ (Most Important)</li>
+                    <li>ReplaySubject</li>
+                    <li>AsyncSubject</li>
+                </ul>
             </div>
         </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>Subject (Basic)</h2>
+        <ul>
+            <li>Does NOT store previous value</li>
+            <li>Only emits to current subscribers</li>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>BehaviorSubject ⭐ (Most Important)</h2>
+        <ul>
+            <li>Stores latest value</li>
+            <li>New subscribers get last emitted value</li>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>ReplaySubject</h2>
+        <ul>
+            <li>Stores multiple previous values</li>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>AsyncSubject</h2>
+        <ul>
+            <li>Emits only last value when completed</li>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>Subject: Take the reference of Todo List and form components</h2>
+        <h2>BehaviourSubject:</h2>
+        <p>let s = new BehavoiurSubject()</p>
+        <!-- Share Replay Example -->
+        <input type="text" [(ngModel)]="userId" placeholder="Enter ID">
+        <button (click)="getUser()">Get Data</button>
     </div>
 </div>

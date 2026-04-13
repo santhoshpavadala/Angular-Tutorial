@@ -1,21 +1,5 @@
 <div class="section">
-    <h1>Angular - Observables</h1>
-
-    <div class="sub-section">
-        <h2>Obeservable Examples</h2>
-        <p>Observables are a core part of RxJS (Reactive Extensions for JavaScript), which Angular uses extensively under the hood. <br>
-            Think of an Observable as:<br>
-            A stream of data that arrives over time<br>
-            Something you can subscribe to<br>
-            An elegant way to handle asynchronous operations (HTTP calls, user events, WebSockets, etc.)</p>
-
-            <button class="btn btn-success" (click)="getObservable()">Get Observable</button>
-            <button class="btn btn-success" (click)="getObservable2()">Get Observable2</button>
-            {{data2}}
-            <div>{{error2}}</div>
-            <button class="btn btn-success" (click)="unsub()">UnSubscribe</button>
-    </div>
-
+    <h1>Angular - RXJS ((Reactive Extensions for JavaScript)) Introduction</h1>
 
     <div class="sub-section">
         <h2>Rxjs Library</h2>
@@ -42,13 +26,32 @@
             <li><b>merge, join, forkjoin</b></li>
             <li>debounceTime</li>
         </ul>
+    </div>
 
 
+    <div class="sub-section">
+        <h2>Obeservable in Angular</h2>
+
+        <h2>What is an Observable?</h2>
+
+        <p>An Observable is a data stream that emits values over time (asynchronously), and you can listen to those values using subscribe().
+            <br>
+            Angular uses Observables from RxJS.
+            <br>
+            Observable = “Data coming continuously over time”
+        </p>
+
+
+        <p>Observables are a core part of RxJS (Reactive Extensions for JavaScript), which Angular uses extensively
+            under the hood. <br>
+            Think of an Observable as:<br>
+            A stream of data that arrives over time<br>
+            Something you can subscribe to<br>
+            An elegant way to handle asynchronous operations (HTTP calls, user events, WebSockets, etc.)</p>
+        
         <h2>What Is Observables</h2>
         <p>An Observable is a data stream that emits values over time.<br>
-        You can subscribe to it to receive data, errors, or completion notifications.</p>
-
-        
+            You can subscribe to it to receive data, errors, or completion notifications.</p>
 
         <h2>Basic Observable Flow</h2>
         <p>Observable → Subscribe → Data / Error / Complete</p>
@@ -63,6 +66,24 @@
         <h2>Syntax for Obseravle</h2>
         <p>Observable is a class</p>
         <p><b>let o = new observable()</b></p>
+
+
+        <h2>Where to Use Observables in Angular</h2>
+        <p>1. API Calls (MOST COMMON): Use case: Fetch data from backend return this.http.get('/api/users');  <br></p>
+        <p>2. Component ↔ Component Communication: Use case: Share data between components</p>
+        <p>3. Forms (Realtime Input Handling): this.form.valueChanges.subscribe: Live validation, Search boxes, Auto-save forms</p>
+        <p>4. Search with Debounce</p>
+        <p>5. Routing Events</p>
+        <p>6. Real-Time Data (Live Updates): interval(1000).subscribe</p>
+        <p>7. Async Pipe in Templates (BEST PRACTICE)</p>
+        <p>8. Error Handling & Data Transformation</p>
+        <p>9. WebSocket / Live APIs</p>
+
+        <button class="btn btn-success" (click)="getObservable()">Get Observable</button>
+        <button class="btn btn-success" (click)="getObservable2()">Get Observable2</button>
+        {{data2}}
+        <div>{{error2}}</div>
+        <button class="btn btn-success" (click)="unsub()">UnSubscribe</button>
 
         <!-- <p>To create object of this type, we have provide a callback function</p>
         <p><b>let o = new observable(function(){} or =>{})</b></p> -->

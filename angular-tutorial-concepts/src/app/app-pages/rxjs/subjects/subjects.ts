@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './subjects.scss'
 })
 export class Subjects implements OnInit {
+  // Subject:
+
   studentName$= new Subject();
   rollNo$ = new Subject<number>()
   takeTill=new Subject<void>();
@@ -28,38 +30,43 @@ export class Subjects implements OnInit {
   userId: number=0;
 
   constructor() {
+  // Subject:
     setTimeout(() => {
       this.studentName$.next("Angular 20");
       this.rollNo$.next(12);
       this.takeTill.next();
-      this.obsServ.courseDuration$.next('3monthss')
+      // Behaviour subject we can initilize the value in service and here in construstor also and gives the latest value
+      this.obsServ.courseDuration$.next('3 monthss')
     }, 4000);
+
+    
+  }
+
+  ngOnInit(): void {
+    // Subject:
+    this.studentName$.subscribe(res=>{
+      console.log(res);
+    })
+    this.rollNo$.subscribe(res=>{
+      console.log(res);
+    })
+
+
+    // BehaviourSubject:
+    this.obsServ.courseDuration$.subscribe((res:any)=>{
+      console.log(res);
+    })
 
     this.obsServ.$roleBehaviour.subscribe((behSub:string)=>{
       debugger;
       console.log(behSub, 'Behaviour subject emited data receives');
-      
     })
 
     this.obsServ.$roleSubject.subscribe((sub:string)=>{
       debugger;
       console.log(sub, 'Behaviour subject emited data receives');
     })
-  }
-
-  ngOnInit(): void {
-    this.studentName$.subscribe(res=>{
-      console.log(res);
-    })
-
-    this.rollNo$.subscribe(res=>{
-      console.log(res);
-    })
-
-    this.obsServ.courseDuration$.subscribe((res:any)=>{
-      console.log(res);
-      
-    })
+    
   }
 
   getUser() {
@@ -67,7 +74,4 @@ export class Subjects implements OnInit {
       debugger;
     })
   }
-
-
-
 }

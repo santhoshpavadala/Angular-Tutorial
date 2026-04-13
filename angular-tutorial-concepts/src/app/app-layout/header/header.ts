@@ -12,14 +12,14 @@ export class Header {
   // BehaviourSubject:
   obsServ = inject(ObserableData);
 
-  constructor(private r: Router) {
+  constructor(private router: Router) {
 
   }
 
   id:number = 10;
 
   navigate() {
-    this.r.navigate(['/basics', this.id, "js"], {
+    this.router.navigate(['/basics', this.id, "js"], {
       queryParams: {"page": 7, "size": 20}
     })
   }
@@ -28,5 +28,10 @@ export class Header {
     debugger;
     this.obsServ.$roleBehaviour.next(event.target.value);
     this.obsServ.$roleSubject.next(event.target.value);
+  }
+
+  onLogout() {
+    localStorage.removeItem('loggedUserId');
+    this.router.navigateByUrl('/login')
   }
 }
