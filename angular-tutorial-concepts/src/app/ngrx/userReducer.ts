@@ -1,5 +1,5 @@
-import { Action, createReducer, on, State } from "@ngrx/store";
-import { updateEmail, updateMobile, updateName, updateUsers } from "./action";
+import { createReducer, on } from "@ngrx/store";
+import { updateEmail, updateMobile, updateName } from "./action";
 import { AppState } from "./model";
 
 let initialState:AppState = {
@@ -9,12 +9,18 @@ let initialState:AppState = {
     id:0,
     posts:[{id:2, title:"asdf", description: "fgh"}]
 }
+
+export const userReducer = createReducer (initialState, 
+    on(updateName, (state, data)=>({...state, name: data.name})), //updateName, updateEmail, updateMobile are coming from action.ts
+    on(updateEmail, (state, data)=>({...state, email: data.email})),
+    on(updateMobile, (state, data)=>({...state,mobile: data.mobile}))
+)
+
+
 // NGRX Effects Example
 // let initialState = {
 //   users: []
 // }
-
-
 
 // // dispatch({type: 'name-edit', payload: "san"})
 // export function userReducer (state=initialState,action: Action) {
@@ -29,13 +35,6 @@ let initialState:AppState = {
 //         return state
 //     }
 // }
-
-
-export const userReducer = createReducer (initialState, 
-    on(updateName, (state, data)=>({...state, name: data.name})),
-    on(updateEmail, (state, data)=>({...state, email: data.email})),
-    on(updateMobile, (state, data)=>({...state,mobile: data.mobile}))
-)
 
 // NGRX Effects Example
 // export const userReducer = createReducer (initialState,

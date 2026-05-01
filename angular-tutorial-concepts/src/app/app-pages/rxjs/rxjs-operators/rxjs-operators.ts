@@ -319,6 +319,7 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
         console.log(res, 'search inputs');
       })
 
+      // exhasustmap  examples - 
 
       this.$loginClicks.pipe(
         exhaustMap(()=>{
@@ -373,6 +374,8 @@ export class RxjsOperators implements OnInit, AfterViewInit, OnDestroy {
         console.log('map:', value);
         this.mapData.push(value);
       });
+
+      
 
   /* ---------------- Filter Operator ---------------- */
     of(7, 78, 89)

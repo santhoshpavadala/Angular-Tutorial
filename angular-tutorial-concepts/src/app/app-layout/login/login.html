@@ -11,17 +11,40 @@
       <p>Password: 112233</p>
     </div>
 
-    <form >
+    <form #loginForm = "ngForm" (ngSubmit)="onLogin()" >
       <div class="form-floating mb-3">
         <input type="email" class="form-control" id="email" placeholder="name@example.com"
-        [(ngModel)]="loginObj.emailId" name="email">
+        [(ngModel)]="loginObj.emailId" name="email" #email="ngModel" required email>
         <label for="email">Email address</label>
+
+        @if (email.touched || email.dirty || isFormSubmitted) {
+          <div>
+            @if (email.errors?.['required']) {
+            <small class="text-danger">
+              Email Id is required
+            </small>
+            } @else if (email.errors?.['email']) {
+              <small class="text-danger">Email format is Incorrect</small>
+            }
+          </div>
+        }
       </div>
 
       <div class="form-floating mb-3">
         <input type="password" class="form-control" id="password" placeholder="Password"
-        [(ngModel)]="loginObj.password" name="password">
+        [(ngModel)]="loginObj.password" name="password" #password="ngModel" required minlength="5">
         <label for="password">Password</label>
+        @if (password.touched || password.dirty || isFormSubmitted) {
+          <div>
+            @if (password.errors?.['required']) {
+            <small class="text-danger">
+              Password Id is required
+            </small>
+            } @else if (password.errors?.['email']) {
+              <small class="text-danger">Min 5 Characters required</small>
+            }
+          </div>
+        }
       </div>
 
       <div class="d-flex justify-content-between mb-3">
@@ -32,8 +55,7 @@
         <a href="#" class="text-decoration-none">Forgot password?</a>
       </div>
 
-      <button class="btn btn-primary w-100 mb-3 login-btn"
-      (click)="onLogin()">
+      <button type="submit" class="btn btn-primary w-100 mb-3 login-btn">
         Login
       </button>
 

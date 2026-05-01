@@ -361,6 +361,7 @@
     <div class="sub-section">
         <h2>What is a pure function? Pure and Impure functions in javascript</h2>
         <h4>Pure Functions</h4>
+        <p>A pure function always returns the same output for the same input and does not cause any side effects.</p>
         <ul>
             <li>It has no side effects </li>
             <li>It is predictable</li>
@@ -374,6 +375,7 @@
             external state or variables.</p>
 
         <h4>Impure Functions</h4>
+        <p>An impure function may return different outputs for the same input or modify external state (side effects).</p>
         <p>An Impure Function is a function that:</p>
         <ul>
             <li>Produces different outputs for the same input OR</li>
@@ -476,7 +478,7 @@
         <h2>call() Method</h2>
         <p>call() invokes a function immediately and allows you to pass arguments one by one.</p>
         <p>syntax: function.call(thisArg, arg1, arg2)</p>
-        <p>so here is call method is used to pointout which object have to print for 'this' keyword value</p>
+        <p><b>so here is call method is used to pointout which object have to print for 'this' keyword value</b></p>
 
 
         <h2>apply() Method</h2>
@@ -594,16 +596,60 @@
             destructuring, spread and rest operators, classes, modules, promises, optional chaining, and default
             parameters, which make JavaScript more powerful and easier to write.</p>
         <ul>
-            <li> let / const</li>
-            <li>Arrow functions</li>
-            <li>Template literals</li>
-            <li>Destructuring</li>
-            <li>Spread operator</li>
-            <li>Rest operator</li>
-            <li>Classes</li>
-            <li>Modules (import/export)</li>
-            <li>Promises</li>
-            <li>Optional chaining</li>
+            <li> let / const (Block-scoped variables)</li>
+            <li>Arrow functions (const add = (a, b) => a + b;)</li>
+            <li>Template literals (Use backticks ` for strings) <br>
+                <!-- let name = "Santhosh";
+                console.log(`Hello ${name}`); -->
+            </li>
+            <li>Destructuring
+                <!-- const user = { name: "JS", age: 25 };
+                const { name, age } = user; -->
+            </li>
+            <li>Spread operator
+                <!-- const arr1 = [1, 2];
+                const arr2 = [...arr1, 3, 4]; -->
+            </li>
+            <li>Rest operator
+                <!-- function sum(...nums) {
+                    return nums.reduce((a, b) => a + b);
+                } -->
+            </li>
+            <li>Classes: Syntax for OOP
+                <!-- class Person {
+                    constructor(name) {
+                    this.name = name;
+                    }
+                } -->
+            </li>
+            <li>Modules (import/export)
+                    <!-- // file1.js
+                    export const name = "JS";
+
+                    // file2.js
+                    import { name } from "./file1"; -->
+            </li>
+            <li>Promises: Handle async operations
+                <!-- const p = new Promise((res, rej) => {
+                    res("Done");
+                }); -->
+            </li>
+            <li>Optional chaining (?)
+                <!-- user?.address?.city; -->
+            </li>
+
+            <li>7. Default Parameters
+                <!-- function greet(name = "Guest") {
+                    console.log(name);
+                } -->
+            </li>
+
+            <li>12. Array Methods Improvements
+                arr.map(), 
+                arr.filter(), 
+                arr.reduce(), 
+                arr.find()
+            </li>
         </ul>
     </div>
 
@@ -613,4 +659,167 @@
         <h2>Various ways to create an Arrays:</h2>
         <h2>object keys</h2>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="section">
+    <h1>Javascript Interview Questions</h1>
+    <div class="sub-section">
+        <h2>JS Interview questions:</h2>
+        <p>What is Hoisting?</p>
+        <p>What is Clouser?</p>
+        <p>What are the new ES6 Feautures used ?</p>
+        <p>Difference between Arrow and Normal functions?</p>
+        <p>scopes in javascript? global scope block scope, function scope, </p>
+        <p>What is destructuring? Array & Object destructuring</p>
+        <p>what is callback function? its a function that is used to passed as an arugment to another function</p>
+        <p>What is pure and impure functions?</p>
+        <p>Difference between var, let, const</p>
+        <p> What is a callback function</p>
+        <p>4. Array methods find and filter difference, how to check if specific elements present in array or not</p>
+        <p>Difference between call, apply, bind</p>
+        <p>ES6 features</p>
+        <p>difference between local storage and session storage</p>
+        <p>Difference between null and undefined</p>
+        <p>by using date methods asked to extract day, month and year and create a new string of date</p>
+        <p>time complexity of the array filter and find methods</p>
+
+        <h4>Coding Question</h4>
+        <p>1. Print Fibonacci series</p>
+        <p>2. Factorial of a number</p>
+        <p>3. Remove duplicates from an array</p>
+        <p>4. Find the missing number in an array</p>
+        <p>5. Reverse string without using built in Methods</p>
+
+        <p>1. print Fibonacci series </p>
+        <p>2. asked to create an object which will store an ecommerce product with some nested object and storing an
+            array of objects also</p>
+
+        <p>1. Print Fibonacci series</p>
+        <p>2. Factorial of a number using loop and recursion (JavaScript)</p>
+        <p>3. Reverse a string without using any default methods.</p>
+        <p>4. Find Missing number from array.</p>
+        <p>5. Remove duplicates from an array using filter() and for Loop</p>
+        <p>6. Remove duplicates from an array of objects</p>
+        <p>7. Remove duplicates from an array of objects with multiple fields</p>
+        <p>8. Find duplicate elements and return their count</p>
+        <p>9. Given an array of numbers, remove 0 and convert positive numbers to negative</p>
+        <p>10. Find the longest word in a string</p>
+        <p>11. Convert a nested array into a flat array using recursion</p>
+        <p>12. There are some coding examples where we have to use Object.keys and Object.values method to Extract data
+            and create in different format.</p>
+
+
+        <div>
+            <p>JavaScript fundamentals.
+                Below are some commonly asked JavaScript programs along with the expected input and output, so the
+                requirement is clear.
+                <!-- 1. Fibonacci series (iterative and recursive)
+                Input: n = 6
+                Output: 0 1 1 2 3 5
+                2. Factorial of a number
+                Input: 5
+                Output: 120
+                3. Remove duplicates from an array or Array of object with some Key as unique (using loop or filter method)
+                Input: [1, 2, 2, 3, 4, 4]
+                Output: [1, 2, 3, 4]
+                4. Flatten a nested array (with and without recursion)
+                Input: [1, [2, [3, 4]]]
+                Output: [1, 2, 3, 4]
+                5. Split an array into chunks of fixed size (dynamic UI)
+                Input: chunk([1, 2, 3, 4, 5], 2)
+                Output: [[1, 2], [3, 4], [5]]
+                6. Reverse a string without using built-in reverse or Check if a string is a palindrome
+                7.Count character frequency in a string
+                Input: "aabbbc"
+                Output: { a: 2, b: 3, c: 1 }
+                8. Find the first non-repeating character in a string
+                Input: "aabbcddee"
+                Output: "c"
+                9. Implement debounce function (commonly asked with search input use case)
+                10.  memoization utility to cache results of a pure function</p> -->
+        </div>
+
+
+        <div>
+            JavaScript Questions
+            ✅ What is Closure and how does it work in JavaScript
+            ✅ What is Hoisting
+            ✔️ Follow-up: Temporal Dead Zone (TDZ)
+            ✅ How memory allocation works in JavaScript
+            ✅ Event Bubbling & Capturing and how to prevent it
+            ✅ Event Delegation
+            ✅ Explain Callback functions
+            ✅ List down ES6 features
+            ✅ Spread vs Rest operator
+            ✅ Scope difference between var, let, and const
+            ✔️ Guess Output: loop with var and accessing it outside loop
+            ✔️ Guess Output: loop with let and accessing it outside loop
+            ✅ Current version of ECMAScript
+            ✅ Explain Promises
+            ✔️ Difference between Promise.all and Promise.race
+        </div>
+    </div>
+</div>
+
+
+<div class="section">
+    <h2>CSS Interview Questions</h2>
+    <div>
+        CSS & UI Fundamentals
+            ✅ CSS Box Model
+            ✅ Position properties in CSS
+            ✅ How to write media queries
+            ✅ Bootstrap Grid system for responsive layouts
+            ✅ Difference between display: none and visibility: hidden
+    </div>
+
+    <div class="section">
+        <h1>CSS Interview Question</h1>
+
+        <div class="sub-section">
+            <h2>Box Model: content+padding+border+margin</h2>
+            <div class="boxModel">
+                <p>200 + 10 + 10 + 2 + 2 = 224px</p>
+            </div>
+
+            <div class="boxWidth">
+                <p>This is box size</p>
+            </div>
+        </div>
+
+        <div class="sub-section">
+            <h2>display: none vs visibility: hidden</h2>
+            <p>Display none removes the element from layout, while visibility hidden hides the element but it keeps the
+                space reserved</p>
+        </div>
+
+        <div class="sub-section">
+            <h2>Media Queries:</h2>
+            <p>media queries apply different styles based on conditions like screen width, device size, or orientation.
+            </p>
+            <p>@media (max-width: 768px) check in css file for example</p>
+        </div>
+
+        <div>
+            <h2>pseudo classes: </h2>
+            <p>A pseudo class style an element based on its state such as hover, focus, active, or its first child</p>
+        </div>
+
+
+    </div>
+</div>
+
 </div>

@@ -3,10 +3,12 @@ import { ArrayType } from '@angular/compiler';
 import { Component, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Customdir } from '../../custom-directives/customdir';
+import { CustomdirHighlite } from '../../custom-directives/customdir-highlite';
+import { CutomdirIf } from '../../custom-directives/cutomdir-if';
 
 @Component({
   selector: 'app-directives',
-  imports: [CommonModule, FormsModule, Customdir],
+  imports: [CommonModule, FormsModule, Customdir, CustomdirHighlite, CutomdirIf],
   templateUrl: './directives.html',
   styleUrl: './directives.scss',
 })

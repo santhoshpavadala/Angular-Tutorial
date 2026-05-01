@@ -1,6 +1,14 @@
 <div class="section">
     <h2>Angular Signals(16+)</h2>
     <div class="sub-section">
+        <h2>Signals:</h2>
+        <p>A Signal in Angular is a reactive state container that holds a value and automatically notifies Angular to update the UI whenever that value changes.</p>
+        <p>A Signal is: <br>
+            A variable <br>
+            That Angular tracks automatically <br>
+            And re-renders the UI when it changes</p>
+    </div>
+    <div class="sub-section">
         <div class="row">
             <div class="col-12">
                 <h2>What are Signals in Angular?</h2>
@@ -32,19 +40,63 @@
                     Automatically tracking dependencies <br>
                     Triggering fine-grained change detection</p>
             </div>
+
+            <div class="col-12">
+                <h2>1. Writable Signal</h2>
+                <p>A Writable Signal is a signal whose value you can read and update manually. <br> It’s like a normal variable but reactive.</p>
+                <p>Use cases <br>
+                    Form input values <br>
+                    Toggle state <br>
+                    Counters <br>
+                    UI flags (loading, open/close)</p>
+            </div>
+            <div class="col-12">
+                <h2>2. Computed Signal</h2>
+                <p>A Computed Signal is a derived value that is automatically calculated based on other signals. You cannot set it manually.</p>
+                <p>When price or quantity changes → total updates automatically</p>
+                <p>Use cases <br>
+                    Calculations (total price) <br>
+                    Filtering lists <br>
+                    Derived UI state</p>
+            </div>
+            <div class="col-12">
+                <h2>3. Effect</h2>
+                <p>An Effect runs a function automatically when dependent signals change, mainly for side effects.</p>
+                <p>Important <br>
+                Used for side effects, NOT for storing values
+                Runs automatically when signals change</p>
+                <p>
+                    Use cases <br>
+                    API calls <br>
+                    Logging <br>
+                    Local storage updates <br>
+                    DOM interactions
+                </p>
+            </div>
         </div>
-    <div class="row">
-        <div class="col-3">{{signalVariable}}</div>
-        <div class="col-3">{{signalVariable2()}}</div>
-        <div class="col-3">{{rollno()}}</div>
-        <div class="col-3">{{city()}}</div>
-        <div class="col-3">
-            <button (click)="changesCity()">Change Course</button>
+        <div class="row">
+            <div class="col-3">{{signalVariable}}</div>
+            <div class="col-3">{{signalVariable2()}}</div>
+            <div class="col-3">{{rollno()}}</div>
+            <div class="col-3">{{city()}}</div>
+            <div class="col-3">
+                <button (click)="changesCity()">Change Course</button>
+            </div>
+            <div class="col-3">{{courseDuration()}}</div>
         </div>
-        <div class="col-3">{{courseDuration()}}</div>
-    </div>
     </div>
 
+    <div class="sub-section">
+        <div>
+            <div style="font-size: 2rem; color: red;">{{count()}}</div>
+            <button (click)="increment()" class="btn btn-primary">Increment</button>
+        </div>
+
+        <div>
+            <div>{{area()}}</div>
+            <button (click)="getArea()" class="btn btn-warning">Area Increment</button>
+        </div>
+    </div>
 
     <div class="sub-section">
         <h2>Signal form Example</h2>
@@ -80,4 +132,3 @@
         
     </div>
 </div>
-

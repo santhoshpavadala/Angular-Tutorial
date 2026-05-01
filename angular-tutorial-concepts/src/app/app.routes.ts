@@ -46,6 +46,7 @@ import { MaterialReactiveForms } from './app-pages/crud/material-reactive-forms/
 import { MaterialTemplateForms } from './app-pages/crud/material-template-forms/material-template-forms';
 import { LoginRegister } from './app-layout/login-register/login-register';
 import { JavascriptInterview } from './app-pages/javascript-interview/javascript-interview';
+import { Search } from './app-pages/search/search';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -72,12 +73,13 @@ export const routes: Routes = [
       { path: 'pipes', component: Pipes },
       { path: 'templates', component: Templates },
       { path: 'ngcontent', component: NgContent },
-      { path: 'services', component: ServicesExamples },
       { path: 'todo-form', component: Todoform },
       { path: 'todo-list', component: Todolist },
       { path: 'observables', component: Observables },
+      { path: 'services', component: ServicesExamples },
       { path: 'subject', component: Subjects },
       { path: 'rxjs-operators', component: RxjsOperators },
+      { path: 'global-search', component: Search },
       { path: 'rxjs-forms', component: RxjsForms },
       { path: 'unsubscribe', component: AngUnsubscribe },
       { path: 'http-interceptors', component: HttpInterceptors },
