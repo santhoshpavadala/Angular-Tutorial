@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { LoginModel } from '../../models/login-model';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { Router, ROUTES, RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login-service';
 import { Alert } from '../../app-shared/alert/alert';
@@ -17,6 +17,7 @@ export class Login {
   router = inject(Router);
   loginData = inject(LoginService)
 
+  isFormSubmitted:boolean=false;
 
   onLogin() {
     // // Hardcode login
@@ -25,18 +26,19 @@ export class Login {
     // } else {
     //   alert('Wrong Credientials')
     // }
-
+    this.isFormSubmitted = true;
     this.loginData.loginUser(this.loginObj).subscribe({
       next: (res:any)=> {
         debugger;
         // setting the token for UserId in local storage
         // In Auth gaurd we can get the loacal storage data
         localStorage.setItem('loggedUserId', res.data.userId);
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/home');
+        this.isFormSubmitted = false;
       },
-      error: ()=> {
-        alert('Wrong Credientials')
-      }
+      // error: ()=> {
+      //   alert('Wrong Credientials')
+      // }
     })
   }
 

@@ -1,0 +1,68 @@
+.boxModel {
+    width: 200px;
+    padding: 10px;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+.boxWidth{
+    width: 300px;
+    padding: 10px;
+    border: 2px solid black;
+    margin: 20px;
+}
+
+// Media queries examples:
+/* Mobile */
+@media (max-width: 480px) {
+  body {
+    background: lightblue;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    background: lightgreen;
+  }
+}
+
+/* Laptop */
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    background: lightyellow;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  body {
+    background: lightgray;
+  }
+}
+
+
+// 
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #121212;
+    color: white;
+  }
+}
+@media (hover: hover) {
+  button:hover {
+    background: black;
+    color: white;
+  }
+}
+@media (orientation: portrait) {
+  body {
+    background: pink;
+  }
+}
+
+@media (orientation: landscape) {
+  body {
+    background: orange;
+  }
+}

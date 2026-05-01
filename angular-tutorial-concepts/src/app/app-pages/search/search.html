@@ -1,0 +1,25 @@
+<div class="section">
+    <h2>Global Search: Search Operations using RXJS Observables and Operators</h2>
+    <div class="subsection">
+        <div>
+            <label for="">User Search List</label>
+            <input type="text" [formControl]="searchControl" placeholder="Search User..." class="form-control">
+        </div>
+        @if (result.length > 0) {
+            <div>
+                @for (user of result; track $index) {
+                    <p>
+                        {{user.name}} - {{user.email}}
+                    </p>
+                }
+            </div>
+        }
+
+        @if (result.length === 0) {
+            <div>
+                <p>No Result</p>
+            </div>
+        }
+        
+    </div>
+</div> 

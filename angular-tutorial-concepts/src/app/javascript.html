@@ -156,7 +156,7 @@ thirdFn();
         }
         console.log(impure(5));
         console.log(impure(5));
-
+''
 
 // -------------------Call back function in JavaScript -----------------
         function greet(name, callback) {
@@ -171,7 +171,7 @@ thirdFn();
 
 
         function login(userName, callBack) {
-            console.log('Hello', + userName);
+            console.log('Hello' + userName);
             callBack();
         }
         function loginStatus() {
@@ -387,13 +387,20 @@ thirdFn();
     function greet3(city) {
         console.log(this.name + ' from ' + city);
     }
-    greet3.call(personCall, "Hyderabad")
+    greet3.call(personCall, "Hyderabad");
+
+
+    let studentName = {name: "Ajay"}
+    function message(wishes) {
+        console.log('Hello, '+ this.name, wishes);
+    }
+    message.call(studentName, "Good Luck")
 
     var salary = 30000;
     function getSalary(a, b) {
-        console.log(salary, 'default call');
-        console.log(window.salary, 'Window call');
-        console.log(this.salary, 'this key points required obj call');
+        // console.log(salary, 'SALARY: default call');
+        // console.log(window.salary, 'SALARY: Window call');
+        console.log(this.salary, 'SALARY: this key points required obj call');
         //here this is represents or manipulates from where to take the salary from var or object
         console.log(a, b);
     }
@@ -404,6 +411,8 @@ thirdFn();
     employee2 = {salary: 50000}
     employee3 = {salary: 75000}
     employee4 = {salary: 100000}
+
+    // for call we can pass this object and individual arguments
     getSalary.call(employee, 10, 20)
     getSalary.call(employee2, 30, 40);
 
@@ -411,7 +420,7 @@ thirdFn();
     // apply() Method passes args as array
     getSalary.apply(employee3, [50,60])
 
-    // bind() Method passes args as array
+    // bind() Method passes arguments individually and returns with new function then only bindi will applies
     var f1 = getSalary.bind(employee4, 70, 80);
     f1();
 
@@ -496,7 +505,124 @@ thirdFn();
 
 
 
+    // -----------------------Coding Problems-----------------------------------------
 
+    // --------------- 1. Fibonacci Series (VERY IMPORTANT)
+    function fibonacci(n) {
+        let a=0,b=1;
+
+        for(let i=0; i<n; i++) {
+            console.log(a,'fibinocci values');
+            let next = a+b;
+            a=b;
+            b=next;
+        }
+    }
+    fibonacci(6);
+
+    // --------------- 2. Factorial Using Loop (Most Recommended)
+
+    function factorial(n) {
+        let result =1;
+        for(let i=0; i<=1; i++) {
+            result *= i;
+            // result = result*i
+        }
+        return result;
+    }
+
+    console.log(factorial(5)); // 120
+
+//     result = 1
+// i=1 → result = 1 × 1 = 1  
+// i=2 → result = 1 × 2 = 2  
+// i=3 → result = 2 × 3 = 6  
+// i=4 → result = 6 × 4 = 24  
+// i=5 → result = 24 × 5 = 120  
+
+    // using Recurion method
+    function factorial2(n) {
+    if (n === 0 || n === 1) return 1;
+
+    return n * factorial2(n - 1);
+    }
+
+    console.log(factorial2(5)); // 120
+
+
+    // --------------- 3. Reverse a string without using built-in methods
+
+    function reverseStr(str) {
+        let reversed = "";
+        for(let i = str.length-1; i>=0; i--) {
+            reversed = reversed+str[i]
+        }
+        return reversed;
+    }
+
+    console.log(reverseStr('Santhosh'), 'REVERSED STRNG EXAMPLE'); // olleh
+    
+
+    // --------------- 3. Remove duplicates from an array
+
+    function removeDuplicates(arr) {
+        return [...new Set(arr)];
+    }
+    console.log(removeDuplicates([1, 2, 2, 3, 4, 4]), 'removeDuplicates');
+
+
+// Remove Duplicates (Loop)
+    function removeDuplicate(arr) {
+        let result = [];
+
+        for (let i = 0; i < arr.length; i++) {
+            if (!result.includes(arr[i])) {
+            result.push(arr[i]);
+            }
+        }
+
+        return result;
+        }
+
+      console.log(removeDuplicate([1,1,2,2,3,4,4,5]), 'removeDuplicates');
+
+
+    //   Remove Duplicates using filter()
+      function removeDuplicates(arr) {
+        return arr.filter((item, index) => arr.indexOf(item) === index);
+        }
+//         Step-by-step
+// indexOf(item) → first occurrence
+// Compare with current index
+// Keep only first occurrence
+
+
+        // Remove Duplicates from Array of Objects
+        function removeDuplicates(arr) {
+            const map = new Map();
+
+            arr.forEach(item => {
+                map.set(item.id, item);
+            });
+
+            return [...map.values()];
+            }
+    
+//             Keys must be unique
+// Overwrites duplicates automatically
+
+// Interview Question: 
+            let myArray = [1,2,3,4,5,1,2,3,4,5,2,3,4];
+            let resultD = [...new Set(myArray)];
+            console.log(resultD);
+
+
+            let myArray2 = [1,2,3,4,5,1,2,3,4,5,2,3,4];
+            function getUniqueElements(arr) {
+                return [...new Set(arr)];
+            }
+            let resultdup = getUniqueElements(myArray2);
+            console.log(resultdup);
 
     </script>
 

@@ -6,6 +6,10 @@ export const updateUsers = createAction(
   props<{users: any[]}>()
 )
 
+export const updateName = createAction('name-edit', props<{name:string}>()); //syntax, it return a function updateName. createAction and props are the inbulit inputs
+export const updateEmail = createAction('email-edit', props<{email:string}>());
+export const updateMobile = createAction('mobile-edit', props<{mobile:string}>());
+
 // Need to import createAction method in Ngrx.
 // Need to import props from ngrx
 
@@ -28,12 +32,6 @@ export const updateUsers = createAction(
     name: 'Santhosh'
   }
 */
-
-export const updateName = createAction('name-edit', props<{name:string}>()); //syntax, it return a function updateName. createAction and props are the inbulit inputs
-export const updateEmail = createAction('email-edit', props<{email:string}>());
-export const updateMobile = createAction('mobile-edit', props<{mobile:string}>());
-
-
 
 // Create Action example:
 // export function  updateName(name){

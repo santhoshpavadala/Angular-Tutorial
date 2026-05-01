@@ -1,0 +1,10 @@
+<div>
+    <p> {{isExpanded ? text : (text | slice:0:limit)}}
+        @if(text.length > limit) {
+        <span>
+            <a (click)="onToggleView()" style="cursor:pointer; color:blue;">
+                {{isExpanded ? 'View Less' : '... View More'}}</a>
+        </span>
+        }
+    </p>
+</div>
