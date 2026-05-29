@@ -276,7 +276,7 @@ aside {
     border: 1px solid #e5e7eb;
     border-radius: 8px;
 
-    padding: 12px;
+    padding: 16px;
     margin: 10px 0;
 
     transition: background-color 0.2s ease;
@@ -308,18 +308,7 @@ table {
   }
 }
 
-/* ================================
-   CARDS
-================================ */
-.cardContainer {
-  display: flex;
-  gap: 20px;
-  margin: 20px;
 
-  .card {
-    padding: 20px;
-  }
-}
 
 /* ================================
    MEDIA
@@ -385,4 +374,107 @@ input.ng-touched.ng-invalid {
 
 table {
   width: 100%;
+}
+
+
+/* ================================
+   CARDS
+================================ */
+.cardContainer {
+  display: flex;
+  gap: 20px;
+  margin: 20px;
+
+  .card {
+    padding: 20px;
+  }
+}
+
+/* ================================
+   Grid Cards Dashboards
+================================ */
+.gridDashboard{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  // padding: 16px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.mat-mdc-card {
+  // background-color: #fff;
+  // border-radius: 10px;
+   --mat-card-elevated-container-color: #fff;
+  --mat-card-elevated-container-shape: 12px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  --mat-card-elevated-container-elevation: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  cursor: pointer;
+
+  .mat-mdc-card-subtitle {
+    --mat-card-subtitle-text-color: black;
+  }
+
+  &.dark-card {
+    --mat-card-elevated-container-color: #1e293b;
+    color: white;
+    .mat-mdc-card-subtitle {
+      --mat-card-subtitle-text-color: white;
+    }
+
+    p {
+        color: white;
+    }
+  }
+
+  &.light-card {
+    --mat-card-elevated-container-color: #cccccc;
+  }
+}
+
+.mat-mdc-card:hover {
+  transform: scale(1.03);
+  --mat-card-elevated-container-elevation: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* ================================
+  Card status Badges
+================================ */
+.statusBadge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  width: fit-content;
+
+  &.active {
+    background: green;
+  }
+
+  &.inactive {
+    background: red;
+  }
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
 }
