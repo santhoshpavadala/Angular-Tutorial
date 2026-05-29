@@ -1,0 +1,57 @@
+<div class="dashboard-header">
+    <h2>
+        Filter & Tap Operators Dashboard
+    </h2>
+    <p>
+        Total Filtered Users:
+        {{ userList.length }}
+    </p>
+</div>
+
+<div class="gridDashboard">
+    @for (user of userList; track $index) {
+        <mat-card>
+            <mat-card-header style="flex-direction: column;">
+                <div style="display: flex; gap: 16px;">
+                    <div>
+                        <img [src]="user.profileImage" class="profile-img">
+                    </div>
+                    <div style="flex: 1">
+                        <mat-card-title> {{ user.name }}</mat-card-title>
+                        <mat-card-subtitle>{{ user.role }}</mat-card-subtitle>
+                    </div>
+                </div>
+
+                <div class="statusBadge"
+                        [ngClass]="{
+                            active: user.status === 'Active',
+                            inactive: user.status === 'Inactive'
+                        }">
+                        {{ user.status }}
+                    </div>
+
+            </mat-card-header>
+
+                
+
+
+            <!-- Content -->
+            <mat-card-content>
+               
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ user.email }}
+                </p>
+                <p>
+                    <strong>City:</strong>
+                    {{ user.city }}
+                </p>
+                <p>
+                    <strong>Company:</strong>
+                    {{ user.company }}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    }
+</div>

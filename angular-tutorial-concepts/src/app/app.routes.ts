@@ -47,6 +47,8 @@ import { MaterialTemplateForms } from './app-pages/crud/material-template-forms/
 import { LoginRegister } from './app-layout/login-register/login-register';
 import { JavascriptInterview } from './app-pages/javascript-interview/javascript-interview';
 import { Search } from './app-pages/search/search';
+import { RxjsMapDashboard } from './app-pages/rxjs/RXJS-Opearators-Examples/rxjs-map-dashboard/rxjs-map-dashboard';
+import { RxjsFilterDashboard } from './app-pages/rxjs/RXJS-Opearators-Examples/rxjs-filter-dashboard/rxjs-filter-dashboard';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -75,13 +77,19 @@ export const routes: Routes = [
       { path: 'ngcontent', component: NgContent },
       { path: 'todo-form', component: Todoform },
       { path: 'todo-list', component: Todolist },
-      { path: 'observables', component: Observables },
       { path: 'services', component: ServicesExamples },
+
+      // RXJS Routes
+      { path: 'observables', component: Observables },
       { path: 'subject', component: Subjects },
       { path: 'rxjs-operators', component: RxjsOperators },
       { path: 'global-search', component: Search },
       { path: 'rxjs-forms', component: RxjsForms },
       { path: 'unsubscribe', component: AngUnsubscribe },
+      { path: 'rxjs-map', component: RxjsMapDashboard },
+      { path: 'rxjs-filter', component: RxjsFilterDashboard },
+
+
       { path: 'http-interceptors', component: HttpInterceptors },
       { path: 'forms', component: Forms },
       { path: 'signup', component: SignupForm },

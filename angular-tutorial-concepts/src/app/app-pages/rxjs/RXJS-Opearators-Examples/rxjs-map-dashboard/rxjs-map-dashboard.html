@@ -1,0 +1,136 @@
+<div class="section">
+    <h1>Rxjs Map & SwitchMap Operators</h1>
+    <div class="sub-section">
+        <h2>Total Users ({{userList.length}})</h2>
+        <!-- <div class="mb-4">
+            <input type="text" placeholder="Search Users" class="form-control"
+            (input)="searchUsers($event)">
+        </div> -->
+        <div class="gridContainer">
+            <mat-form-field appearance="outline">
+                <mat-label>Search Users</mat-label>
+                <input matInput placeholder="Search..." [formControl]="searchControl">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Company</mat-label>
+                <mat-select [formControl]="companyControl">
+                    <mat-option value="">All Companies</mat-option>
+                    @for(company of companyList; track company) {
+                    <mat-option [value]="company">
+                        {{ company }}
+                    </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>City</mat-label>
+                <mat-select [formControl]="cityControl">
+                    <mat-option value="">All Cities</mat-option>
+                    @for(city of cityList; track city) {
+                    <mat-option [value]="city">
+                        {{ city }}
+                    </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+        @if(isLoading){
+            <div class="loaderContainer">
+                <mat-spinner diameter="50"></mat-spinner>
+                <p>Loading Users...</p>
+            </div>
+        }
+
+    @if(!isLoading){
+        <div class="gridDashboard">
+            @for (user of userList; track $index) {
+            <!-- <h2>Total Users ({{user.totalUsers}})</h2> -->
+            <mat-card [ngClass]="user.theme">
+                <mat-card-header style="justify-content: space-between;">
+                    <mat-card-title>User Info ({{user.totalUsers}})</mat-card-title>
+                    <mat-card-subtitle> Status:
+                        <span class="statusBadge" [ngClass]="{
+                                active: user.statusBadge === 'Active',
+                                inactive: user.statusBadge === 'Inactive'
+                            }">{{ user.statusBadge }}</span>
+                    </mat-card-subtitle>
+                    <img [src]="user.profileImage" style="width: 50px;">
+                </mat-card-header>
+
+                <mat-card-content>
+                    <p>Name: {{user.name}}</p>
+                    <p>Email: {{user.email}}</p>
+                    <p>City: {{user.city}}</p>
+                    <p>Company: {{user.company}}</p>
+                    <p>Role: {{user.role}}</p>
+                    <p class="prfl">Initials: <span class="prfl-avtr">{{user.initials}}</span></p>
+                    <!-- Progress -->
+                    <p>Progress: {{user.progress}}</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" [style.width.%]="user.progress">
+                        </div>
+                    </div>
+
+                    <br>
+                    <p class="text-success fw-bold">Notification: {{ user.notification }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    @if(user.canEdit) {
+                    <button matButton>Edit</button>
+                    }
+                    <button matButton>SHARE</button>
+                </mat-card-actions>
+            </mat-card>
+            }
+        </div>
+    }
+    </div>
+
+    
+    <div class="sub-section">
+        <h2>ForkJoin Examples:</h2>
+        @if(isLoading){
+            <div class="loaderContainer">
+                <mat-spinner diameter="50"></mat-spinner>
+                <p>Loading Users...</p>
+            </div>
+        }
+        @if(!isLoading){
+        <div class="gridContainer">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Total Users</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h2>{{dashboardSummary.totalUsers}}</h2>
+                </mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Total Posts</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h2>{{dashboardSummary.totalPosts}}</h2>
+                </mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Total Todos</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <h2>{{dashboardSummary.totalTodos}}</h2>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    }
+
+    </div>
+
+    <div class="sub-section">
+        
+    </div>
+</div>
