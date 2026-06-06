@@ -2,9 +2,11 @@
     <h1 class="text-center text-primary">Subject</h1>
 
     <div class="sub-section">
-        <div class="row">
             <div class="col-12">
                 <h2>What is a Subject? </h2>
+                <p>A Subject is both an Observable and an Observer. <br>
+                It allows you to manually emit values using next() and multiple subscribers can listen to those values. <br>
+                <strong>Does NOT store previous values.</strong></p>
                 <p>In Angular, a Subject (from RxJS) is a special type of Observable that: </p>
                 <ul>
                     <li>✔ Can emit values (like Observable)</li>
@@ -14,6 +16,12 @@
 
                 <p>A Subject is like a bridge or event bus that allows data to be shared between components/services.
                 </p>
+
+                <h2>Subject (Basic)</h2>
+                <ul>
+                    <li>Does NOT store previous value</li>
+                    <li>Only emits to current subscribers</li>
+                </ul>
 
                 <ul> A Subject is:
                     <li>An Observable</li>
@@ -37,6 +45,14 @@
                     <li>Trigger events manually</li>
                 </ul>
 
+                <p>subject$.next('Angular');
+                    subject$.subscribe(value => 
+                    console.log(value);
+                    );
+                    <strong>Before Subscription with the next it cant gives the result. After subscribe onl it emits the data. <br>
+                    Here  Angular was emitted before subscription.</strong>
+                </p>
+
                 <h3>Types of Subjects:</h3>
                 <ul>
                     <li>Subject (Basic)</li>
@@ -45,23 +61,34 @@
                     <li>AsyncSubject</li>
                 </ul>
             </div>
+
+        <div>
+            <h2>Example: List of Users</h2>
+            @for (user of userList; track $index) {
+                <ul>
+                    <li>Name: {{user.name}}</li>
+                    <li>Email: {{user.email}}</li>
+                </ul>
+            }
         </div>
     </div>
 
     <div class="sub-section">
-        <h2>Subject (Basic)</h2>
-        <ul>
-            <li>Does NOT store previous value</li>
-            <li>Only emits to current subscribers</li>
-        </ul>
-    </div>
-
-    <div class="sub-section">
         <h2>BehaviorSubject ⭐ (Most Important)</h2>
+        <p>BehaviorSubject stores the latest value and immediately provides it to new subscribers. <br>
+        Stores latest value. <br>
+        Requires initial value.</p>
         <ul>
             <li>Stores latest value</li>
             <li>New subscribers get last emitted value</li>
         </ul>
+
+        <div>
+            <h2>Behaviour Subject Example:</h2>
+            <p>
+                Users Count: {{ userCount$ | async }}
+            </p>
+        </div>
     </div>
 
     <div class="sub-section">

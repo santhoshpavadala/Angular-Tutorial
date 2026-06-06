@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, Inject, inject, OnInit } from '@angular/core';
+import { BehaviorSubject, Subject, switchMap } from 'rxjs';
 import { Observables } from '../observables/observables';
 import { ObserableData } from '../../../services/obserable-data';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MapService } from '../../../services/RXJS-Opearators/map-service';
 
 @Component({
   selector: 'app-subjects',
@@ -13,7 +14,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class Subjects implements OnInit {
   // Subject:
-
   studentName$= new Subject();
   rollNo$ = new Subject<number>()
   takeTill=new Subject<void>();
@@ -22,12 +22,22 @@ export class Subjects implements OnInit {
   // Real example
   courseName$: Subject<string> = new Subject<string>();
 
+  
+
 
   // BehaviourSubject:
   obsServ = inject(ObserableData);
 
   // Share Replay
   userId: number=0;
+
+
+  // Realtime example
+  refreshUsers$ = new Subject<void>();
+  userService= inject (MapService);
+  userList: any[]= [];
+
+  userCount$ = new BehaviorSubject<number>(0);
 
   constructor() {
   // Subject:
@@ -43,6 +53,18 @@ export class Subjects implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.refreshUsers$.pipe(switchMap(
+      ()=>this.userService.getUsers()
+    )).subscribe({
+      next: (user)=>{
+        this.userList = user;
+        //Behaviour Sub
+        this.userCount$.next(user.length);
+      }
+    });
+    this.refreshUsers();
+
     // Subject:
     this.studentName$.subscribe(res=>{
       console.log(res);
@@ -73,5 +95,9 @@ export class Subjects implements OnInit {
     this.obsServ.getUserById(this.userId).subscribe((res:any)=>{
       debugger;
     })
+  }
+
+  refreshUsers() {
+    this.refreshUsers$.next();
   }
 }
