@@ -98,4 +98,83 @@
 
     </table>
   </div>
+
+  <div class="sub-section">
+    <h2>Angular Pure and Impure Pipes</h2>
+
+    <div>
+      <h4>What is Pure Pipe?</h4>
+      <p>A Pure Pipe is a pipe that Angular executes only when the input value or input reference changes.</p>
+      <p>Pure pipes are optimized for performance because Angular avoids running them unnecessarily.</p>
+      <p>By default, all Angular pipes are Pure Pipes.</p>
+
+      <div>
+        <p>Full name</p>
+        <h4>{{firName | fullname:lasName}}</h4>
+        <p>Uppercase</p>
+        <h4>{{firName | uppercase}}</h4>
+        <p>Tax of salary/p>
+          <h4>{{salary | tax}}</h4>
+          <p>Angular recalculates only if salary changes.</p>
+      </div>
+
+      <div>
+        <h3>Pure Pipe with Arrays</h3>
+        <h4>Users Count: {{users | usersCount}}</h4>
+        
+      </div>
+
+      <div>
+        <h4>Advantages of Pure Pipes</h4>
+        <ul>
+          <li>Better Performance</li>
+          <li>Less CPU Usage</li>
+          <li>Recommended for Enterprise Applications</li>
+          <li>Runs Only When Needed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h2>2. Impure Pipe</h2>
+      <p>An Impure Pipe is a pipe that Angular executes during every change detection cycle, regardless of whether the input reference changed or not. <br>
+      Impure pipes are useful when data changes internally without creating a new object or array reference.</p>
+
+      <p>The important part:</p>
+      <pre>pure: false</pre>
+      <p>This tells Angular to run the pipe on every change detection cycle.</p>
+
+      <div>
+        <input type="text" [(ngModel)]="searchText">
+
+        @for (emp of employees | search : searchText; track emp.id) {
+          <div>
+            {{emp.name}}
+          </div>
+        }
+      </div>
+
+      <div>
+        <h4>Advantages of Impure Pipes</h4>
+        <ul>
+          <li>Detect Internal Changes</li>
+          <li>Good for Real-Time Data</li>
+          <li>Useful for Dynamic Filtering</li>
+        </ul>
+
+        <h4>Disadvantages of Impure Pipes</h4>
+        <ul>
+          <li>Runs Frequently</li>
+          <li>Can Affect Performance</li>
+          <li>Not Recommended for Heavy Calculations</li>
+          <li>Higher CPU Usage</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <p><b>A Pure Pipe executes only when Angular detects a change in the input value or reference. It is the default pipe type and provides better performance.</b></p>
+      <p><b>An Impure Pipe executes on every Angular change detection cycle, even if the reference does not change. It is useful for real-time filtering and dynamic data updates but can impact performance.</b></p>
+    </div>
+  </div>
 </div>

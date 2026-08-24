@@ -1,16 +1,53 @@
-<div class="card">
-    <img src="{{cuser.img}}" alt="Image" width="100px">
-    <div class="details">
-        <h2 id="name">{{cuser.name}}</h2>
-    </div>
-    <p id="info">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi corrupti ab, expedita autem neque cupiditate nulla voluptates vel nemo at reprehenderit et
-         mollitia in repudiandae blanditiis ad quisquam asperiores cumque?</p>
-    <div class="row">
-        <span>Email</span>
-        <span class="data">{{cuser.email}}</span>
-    </div>
-    <div class="row">
-        <span>City</span>
-        <span class="data">{{cuser.address.city}}</span>
-    </div>
+
+
+<div class="gridContainer">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{selectedUser.name}}</mat-card-title>
+
+            
+        </mat-card-header>
+        <mat-card-content>
+            <p>Email: {{selectedUser.email}}</p>
+            <p>City: {{selectedUser.address.city}}</p>
+            <p>Phone: {{selectedUser.phone}}</p>
+            <p>Website: {{selectedUser.website}}</p>
+            <p>Company: {{selectedUser.company.name}}</p>
+            <p>Zipcode: {{selectedUser.address.zipcode}}</p>
+
+            <div>
+                <button
+                    [routerLink]="['/users', selectedUser.id]"
+                    [queryParams]="{tab:'profile'}">
+                    Profile
+                </button>
+
+                <button
+                    [routerLink]="['/users', selectedUser.id]"
+                    [queryParams]="{tab:'company'}">
+                    Company
+                </button>
+
+                <button
+                    [routerLink]="['/users', selectedUser.id]"
+                    [queryParams]="{tab:'address'}">
+                    Address
+                </button>
+            </div>
+
+            @if(selectedTab === 'profile') {
+                <p>Email: {{selectedUser.email}}</p>
+                <p>Phone: {{selectedUser.phone}}</p>
+            }
+
+            @if(selectedTab === 'company') {
+                <p>Company: {{selectedUser.company.name}}</p>
+            }
+
+            @if(selectedTab === 'address') {
+                <p>City: {{selectedUser.address.city}}</p>
+            }
+        </mat-card-content>
+
+    </mat-card>
 </div>

@@ -1,15 +1,33 @@
-<h2>Route Parameters Examples with number of Ids</h2>
-<div class="cardContainer">
-  @for (user of users; track user) {
-    <div class="card">
-      <span>{{user.name}}</span>
-      <span>
-        <a [routerLink]="['/usercard', user.id]" routerLinkActive="active">Profile</a>
-      </span>
-    </div>
-  }
-</div>
+<div class="section">
+  <h1>Routing Parameters Example:</h1>
+  <div class="sub-section">
+      <h2>Route Parameters Examples with number of Ids</h2>
+      <div>
+        <input #searchBox placeholder="Search User">
+        <button (click)="searchUsers(searchBox.value)">Search</button>
+      </div>
+      <div class="gridDashboard">
+        @for(user of users; track user.id){
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              {{ user.name }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-actions>
+            <button class="btn btn-primary" [routerLink]="['/users', user.id]" routerLinkActive="active">
+              View Details
+            </button>
 
-<h2>Query Parameters Example '? condition (Key & Value)' syntax</h2>
-<p><b>Syntax: </b>routerLink="/users" routerLinkActive="active" [queryParams]='category': 'Admin' check syntax correctly
-</p>
+            
+          </mat-card-actions>
+        </mat-card>
+        }
+      </div>
+  </div>
+
+  <div class="sub-section">
+    <h2>Query Parameters Example '? condition (Key & Value)' syntax</h2>
+    <p><b>Syntax: </b>routerLink="/users" routerLinkActive="active" [queryParams]='category': 'Admin' check syntax correctly</p>
+  </div>
+</div>

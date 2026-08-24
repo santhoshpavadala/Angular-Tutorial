@@ -1,6 +1,235 @@
 <div class="section">
     <h1>Rxjs Map & SwitchMap Operators</h1>
     <div class="sub-section">
+        <h1>RxJS Operators - Quick Notes</h1>
+        
+        <h2>1. map()</h2>
+        
+        <p>
+            Transforms data from one format to another without changing the number of items.
+        </p>
+        
+        <pre>
+        Input  : User API Response
+        Output : UserView Model
+        </pre>
+        
+        <p>
+            Use Case:
+            Convert API response into UI-friendly data.
+        </p>
+        
+        <hr>
+        
+        <h2>2. filter()</h2>
+        
+        <p>
+            Filters items based on a condition and returns only matching records.
+        </p>
+        
+        <pre>
+        Input  : 10 Users
+        Output : 5 Active Users
+        </pre>
+        
+        <p>
+            Use Case:
+            Search, Active Users, Status Filtering, Company Filtering.
+        </p>
+        
+        <hr>
+        
+        <h2>3. tap()</h2>
+        
+        <p>
+            Performs side effects without modifying the data stream.
+        </p>
+        
+        <pre>
+        Input  : Users
+        Output : Same Users
+        </pre>
+        
+        <p>
+            Use Case:
+            Logging, Debugging, Loader Start, Analytics.
+        </p>
+        
+        <hr>
+        
+        <h2>4. debounceTime()</h2>
+        
+        <p>
+            Waits for a specified time before emitting the latest value.
+        </p>
+        
+        <pre>
+        User Types
+        ↓
+        Wait 500ms
+        ↓
+        API Call
+        </pre>
+        
+        <p>
+            Use Case:
+            Search Inputs, Autocomplete.
+        </p>
+        
+        <hr>
+        
+        <h2>5. distinctUntilChanged()</h2>
+        
+        <p>
+            Ignores consecutive duplicate values.
+        </p>
+        
+        <pre>
+        Angular
+        Angular
+        Angular
+        
+        Output:
+        Angular
+        </pre>
+        
+        <p>
+            Use Case:
+            Prevent unnecessary API calls.
+        </p>
+        
+        <hr>
+        
+        <h2>6. switchMap()</h2>
+        
+        <p>
+            Cancels previous observable and switches to the latest observable.
+        </p>
+        
+        <pre>
+        Search A
+        ↓ Cancel
+        
+        Search B
+        ↓ Cancel
+        
+        Search C
+        ↓ Execute
+        </pre>
+        
+        <p>
+            Use Case:
+            Search, Route Params, Dynamic Filters.
+        </p>
+        
+        <hr>
+        
+        <h2>7. combineLatest()</h2>
+        
+        <p>
+            Combines multiple observables and emits the latest values from all.
+        </p>
+        
+        <pre>
+        Search
+        +
+        Company
+        +
+        City
+        
+        ↓
+        
+        [search, company, city]
+        </pre>
+        
+        <p>
+            Use Case:
+            Dashboard Filters, Forms.
+        </p>
+        
+        <hr>
+        
+        <h2>8. catchError()</h2>
+        
+        <p>
+            Handles errors and allows the observable stream to continue.
+        </p>
+        
+        <pre>
+        API Error
+        ↓
+        Fallback Data
+        </pre>
+        
+        <p>
+            Use Case:
+            API Error Handling.
+        </p>
+        
+        <hr>
+        
+        <h2>9. finalize()</h2>
+        
+        <p>
+            Executes when an observable completes, errors, or is unsubscribed.
+        </p>
+        
+        <pre>
+        API Call
+        ↓
+        Success/Error
+        ↓
+        Hide Loader
+        </pre>
+        
+        <p>
+            Use Case:
+            Loader Cleanup, Resource Cleanup.
+        </p>
+        
+        <hr>
+        
+        
+        
+        <h1>Memory Trick</h1>
+        
+        <pre>
+        map
+        → Transform Data
+        
+        filter
+        → Remove Data
+        
+        tap
+        → Side Effects
+        
+        debounceTime
+        → Wait Before Emit
+        
+        distinctUntilChanged
+        → Ignore Duplicates
+        
+        switchMap
+        → Cancel Previous
+        
+        combineLatest
+        → Combine Observables
+        
+        catchError
+        → Handle Errors
+        
+        finalize
+        → Cleanup
+        
+        forkJoin
+        → Wait For All
+        
+        mergeMap
+        → Run All Together
+        </pre>
+        </div>
+
+    <div class="sub-section">
         <h2>Total Users ({{userList.length}})</h2>
         <!-- <div class="mb-4">
             <input type="text" placeholder="Search Users" class="form-control"
@@ -39,13 +268,13 @@
 
 
         @if(isLoading){
-            <div class="loaderContainer">
-                <mat-spinner diameter="50"></mat-spinner>
-                <p>Loading Users...</p>
-            </div>
+        <div class="loaderContainer">
+            <mat-spinner diameter="50"></mat-spinner>
+            <p>Loading Users...</p>
+        </div>
         }
 
-    @if(!isLoading){
+        @if(!isLoading){
         <div class="gridDashboard">
             @for (user of userList; track $index) {
             <!-- <h2>Total Users ({{user.totalUsers}})</h2> -->
@@ -87,17 +316,41 @@
             </mat-card>
             }
         </div>
-    }
+        }
     </div>
 
-    
+
     <div class="sub-section">
         <h2>ForkJoin Examples:</h2>
+        <h2>10. forkJoin()</h2>
+        
+        <p>
+            Waits for all observables to complete and returns a combined result.
+        </p>
+        
+        <pre>
+        Users API
+        Posts API
+        Todos API
+        
+        ↓
+        
+        Single Response
+        </pre>
+        
+        <p>
+            Use Case:
+            Dashboard Initialization, Multiple API Calls.
+        </p>
+        <hr>
+        
+       
+        
         @if(isLoading){
-            <div class="loaderContainer">
-                <mat-spinner diameter="50"></mat-spinner>
-                <p>Loading Users...</p>
-            </div>
+        <div class="loaderContainer">
+            <mat-spinner diameter="50"></mat-spinner>
+            <p>Loading Users...</p>
+        </div>
         }
         @if(!isLoading){
         <div class="gridContainer">
@@ -126,11 +379,260 @@
                 </mat-card-content>
             </mat-card>
         </div>
-    }
+        }
 
     </div>
 
     <div class="sub-section">
+        <h2>Merge Map Examples</h2>
+         <h2>11. mergeMap()</h2>
+        <p>
+            Maps values to inner observables and executes all requests in parallel.
+        </p>
+        <pre>
+        User1 → API
+        User2 → API
+        User3 → API
         
+        All Run Together
+        </pre>
+        
+        <p>
+            Use Case:
+            Bulk Processing, Multiple Requests.
+        </p>
+        <hr>
+
+
+        <div class="gridContainer">
+
+            @for(user of dashboardStats; track $index){
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+
+                        {{user.userName}}
+
+                    </mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+
+                    <p>
+                        Posts:
+                        {{user.totalPosts}}
+                    </p>
+
+                    <p>
+                        Completed Todos:
+                        {{user.completedTodos}}
+                    </p>
+
+                </mat-card-content>
+
+            </mat-card>
+
+            }
+
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>ConcatMap</h2>
+        <p>concatMap maps values to inner observables and executes them one after another in sequence.</p>
+        <p>Wait for previous request <br>
+            ↓ <br>
+            Then start next request</p>
+            <p>User1 -> API Complete <br>
+                        ↓ <br>
+                User2 -> API Complete <br>
+                        ↓ <br>    
+                User3 -> API Complete</p>
+
+        <h4>Real World Usage</h4>
+        <ul>
+            <li>Save Forms</li>
+            <li>Upload Files</li>
+            <li>Generate Invoices</li>
+            <li>Payment Processing</li>
+            <li>Sequential Operations</li>
+        </ul>
+
+        <ul>
+            <li>Save Employee 1</li>
+            <li>Save Employee 2</li>
+            <li>Save Employee 3</li>
+        </ul>
+
+        <div class="gridDashboard">
+            @for(user of processedUsers; track $index){
+                <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        Name: {{ user.userName }}
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    Message: {{ user.message }}
+                </mat-card-content>
+                </mat-card>
+            }
+            </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>exhaustMap Operator</h2>
+        <p>exhaustMap ignores new values while the current observable is still running.</p>
+        <p>Current request running <br>
+            ↓ <br>
+            Ignore everything else <br>
+            ↓ <br>
+            Until current request finishes</p>
+
+            <div>
+                <p>
+                    <strong>Visual Example </strong> <br>
+                    User clicks Login button: <br>
+                    <strong> Without exhaustMap </strong>
+                </p>
+                <p>
+                    Click <br>
+                    Click <br>
+                    Click <br>
+                    Click <br>
+                    ↓ <br>
+                    4 API Calls <br>
+                    ❌ Bad
+                </p>
+            </div>
+            <div>
+                <strong>With exhaustMap</strong>
+                <p>Click <br>
+                    ↓ <br>
+                    API Running <br>
+                    Click <br>
+                    ↓ <br>
+                    Ignored <br>
+                    Click <br>
+                    ↓ <br>
+                    Ignored <br>
+
+                    Click<br>
+                    ↓<br>
+                    Ignored<br>
+
+                    API Complete</p>
+            </div>
+
+            <div>
+                <strong>Easy Memory Trick</strong>
+                <p>
+                    switchMap <br>
+                    → Cancel Previous <br>
+
+                    mergeMap <br>
+                    → Run All <br>
+
+                    concatMap <br>
+                    → Queue All <br>
+
+                    exhaustMap <br>
+                    → Ignore New <br>
+                </p>
+            </div>
+
+            <div>
+                <strong>Real Angular Use Cases</strong>
+                <strong>Login Button</strong>
+                <strong>Submit Form</strong>
+                <strong>Payment Gateway </strong>
+                <strong>Order Placement</strong>
+                <p>Prevent duplicate Actions</p>
+            </div>
+
+            <div>
+                <h2>Example on click load data</h2>
+                <button
+                    mat-raised-button class="mb-4"
+                    color="primary"
+                    (click)="loadUsers()">
+                    Load Users
+                    </button>
+
+                    <div class="gridDashboard">
+                    @for(user of userList1; track $index){
+                        <mat-card>
+                            <mat-card-header>
+                        <mat-card-title>
+                            {{user.name}}
+                        </mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            {{user.email}}
+                        </mat-card-content>
+                        </mat-card>
+                    }
+
+                    </div>
+            </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>takeUntil()</h2>
+        <p>
+            Automatically unsubscribes from an observable when another observable emits. Memory Leaks <br>
+            takeUntil automatically unsubscribes from an observable when another observable emits.
+        </p>
+
+        <pre>
+        Observable
+        ↓
+        takeUntil()
+        ↓
+        Component Destroy
+        ↓
+        Unsubscribe
+        </pre>
+
+        <p>
+        Use Case:
+        Prevent Memory Leaks,
+        Search Subscriptions,
+        WebSockets,
+        Route Params,
+        Polling.
+        </p>
+
+        <pre>
+            <code>
+                subscription!: Subscription;
+                ngOnInit() 
+                this.subscription =
+                    this.userService.getUsers()
+                    .subscribe();
+                ngOnDestroy() 
+                this.subscription.unsubscribe();
+            </code>
+        </pre>
+        <p>Multiple subscriptions -> Messy</p>
+
+
+        <div>
+            <p><b>Better Way</b></p>
+
+            <pre>
+                    destroy$ = new Subject void();
+                    
+                    this.userService.getUsers().pipe(
+                    takeUntil(this.destroy$)
+                    )
+                    .subscribe();
+
+                    ngOnDestroy(): void 
+                    this.destroy$.next();
+                    this.destroy$.complete();
+            </pre>
+        </div>
     </div>
 </div>

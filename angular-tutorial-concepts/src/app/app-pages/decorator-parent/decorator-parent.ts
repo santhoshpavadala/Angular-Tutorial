@@ -12,6 +12,7 @@ import { MyButton } from "../../app-shared/my-button/my-button";
 export class DecoratorParent {
   // Input Decerators Variables
   title = 'Angular Input Decerator Title';
+  parentTitle2 = "parenttitle2"
   pnumber = [10, 30, 50, 70, 90];
   userData = { name: 'Alice', age: 30 };
   data  = "Send parent to child"
@@ -23,6 +24,19 @@ export class DecoratorParent {
   receiveMessage(msg: string) {
     this.message = msg;
   }
+
+ 
+
+
+messageChild: string = "";
+msgFromChild(msg1:string) {
+  this.messageChild = msg1;
+}
+
+
+
+
+
 
   // Viewchild decerator:Example of GETING FROM CHILD DATA
   @ViewChild(Decerators) parentDecerator!: Decerators;

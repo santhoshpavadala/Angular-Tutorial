@@ -38,72 +38,86 @@
     </div>
 
     <div class="sub-section">
-        <h2>Angular Important Inerview questions</h2>
-        <p>What are the building blocks of Angular</p>
-        <p>What is Routing</p>
-        <p>What is directives & how to create custom directives and uses?</p>
-        <p>What are pipes and how to create custom pipe and uses?</p>
-        <p>What is service? and dependency injections also?</p>
-        <p>What is differences between Templ and Reactive forms?</p>
-        <p>What is Signals?</p>
-        <p>Waht is standalone application and modules ?</p>
-        <p>What is use of RXJS?</p>
-        <p>How to Unsubscribe? using ngOnDestroy and Async for memory optimizations</p>
-        <p>What is Authentication and Authorization? Role based questions and Gaurds</p>
-        <p>What is Decorators? view child</p>
-        <p>Waht is module?</p>
-        <p>Waht is the use of main.ts</p>
+        <h2>What are the major modern Angular features you have worked with?</h2>
+        <p>In modern Angular, I have worked with standalone components, Signals, the new control-flow syntax such as @ if, @ for, and @ switch, functional guards and interceptors, lazy loading, dependency injection, RxJS, reactive forms, and modern Angular routing.
 
+        Angular also provides APIs such as inject(), input(), output(), computed(), and effect() that make components more lightweight and reactive.</p>
+    </div>
 
-        <p>1. What are components and modules</p>
-        <p>2. What is data binding</p>
-        <p>3. What is a directive and can we create custom directive just like *ngIf</p>
-        <p>4. What is a pipe, cmd to create custom pipe</p>
-        <p>5. What is use of service </p>
-        <p>6. Explain why routing is important building block of angular</p>
-        <p>7. How to navigate with query parameters </p>
-        <p>8. Difference between template and reactive forms.</p>
-        <p>9. Various ways to create reactive form</p>
-        <p>10. In your project how you have handled api errors</p>
+    <div class="sub-section">
+        <h2>Q2. What is a standalone component?</h2>
+        <p>A standalone component doesn't need to be declared inside an NgModule</p>
+        <p>In modern Angular, standalone components are preferred because they simplify application structure and make lazy loading easier.</p>
+        <p>I prefer standalone components for new development because they reduce module boilerplate and make dependencies explicit. However, I can work with NgModule-based applications because many enterprise applications still use them.</p>
+    </div>
 
+    <div class="sub-section">
+        <h2>Q4. What is the new Angular control flow?</h2>
+        <p>Angular provides:  <br>
+        @ if (isLoggedIn)  <br>
+        @ for (user of users; track user.id) </p>
+        <h4>Why is track important?</h4>
+        <p>It helps Angular identify which items changed instead of recreating the entire list.</p>
+
+        <pre>
+            <code>@ switch (status) 
+                @ case ('active') 
+                    Active
+                
+                @ case ('inactive') 
+                    Inactive
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>2. Signals</h2>
+        <h4>What is a Signal?</h4>
+        <p>A Signal is Angular's reactive primitive for holding a value and notifying Angular when that value changes.</p>
         <div>
-            Angular Questions (Some were Scenario based)
-            ✅ Building blocks of Angular
-            ✅ Difference between AngularJS and Angular (2+)
-            ✅ What is routing and why it’s needed
-            ✅ With Angular 17+ standalone components, App.Module is gone — what changed?
-            ✅ Template-driven vs Reactive Forms
-            ✅ Purpose of Services
-            ✅ Data sharing between components
-            ✔️ What if components don’t have a parent-child relationship?
-            ✅ Subject vs BehaviorSubject
-            ✅ Opening Bootstrap modal without bootstrap.js
-            ✔️ Expected answer: ViewChild approach
-            ✅ Handling large forms using multi-step / stepper forms
-            ✅ Handling API errors at a single place
-            ✅ Showing loader when API data takes time to load
-            ✅ @HostListener and Renderer
-            ✔️ Explained using a custom directive
-            ✅ Signals – difference between set() and update()
-            Project & Work Culture Questions
-            ✅ Where you Keep your codebase repo
-            ✅ Do you raise PRs and who reviews them
-            ✅ Are you using GitHub Copilot during development
-            ✅ Have you written unit test cases
+            <h4>Count example</h4>
+            <p>count = signal(0);</p> 
+            
+            <h4> to read </h4>
+            <p>this.count()</p>
+
+            <h4>to update</h4>
+            <p>this.count.set(10);</p> 
+            <p>or</p>
+            <p>this.count.update(value => value + 1);</p>
         </div>
-
-
-
+        <h4>Why were Signals introduced?</h4>
+        <p>Signals provide fine-grained reactivity.
+            Instead of Angular having to evaluate a broad component tree during change detection, Signals allow Angular to understand which pieces of state depend on which values.
+            They make state management simpler for many component-level use cases and work particularly well with modern Angular's reactive rendering model.</p>
+    
+        <h4>signal() vs computed() vs effect()?</h4>
+        <div> <b>signal()</b> <br>
+            Stores state. <br>
+            count = signal(10);
+        </div>
         <div>
-            <h4>Angular coding </h4>
-            <p>1. Create reusable component using Input to handle show more show less characters where we will pass text
-                and how many char to Limit and once done asked to can we show complete text as tooltip using title
-                attribute with property binding</p>
-
-            <p>1. Creating a small CRUD application</p>
-            <p>2. Building a reusable component using Input and Output</p>
-            <p>3. Sometime they will just ask you to do API integration and show data in table</p>
+            <b>computed()</b> <br>
+            Creates derived/read-only state.
+        <pre>
+            <code>count = signal(10);
+            doubleCount = computed(() => this.count() * 2);</code>
+        </pre>
         </div>
+        <div>
+            <b>effect()</b> <br>
+            Runs side effects when signals it reads change.
+            <pre>
+                <code>
+                    effect(() => 
+        console.log(this.count());
+        );
+                </code>
+            </pre>
+        </div>
+        <h4>Interview answer:</h4>
+        <p>I use Signals for state, computed for derived state, and effects only for side effects such as logging, local storage synchronization, or interacting with an external API. I avoid using effects for normal derived business logic because computed is more appropriate.</p>
+
     </div>
 
 
@@ -243,6 +257,78 @@
             <app-view-more [text]="ptext" [limit]="plimit"></app-view-more>
         </div>
     </div>
+
+    <div class="sub-section">
+        <h2>Angular Important Inerview questions</h2>
+        <p>What are the building blocks of Angular</p>
+        <p>What is Routing</p>
+        <p>What is directives & how to create custom directives and uses?</p>
+        <p>What are pipes and how to create custom pipe and uses?</p>
+        <p>What is service? and dependency injections also?</p>
+        <p>What is differences between Templ and Reactive forms?</p>
+        <p>What is Signals?</p>
+        <p>Waht is standalone application and modules ?</p>
+        <p>What is use of RXJS?</p>
+        <p>How to Unsubscribe? using ngOnDestroy and Async for memory optimizations</p>
+        <p>What is Authentication and Authorization? Role based questions and Gaurds</p>
+        <p>What is Decorators? view child</p>
+        <p>Waht is module?</p>
+        <p>Waht is the use of main.ts</p>
+
+
+        <p>1. What are components and modules</p>
+        <p>2. What is data binding</p>
+        <p>3. What is a directive and can we create custom directive just like *ngIf</p>
+        <p>4. What is a pipe, cmd to create custom pipe</p>
+        <p>5. What is use of service </p>
+        <p>6. Explain why routing is important building block of angular</p>
+        <p>7. How to navigate with query parameters </p>
+        <p>8. Difference between template and reactive forms.</p>
+        <p>9. Various ways to create reactive form</p>
+        <p>10. In your project how you have handled api errors</p>
+
+        <div>
+            Angular Questions (Some were Scenario based)
+            ✅ Building blocks of Angular
+            ✅ Difference between AngularJS and Angular (2+)
+            ✅ What is routing and why it’s needed
+            ✅ With Angular 17+ standalone components, App.Module is gone — what changed?
+            ✅ Template-driven vs Reactive Forms
+            ✅ Purpose of Services
+            ✅ Data sharing between components
+            ✔️ What if components don’t have a parent-child relationship?
+            ✅ Subject vs BehaviorSubject
+            ✅ Opening Bootstrap modal without bootstrap.js
+            ✔️ Expected answer: ViewChild approach
+            ✅ Handling large forms using multi-step / stepper forms
+            ✅ Handling API errors at a single place
+            ✅ Showing loader when API data takes time to load
+            ✅ @HostListener and Renderer
+            ✔️ Explained using a custom directive
+            ✅ Signals – difference between set() and update()
+            Project & Work Culture Questions
+            ✅ Where you Keep your codebase repo
+            ✅ Do you raise PRs and who reviews them
+            ✅ Are you using GitHub Copilot during development
+            ✅ Have you written unit test cases
+        </div>
+
+
+
+        <div>
+            <h4>Angular coding </h4>
+            <p>1. Create reusable component using Input to handle show more show less characters where we will pass text
+                and how many char to Limit and once done asked to can we show complete text as tooltip using title
+                attribute with property binding</p>
+
+            <p>1. Creating a small CRUD application</p>
+            <p>2. Building a reusable component using Input and Output</p>
+            <p>3. Sometime they will just ask you to do API integration and show data in table</p>
+        </div>
+    </div>
+
+
+
 </div>
 
 

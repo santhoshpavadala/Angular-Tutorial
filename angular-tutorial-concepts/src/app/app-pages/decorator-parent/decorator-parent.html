@@ -19,8 +19,12 @@ It is declared using the # symbol.</p>
 <button (click)="getChildData()">Get View Child Data</button>
 <div>{{cdata}}</div>
 
-<app-decerators [parentTitle]="title" [parentNumber]="pnumber" [puser]="userData" 
+<h2>{{messageChild}} </h2>
+<app-decerators [parentTitle]="title" [parentTitle2]="parentTitle2" [parentNumber]="pnumber" [puser]="userData" 
 [parentMsg]="'Aliased Input!'" [pdata]="data" [pname]="name"
-(childData)="childData=$event" (messageEvent)="receiveMessage($event)" 
+(childData)="childData=$event" (messageEvent)="receiveMessage($event)"
+
+(msgToParent)="msgFromChild($event)"
 #templateId></app-decerators>
+
 

@@ -2,20 +2,115 @@
     <h1>Routing Examples Component</h1>
 
     <div class="sub-section">
+        <h2>What is Routing?</h2>
+        <p>Routing is the mechanism that enables navigation between different views/components in an Angular application
+            without reloading the browser. <br>
+            Angular uses the Router to map URLs to Components.</p>
+        <p>Angular loads: without refreshing the page.</p>
+
+        <h2>RouterOutlet</h2>
+        <p>RouterOutlet is a placeholder where Angular renders routed components.</p>
+        <p>RouterOutlet is a directive that acts as a placeholder where Angular dynamically loads routed components.</p>
+        <pre>
+            <code>
+                <nav>
+                    <a routerLink="/users">Users</a>
+                    <a routerLink="/posts">Posts</a>
+                    <a routerLink="/todos">Todos</a>
+                </nav>
+                    <hr>
+                router-outlet router-outlet
+            </code>
+        </pre>
+
+        <h2>routerLink</h2>
+        <p>Used to navigate between routes.</p>
+        <pre>
+            <code>
+                a routerLink="/users">
+                    Users
+                a
+            </code>
+        </pre>
+
+        <pre>
+            <code>
+                a [routerLink]="['/users', user.id]">
+                    View User
+                a
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>What is a Route Parameter?</h2>
+        <p>Route Parameters are dynamic values passed through the URL path and are typically used to identify a specific
+            resource.</p>
+        <b>/user/1</b>
+        <p>where 1 is the Route Parameter.</p>
+        <pre>
+            <code>
+                path:'users/:id',
+                component:UserDetailsComponent
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>Query Parameters</h2>
+        <p>Query Parameters are optional key-value pairs appended to the URL after ?.</p>
+        <b>/users?page=1</b>
+        <p>page = 1 is a Query Parameter.</p>
+        <p></p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Child Routes</h2>
+        <p>Routes nested inside another route.</p>
         <h2>This is Child/Nested Routing Examples</h2>
+        <pre>
+            <code>
+                <!-- { -->
+                path:'routings',
+                component:UsersComponent,
+
+                children:[
+
+                <!-- { -->
+                path:'childroute1',
+                component:Childroute1Component
+                <!-- }, -->
+
+                <!-- { -->
+                path:'childroute2',
+                component:Childroute2Component
+                <!-- } -->
+
+                ]
+                <!-- } -->
+            </code>
+        </pre>
 
         <ul class="nav flex-row">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" routerLink="/routings/childroute1">Child1</a>
                 <a class="nav-link" routerLink="/routings/childroute2">Child2</a>
-                <a class="nav-link" routerLink="/routings/childroute3">Child3</a>
             </li>
         </ul>
 
-        <!-- Thorugh buttn click navigate to another component -->
-         <button class="btn btn-primary" (click)="navigateComp()">Navigate</button>
-
         <router-outlet></router-outlet>
+
+        <!-- Thorugh buttn click navigate to another component -->
+        <button class="btn btn-primary" (click)="navigateComp()">Navigate</button>
+    </div>
+
+    <div class="sub-section">
+        <h2>Lazy Loading</h2>
+        <p>Lazy Loading loads modules/components only when needed.</p>
+        <p>Without Lazy Loading:Loaded all components At Startup. - Huge bundle. - Slow app.</p>
+        <p>With Lazy Loading: Users Loaded First <br>
+            Posts Loaded Only When Needed <br>
+            Admin Loaded Only When Needed</p>
     </div>
 
     <div class="sub-section">
@@ -24,7 +119,7 @@
             Should the user be allowed to enter this route?<br>
             Should the user leave the current route?<br>
             Should a module load at all?</p>
-            
+
         <p>This is useful for:<br>
             Authentication (allow only logged-in users)<br>
             Authorization (allow only admins)<br>
@@ -32,19 +127,258 @@
             Lazy-loading control</p>
 
         <p>Angular provides these guard interfaces: <br>
-            Guard Interface	Purpose<br>
+            Guard Interface Purpose<br>
             CanActivate - Check if the route can be activated <br>
             CanActivateChild - Check if child routes can be activated<br>
             CanDeactivate - Check if user can leave the current route<br>
             CanLoad - Check if a lazy-loaded module can be loaded<br>
             CanMatch - Check if the route should match (Angular 15+)</p>
 
+        <div>
+            <b>Steps:</b>
+            <ul>
+                <li>In which service file.ts we need to get the interface of canActive in export class as <b>implements
+                        CanActivate</b></li>
+                <li>We need to write a method of canActivate inside of interface</li>
+            </ul>
+        </div>
+
+        <h2>What is a Route Guard?</h2>
+        <p>A Route Guard is an Angular feature that controls whether a user is allowed to navigate to a route. <br>
+            It acts as a checkpoint before Angular loads a component.</p>
+
+        <h2>Real-Life Example</h2>
+        <p>Think of an office building.</p>
+        <pre>
+            <code>Outside
+                    │
+                Security Guard
+                    │
+                Office
+            </code>
+        </pre>
+
+        <p>
+            The security guard checks: <br>
+            Are you an employee? <br>
+            Do you have an ID card? <br>
+
+            If yes: Enter Office, Otherwise: Access Denied <br>
+            Angular Guards work exactly the same way.
+        </p>
+
+        <p>
+            Without Gaurd: Click on Admin, non admin users also can enters, <br>
+            With Gaurd:
+            <code>
+                Click Admin <br>
+                    ↓ <br>
+                Guard Executes <br>
+                    ↓ <br>
+                Allowed? <br>
+                ↓        ↓ <br>
+                Yes       No <br>
+                ↓         ↓ <br>
+                Admin    Login
+            </code>
+        </p>
+
+        <div>
+            <h2>Types of Guards</h2>
+            <p>Angular provides several built-in guards.</p>
             <div>
-                <b>Steps:</b>
-                <ul>
-                    <li>In which service file.ts we need to get the interface of canActive in export class as <b>implements CanActivate</b></li>
-                    <li>We need to write a method of canActivate inside of interface</li>
-                </ul>
+                | Guard | Purpose | <br>
+                | ------------------ | -------------------------------- | <br>
+                | `CanActivate` | Allow or block access to a route | <br>
+                | `CanActivateChild` | Protect child routes | <br>
+                | `CanDeactivate` | Prevent leaving a page | <br>
+                | `CanMatch` | Decide if a route should match | <br>
+                | `Resolve` | Load data before navigation | <br>
             </div>
+        </div>
+
+        <div>
+            <h2>1. CanActivate: Controls whether a route can be activated.</h2>
+
+            <pre>
+                <code>
+                    <!-- { -->
+                    path: 'admin',
+                    canActivate: [authGuard],
+                    component: AdminComponent
+                    <!-- } -->
+                </code>
+            </pre>
+
+            <pre>
+                <code>
+                    User clicks Admin
+                            ↓
+                    authGuard()
+                            ↓
+                    true
+                            ↓
+                    Admin Component
+
+                    or
+
+                    false
+
+                    Redirect Login
+                </code>
+            </pre>
+
+            <div>
+                <h4>Functional Guard (Angular 15+)</h4>
+                <pre>
+                <code>
+                    import  CanActivateFn  from '@angular/router';
+
+                    export const authGuard: CanActivateFn = () => 
+
+                    const isLoggedIn = true;
+
+                    return isLoggedIn;
+
+                    ;
+                </code>
+            </pre>
+            </div>
+
+            <div>
+                <h4>Real Authentication Example: Suppose after login you store:</h4>
+                <pre>
+                    <code>
+                        localStorage.setItem(
+                            'token',
+                            'abcdef123'
+                        );
+                    </code>
+                </pre>
+
+                <pre>
+                    <code>
+                        import  inject  from '@angular/core';
+                        import  Router  from '@angular/router';
+
+                        export const authGuard: CanActivateFn = () => 
+
+                        const router = inject(Router);
+
+                        const token =
+                            localStorage.getItem('token');
+
+                        if(token)
+
+                            return true;
+
+                        
+
+                        router.navigate(['/login']);
+
+                        return false;
+
+                        ;
+                    </code>
+                </pre>
+
+                <div>
+                    <h4>Flow</h4>
+                <pre>
+                    <code>
+                        Navigate /admin
+                            ↓
+                        Token Exists?
+                        ↓        ↓
+                        Yes       No
+                        ↓         ↓
+                        Admin    Login
+                    </code>
+                </pre>
+                </div>
+
+                <div>
+                    <h4>Interview Question</h4>
+                    <h4>What is CanActivate?</h4>
+                    <p>CanActivate determines whether a user is allowed to navigate to a route before Angular loads the component.</p>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h2>CanActivateChild</h2>
+            <p>canActivateChild is an Angular route guard used to control access to child routes. It is useful when multiple child routes share the same authorization or authentication rule, such as protecting all admin routes with a single guard.</p>
+            <p>canActivateChild is an Angular route guard used to control access to the child routes of a parent route.</p>
+            <p>canActivateChild checks whether a user is allowed to navigate to a child route before Angular activates that child route.</p>
+            <p>Implemented for Admin module in this app please check.</p>
+
+            <pre>
+                <code>
+                    export const ADMIN_ROUTES: Routes = [
+                    <!-- { -->
+                        path: "",
+                        component: AdminLayout,
+                        canActivateChild: [adminAuthGuard],
+                        children: [
+                            <!-- { -->
+                                path: '',
+                                redirectTo: 'admin-dashboard',
+                                pathMatch: 'full'
+                            <!-- }, -->
+                            <!-- { -->
+                                path: 'admin-dashboard',
+                                component: AdminDashboard
+                            <!-- }, -->
+                            <!-- { -->
+                                path: 'admin-users',
+                                component: AdminUsers
+                            <!-- } -->
+                        ]
+                    <!-- } -->
+                ]
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>canDeactivate</h2>
+            <h4>1. What is canDeactivate?</h4>
+            <p>canDeactivate is an Angular route guard used to determine whether a user is allowed to leave the current route/component. <br>
+            It is mainly used when the user has unsaved changes.</p>
+
+            <div>
+                <pre>
+                    <code>
+                        User tries to leave
+                            ↓
+                        canDeactivate
+                            ↓
+                        Form has unsaved changes?
+                            ↓
+                            YES
+                            ↓
+                        "Are you sure?"
+                            ↓
+                        ┌─────┴─────┐
+                        ↓           ↓
+                        Stay       Leave
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <div>
+            <h2>CanMatch</h2>
+            <p>CanMatch is an Angular route guard that determines whether a route should
+                 match the current URL. It is particularly useful with lazy-loaded routes 
+                 because it can prevent a route from being selected based on conditions such as 
+                 user roles or permissions. Unlike canActivate, when canMatch returns false, 
+                 Angular can continue looking for another route that matches the same URL.</p>
+
+                 <p>CanMatch is a route guard that determines whether Angular should match a route at all.</p>
+                 <p>canMatch decides whether a route is eligible to be matched before Angular activates or lazy-loads that route.
+                    This makes it especially useful for role-based routing and lazy-loaded features.</p>
+        </div>
+        
     </div>
 </div>

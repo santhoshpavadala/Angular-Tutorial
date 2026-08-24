@@ -55,8 +55,9 @@
         <a href="#" class="text-decoration-none">Forgot password?</a>
       </div>
 
-      <button type="submit" class="btn btn-primary w-100 mb-3 login-btn">
-        Login
+      <button type="submit" class="btn btn-primary w-100 mb-3 login-btn" 
+      [disabled]="isFormSubmitted || loginForm.invalid">
+         {{ isFormSubmitted ? 'Logging in...' : 'Login' }}
       </button>
 
       <div class="text-center">

@@ -34,4 +34,25 @@ export class Header {
     localStorage.removeItem('loggedUserId');
     this.router.navigateByUrl('/login')
   }
+
+  goToAdmin() {
+    const role =
+      localStorage.getItem('loggedRole');
+
+
+    if (role === 'admin') {
+
+      this.router.navigateByUrl(
+        '/dashboard/admindashboard'
+      );
+
+    } else {
+
+      this.router.navigateByUrl(
+        '/ang-interview'
+      );
+
+    }
+
+  }
 }
