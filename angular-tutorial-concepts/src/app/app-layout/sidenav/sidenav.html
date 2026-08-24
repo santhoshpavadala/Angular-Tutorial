@@ -1,62 +1,72 @@
 <aside>
+
   <nav>
-    <a routerLink="/basics" routerLinkActive="active">Basics</a>
-    <a routerLink="/ang-interview" routerLinkActive="active">Angular - Interview</a>
-    <a routerLink="/js-interview" routerLinkActive="active">Javascript - Interview</a>
-    <a routerLink="/data_binding" routerLinkActive="active">Data Binding</a>
-    <a routerLink="/decerators_parent" routerLinkActive="active">Decerators Parent</a>
-    <a routerLink="/directives" routerLinkActive="active">Directives</a>
-    <a routerLink="/pipes" routerLinkActive="active">Pipes</a>
-    <a routerLink="/templates" routerLinkActive="active">Templates</a>
-    <a routerLink="/ngcontent" routerLinkActive="active">Ng-Content</a>
-    <a routerLink="/change-detection" routerLinkActive="active">Change-Detection</a>
+
+    <!-- =====================================
+         ADMIN SIDENAV
+         ===================================== -->
+
+    @if (isAdmin) {
+
+      <div class="menu-title">
+        <strong>ADMIN MENU</strong>
+      </div>
 
 
-    <!-- Angular Routings -->
-    <a routerLink="/routings" routerLinkActive="active">Routings</a>
-    <!-- USERS MODULES LAZY LOADING PARENT CHILD -->
-    <a routerLink="/users-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">UsersList-LAZY LOADING </a> <!--// Shows exact link only if its parent and then child then its active state only for parent :routerLinkActiveOptions -->
-    <a routerLink="/users-list/users-edit" routerLinkActive="active">Users Edit-LAZY LOADING </a>
+      @for (
+        item of adminMenuItems;
+        track item.route
+      ) {
+
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{
+            exact: true
+          }"
+        >
+
+          {{ item.label }}
+
+        </a>
+
+      }
+
+    }
 
 
-    <!-- Lifecycle Hooks -->
-    <a routerLink="/lifecycle-parent" routerLinkActive="active">Lifecycle Hooks</a>
-    <a routerLink="/unsubscribe" routerLinkActive="active">Unsubscribe</a>
+    <!-- =====================================
+         USER SIDENAV
+         ===================================== -->
 
-    <!--  -->
-    <a routerLink="/signals" routerLinkActive="active">Signals</a>
-    <a routerLink="/services" routerLinkActive="active">Services</a>
+    @if (isUser) {
 
-    <!-- RXJS COMPONENTS -->
-    <a routerLink="/observables" routerLinkActive="active">Rxjs - Observables</a>
-    <a routerLink="/global-search" routerLinkActive="active">Rxjs - Sarch</a>
-    <a routerLink="/subject" routerLinkActive="active">Rxjs - Subject</a>
-    <a routerLink="/rxjs-operators" routerLinkActive="active">Rxjs - Operators</a>
-    <a routerLink="/rxjs-map" routerLinkActive="active">RXJS - Map</a>
-    <a routerLink="/rxjs-filter" routerLinkActive="active">RXJS - Filter</a>
-
-    <a routerLink="/todo-form" routerLinkActive="active">Rxjs - Todo Form</a>
-    <a routerLink="/rxjs-forms" routerLinkActive="active">Rxjs - form</a>
-    <a routerLink="/http-interceptors" routerLinkActive="active">http-interceptors</a>
-
-    <!-- Angular Forms -->
-    <a routerLink="/forms" routerLinkActive="active">Forms</a>
-    <a routerLink="/signup" routerLinkActive="active">Signup-Forms</a>
-    <a routerLink="/templete-form" routerLinkActive="active">Template-Forms</a>
-    <a routerLink="/reactive-forms" routerLinkActive="active">Reactive-Forms</a>
-    <a routerLink="/crud-operation-template" routerLinkActive="active">CRUD-Operations - Template</a>
-    <a routerLink="/crud-operation-reactive" routerLinkActive="active">CRUD-Operations - Reactive</a>
-    <a routerLink="/crud-api-methods" routerLinkActive="active">CRUD-API-Methods</a>
-    <a routerLink="/material-reactive-forms" routerLinkActive="active">Material-Reactive-Forms</a>
-    <a routerLink="/material-template-forms" routerLinkActive="active">material-Template-Forms</a>
-
-    
-    <a routerLink="/ngrx", routerLinkActive="active">NGRX</a>
+      <div class="menu-title">
+        <strong>USER MENU</strong>
+      </div>
 
 
-    <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/about" routerLinkActive="active">About</a>
-    <a routerLink="/contact" routerLinkActive="active">Contact</a>
-    <a routerLink="/users" routerLinkActive="active" [queryParams]="{'category': 'Admin', 'size': 8}">Users</a>
+      @for (
+        item of userMenuItems;
+        track item.route
+      ) {
+
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{
+            exact: item.exact ?? false
+          }"
+        >
+
+          {{ item.label }}
+
+        </a>
+
+      }
+
+    }
+
   </nav>
+
 </aside>

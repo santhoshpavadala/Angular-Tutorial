@@ -2,6 +2,7 @@
   <h1>Angular Services Examples</h1>
   <div class="sub-section">
     <h2>Angular Services – Brief Introduction</h2>
+    <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing, and common functionality across multiple components.</p>
     <p> In Angular, a Service is a class used to share data, logic, or functionality across multiple components. </p>
     <p>It follows the Singleton pattern (when provided in root), meaning one shared instance across the application.</p>
     <ul>We use services for:
@@ -12,17 +13,127 @@
       <li>Reusable utility functions</li>
       <li>Authentication & authorization logic</li>
     </ul>
+
+    <div>
+      <p>A Service is a TypeScript class used to store: <br>
+        Business Logic <br>
+        API Calls <br>
+        Shared Data <br>
+        Reusable Functions <br>
+        Services help keep components clean and focused on UI logic.</p>
+
+      <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing, and
+        common functionality across multiple components.</p>
+    </div>
   </div>
 
 
+  <div class="sub-section">
+    <h2>Users List ({{userList.length}})</h2>
+    <div class="gridDashboard">
+      @for (user of userList; track user.id) {
+      <mat-card class="user-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{ user.name }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ user.username }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <h4>Basic Information</h4>
+          <p><strong>ID:</strong> {{ user.id }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Phone:</strong> {{ user.phone }}</p>
+          <p><strong>Website:</strong> {{ user.website }}</p>
+          <hr>
+          <h4>Address</h4>
+          <p>
+            <strong>Street:</strong>
+            {{ user.address.street }}
+          </p>
+          <p>
+            <strong>Suite:</strong>
+            {{ user.address.suite }}
+          </p>
+          <p>
+            <strong>City:</strong>
+            {{ user.address.city }}
+          </p>
+          <p>
+            <strong>Zipcode:</strong>
+            {{ user.address.zipcode }}
+          </p>
+          <hr>
+          <h4>Geo Location</h4>
+          <p>
+            <strong>Latitude:</strong>
+            {{ user.address.geo.lat }}
+          </p>
+          <p>
+            <strong>Longitude:</strong>
+            {{ user.address.geo.lng }}
+          </p>
+          <hr>
+          <h4>Company</h4>
+          <p>
+            <strong>Name:</strong>
+            {{ user.company.name }}
+          </p>
+          <p>
+            <strong>Catch Phrase:</strong>
+            {{ user.company.catchPhrase }}
+          </p>
+          <p>
+            <strong>Business:</strong>
+            {{ user.company.bs }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+      }
+    </div>
+
+  </div>
+  <div class="sub-section">
+    <h2>PostList({{postList.length}})</h2>
+    <div class="gridDashboard">
+      @for (post of postList; track $index) {
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Post Data</mat-card-title></mat-card-header>
+          <mat-card-content>
+            <p><b>post-Title: </b>{{post.title}}</p>
+            <p><b>Post-Content: </b>{{post.body}}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </div>
+  <div>
+    <h2>Todos List ({{todoList.length}})</h2>
+    <div class="gridDashboard">
+      @for (todo of todoList; track $index) {
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Todo Data</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Todo Title: {{todo.title}}</p>
+            <p >Todo Status: {{todo.completed === true ? "Success": "Fail"}}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </div>
 
 
   <div class="sub-section">
     <h2>Mobile List - Example of services</h2>
     @for (m of mobileList; track m) {
-      <div>
-        {{m}}
-      </div>
+    <div>
+      {{m}}
+    </div>
     }
 
     <button (click)="addMobile()">Add Mobile</button>
@@ -33,7 +144,8 @@
     <p>Need to import provideHttpClient() in app-config.ts in latest angular 17+</p>
     <p>Need to import HttpClientModule in app-module.ts below 17 versions</p>
 
-    <p>We need to import 6httpClient servive using dependency injection through constructor and use the online api call <br>
+    <p>We need to import 6httpClient servive using dependency injection through constructor and use the online api call
+      <br>
       constructor(
       private http: HttpClient
       )
@@ -41,24 +153,124 @@
 
     <button class="btn btn-danger" (click)="getHttpData()">HTTP Data</button>
     @if(httpData) {
-      <div>
-        <table>
-          <h4>Table Data ({{ httpData.length }})</h4>
-          <tr>
-            @for (header of tableHeaders; track header) {
-              <th>{{header}}</th>
-            }
-          </tr>
-          @for (row of httpData; track row) {
-            <tr>
-              <td>{{ row.id }}</td>
-              <td>{{ row.title }}</td>
-              <td>{{ row.price }}</td>
-            </tr>
+    <div>
+      <table>
+        <h4>Table Data ({{ httpData.length }})</h4>
+        <tr>
+          @for (header of tableHeaders; track header) {
+          <th>{{header}}</th>
           }
-        </table>
-      </div>
+        </tr>
+        @for (row of httpData; track row) {
+        <tr>
+          <td>{{ row.id }}</td>
+          <td>{{ row.title }}</td>
+          <td>{{ row.price }}</td>
+        </tr>
+        }
+      </table>
+    </div>
     }
 
+  </div>
+
+  <div class="sub-section">
+    <h4>Dependency Injection (DI)</h4>
+    <p>Dependency Injection is a design pattern where Angular automatically provides required objects (dependencies) to a class instead of creating them manually.</p>
+    <p>Dependency Injection is a design pattern where Angular automatically provides required dependencies to a component or service instead of creating them manually.</p>
+    <h4>What is a Dependency?</h4>
+    <p>A dependency is any object a class needs to perform its work.</p>
+    <div>
+      <h4>Without DI</h4>
+      <p>export class UsersComponent  <br>
+        userService = <br>
+        new UserService(); <br>
+      </p>
+      <p>
+        constructor( <br>
+          private userService: UserService <br>
+        ) 
+      </p>
+      <h4>Benefits:</h4>
+      <ul>
+          <li>✅ Loose Coupling</li>
+          <li>✅ Better Testing</li>
+          <li>✅ Reusability</li>
+          <li>✅ Maintainability</li>
+        </ul>
+    </div>
+  </div>
+  <div class="sub-section">
+    <h4>What is @Injectable()?</h4>
+    <p>Marks a class as available for Angular's Dependency Injection system.</p>
+    <p>It tells Angular that the class can participate in the Dependency Injection system.</p>
+    <pre>
+      <code>
+        @Injectable(
+          providedIn:'root'
+        )
+        export class UserService 
+      </code>
+    </pre>
+    <h4>Injector</h4>
+    <p>An Injector is responsible for creating and providing dependencies.</p>
+    <p>Injector is the Angular mechanism responsible for creating and supplying dependency instances.</p>
+    <h4>Provider</h4>
+    <p>A Provider tells Angular how to create a dependency.</p>
+    <h4>Singleton Service</h4>
+    <p>A Singleton Service has only one instance throughout the application.</p>
+    <p>A service that has only one shared instance across the entire Angular application.</p>
+    <pre>
+      <code>
+        @Injectable(
+        providedIn:'root'
+        )
+      </code>
+    </pre>
+
+    <h4>10. Injection Token</h4>
+    <p>Used when Angular cannot identify dependency type automatically.</p>
+    <pre>
+      <code>
+        export const API_URL =
+        new InjectionToken string(
+        'apiUrl'
+        );
+
+        <!-- { -->
+        provide: API_URL,
+        useValue:
+        'https://api.com'
+        <!-- } -->
+
+        constructor(
+        @Inject(API_URL)
+        private apiUrl:string
+        )
+      </code>
+    </pre>
+    <h4>Why InjectionToken?</h4>
+    <p>Used to inject primitive values, configuration objects, and interfaces.</p>
+
+    <h4>11. Factory Provider</h4>
+    <p>Used when dependency creation requires custom logic.</p>
+
+    <pre>
+      <code>
+        <!-- { -->
+          provide:'API_URL',
+
+          useFactory: () => 
+          <!-- { -->
+
+            return environment.apiUrl;
+
+          <!-- } -->
+
+          <!-- } -->
+      </code>
+    </pre>
+    <h4>When to use Factory Provider?</h4>
+    <p>When dependency creation depends on runtime conditions or configuration.</p>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="section">
-    <h1>Angular - Modules</h1>
+    <h1>Angular -Lazy Loading Modules</h1>
 
     <div class="sub-section">
         <h2>What is an Angular Module (NgModule)?</h2>
@@ -18,8 +18,11 @@
 
     <div class="sub-section">
         <h2>What is Lazy Loading?</h2>
+        <p>Lazy Loading is a technique where Angular loads modules/components only when users navigate to them, reducing initial bundle size and improving application performance.</p>
         <p>Lazy loading is a technique where Angular loads feature code only when
              the user navigates to a specific route, instead of loading everything at application startup.</p>
+
+        <p>Lazy Loading is an Angular optimization technique that loads modules or components only when they are required, reducing the initial application bundle size.</p>
         <h2>Why Lazy Loading is Used?</h2>
         <ul>
             <li>Faster initial load time 🚀</li>
@@ -36,5 +39,44 @@
             <li>Admin (lazy)</li>
             <li>Settings (lazy)</li>
         </ul>
+
+        <div>
+            <h2>Example 1: Module-Based Lazy Loading</h2>
+            <p><b>Generate Module: ng g module users --route users --module app.module</b> <br>
+            Angular automatically creates lazy loading routes.</p>
+
+            <p>In users-routing.module.ts</p>
+            <pre>
+                <code>
+                    const routes: Routes = [
+                        <!-- { -->
+                            path: '',
+                            component: UsersComponent
+                        <!-- } -->
+                    ];
+                </code>
+            </pre>
+            <p>In app-routing.module.ts</p>
+            <pre>
+                <code>
+                    const routes: Routes = [
+                    <!-- { -->
+                        path: 'users',
+                        loadChildren: () =>
+                        import('./users/users.module')
+                            .then(m => m.UsersModule)
+                    <!-- } -->
+                    ];
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>Angular 17+ Standalone Lazy Loading</h2>
+        <p>Nowadays Angular prefers Standalone Components.</p>
+
+        <p>Lets create the api-data-module,  </p>
+
     </div>
 </div>

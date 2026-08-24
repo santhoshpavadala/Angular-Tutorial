@@ -49,6 +49,7 @@ import { JavascriptInterview } from './app-pages/javascript-interview/javascript
 import { Search } from './app-pages/search/search';
 import { RxjsMapDashboard } from './app-pages/rxjs/RXJS-Opearators-Examples/rxjs-map-dashboard/rxjs-map-dashboard';
 import { RxjsFilterDashboard } from './app-pages/rxjs/RXJS-Opearators-Examples/rxjs-filter-dashboard/rxjs-filter-dashboard';
+import { adminMatchGuard } from './gaurds/admin-match-guard';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -66,7 +67,7 @@ export const routes: Routes = [
       // Route guard example implemented only for contacts - old canActivate service based
       { path: 'contact', component: Contacts, canActivate: [RoutegaurdAuth] },
       { path: 'users', component: Users },
-      { path: 'usercard/:id', component: Usercard },
+      { path: 'users/:id', component: Usercard },
       { path: 'products', component: Products },
       { path: 'basics/:id/:test', component: AngularBasics },
       { path: 'decerators_parent', component: DecoratorParent },
@@ -89,7 +90,6 @@ export const routes: Routes = [
       { path: 'rxjs-map', component: RxjsMapDashboard },
       { path: 'rxjs-filter', component: RxjsFilterDashboard },
 
-
       { path: 'http-interceptors', component: HttpInterceptors },
       { path: 'forms', component: Forms },
       { path: 'signup', component: SignupForm },
@@ -104,13 +104,7 @@ export const routes: Routes = [
       { path: 'ngrx', component: Ngrx },
       { path: 'signals', component: Signals },
       { path: 'change-detection', component: ChangeDetection},
-
-      // Lazy Loading Module Concept
-      {
-        path: 'users-list',
-        loadChildren: () =>
-          import('./users-module/users-module').then((m) => m.UsersModule),
-      },
+      
       {
         path: 'routings',
         component: Routings,
@@ -119,6 +113,29 @@ export const routes: Routes = [
           { path: 'childroute2', component: Childroute2 },
         ],
       },
+
+      // Lazy Loading Module Concepts
+      
+      {
+        path: 'users-list',
+        loadChildren: () =>
+          import('./users-module/users-module').then((m) => m.UsersModule),
+      },
+
+      // =========================
+      // ADMIN FEATURE
+      // =========================
+      {
+        path:'dashboard',
+        canMatch: [adminMatchGuard],
+        loadChildren: ()=> import ('./app-features/admin-layout/admin.routes')
+        .then(m=>m.ADMIN_ROUTES)
+      },
+      {
+        path: 'dashboard',
+        loadChildren: ()=> import ('./app-features/user-dashboard-module/userdashboard.routes')
+        .then(m=>m.USERDASHBOARD_ROUTES)
+      }
     ],
   },
   { path: '**', component: Pagenotfound },
