@@ -33,8 +33,445 @@
     </div>
 
     <div class="sub-section">
-        <h2>What is Angular</h2>
-        <p>Angular is a TypeScript-based front-end framework developed by Google used to build single-page applications using a component-based architecture, with features like data binding, dependency injection, and routing.</p>
+        <h2>Q1. What is Angular?</h2>
+        <p>Angular is a TypeScript-based front-end framework developed by Google used to build single-page applications using a component-based architecture, with features like data binding, dependency injection, and routing. dependency injection, routing, forms, HTTP communication, RxJS, and reactive state management.</p>
+        <p>Angular is a TypeScript-based front-end framework developed and maintained by Google for building scalable single-page applications (SPAs). <br>
+            Angular provides built-in features such as: </p>
+            <ul>
+                <li>Components</li>
+                <li>Directives</li>
+                <li>Pipes</li>
+                <li>Services</li>
+                <li>Dependency Injection</li>
+                <li>Routing</li>
+                <li>Forms</li>
+                <li>HTTP client</li>
+                <li>RxJS integration</li>
+                <li>Signals</li>
+                <li>Change detection</li>
+                <li>Lazy loading</li>
+                <li>Guards</li>
+                <li>Interceptors</li>
+            </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>2. Angular Architecture</h2>
+        <p>The most important Angular architecture concepts are:</p>
+            <pre>
+                <code>
+                    Angular Application
+                            |
+                            ├── Components
+                            |
+                            ├── Templates
+                            |
+                            ├── Directives
+                            |
+                            ├── Pipes
+                            |
+                            ├── Services
+                            |
+                            ├── Dependency Injection
+                            |
+                            ├── Routing
+                            |
+                            ├── Forms
+                            |
+                            ├── HTTP
+                            |
+                            └── State Management
+                </code>
+            </pre>
+
+            <h4>Component</h4>
+            <p>A component controls a portion of the UI.A component consists mainly of:</p>
+            <pre>
+                <code>
+                    Component
+                    ├── TypeScript class
+                    ├── HTML template
+                    ├── CSS/SCSS
+                    └── Metadata
+                </code>
+            </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>3. Standalone Components</h2>
+        <p>A standalone component is a component that can directly declare its own imports and doesn't need to belong to an NgModule. It simplifies application structure and is the recommended approach for modern Angular applications.</p>
+        <p>Modern Angular applications commonly use standalone components.</p>
+        <p>Standalone components reduce the need for traditional NgModule organization.</p>
+        <pre>
+            <code>
+                @Component(
+                    selector: 'app-user',
+                    standalone: true,
+                    imports: [CommonModule],
+                    templateUrl: './user.component.html'
+                )
+                export class UserComponent 
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>4. Angular Bootstrapping</h2>
+        <p>Bootstrapping means starting the Angular application.</p>
+        <p>bootstrapApplication(AppComponent);</p>
+        <p>Bootstrapping is the process of starting an Angular application by creating the root component and initializing Angular's application environment.</p>
+        <pre>
+            <code>
+                main.ts
+                ↓
+                bootstrapApplication()
+                ↓
+                AppComponent
+                ↓
+                Application starts
+                ↓
+                Angular renders components
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>Databinding</h2>
+        <p>Angular supports four major types of data binding.</p>
+        <div>
+            <h4>1. Interpolation: {{ name }}</h4>
+        </div>
+        <div>
+            <h4>2. Property Binding</h4>
+            <img [src]="imageUrl" width="100px">
+        </div>
+        <div>
+            <h4>3. Event Binding</h4>
+            <button (click)="save()">Save</button>
+        </div>
+        <div>
+            <h4>4. Two-way Binding</h4>
+            <input [(ngModel)]="inputName">
+            <p>This is called banana-in-a-box syntax.</p>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>6. Directives</h2>
+        <p>A directive changes the behavior or appearance of DOM elements. Three categories:</p>
+        <div>
+            <h4>Attribute Directive: ngClass & ngStyle</h4>
+            <div [ngClass]="className">ngClass Applied</div>
+            <input [ngStyle]="styles" value="ngStyle">
+        </div>
+
+        <div>
+            <h4>Structural Directive</h4>
+            <p> *ngIf="isLoggedIn"  || @ if (isLoggedIn) </p>
+            <p>*ngFor="let user of users" || @ for (user of users; track user.id)</p>
+        </div>
+
+        <div>
+            <h2>7. Create a Custom Directive</h2>
+            <p>appHighlight example: by using with elementRef :  this.elementRef.nativeElement.style.backgroundColor </p>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>8. Pipes</h2>
+        <p>Pipes transform data inside templates.</p>
+        <p>In Angular, a Pipe is used to transform data in the template before displaying it in the UI.
+        It does NOT change the original data, it only transforms it for display.</p>
+        <p>Built-in examples:name | uppercase; price | currency; today | date; value | number</p>
+
+        <h4>9. Custom Pipe: Create a pipe that reverses a string.</h4>
+
+        <h4>10. Pure vs Impure Pipes</h4>
+        <p>A Pure Pipe is a pipe that Angular executes only when the input value or input reference changes.
+            Pure pipes are optimized for performance because Angular avoids running them unnecessarily.
+            By default, all Angular pipes are Pure Pipes.</p>
+            <pre>
+                <code>@Pipe(
+                name: 'myPipe',
+                pure: true
+                )</code>
+            </pre>
+
+        <p>An Impure Pipe is a pipe that Angular executes during every change detection cycle, regardless of whether the input reference changed or not.
+            Impure pipes are useful when data changes internally without creating a new object or array reference. <br>
+            The important part: <br>
+            pure: false <br>
+            This tells Angular to run the pipe on every change detection cycle.</p>
+            <pre>
+                <code>@Pipe(
+                name: 'myPipe',
+                pure: false
+                )</code>
+            </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>11. Lifecycle Hooks</h2>
+        <div>
+            <h2>What are Lifecycle Hooks in Angular?</h2>
+            <p>In Angular, a component is born, updated, and destroyed. <br />
+                Angular gives us lifecycle hooks — special methods that let us tap into
+                each stage of that component’s life. <br />
+                Think of them like checkpoints: <br />
+                “Component created” → “Data changed” → “View rendered” → “Component
+                destroyed”
+            </p>
+            <p>
+                Lifecycle hooks are special methods that Angular calls at specific moments
+                in a component's life - from creation to destruction. They let you tap
+                into key moments and run custom logic.
+            </p>
+            <h4>Full Lifecycle Order (Big Picture)</h4>
+            <ul>
+                <li>constructor() → Component instance created</li>
+                <li>ngOnChanges() → Input() properties change, Called when an @Input() value changes.</li>
+                <pre>
+                    <code>
+                        ngOnChanges(changes: SimpleChanges) 
+                            console.log(changes);
+                        
+                    </code>
+                </pre>
+                <li>ngOnInit() → Component initialized (called once)</li>
+                <pre>
+                    <code>
+                        ngOnInit() 
+                            this.loadUsers();
+                        
+                    </code>
+                </pre>
+                <li>ngDoCheck() → Custom change detection</li>
+                <li>ngAfterContentInit() → Content projection initialized</li>
+                <li>ngAfterContentChecked() → Content projection checked</li>
+                <li>ngAfterViewInit() → View initialized, Runs after component view initialization. @ViewChild()</li>
+                <pre>
+                    <code>
+                        @ViewChild()
+                    </code>
+                </pre>
+                <li>ngAfterViewChecked() → View checked</li>
+                <li>ngOnDestroy() → Component destroyed, Used for cleanup.</li>
+                <pre>
+                    <code>
+                        ngOnDestroy() 
+                            this.subscription.unsubscribe();
+                        
+                    </code>
+                </pre>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>What is a Decorator in Angular?</h2>
+        <p>A Decorator is a special TypeScript function that adds metadata to a class, method, property, or parameter. <br>
+        In Angular, decorators tell Angular how a class or property should behave.</p>
+        <p>A decorator is a function that adds metadata to a class, property, method, or parameter so Angular knows how to process and use it.</p>
+        <ul>Angular uses decorators to define things like:
+        <li>Components</li>
+        <li>Directives</li>
+        <li>Services</li>
+        <li>Modules</li>
+        <li>Input/Output bindings</li>
+        <li>Dependency Injection</li>
+        </ul>
+
+        <h4>Types of Angular Decorators</h4>
+        <p>Angular decorators are mainly 4 types:</p>
+        <ul>
+        <li>Class Decorators: <span>Applied to classes: </span> <span><b> @Component, @Directive, @Pipe, @Injectable, @NgModule</b></span></li>
+        <li>Property Decorators: <span>Applied to class properties: </span> <span><b> @Input, @Output, @ViewChild </b></span></li>
+        <li>Method Decorators: <span>Applied to methods: </span> <span><b>@HostListener </b></span></li>
+        <li>Parameter Decorators: <span>Applied to constructor parameters: </span> <span><b>@Inject, @Optional </b></span></li>
+        </ul>
+
+        <h2>Property Decorators: These decorators are applied to class properties.</h2>
+        <h4>@Input Decorators:</h4>
+        <p>@Input allows data from parent component to child component.</p>
+
+        <h4>@Output Decorators:</h4>
+        <p>@Output is used to send data from child component to parent component.</p>
+
+        <h4>@ViewChild</h4>
+        <p>Used to access a child component or DOM element from the parent component.</p>
+
+        <h2>12. Decerators: @Input and @Output</h2>
+        <p>Parent → Child:</p>
+        <pre>
+            <code>
+                Parent
+                ↓
+                @Input()
+                ↓
+                Child
+
+                In Parent
+                app-child [userName]="name"> /app-child>
+                In Child:
+                @Input() userName = '';
+            </code>
+        </pre>
+
+        <p>Child → Parent:</p>
+        <pre>
+            <code>
+                Child
+                ↓
+                @Output()
+                ↓
+                Parent
+
+                Child:
+                @Output() userSelected = new EventEmitter string>();
+
+                    selectUser() 
+                    this.userSelected.emit('Santhosh');
+                    
+                Parent:
+                app-child
+                    (userSelected)="handleUser($event)">
+                /app-child>
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>13. ViewChild</h2>
+        <p>Used to access a child component, directive, or DOM element.</p>
+        <p>@ViewChild is used to get a reference of a single child element, directive, or component from the template.</p>
+        <p>It returns only the first matching element.</p>
+        <p><b>@ViewChild is a decorator used to access a single DOM element, directive, or child component from the parent component's template.</b></p>
+
+        <h4>View Child examples: DOM Manipulations in Angular</h4>
+        <div class="mb-2">
+            <input type="text" #inputFocus>
+            <button (click)="focusInput()">Focus Input</button>
+      </div>
+      <div class="mb-2">
+            <input type="text" #ipValue value="Enter value">
+            <button (click)="readValue()">Read Input</button>
+            <p>{{inputRead}}</p>
+      </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>Content Child</h2>
+        <p>@ContentChild is used to access content projected from a parent component into a child component via ng-content. 
+            It is commonly used in reusable components such as cards, modals, widgets, and form wrappers, and is typically accessed inside ngAfterContentInit().</p>
+  
+        <p>@ContentChild is used to access content projected into a component using ng-content.
+            It allows a child component to access elements, directives, or components 
+            that are passed from the parent through content projection.
+        </p>
+         <app-my-card>
+          <h2 #title>
+            User Information
+        </h2>
+        </app-my-card>
+    </div>
+
+    <div class="sub-section">
+        <h2>15. Dependency Injection</h2>
+        <p>Dependency Injection (DI) is a design pattern used by Angular to provide the dependencies required by a class instead of the class creating those dependencies itself.</p>
+        <p>DI means Angular creates and provides the objects/services that a component, service, directive, or other class needs.</p>
+        <p>Instead of creating manually for each service in component, Angular provides Constructor or Inject menthods to call the required services to a component</p>
+        <div>
+            <pre>
+                <code>
+                    export class UserComponent 
+                        userService = new UserService();
+                        authService = new AuthService();
+                        loggerService = new LoggerService();
+                    
+                </code>
+            </pre>
+
+            <pre>
+                <code>
+                    export class UserComponent 
+                    constructor (
+                        private userService: UserService,
+                        private authService: AuthService,
+                        private loggerService: LoggerService
+                    ) 
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>@Injectable() in Angular</h2>
+            <p>@Injectable() tells Angular that a class can participate in Angular's dependency injection system.</p>
+            <pre>
+                <code>
+                    @Injectable(
+                        providedIn: 'root'
+                    )
+                        export class UserService 
+                </code>
+            </pre>
+        </div>
+
+        <p>This tells Angular to provide the service at the root application injector. <br>
+        Therefore, normally the service behaves as a singleton within that application injector.</p>
+
+        <p>DI with inject(): 
+        Modern Angular also supports the inject() function.</p>
+        <p>Instead of : constructor(private userService: UserService) </p>
+        <p>We can write: private userService = inject(UserService);</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>16. Services</h2>
+        <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing, and common functionality across multiple components.</p>
+        <p> In Angular, a Service is a class used to share data, logic, or functionality across multiple components. </p>
+        <p>It follows the Singleton pattern (when provided in root), meaning one shared instance across the application.</p>
+        <ul>We use services for:
+        <li>API calls (HTTP requests)</li>
+        <li>Business logic</li>
+        <li>State management</li>
+        <li>Data sharing between components</li>
+        <li>Reusable utility functions</li>
+        <li>Authentication & authorization logic</li>
+        </ul>
+
+        <div>
+        <p>A Service is a TypeScript class used to store: <br>
+            Business Logic <br>
+            API Calls <br>
+            Shared Data <br>
+            Reusable Functions <br>
+            Services help keep components clean and focused on UI logic.</p>
+
+        <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing, and
+            common functionality across multiple components.</p>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>18. Angular Routing</h2>
+        <p>Routing is the mechanism that enables navigation between different views/components in an Angular application without reloading the browser.
+        Angular uses the Router to map URLs to Components.
+        Angular loads: without refreshing the page.</p>
+
+            <div>
+                <h4>RouterOutlet</h4>
+                <p>RouterOutlet is a placeholder where Angular renders routed components.
+                RouterOutlet is a directive that acts as a placeholder where Angular dynamically loads routed components.</p>
+            </div>
+        
+        <div>
+            <h2>What is a Route Parameter?</h2>
+            <p>Route Parameters are dynamic values passed through the URL path and are typically used to identify a specific resource. <br>
+            /user/1</p>
+            <h2>Query Parameters</h2>
+            <p>Query Parameters are optional key-value pairs appended to the URL after ?. <br>
+            /users?page=1 page = 1 is a Query Parameter.</p>
+        </div>
     </div>
 
     <div class="sub-section">
@@ -42,13 +479,6 @@
         <p>In modern Angular, I have worked with standalone components, Signals, the new control-flow syntax such as @ if, @ for, and @ switch, functional guards and interceptors, lazy loading, dependency injection, RxJS, reactive forms, and modern Angular routing.
 
         Angular also provides APIs such as inject(), input(), output(), computed(), and effect() that make components more lightweight and reactive.</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Q2. What is a standalone component?</h2>
-        <p>A standalone component doesn't need to be declared inside an NgModule</p>
-        <p>In modern Angular, standalone components are preferred because they simplify application structure and make lazy loading easier.</p>
-        <p>I prefer standalone components for new development because they reduce module boilerplate and make dependencies explicit. However, I can work with NgModule-based applications because many enterprise applications still use them.</p>
     </div>
 
     <div class="sub-section">
