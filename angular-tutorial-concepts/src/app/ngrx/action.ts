@@ -1,10 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 
 export const getUsers = createAction('get-users');
-export const updateUsers = createAction(
-  'update-users',
-  props<{users: any[]}>()
-)
+export const updateUsers = createAction('update-users', props<{users: any[]}>())
 
 export const updateName = createAction('name-edit', props<{name:string}>()); //syntax, it return a function updateName. createAction and props are the inbulit inputs
 export const updateEmail = createAction('email-edit', props<{email:string}>());

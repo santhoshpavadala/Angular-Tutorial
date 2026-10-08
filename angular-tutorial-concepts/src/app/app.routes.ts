@@ -104,7 +104,7 @@ export const routes: Routes = [
       { path: 'ngrx', component: Ngrx },
       { path: 'signals', component: Signals },
       { path: 'change-detection', component: ChangeDetection},
-      
+      // Nested or child routes
       {
         path: 'routings',
         component: Routings,

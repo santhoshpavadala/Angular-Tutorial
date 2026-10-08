@@ -1,5 +1,5 @@
 <div class="section">
-    <div class="h1">Angular Interview Questions</div>
+    <h1>Angular Interview Questions</h1>
 
     <div class="sub-section">
         <!-- <p>
@@ -18,44 +18,2265 @@
         </p> -->
 
         <p>
-            Hi, I’m Santhosh. I have 4+ years of experience as a Frontend Developer with strong expertise in Angular. <br>
+            Hi, I’m Santhosh. I have 4+ years of experience as a Frontend Developer with strong expertise in Angular.
+            <br>
 
-            In my current project, I am working on a dynamic reporting application where I built reusable and scalable components, implemented routing, and handled API integrations using Angular HttpClient. <br>
+            In my current project, I am working on a dynamic reporting application where I built reusable and scalable
+            components, implemented routing, and handled API integrations using Angular HttpClient. <br>
 
-            I have good experience with RxJS, Observables, and state management for handling asynchronous operations. I also focus on writing clean, maintainable code and improving performance. <br>
+            I have good experience with RxJS, Observables, and state management for handling asynchronous operations. I
+            also focus on writing clean, maintainable code and improving performance. <br>
 
-            Additionally, I have strong knowledge of JavaScript, including ES6 concepts, closures, promises, and array methods. <br>
+            Additionally, I have strong knowledge of JavaScript, including ES6 concepts, closures, promises, and array
+            methods. <br>
 
-            I am now looking for a challenging role where I can apply my skills and continue learning advanced concepts. <br>
+            I am now looking for a challenging role where I can apply my skills and continue learning advanced concepts.
+            <br>
 
             Thank you.
-</p>
+        </p>
+    </div>
+
+    <h1>Topic 1: Angular Fundamentals</h1>
+
+    <div class="sub-section">
+        <h2>What is Angular?</h2>
+        <p>Angular is a TypeScript-based front-end framework developed by Google used to build single-page applications
+            using a component-based architecture, with features like data binding, dependency injection, and routing.
+            dependency injection, routing, forms, HTTP communication, RxJS, and reactive state management.</p>
+        <p>Angular is a TypeScript-based front-end framework developed and maintained by Google for building scalable
+            single-page applications (SPAs). <br>
+            Angular provides built-in features such as: </p>
+
+        <ul>
+            <li>Component-based architecture.</li>
+            <li>Dependency injection.</li>
+            <li>Routing</li>
+            <li>Forms.</li>
+            <li>HTTP communication.</li>
+            <li>Change detection.</li>
+            <li>RxJS integration.</li>
+            <li>Signals.</li>
+            <li>Server-side rendering support.</li>
+        </ul>
+        <ul>
+            <li>Components</li>
+            <li>Directives</li>
+            <li>Pipes</li>
+            <li>Services</li>
+            <li>Dependency Injection</li>
+            <li>Routing</li>
+            <li>Forms</li>
+            <li>HTTP client</li>
+            <li>RxJS integration</li>
+            <li>Signals</li>
+            <li>Change detection</li>
+            <li>Lazy loading</li>
+            <li>Guards</li>
+            <li>Interceptors</li>
+        </ul>
+        <h2>Cross-question: Is Angular a framework or a library?</h2>
+        <p>Angular is a framework because it provides an integrated structure and built-in capabilities for developing
+            applications, whereas a library generally offers specific functionality that developers integrate into their
+            own architecture.</p>
     </div>
 
     <div class="sub-section">
-        <h2>What is Angular</h2>
-        <p>Angular is a TypeScript-based front-end framework developed by Google used to build single-page applications using a component-based architecture, with features like data binding, dependency injection, and routing.</p>
+        <h2>What are the main features of Angular?</h2>
+        <p>The main features of Angular include:</p>
+        <ul>
+            <li>Component-based architecture: Builds the UI using reusable components</li>
+            <li>Data binding: Connects component data and templates</li>
+            <li>Directives: Modify element behavior or view structure</li>
+            <li>Pipes: Transform values for display</li>
+            <li>Dependency injection: Supplies dependencies to classes</li>
+            <li>Routing: Handles navigation between views</li>
+            <li>Forms: Supports template-driven and reactive forms</li>
+            <li>HttpClient: Communicates with backend APIs</li>
+            <li>RxJS: Handles asynchronous data streams</li>
+            <li>Signals: Provides reactive state primitives</li>
+            <li>Angular CLI: Automates development and build tasks</li>
+            <li>Testing: Supports unit and integration testing</li>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>2. Angular Architecture</h2>
+        <p>Angular follows a component-based architecture. An Angular application is built using components, templates,
+            services, dependency injection, routing, and other framework features.</p>
+        <pre>
+                <code>
+                    Angular Application
+                            |
+                            ├── Components: Manage UI sections and their behavior.
+                            |
+                            ├── Templates: Define the HTML view and binding expressions.
+                            |
+                            ├── Directives: Add behavior or control view structure.
+                            |
+                            ├── Pipes: Transform values for display.
+                            |
+                            ├── Services: Encapsulate reusable logic, data access, and shared functionality.
+                            |
+                            ├── Dependency Injection: Supplies services and other dependencies.
+                            |
+                            ├── Routing: Maps URL paths to views.
+                            |
+                            ├── Forms
+                            |
+                            ├── HTTP
+                            |
+                            └── State Management
+                </code>
+            </pre>
+
+        <h4>Component</h4>
+        <p>A component controls a portion of the UI.A component consists mainly of:</p>
+        <pre>
+                <code>
+                    Component
+                    ├── TypeScript class
+                    ├── HTML template
+                    ├── CSS/SCSS
+                    └── Metadata
+                </code>
+            </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>Angular Application Structure</h2>
+        <h4>Q1. Explain the folder structure of an Angular application.</h4>
+        <p>Angular CLI creates a standard workspace structure. A feature-oriented application might use the following
+            organization:</p>
+        <pre>
+            <code>
+                src/
+                ├── app/
+                │   ├── core/
+                │   │   ├── services/
+                │   │   └── interceptors/
+                │   ├── shared/
+                │   │   ├── components/
+                │   │   ├── directives/
+                │   │   └── pipes/
+                │   ├── features/
+                │   │   ├── dashboard/
+                │   │   ├── employees/
+                │   │   └── reports/
+                │   ├── app.component.ts
+                │   ├── app.config.ts
+                │   └── app.routes.ts
+                ├── assets/
+                ├── main.ts
+                ├── index.html
+                └── styles.css
+
+                angular.json
+                package.json
+                tsconfig.json
+            </code>
+        </pre>
+        <p>This is a recommended organizational example, not a mandatory Angular structure.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Q3. What is a single-page application (SPA)?</h2>
+        <p>A single-page application is a web application that loads an initial HTML page and updates its content
+            dynamically as users interact or navigate, usually without a full browser-page reload. <br>
+            Angular commonly uses client-side routing to build SPAs.</p>
+
+        <p>Example:</p>
+        <p>Consider an employee management application with:</p>
+        <ul>
+            <li>/dashboard</li>
+            <li>/employees</li>
+            <li>/reports</li>
+            <li>/settings</li>
+        </ul>
+        <p>Angular Router can load the relevant view when the user navigates between these URLs without reloading the
+            entire document.</p>
+        <h4>Cross-question: What are the advantages and disadvantages of SPAs?</h4>
+        <p>Advantages:</p>
+        <ul>
+            <li>Smooth navigation.</li>
+            <li>Reusable client-side UI.</li>
+            <li>Efficient transitions between views.</li>
+            <li>Clear separation between frontend and backend APIs.</li>
+        </ul>
+        <p>Disadvantages:</p>
+        <ul>
+            <li>Initial loading and bundle size require attention.</li>
+            <li>SEO may require server rendering or prerendering.</li>
+            <li>Client-side routing and browser history need proper configuration.</li>
+            <li>- Authentication and client-side security need careful handling.</li>
+        </ul>
+    </div>
+
+    <div class="sub-section">
+        <h2>Q4. What is the difference between Angular and AngularJS?</h2>
+        <pre>
+            <code>
+                Angular	                                    AngularJS
+                Modern TypeScript-based framework	        Older JavaScript-based framework
+                Component-based architecture	            Controller and scope-based architecture
+                Uses modern change-detection mechanisms	    Uses digest-cycle change detection
+                Supports standalone components	            Uses the older module and controller architecture
+                Uses modern Angular CLI tooling	            Uses legacy tooling
+                Actively developed modern framework	        Legacy framework
+
+                Angular and AngularJS are separate frameworks with different architectures.
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>Q5. Why is TypeScript used in Angular?</h2>
+        <p>TypeScript is a superset of JavaScript that adds static typing, interfaces, access modifiers, decorators, and
+            improved tooling. <br>
+            Angular uses TypeScript to support structured application development, catch many errors during compilation,
+            and improve code maintainability.</p>
+
+        <pre>
+            <code>
+                interface Employee 
+                id: number;
+                name: string;
+                department: string;
+
+                const employee: Employee = 
+                id: 101,
+                name: 'Santhosh',
+                department: 'Frontend'
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>3. Standalone Components</h2>
+        <p>A standalone component is a component that can directly declare its own imports and doesn't need to belong to
+            an NgModule. It simplifies application structure and is the recommended approach for modern Angular
+            applications.</p>
+        <p>Modern Angular applications commonly use standalone components.</p>
+        <p>Standalone components reduce the need for traditional NgModule organization.</p>
+        <pre>
+            <code>
+                @Component(
+                    selector: 'app-user',
+                    standalone: true,
+                    imports: [CommonModule],
+                    templateUrl: './user.component.html'
+                )
+                export class UserComponent 
+            </code>
+        </pre>
+        <h2>Q2. What are the advantages of standalone components?</h2>
+        <ul>
+            <li>They reduce the need for NgModule boilerplate.</li>
+            <li>Component dependencies are explicit.</li>
+            <li>They simplify bootstrapping.</li>
+            <li>They support direct lazy loading of routed components.</li>
+            <li>They can make feature organization and migration easier.</li>
+        </ul>
+
+        <h2>Q3. What is the difference between standalone components and NgModule-based components?</h2>
+        <pre>
+            <code>
+                Standalone components	                            NgModule-based components
+                Do not need NgModule declarations	                Declared in an NgModule
+                Import template dependencies directly	            Commonly use dependencies imported through the module
+                Can be bootstrapped with bootstrapApplication()	    Traditionally bootstrapped using bootstrapModule()
+                Recommended default for new Angular code	        Still used in many existing applications
+            </code>
+        </pre>
+
+        <h2>Q4. How do you lazy-load a standalone component?</h2>
+        <p>Use loadComponent in the route configuration.</p>
+        <pre>
+            <code>
+                import  Routes  from '@angular/router';
+
+                export const routes: Routes = [
+                <!-- { -->
+                    path: 'dashboard',
+                    loadComponent: () =>
+                    import('./dashboard.component')
+                        .then(m => m.DashboardComponent)
+                <!-- } -->
+                ];
+            </code>
+        </pre>
+        <p>Angular loads the component when the route is activated.</p>
+
+        <h2>Q5. What is the difference between loadComponent and loadChildren?</h2>
+        <ul>
+            <li>loadComponent lazy-loads a single component for a route.</li>
+            <li>loadChildren lazy-loads child route definitions or an NgModule.</li>
+        </ul>
+
+        <h2>Q6. Can standalone components use NgModules?</h2>
+        <p>Yes. A standalone component can import an NgModule in its imports array to use the declarations that the
+            module exports. Similarly, an NgModule can import a standalone component.</p>
+
+        <h2>Q7. What is bootstrapApplication()?</h2>
+        <p>bootstrapApplication() is an Angular API used to bootstrap an application using a standalone root component
+            and optional application configuration.</p>
+        <pre>
+            <code>
+                import  bootstrapApplication  from '@angular/platform-browser';
+                import  provideRouter  from '@angular/router';
+                import  AppComponent  from './app/app.component';
+                import  routes  from './app/app.routes';
+
+                bootstrapApplication(AppComponent, 
+                providers: [provideRouter(routes)]
+                );
+            </code>
+        </pre>
+        <h3>Q. You have a large application with 30 feature areas. How would standalone components help?</h3>
+        <p>Standalone components let each feature import its direct dependencies without requiring a separate NgModule
+            for every feature. I would combine that with lazy-loaded routes and feature-oriented organization to keep
+            the application modular.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>4. Angular Bootstrapping</h2>
+        <p>Bootstrapping means starting the Angular application.</p>
+        <p>bootstrapApplication(AppComponent);</p>
+        <p>Bootstrapping is the process of starting an Angular application by creating the root component and
+            initializing Angular's application environment.</p>
+
+        <pre>
+            <code>
+                import bootstrapApplication  from '@angular/platform-browser';
+                import AppComponent  from './app/app.component';
+
+                bootstrapApplication(AppComponent)
+                .catch(error => console.error(error));
+            </code>
+        </pre>
+
+        <pre>
+            <code>
+                main.ts
+                ↓
+                bootstrapApplication()
+                ↓
+                AppComponent
+                ↓
+                Application starts
+                ↓
+                Angular renders components
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>Q2. What is the purpose of main.ts?</h2>
+        <p>main.ts is the entry point of a typical Angular application. It bootstraps the root component and supplies
+            the application configuration.</p>
+        <pre>
+            <code>
+                import bootstrapApplication from '@angular/platform-browser';
+                import AppComponent from './app/app.component';
+                import appConfig from './app/app.config';
+
+                bootstrapApplication(AppComponent, appConfig)
+                .catch(err => console.error(err));
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>Q3. What is the purpose of app.config.ts?</h2>
+        <p>app.config.ts defines application-level configuration, including providers such as the router, HTTP client,
+            and other application-wide dependencies.</p>
+        <pre>
+            <code>
+                import ApplicationConfig  from '@angular/core';
+                import provideRouter from '@angular/router';
+                import provideHttpClient from '@angular/common/http';
+                import routes from './app.routes';
+
+                export const appConfig: ApplicationConfig = 
+                <!-- { -->
+                providers: [
+                    provideRouter(routes),
+                    provideHttpClient()
+                ]
+                <!-- }; -->
+            </code>
+        </pre>
+    </div>
+
+    <div class="sub-section">
+        <h2>Q4. What is the purpose of angular.json?</h2>
+        <p>angular.json contains Angular CLI workspace configuration. It defines project settings, build and test
+            targets, assets, styles, scripts, and environment-specific build options.</p>
+
+        <h2>Q5. What is the difference between package.json and package-lock.json?</h2>
+        <p>package.json defines project metadata, dependencies, development dependencies, and scripts. package-lock.json
+            records the resolved dependency tree and versions to support reproducible installations.</p>
+
+        <h2>Q6. What is the difference between core, shared, and feature folders?</h2>
+        <ul>
+            <li>Core: Often contains application-wide services, interceptors, guards, and foundational infrastructure.
+            </li>
+            <li>Shared: Often contains reusable UI components, pipes, directives, and utilities.</li>
+            <li>Features: Contains functionality grouped around specific business areas, such as employees, dashboards,
+                or reports.</li>
+        </ul>
+        <p>The distinction is a team convention. In standalone applications, shared components can be imported directly
+            without creating a shared NgModule.</p>
+
+        <h4>Q. Your application has 100 components and the code is becoming difficult to maintain. What changes would
+            you make?</h4>
+        <p>I would identify the business features, group related components and services together, separate reusable UI
+            from feature-specific UI, and simplify dependencies between features. I would also identify components with
+            too many responsibilities and split them where doing so improves maintainability.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Topic 4: Angular CLI</h2>
+        <h2>Q1. What is Angular CLI?</h2>
+        <p>Angular CLI is a command-line interface used to create, develop, test, build, and maintain Angular
+            applications.</p>
+        <p>It automates common development operations and helps maintain consistent project conventions.</p>
+        <h2>Q2. What are the commonly used Angular CLI commands?</h2>
+        <pre>
+        <code>
+            Command	                        |Purpose
+            ng new my-app	                | Creates an Angular project
+            ng serve	                    |Starts the development server
+            ng serve --open	                |Starts the server and opens the browser
+            ng generate component users	    |Generates a component
+            ng generate service users	    |Generates a service
+            ng generate pipe format-date    |Generates a pipe
+            ng generate directive highlight |Generates a directive
+            ng generate guard auth	        |Generates a guard
+            ng build	                    |Builds the application
+            ng test	                        |Runs configured tests
+            ng version	                    |Displays Angular and CLI versions
+            ng update	                    |Updates Angular packages and runs applicable migrations
+            ng lint	                        |Runs linting if a lint target is configured
+        </code>
+        </pre>
+
+        <h2>Q3. What is the difference between ng serve and ng build?</h2>
+        <p>ng serve starts a development server and rebuilds the application as files change. ng build generates build
+            output for a configured target, such as production.</p>
+
+        <h2>Q4. What is the difference between ng update and npm update?</h2>
+        <p>ng update understands Angular package relationships and can execute Angular migration schematics. npm update
+            updates dependencies according to npm's dependency rules but does not provide Angular-specific migrations.
+        </p>
+
+        <h2>Q5. How do you generate a production build?</h2>
+        <p>Command: ng build --configuration production</p>
+        <p>This invokes the production configuration defined in the project's build settings.</p>
+
+        <h2>Q6. What happens when you execute ng serve?</h2>
+        <p>Angular CLI builds the application for development and serves it locally. It watches source files for changes
+            and rebuilds the application as needed. The development server also supports features such as live reload.
+        </p>
+
+        <h2>Q7. How do you upgrade an Angular project?</h2>
+        <p>First, inspect the current Angular and Node.js versions and review the compatibility requirements. Then use
+            the Angular update guidance and CLI commands to update packages and run migrations. Finally, resolve
+            compilation and test issues and validate the application.</p>
+        <pre>
+            <code>
+                ng version
+                ng update @angular/core @angular/cli
+            </code>
+        </pre>
+        <p>The exact update command may differ when crossing major versions or when updating other Angular packages.</p>
+
+        <h2>Q. Your application runs locally but fails after a production build. How would you troubleshoot it?</h2>
+        <p>I would inspect the build errors and warnings, verify production configuration and environment variables,
+            check package compatibility, and investigate any differences in optimization, lazy loading, asset paths, or
+            runtime configuration. I would also test the production build locally where possible.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>Topic 7: Components</h2>
+        <h2>Q1. What is a component in Angular?</h2>
+        <p>A component is a reusable UI building block. It combines a TypeScript class with a template and metadata to
+            define a portion of an Angular application's view and behavior.</p>
+        <p>An Angular component is a fundamental building block of an Angular application. It controls a specific part
+            of the user interface and combines three main things:</p>
+        <ul>
+            <li>Template: Defines the HTML structure.</li>
+            <li>Class: Contains the data, logic and behavior.</li>
+            <li>Metadata: Configures the component using the @Component decorator.</li>
+        </ul>
+        <pre>
+            <code>
+                import  Component  from '@angular/core';
+                @Component(
+                selector: 'app-user',
+                standalone: true,
+                template: `
+                    h2 userName
+                    button (click)="changeName()" Change Name button
+                `
+                )
+                export class UserComponent 
+                userName = 'John';
+                changeName() 
+                    this.userName = 'David';
+            </code>
+        </pre>
+        <p>Here:</p>
+        <ul>
+            <li>@Component declares the component metadata.</li>
+            <li>selector defines the custom HTML tag.</li>
+            <li>standalone: true makes it usable without declaring it in an NgModule.</li>
+            <li>template defines the component's view.</li>
+            <li>UserComponent contains the component's state and methods.</li>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+    <div class="sub-section">
+        <h2>Topic 8: Data Binding</h2>
+        <h2>Q1. What is data binding in Angular?</h2>
+        <p>Data binding connects component data and behavior to a template. It allows Angular to display values, set
+            element properties, respond to events, and synchronize values between the component and the view.</p>
+
+
+        <h2>Q2. What are the different types of data binding?</h2>
+        <p>Angular supports four commonly discussed types:</p>
+        <ol>
+            <li>Interpolation</li>
+            <li>Property binding.</li>
+            <li>Event binding.</li>
+            <li>Two-way binding.</li>
+        </ol>
+
+        <div>
+            <h2>Q3. What is interpolation?</h2>
+            <p>Interpolation uses double curly braces to display an expression's result as text in a template.</p>
+            <h4>1. Interpolation: {{ name }}</h4>
+        </div>
+        <div>
+            <h2>Q4. What is property binding?</h2>
+            <p>Property binding sets a DOM property or component input using an expression from the component.</p>
+            <img [src]="imageUrl" width="100px">
+        </div>
+        <div>
+            <h2>Q5. What is event binding?</h2>
+            <p>Event binding listens for an event and executes a template expression when the event occurs.</p>
+            <button (click)="save()">Save</button>
+        </div>
+        <div>
+            <h2>Q6. What is two-way data binding?</h2>
+            <p>Two-way binding combines a value flowing from the component to the view with an event that updates the
+                component from the view.</p>
+            <input [(ngModel)]="inputName">
+            <p>This is called banana-in-a-box syntax.</p>
+        </div>
+
+        <h4>Q. You have a search input that should filter a table as the user types. How would you implement it?</h4>
+        <p>For a simple local table, I would use event binding or a form control to capture the search term and derive
+            the filtered list. For API-based search, I would use an input stream with operators such as debounceTime,
+            distinctUntilChanged, and switchMap to avoid unnecessary requests.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>6. Directives</h2>
+        <p>A directive is a class that adds behavior to elements or changes the structure of a view.</p>
+        <p>A directive changes the behavior or appearance of DOM elements. Three categories:</p>
+
+        <p>Angular has three commonly discussed directive categories:</p>
+        <ul>
+            <li>Component directives.</li>
+            <li>Attribute directives.</li>
+            <li>Structural directives.</li>
+        </ul>
+
+        <div>
+            <h4>Attribute Directive: ngClass & ngStyle</h4>
+            <p>An attribute directive changes the appearance or behavior of an existing element. <br>
+                Examples include NgClass, NgStyle, and custom attribute directives.</p>
+            <div [ngClass]="className">ngClass Applied</div>
+            <input [ngStyle]="styles" value="ngStyle">
+        </div>
+
+        <div>
+            <h4>Structural Directive</h4>
+            <p>A structural directive changes the structure of a view by adding, removing, or repeating embedded views.
+                <br>
+                Traditional examples include NgIf, NgFor, and NgSwitch.
+            </p>
+            <p> *ngIf="isLoggedIn" || @ if (isLoggedIn) </p>
+            <p>*ngFor="let user of users" || @ for (user of users; track user.id)</p>
+        </div>
+
+        <div>
+            <h4>Q6. What is the difference between *ngFor and @ for?</h4>
+            <p>*ngFor is a structural directive used to repeat a template for each item in a collection.
+                @ for is modern built-in template control-flow syntax that also supports explicit tracking.</p>
+
+            <pre>
+                <code>
+                    @ for (employee of employees; track employee.id) 
+                    <p> employee.name </p>
+
+                     @ empty 
+                    <p>No employees found.</p>
+                    
+                </code>
+            </pre>
+
+            <h4>Q7. What is trackBy in *ngFor?</h4>
+            <p>trackBy provides a function that helps Angular identify
+                items in a collection by a stable key. It can reduce unnecessary DOM operations
+                when the collection changes.</p>
+            <pre>
+                <code>
+                    trackById(index: number, employee: Employee) 
+                        return employee.id;
+                    
+                     li * ngFor="let employee of employees; trackBy: trackById">
+                         employee.name 
+                    li
+
+                    With modern @ for, use the track expression instead.
+                </code>
+            </pre>
+
+            <h4>Q. You are rendering 1,000 rows in a table. How would you avoid unnecessary DOM updates?</h4>
+            <p>I would use stable tracking keys, avoid recreating the entire collection unnecessarily, and consider
+                pagination or virtual scrolling. If the dataset is large, server-side pagination and filtering may be
+                more suitable.</p>
+        </div>
+
+        <div>
+            <h2>7. Create a Custom Directive</h2>
+            <p>appHighlight example: by using with elementRef : this.elementRef.nativeElement.style.backgroundColor </p>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>Topic 10: Pipes</h2>
+        <h2>Q1. What is a pipe in Angular?</h2>
+        <p>In Angular, a Pipe is used to transform data in the template before displaying it in the UI.
+            It does NOT change the original data, it only transforms it for display.</p>
+        <p>Built-in examples:name | uppercase; price | currency; today | date; value | number</p>
+        <ul>Common built-in pipes include:
+            <li>DatePipe</li>
+            <li>CurrencyPipe</li>
+            <li>DecimalPipe</li>
+            <li>PercentPipe</li>
+            <li>UpperCasePipe</li>
+            <li>LowerCasePipe</li>
+            <li>JsonPipe</li>
+            <li>SlicePipe</li>
+        </ul>
+
+        <div>
+            <h2>Q2. How do you use built-in pipes?</h2>
+            <pre>
+                <code>
+                    export class ProductComponent 
+                    <!-- { -->
+                        today = new Date();
+                        price = 1500;
+                        percentage = 0.75;
+                        productName = 'laptop';
+                    <!-- } -->
+
+                    <p> today | date:'dd-MM-yyyy' </p>
+                    <p> price | currency:'INR' </p>
+                    <p> percentage | percent </p>
+                    <p> productName | uppercase </p>
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>Q3. What is a custom pipe?</h2>
+            <p>A custom pipe is created when the built-in pipes do not meet a particular display-transformation
+                requirement.</p>
+            <pre>
+                <code [textContent]="custompipe"></code>
+                <p> description | truncate:20 </p>
+            </pre>
+        </div>
+
+        <h2>Q4. Pure vs Impure Pipes</h2>
+        <p>A pure pipe is the default. It executes when Angular detects a change to its input value or reference. An
+            impure pipe can execute during every relevant change-detection cycle.</p>
+        <pre>
+            <code>
+                Pure pipe	                    Impure pipe
+                Default	                        Requires pure: false
+                Runs on input changes	        Can run frequently
+                Usually more efficient	        May be more expensive
+                Good for most transformations	Appropriate only for specific cases
+            </code>
+        </pre>
+
+
+        <p>A Pure Pipe is a pipe that Angular executes only when the input value or input reference changes.
+            Pure pipes are optimized for performance because Angular avoids running them unnecessarily.
+            By default, all Angular pipes are Pure Pipes.</p>
+        <pre>
+                <code>@Pipe(
+                name: 'myPipe',
+                pure: true
+                )</code>
+            </pre>
+
+        <p>An Impure Pipe is a pipe that Angular executes during every change detection cycle, regardless of whether the
+            input reference changed or not.
+            Impure pipes are useful when data changes internally without creating a new object or array reference. <br>
+            The important part: <br>
+            pure: false <br>
+            This tells Angular to run the pipe on every change detection cycle.</p>
+        <pre>
+                <code>@Pipe(
+                name: 'myPipe',
+                pure: false
+                )</code>
+            </pre>
+
+        <div>
+            <h2>Q5. Can we chain pipes?</h2>
+            <p>Yes. The output of one pipe can be passed to another.</p>
+            <pre>
+                    <code><p> today | date:'fullDate' | uppercase </p></code>
+                </pre>
+
+            <h2>Q6. Can pipes accept parameters?</h2>
+            <p>Yes. Parameters are passed after the pipe name using colons.</p>
+            <pre><code><p> amount | number:'1.2-2' </p></code></pre>
+
+            <h2>Q7. Why should expensive operations be avoided inside pipes?</h2>
+            <p>Pipes can be evaluated as part of template update processing. Expensive transformations, especially in
+                impure pipes, can affect rendering performance. Complex calculations may be better placed in a service
+                or derived state.</p>
+
+            <h2>Q. You need to filter and sort a large table. Would you use a custom pipe?</h2>
+            <p>For a small, simple list, a pure custom pipe may be appropriate. For large data, frequent updates, or
+                server-backed filtering, I would consider derived state, a dedicated data-processing layer, or
+                server-side operations to avoid repeated expensive calculations.</p>
+        </div>
+
+    </div>
+
+    <div class="sub-section">
+        <h2>Topic 11: Angular Lifecycle Hooks</h2>
+        <div>
+            <h2>What are Lifecycle Hooks in Angular?</h2>
+            <p>Lifecycle hooks are methods that allow developers to execute code at specific stages of a component or
+                directive's lifecycle. <br>
+                They are useful for initializing data, responding to input changes, accessing initialized views, and
+                cleaning up resources.</p>
+
+            <p>In Angular, a component is born, updated, and destroyed. <br />
+                Angular gives us lifecycle hooks — special methods that let us tap into
+                each stage of that component’s life. <br />
+                Think of them like checkpoints: <br />
+                “Component created” → “Data changed” → “View rendered” → “Component
+                destroyed”
+            </p>
+            <p>
+                Lifecycle hooks are special methods that Angular calls at specific moments
+                in a component's life - from creation to destruction. They let you tap
+                into key moments and run custom logic.
+            </p>
+
+            <h2>Q2. Explain the Angular lifecycle hooks.</h2>
+            <pre>
+                <code>
+Hook	                Purpose
+ngOnChanges	            Responds to changes in input properties
+ngOnInit	            Runs once after initial input setup
+ngDoCheck	            Allows custom change checking
+ngAfterContentInit	    Runs after projected content is initialized
+ngAfterContentChecked	Runs after projected content is checked
+ngAfterViewInit	        Runs after the component view is initialized
+ngAfterViewChecked	    Runs after the component view is checked
+ngOnDestroy	            Runs before the component or directive is destroyed
+                </code>
+            </pre>
+
+
+
+
+
+            <h4>Full Lifecycle Order (Big Picture)</h4>
+            <ul>
+                <li>constructor() → Component instance created</li>
+                <li>ngOnChanges() → Input() properties change, Called when an @Input() value changes.</li>
+                <pre>
+                    <code>
+                        ngOnChanges(changes: SimpleChanges) 
+                            console.log(changes);
+                        
+                    </code>
+                </pre>
+                <li>ngOnInit() → Component initialized (called once)</li>
+                <pre>
+                    <code>
+                        ngOnInit() 
+                            this.loadUsers();
+                        
+                    </code>
+                </pre>
+                <li>ngDoCheck() → Custom change detection</li>
+                <li>ngAfterContentInit() → Content projection initialized</li>
+                <li>ngAfterContentChecked() → Content projection checked</li>
+                <li>ngAfterViewInit() → View initialized, Runs after component view initialization. @ViewChild()</li>
+                <pre>
+                    <code>
+                        @ViewChild()
+                    </code>
+                </pre>
+                <li>ngAfterViewChecked() → View checked</li>
+                <li>ngOnDestroy() → Component destroyed, Used for cleanup.</li>
+                <pre>
+                    <code>
+                        ngOnDestroy() 
+                            this.subscription.unsubscribe();
+                        
+                    </code>
+                </pre>
+            </ul>
+        </div>
+
+        <h2>Q3. What is the difference between constructor and ngOnInit?</h2>
+        <p>The constructor is a TypeScript class initialization method. It is commonly used for dependency injection and
+            simple initialization. <br>
+            ngOnInit is an Angular lifecycle hook. It runs after Angular has initialized the component's input
+            properties.</p>
+
+        <h2>Q4. What is the difference between ngOnChanges and ngOnInit?</h2>
+        <p>ngOnChanges runs when input properties change. It can run during initial setup before ngOnInit, and it may
+            run again for later input changes. <br>
+            ngOnInit runs once after the initial input setup.</p>
+
+        <pre>
+            <code>
+import 
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+ from '@angular/core';
+
+@Component(
+  selector: 'app-user',
+  standalone: true,
+  template: `<p> name </p>`
+)
+export class UserComponent implements OnChanges, OnInit 
+  @Input() name = '';
+
+  ngOnChanges(changes: SimpleChanges) 
+    console.log('Input changed', changes);
+  
+
+  ngOnInit() 
+    console.log('Component initialized');
+            </code>
+        </pre>
+
+        <h2>Q5. What is the difference between ngAfterViewInit and ngAfterContentInit?</h2>
+        <p>ngAfterViewInit runs after the component's own view and view children are initialized. <br>
+            ngAfterContentInit runs after content projected into the component using content projection has been
+            initialized.</p>
+
+        <h2>Q6. What is the purpose of ngOnDestroy?</h2>
+        <p>ngOnDestroy allows a component or directive to release resources before destruction. Common cleanup tasks
+            include unsubscribing from long-lived Observables, removing manually registered event listeners, and
+            clearing other resources.</p>
+
+        <h2>Q7. What is the difference between ngDoCheck and ngOnChanges?</h2>
+        <p>ngOnChanges responds to Angular-detected changes in input properties. ngDoCheck allows custom change checking
+            and runs during relevant change-detection cycles. <br>
+            ngDoCheck should be used cautiously because it can execute frequently.</p>
+
+        <h2>Q8. How do you prevent memory leaks from subscriptions?</h2>
+        <p>Use appropriate cleanup strategies based on the subscription lifecycle. Common approaches include the async
+            pipe, takeUntilDestroyed(), and the takeUntil pattern.</p>
+        <pre>
+            <code>
+import 
+  Component,
+  DestroyRef,
+  inject,
+  OnInit
+ from '@angular/core';
+import  takeUntilDestroyed  from '@angular/core/rxjs-interop';
+import  interval  from 'rxjs';
+
+@Component(
+  selector: 'app-timer',
+  standalone: true,
+  template: `<p>Timer component</p>`
+)
+export class TimerComponent implements OnInit 
+  private destroyRef = inject(DestroyRef);
+
+  ngOnInit() 
+    interval(1000)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => console.log(value));
+            </code>
+        </pre>
+        <p>The subscription is automatically cleaned up when the component is destroyed.</p>
+
+        <h2>Q. You subscribe to a continuously running WebSocket stream in a component. What happens if you do not clean
+            up the subscription?</h2>
+        <p>The subscription may continue receiving data after the component is destroyed, potentially causing memory
+            leaks, unnecessary processing, or attempts to update state that is no longer relevant. I would use an
+            appropriate cleanup strategy or manage the stream at a longer-lived service level if the data needs to
+            remain active across views.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>What is a Decorator in Angular?</h2>
+        <p>A Decorator is a special TypeScript function that adds metadata to a class, method, property, or parameter.
+            <br>
+            In Angular, decorators tell Angular how a class or property should behave.
+        </p>
+        <p>A decorator is a function that adds metadata to a class, property, method, or parameter so Angular knows how
+            to process and use it.</p>
+        <ul>Angular uses decorators to define things like:
+            <li>@Component</li>
+            <li>@Directive</li>
+            <li>@Pipe</li>
+            <li>@Injectable</li>
+            <li>@Input</li>
+            <li>@Output</li>
+            <li>@HostListener</li>
+            <li>@HostBinding</li>
+        </ul>
+
+        <h4>Types of Angular Decorators</h4>
+        <p>Angular decorators are mainly 4 types:</p>
+        <ul>
+            <li>Class Decorators: <span>Applied to classes: </span> <span><b> @Component, @Directive, @Pipe,
+                        @Injectable, @NgModule</b></span></li>
+            <li>Property Decorators: <span>Applied to class properties: </span> <span><b> @Input, @Output, @ViewChild
+                    </b></span></li>
+            <li>Method Decorators: <span>Applied to methods: </span> <span><b>@HostListener </b></span></li>
+            <li>Parameter Decorators: <span>Applied to constructor parameters: </span> <span><b>@Inject, @Optional
+                    </b></span></li>
+        </ul>
+
+        <h2>Property Decorators: These decorators are applied to class properties.</h2>
+        <h4>@Input Decorators:</h4>
+        <p>@Input allows data from parent component to child component.</p>
+
+        <h4>@Output Decorators:</h4>
+        <p>@Output is used to send data from child component to parent component.</p>
+
+        <h4>@ViewChild</h4>
+        <p>Used to access a child component or DOM element from the parent component.</p>
+
+        <h2>12. Decerators: @Input and @Output</h2>
+        <p>Parent → Child:</p>
+        <pre>
+            <code>
+                Parent
+                ↓
+                @Input()
+                ↓
+                Child
+
+                In Parent
+                app-child [userName]="name"> /app-child>
+                In Child:
+                @Input() userName = '';
+            </code>
+        </pre>
+
+        <p>Child → Parent:</p>
+        <pre>
+            <code>
+                Child
+                ↓
+                @Output()
+                ↓
+                Parent
+
+                Child:
+                @Output() userSelected = new EventEmitter string>();
+
+                    selectUser() 
+                    this.userSelected.emit('Santhosh');
+                    
+                Parent:
+                app-child
+                    (userSelected)="handleUser($event)">
+                /app-child>
+            </code>
+        </pre>
+        <h4>Q3. What is the purpose of @Component?</h4>
+        <p>@Component defines metadata such as the selector, template, styles, imports, and other configuration that
+            Angular needs to create and use a component.</p>
+        <h4>Q4. What are @Input and @Output?</h4>
+        <p>@Input allows a parent component to pass data to a child component. @Output allows a child component to emit
+            events that the parent can handle.</p>
+        <pre>
+            <code>
+                import 
+                Component,
+                Input,
+                Output,
+                EventEmitter
+                 from '@angular/core';
+
+                @Component(
+                selector: 'app-user-card',
+                standalone: true,
+                template: `
+                    <p> name </p>
+                    <button click=select()>Select</button>
+                `
+                )
+                export class UserCardComponent 
+                @Input() name = '';
+
+                @Output() selected = new EventEmitter< string>();
+
+                select() 
+                    this.selected.emit(this.name);
+                
+
+            Parent template:
+            app-user-card [name]="userName" (selected)="onUserSelected($event)"/>
+            </code>
+        </pre>
+
+        <h4>Q5. What is the difference between @Input and signal-based input()?</h4>
+        <p>Both define component inputs. Decorator-based @Input exposes a property that receives a value from the
+            parent. Signal-based input() exposes the input as a read-only Signal, allowing reactive reads using
+            function-call syntax.</p>
+        <pre>
+            <code>
+                import Component, input from '@angular/core';
+                @Component(
+                selector: 'app-user',
+                standalone: true,
+                template: `<p>name()</p>`
+                )
+                export class UserComponent 
+                name = input('Guest');
+            </code>
+        </pre>
+        <h4>Q6. What is the difference between @Component and @Directive?</h4>
+        <p>A component is a directive with its own template. A directive adds behavior to an existing element or
+            controls view structure without defining its own component template.</p>
+        <h4>Q7. What are @HostListener and @HostBinding?</h4>
+        <p>@HostListener listens to events on a directive or component's host element. @HostBinding binds a class
+            property to a property, attribute, or class on the host element.</p>
+        <pre>
+            <code>
+                import 
+                    Directive,
+                    HostListener,
+                    HostBinding
+                 from '@angular/core';
+
+                @Directive(
+                    selector: '[appHover]',
+                    standalone: true
+                )
+                    export class HoverDirective 
+                    @HostBinding('class.active') isActive = false;
+
+                    @HostListener('mouseenter')
+                    onMouseEnter() 
+                        this.isActive = true;
+                    
+
+                    @HostListener('mouseleave')
+                    onMouseLeave() 
+                        this.isActive = false;
+            </code>
+        </pre>
+
+        <h4>Q. How would you design a reusable modal component?</h4>
+        <p>I would build a component with clear inputs for title, visibility, and configuration, and outputs for close
+            or confirmation events. For more advanced use cases, I would consider Angular CDK Dialog or Material Dialog
+            rather than manually implementing focus management and accessibility behavior.</p>
+    </div>
+
+    <div class="sub-section">
+        <h2>2. Component Communication</h2>
+        <p>In Angular, components communicate to exchange data and coordinate actions. The approach depends on the
+            relationship between the components.</p>
+        <p>2.1 Types of component communication</p>
+        <p>Common communication approaches:</p>
+        <ul>
+            <li>Parent to child: inputs.</li>
+            <li>Child to parent: outputs.</li>
+            <li>Sibling or unrelated components: shared services, Signals or other state management.</li>
+            <li>- Parent and projected content: content queries and content projection, covered later in this section.
+            </li>
+        </ul>
+
+        <h2>Q1. How do you communicate between two sibling components?</h2>
+        <p>A shared service is a common solution. For modern Angular, a service containing a signal can share reactive
+            state.</p>
+        <h2>Q2. Should components directly access each other's properties?</h2>
+        <p>Usually not. Prefer explicit inputs, outputs, shared services or query APIs where appropriate. This keeps
+            components loosely coupled and easier to maintain.</p>
+
+        <div>
+            <h2>3. @Input() and Signal-Based Inputs</h2>
+            <p>Inputs allow a parent component to pass data to a child component.</p>
+            <h4>3.1 Traditional @Input()</h4>
+            <p>child.component.ts</p>
+            <pre>
+                <code [textContent]="inputDecerator">
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>13. ViewChild</h2>
+        <p>Used to access a child component, directive, or DOM element.</p>
+        <p>@ViewChild is used to get a reference of a single child element, directive, or component from the template.
+        </p>
+        <p>It returns only the first matching element.</p>
+        <p><b>@ViewChild is a decorator used to access a single DOM element, directive, or child component from the
+                parent component's template.</b></p>
+
+        <h4>View Child examples: DOM Manipulations in Angular</h4>
+        <div class="mb-2">
+            <input type="text" #inputFocus>
+            <button (click)="focusInput()">Focus Input</button>
+        </div>
+        <div class="mb-2">
+            <input type="text" #ipValue value="Enter value">
+            <button (click)="readValue()">Read Input</button>
+            <p>{{inputRead}}</p>
+        </div>
+
+        <div>
+            <h2>5.2 ViewChildren</h2>
+            <p>ViewChildren retrieves multiple matching elements or child components as a QueryList.</p>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>Content Child</h2>
+        <p>@ContentChild is used to access content projected from a parent component into a child component via
+            ng-content.
+            It is commonly used in reusable components such as cards, modals, widgets, and form wrappers, and is
+            typically accessed inside ngAfterContentInit().</p>
+
+        <p>@ContentChild is used to access content projected into a component using ng-content.
+            It allows a child component to access elements, directives, or components
+            that are passed from the parent through content projection.
+        </p>
+        <app-my-card>
+            <h2 #title>
+                User Information
+            </h2>
+        </app-my-card>
+    </div>
+
+    <div class="sub-section">
+        <h2>CHANGE DETECTION & PERFORMANCE</h2>
+
+        <p>Change detection is the mechanism Angular uses to determine when the component view needs to be updated to
+            reflect changes in application state.</p>
+        <p>For example, when a user clicks a button and a component property changes, Angular can update the displayed
+            value.</p>
+
+
+
+        <h3>9. How does Angular change detection work?</h3>
+        <p>
+            Angular runs a top-down check of components to detect data changes.
+            Zone.js triggers detection when async tasks complete.
+        </p>
+        <p>Consider this example:</p>
+        <pre>
+            <code [textContent]="changeDetection"></code>
+        </pre>
+        <p>When the button is clicked:</p>
+        <ol>
+            <li>Angular handles the event.</li>
+            <li>The component's count value changes.</li>
+            <li>Angular performs the necessary change-detection work.</li>
+            <li>The view updates to show the new count.</li>
+        </ol>
+
+        <h3>10. What is OnPush strategy?</h3>
+        <p>
+            OnPush runs change detection only when:
+            - Input reference changes
+            - Event occurs
+            - Observable emits
+            - markForCheck() is called
+        </p>
+
+        <h3>11. Why is OnPush better for large apps?</h3>
+        <p>
+            It reduces unnecessary DOM checks and improves performance.
+        </p>
+
+        <h3>Default and OnPush strategies</h3>
+        <p>Angular provides two component change-detection strategies.</p>
+        <pre>
+            <code>
+Default (Eager)	                                                OnPush
+1.Checks the component during applicable change-detection runs	1.Uses more selective triggers to determine when to check
+2.Useful for straightforward component behavior	                2.Useful for optimizing component trees
+3.May result in more checks across a large tree	                3.Can reduce unnecessary checks when used correctly
+            </code>
+        </pre>
+
+        <h4>Example of OnPush:</h4>
+        <pre>
+            <code [textContent]="onPush"></code>
+        </pre>
+
+        <p>With OnPush, Angular can check the component when, among other triggers:</p>
+        <ul>
+            <li>A bound input receives a new value.</li>
+            <li>An event is handled in the component's view.</li>
+            <li>A signal read by the template changes.</li>
+            <li>The component is explicitly marked for checking.</li>
+        </ul>
+
+        <h3>12. What are common performance mistakes?</h3>
+        <ul>
+            <li>Not using trackBy</li>
+            <li>Mutating objects instead of replacing</li>
+            <li>Too many subscriptions</li>
+            <li>Heavy logic in templates</li>
+        </ul>
+
+        <div>
+            <h2>9.3 markForCheck() and detectChanges()</h2>
+            <p>These APIs allow explicit control over change-detection behavior.</p>
+            <h4>markForCheck()</h4>
+            <p>Marks a component so that Angular checks it during a subsequent change-detection run.</p>
+            <pre>
+                <code [textContent]="markForCheck"></code>
+            </pre>
+
+            <h4>detectChanges()</h4>
+            <p>Immediately checks the view and its relevant child views.</p>
+            <p>It can be useful for specialized cases, but frequent manual calls can make an application harder to
+                reason about.</p>
+        </div>
+
+        <div>
+            <h2>9.4 Change detection and Signals</h2>
+            <p>Signals integrate with Angular's change-detection system.</p>
+            <pre>
+                <code [textContent]="signalChnageDetection"></code>
+            </pre>
+            <p>When the signal changes, Angular knows that the template depends on it and can schedule the necessary
+                update.</p>
+        </div>
+
+        <h2>9.5 Zone.js and zoneless Angular</h2>
+        <p>Traditionally, Angular has commonly used Zone.js to help detect asynchronous activity and initiate change
+            detection.</p>
+        <p>Modern Angular also supports zoneless change detection, where Angular relies on explicit notifications such
+            as signal updates, template events and other supported mechanisms rather than Zone.js patching asynchronous
+            APIs.</p>
+
+
+        <div>
+            <pre>
+                <code>
+ Interview questions
+Q1. What is change detection in Angular?
+It is the process Angular uses to synchronize the component state with the rendered view.
+
+Q2. What is the difference between markForCheck() and detectChanges()?
+markForCheck() marks a view for checking during a later change-detection run. detectChanges() immediately performs change detection for the view and its children.
+
+Q3. Why is OnPush used?
+It helps reduce unnecessary checks by making component checking more selective. It is particularly useful in large applications with reusable component trees.
+
+Q4. Does OnPush mean a component will never update unless its input reference changes?
+No. Events within its view, changes to signals read in its template, explicit marking and other supported notifications can also cause it to update.
+
+Q5. What happens if you mutate an object passed to an OnPush child?
+If the object reference remains unchanged, the input change alone will not trigger the child to be checked. Prefer immutable updates or use an appropriate reactive state mechanism.
+                </code>
+            </pre>
+        </div>
+    </div>
+
+
+    <div class="sub-section">
+        <h2>16. Services</h2>
+        <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing, and
+            common functionality across multiple components.</p>
+        <p> In Angular, a Service is a class used to share data, logic, or functionality across multiple components.
+        </p>
+        <p>For example, in an employee management application, multiple components may need employee data. Instead of
+            writing API calls in every component, create an EmployeeService and reuse it.</p>
+        <p>It follows the Singleton pattern (when provided in root), meaning one shared instance across the application.
+        </p>
+        <ul>We use services for:
+            <li>API calls (HTTP requests)& Improve maintainability and testability.</li>
+            <li>Reuse business logic across components: Share data between components.</li>
+            <li>State management</li>
+            <li>Data sharing between components: Centralize API communication.</li>
+            <li>Reusable utility functions<: Separate UI logic from application logic./li>
+            <li>Authentication & authorization logic</li>
+        </ul>
+
+        <div>
+            <p>A Service is a TypeScript class used to store: <br>
+                Business Logic <br>
+                API Calls <br>
+                Shared Data <br>
+                Reusable Functions <br>
+                Services help keep components clean and focused on UI logic.</p>
+
+            <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing,
+                and
+                common functionality across multiple components.</p>
+
+            <h4>Example: Creating an Angular service <br>
+                Create a service using the Angular CLI:</h4>
+            <p><strong>ng generate service services/employee</strong></p>
+            <pre>
+                    <code [textContent]="serviceExample"></code>
+                </pre>
+            <p>Here:</p>
+            <ul>
+                <li>@Injectable() makes the class available for Angular's dependency injection system.</li>
+                <li>providedIn: 'root' registers the service with the root injector.</li>
+                <li>getEmployees() returns the employee list.</li>
+                <li>getEmployeeById() finds an employee by ID.</li>
+            </ul>
+
+            <p>Using the service in a component: in code section above</p>
+            <p>The component receives an instance of EmployeeService through its constructor rather than creating the
+                service manually.</p>
+
+            <div>
+                <h2>Interview questions</h2>
+                <h4>Q1. Why do we use services in Angular?</h4>
+                <p>Services help separate concerns, reuse logic, share data and centralize functionality such as API
+                    calls and business rules.</p>
+                <h4>Q2. Can we use a service without @Injectable()?</h4>
+                <p>A class without @Injectable() can sometimes be injected if it has no dependencies and is provided
+                    appropriately. However, @Injectable() is the standard and recommended approach for services,
+                    particularly when they have dependencies or use Angular's DI features.</p>
+                <h4>Q3. Should all business logic be written in services?</h4>
+                <p>Not necessarily. Component-specific UI behavior belongs in components. Reusable business logic and
+                    data operations are good candidates for services. The goal is clear responsibility, not moving every
+                    method out of a component.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>15. Dependency Injection</h2>
+        <p>Dependency Injection (DI) is a design pattern used by Angular to provide the dependencies required by a class
+            instead of the class creating those dependencies itself.</p>
+        <p>DI means Angular creates and provides the objects/services that a component, service, directive, or other
+            class needs.</p>
+        <p>Instead of creating manually for each service in component, Angular provides Constructor or Inject menthods
+            to call the required services to a component</p>
+        <div>
+            <pre>
+                <code>
+                    export class UserComponent 
+                        userService = new UserService();
+                        authService = new AuthService();
+                        loggerService = new LoggerService();
+                </code>
+            </pre>
+
+            <pre>
+                <code>
+                    export class UserComponent 
+                    constructor (
+                        private userService: UserService,
+                        private authService: AuthService,
+                        private loggerService: LoggerService
+                    ) 
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>@Injectable() in Angular</h2>
+            <p>@Injectable() tells Angular that a class can participate in Angular's dependency injection system.</p>
+            <pre>
+                <code>
+                    @Injectable(
+                        providedIn: 'root'
+                    )
+                        export class UserService 
+                </code>
+            </pre>
+
+            <h4>providedIn: 'root' and Service Providers</h4>
+            <p>A provider tells Angular how to resolve a dependency. For services, the provider configuration determines
+                where the service is registered and which instances are available.</p>
+        </div>
+
+        <p>This tells Angular to provide the service at the root application injector. <br>
+            Therefore, normally the service behaves as a singleton within that application injector.</p>
+
+        <p>DI with inject():
+            Modern Angular also supports the inject() function.</p>
+        <p>Instead of : constructor(private userService: UserService) </p>
+        <p>We can write: private userService = inject(UserService);</p>
+
+        <div>
+            <h2>Interview questions</h2>
+            <h4>Q1. What is the difference between providedIn: 'root' and component-level providers?</h4>
+            <p>providedIn: 'root' registers a service application-wide through the root injector. Component-level
+                providers register a service in a particular component's injector, allowing a separate instance for that
+                component subtree.</p>
+
+            <h4>Q2. What is providedIn: 'platform'?</h4>
+            <p>It registers a service in the platform injector, which can be shared by applications running on the same
+                Angular platform instance. It is a specialized option rather than the usual choice for ordinary
+                application services.</p>
+
+            <h4>Q3. What is tree-shakable dependency injection?</h4>
+            <p>When services are provided using mechanisms such as providedIn: 'root', Angular's build tools can
+                eliminate unused services from the production bundle when they are not referenced by the application.
+            </p>
+        </div>
+
+        <div>
+            <h2>4. Hierarchical Dependency Injection</h2>
+            <p>Angular DI is hierarchical. Instead of having only one injector, Angular has injector hierarchies that
+                determine which provider supplies a dependency.</p>
+            <p>For modern standalone Angular applications, the main concepts are:</p>
+            <ul>
+                <li>Environment injectors: Used for application-level and route-level provider scopes.</li>
+                <li>Element injectors: Associated with components and directives in the component tree.</li>
+            </ul>
+            <p>A component can resolve dependencies from its own injector or from an ancestor injector.</p>
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="hirarchialDI"></code>
+            </pre>
+
+            <p>Here, the parent component has its own NotificationService provider. The child resolves the service from
+                the nearest matching provider in its injector hierarchy, so it receives the parent's instance rather
+                than the root instance.</p>
+        </div>
+
+        <div>
+            <h2>Resolution modifiers</h2>
+            <p>Angular provides DI modifiers that change how a dependency is resolved.</p>
+            <pre>
+                <code>
+Modifier	    Purpose
+self	        Look only in the current injector
+skipSelf	    Start searching from the parent injector
+optional	    Return null if no provider is found
+host	        Restrict resolution to the relevant host boundary
+                </code>
+            </pre>
+
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="resModifier"></code>
+            </pre>
+            <p>This requests the service from an ancestor injector and allows the dependency to be absent.</p>
+
+
+        </div>
+
+        <div>
+            <h2>Interview questions</h2>
+            <h4>Q1. What is hierarchical dependency injection?</h4>
+            <p>It is Angular's mechanism for organizing providers across injector hierarchies. It allows different parts
+                of an application to share services or use scoped instances.</p>
+
+            <h4>Q2. What happens if the same service is provided in root and in a child component?</h4>
+            <p>The child component and descendants resolving from its provider get the child-scoped instance. Other
+                parts of the application resolving from the root continue to use the root instance.</p>
+
+            <h4>Q3. Why is hierarchical DI useful?</h4>
+            <p>It supports scoped state and behavior. For example, separate instances of a form-state service can be
+                created for different editor components without sharing their internal state.</p>
+        </div>
+
+        <div>
+            <h2>5. InjectionToken</h2>
+            <p>An InjectionToken allows Angular to inject values or dependencies that are not represented by a class.
+            </p>
+            <p>This is useful for injecting:</p>
+            <ul>
+                <li>Configuration objects.</li>
+                <li>API base URLs.</li>
+                <li>Feature flags.</li>
+                <li>Interfaces and other TypeScript types.</li>
+                <li>- Abstract dependencies with different implementations.</li>
+            </ul>
+            <p>TypeScript interfaces disappear during compilation, so they cannot directly act as Angular DI tokens.</p>
+            <p>Example: API configuration: app.config.ts or a configuration file</p>
+
+            <pre><code [textContent]="injectionToken"></code></pre>
+            <p>Register the token:</p>
+
+            <pre>
+                <code [textContent]="injectionToken2"></code>
+            </pre>
+
+            <p>Inject the configuration:</p>
+            <pre><code [textContent]="injectionToken3"></code></pre>
+
+            <h4>Provider strategies</h4>
+            <p>Angular providers support several strategies.</p>
+            <pre>
+                <code>
+Strategy	Purpose
+useClass	Provide an instance of a class
+useValue	Provide a fixed value
+useFactory	Create a dependency using a factory function
+useExisting	Create an alias for another provider
+
+Example: 
+providers: [
+  <!-- { -->
+    provide: APP_CONFIG,
+    useFactory: () => (
+        <!-- { -->
+      apiUrl: '/api',
+      production: true
+    <!-- } -->
+    )
+  <!-- } -->
+]
+                </code>
+            </pre>
+
+
+            <div>
+                <h2>Interview questions</h2>
+                <h4>Q1. Why do we need InjectionToken?</h4>
+                <p>It provides a runtime token for dependencies that are not classes, such as interfaces, configuration
+                    values and primitive types.</p>
+
+                <h4>Q2. What is the difference between useClass and useExisting?</h4>
+                <p>useClass tells Angular to instantiate a class for a token. useExisting aliases an existing provider
+                    token, so both tokens resolve to the same instance when they refer to that provider.</p>
+
+                <h4>Q3. When would you use useFactory?</h4>
+                <p>Use it when the provided value depends on runtime conditions, configuration, or other injected
+                    dependencies and needs to be created by a function.</p>
+            </div>
+
+        </div>
+
+        <div>
+            <h2>6. inject() vs Constructor Injection</h2>
+            <p>Angular supports two common ways to obtain dependencies.</p>
+            <h4>Constructor injection</h4>
+            <p>constructor(private employeeService: EmployeeService)</p>
+            <p>The dependency is declared as a constructor parameter.</p>
+
+            <h4>The inject() function</h4>
+            <p>private employeeService = inject(EmployeeService);</p>
+            <p>inject() retrieves a dependency from the active injection context. It is commonly used in field
+                initializers, provider factories, guards and other supported injection contexts.</p>
+
+            <h2>Interview questions</h2>
+            <h4>Q1. Which is better: constructor injection or inject()?</h4>
+            <p>Both are valid. Constructor injection is familiar and explicit, while inject() can make field-based
+                dependencies and functional APIs more convenient. Follow the conventions of the codebase and choose the
+                approach that keeps dependencies clear.</p>
+            <h4>Q2. Can inject() be called inside any method?</h4>
+            <p>No. It must be called in an Angular injection context, such as a constructor, field initializer, provider
+                factory or supported functional API. Calling it later in an arbitrary method usually produces an
+                injection-context error.</p>
+            <h4>Q3. Can we use inject() in a functional route guard?</h4>
+            <p>Yes. Functional route guards execute in an injection context, so they can use inject() to obtain
+                services.</p>
+            <pre>
+                <code>
+                    export const authGuard: CanActivateFn = () => 
+                        const authService = inject(AuthService);
+                        const router = inject(Router);
+
+                        return authService.isLoggedIn
+                            ? true
+                            : router.createUrlTree(['/login']);
+                        ;
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>7. Sharing Data Between Components Using Services</h2>
+            <p>A shared service is useful when components are unrelated in the component tree or when multiple
+                components need access to the same application state.</p>
+            <p>For modern Angular, Signals provide a convenient way to expose reactive state.</p>
+
+            <h4>Example: Shared cart service</h4>
+            <p>cart.service.ts</p>
+            <pre>
+                <code>
+import  Injectable, signal, computed  from '@angular/core';
+
+@Injectable(
+  providedIn: 'root'
+)
+export class CartService 
+  private itemsState = signal < string[]>([]);
+
+  items = this.itemsState.asReadonly();
+
+  itemCount = computed(() => this.items().length);
+
+  addItem(item: string) 
+  <!-- { -->
+    this.itemsState.update(items => [...items, item]);
+  <!-- } -->
+
+  clearCart() 
+  <!-- { -->
+    this.itemsState.set([]);
+  <!-- } -->
+
+  product component:
+  private cart = inject(CartService);
+
+  addToCart() 
+    this.cart.addItem('Laptop');
+
+  Cart component:
+  cart = inject(CartService);
+
+   h3 Cart Items: cart.itemCount() h3
+
+    @ for (item of cart.items(); track $index) 
+      <p> item </p>
+    
+      Both components resolve the root-provided service, so they observe the same cart state.
+
+                </code>
+            </pre>
+
+            <h2>Interview questions</h2>
+            <h4>Q1. How do you share data between unrelated components?</h4>
+            <p>Use a shared service with Signals, Observables or another state management mechanism. This avoids tightly
+                coupling unrelated components.</p>
+
+            <h4>Q2. What is the difference between using a shared service and using @Input() and @Output()?</h4>
+            <p>Inputs and outputs are suited to direct parent-child communication. A shared service is useful for
+                unrelated components or state that needs to be accessed from multiple places.</p>
+
+            <h4>Q3. Should a shared service expose writable signals publicly?</h4>
+            <p>For state that should be centrally managed, it is often better to keep writable signals private and
+                expose read-only signals. This prevents consumers from changing state without going through the
+                service's intended methods.</p>
+        </div>
+
+        <div>
+            <h2>8. Singleton Services and Service Instances</h2>
+            <p>A singleton service means a service has one shared instance within a particular injector scope. <br>
+                A service with providedIn: 'root' normally behaves as a singleton within that application's root
+                injector. <br>
+                However, singleton does not mean there can only ever be one instance of that service class in the entire
+                application. Providing the same service at component or route level can create additional instances.
+            </p>
+
+            <pre>
+                <code [textContent]="singleTon"></code>
+            </pre>
+
+            <p>Both components use the root-provided service instance, so the count is shared. <br>
+                If you add providers: [CounterService] to CounterAComponent, it gets its own instance instead.</p>
+
+            <div>
+                <h2>Interview questions</h2>
+                <h4>Q1. Is every Angular service a singleton?</h4>
+                <p>No. The instance lifecycle depends on where and how the service is provided.</p>
+
+                <h4>Q2. How can you accidentally create multiple instances of a service?</h4>
+                <p>By providing the service in multiple component injectors or other injector scopes. A common mistake
+                    is adding a root-provided service again to a component's providers array without intending to create
+                    a separate instance.</p>
+
+                <h4>Q3. What is a practical use case for multiple service instances?</h4>
+                <p>A reusable editor component may need its own editing state. Providing an editor-state service at the
+                    editor component level lets each editor maintain independent state.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>18. Angular Routing</h2>
+        <p>Routing is the mechanism that enables navigation between different views/components in an Angular application
+            without reloading the browser.
+            Angular uses the Router to map URLs to Components.
+            Angular loads: without refreshing the page.</p>
+
+        <p>Definition: Angular Routing is a mechanism that allows users to navigate between different views or
+            components of a single-page application (SPA) without reloading the entire page.</p>
+        <p>For example, an application might have these routes:</p>
+        <pre>
+            <code>
+URL	        Component
+/home	    HomeComponent
+/users	    UsersComponent
+/users/101	UserDetailsComponent
+/login	    LoginComponent
+            </code>
+        </pre>
+        <p>When the URL changes, Angular Router determines which component should be displayed.</p>
+
+        <h4>Why do we use routing?</h4>
+        <ul>
+            <li>To navigate between pages without a full page reload.</li>
+            <li>To organize large applications into feature routes.</li>
+            <li>To support route parameters and query parameters.</li>
+            <li>To protect routes with guards.</li>
+            <li>To load feature code only when required.</li>
+        </ul>
+
+        <div>
+            <h2>2. Router setup in Angular</h2>
+            <p>In modern standalone Angular applications, routing is commonly configured using provideRouter().</p>
+
+            <h4>Step 1: Create components</h4>
+            <p>For example, assume these standalone components already exist:</p>
+            <ul>
+                <li>HomeComponent</li>
+                <li>UsersComponent</li>
+                <li>LoginComponent</li>
+                <li>NotFoundComponent</li>
+            </ul>
+
+            <h4>Step 2: Define routes</h4>
+            <p>app.routes.ts</p>
+            <pre>
+                <code [textContent]="routing"></code>
+            </pre>
+            <p>The wildcard route ** handles URLs that do not match any earlier route. Keep it at the end because
+                Angular checks routes in order.</p>
+
+            <h4>Step 3: Register the router</h4>
+            <p>app.config.ts</p>
+            <pre>
+                <code [textContent]="routing2"></code>
+            </pre>
+
+            <h4>Step 4: Add the router outlet</h4>
+            <p>app.component.html</p>
+            <pre>
+                <code [textContent]="routing3"></code>
+            </pre>
+            <p>RouterOutlet is the placeholder where Angular renders the component matching the current URL.</p>
+
+            <p>For standalone components, import the router directives used in the template:</p>
+
+            <pre>
+                <code [textContent]="routing4"></code>
+            </pre>
+            <p>In older NgModule-based applications, the equivalent setup commonly uses RouterModule.forRoot(routes) and
+                imports RouterModule into the relevant module.</p>
+        </div>
+
+        <div>
+            <h2>3. RouterLink and RouterLinkActive</h2>
+            <p>These are directives used for navigation and highlighting the active route.</p>
+            <h4>RouterLink</h4>
+            <p>RouterLink navigates to a route without reloading the page.</p>
+            <pre>
+                <code>
+< a routerLink="/home">Home < / a>
+< a routerLink="/users">Users< / a>
+
+< a [routerLink]="['/users', 101]">
+  View User
+< /a>
+                </code>
+            </pre>
+
+            <h4>RouterLinkActive</h4>
+            <p>RouterLinkActive applies a CSS class when the associated route is active.</p>
+
+            <pre>
+                <code>
+                    < a
+                    routerLink="/home"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]=" exact: true "
+                    >
+                    Home
+                    < /a>
+
+                    active css class
+                    .active 
+                    <!-- { -->
+                        color: blue;
+                        font-weight: bold;
+                    <!-- } -->
+                </code>
+            </pre>
+            <p>exact: true ensures the link is active only when the URL matches exactly. Without it, a link can also be
+                considered active for matching child paths.</p>
+            <h4>Interview question: What is the difference between RouterLink and RouterLinkActive?</h4>
+            <p>RouterLink performs navigation to a specified route.</p>
+            <p>- RouterLinkActive applies a CSS class or other active state when a route matches the current URL.</p>
+        </div>
+
+        <div>
+            <h2>4. Programmatic navigation</h2>
+            <p>Sometimes navigation needs to happen after a user action, such as a successful login or saving a form.
+                <br>
+                Angular provides Router for programmatic navigation.</p>
+
+            <pre>
+                <code>
+import  Component, inject  from '@angular/core';
+import  Router  from '@angular/router';
+
+@Component(
+  selector: 'app-login',
+  standalone: true,
+  template: `
+    button (click)="login()">Login button
+  `
+)
+export class LoginComponent 
+  private router = inject(Router);
+
+  login(): void 
+    // Example only: assume login succeeds.
+    this.router.navigate(['/home']);
+                </code>
+            </pre>
+
+            <p>navigate() vs navigateByUrl()</p>
+            <p>this.router.navigate(['/users', 101]);
+                this.router.navigateByUrl('/users/101');</p>
+
+            <pre>
+                <code>
+navigate()	                                | navigateByUrl()
+Accepts an array of route commands.	        | Accepts a URL string or UrlTree.
+Convenient for building paths dynamically.	|Useful when the complete URL is already available.
+Supports relative navigation through        | Can navigate directly to a prepared URL.
+navigation extras.	
+
+Interview question: How do you navigate relative to the current route?
+
+this.router.navigate(['../settings'], 
+  relativeTo: this.route
+);
+
+Here, this.route is an ActivatedRoute instance injected into the component.
+                </code>
+            </pre>
+        </div>
+
+
+
+
+
+        <div>
+            <h2>5. Route parameters</h2>
+            <p>Route Parameters are dynamic values passed through the URL path and are typically used to identify a
+                specific resource.</p>
+            <p>For example: /users/101; Here, 101 is a route parameter representing a user ID.</p>
+
+            <h4>Define a parameterized route</h4>
+
+            <pre>
+                <code [textContent]="routeParam"></code>
+            </pre>
+            <p>The snapshot approach reads the parameter at the time the component is initialized.</p>
+            <p>However, if Angular reuses the same component while the parameter changes, the snapshot value will not
+                update automatically. Use the observable instead:</p>
+            <pre>
+                <code [textContent]="routeParam2"></code>
+            </pre>
+            <p>For modern Angular, you can also convert the observable into a signal using toSignal() from
+                @angular/core/rxjs-interop when reactive template updates are useful.</p>
+        </div>
+        <div>
+            <h2>Query Parameters</h2>
+            <p>Query Parameters are optional key-value pairs appended to the URL after ?. <br>
+                /users?page=1 page = 1 is a Query Parameter.</p>
+        </div>
+
+        <div>
+            <h2>Route parameters vs query parameters</h2>
+            <pre>
+                <code>
+Route parameters	            |Query parameters
+Part of the route path.	        |Appear after ? in the URL.
+Commonly identify a resource.	|Commonly represent filters, sorting, pagination, or optional settings.
+Example: /users/101	            |Example: /users?page=2&search=santhosh
+Access through paramMap.	    |Access through queryParamMap.
+                </code>
+            </pre>
+
+            <h4>Read query parameters:</h4>
+            <pre>
+                <code [textContent]="queryParam">
+                </code>
+            </pre>
+
+            <h4>Interview question: What is the difference between snapshot and observable route parameters?</h4>
+            <ul>
+                <li>snapshot provides the current parameter value as a one-time read.</li>
+                <li>Observable route parameters emit when the parameters change, making them suitable for reused
+                    components and reactive updates.</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>6. Child and nested routes</h2>
+            <p>Nested routes help structure applications with shared layouts.</p>
+            <p>for example, an admin dashboard might contain:</p>
+            <ul>
+                <li>/admin/dashboard</li>
+                <li>/admin/users</li>
+                <li>/admin/settings</li>
+            </ul>
+            <h4>Route configuration</h4>
+            <pre>
+                <code [textContent]="nestedRoutes"></code>
+            </pre>
+            <p>The parent layout must contain a router-outlet for its child route components.</p>
+            <pre>
+                <code [textContent]="nestedRoutes2"></code>
+            </pre>
+            <p>The parent layout remains displayed while Angular renders the selected child component inside its outlet.
+            </p>
+            <p>Real-world scenario: In an enterprise application, the sidebar and header can remain constant while only
+                the main content changes based on the selected route.</p>
+        </div>
+
+        <div>
+            <h2>7. Lazy loading</h2>
+            <p>Definition: Lazy loading is a technique in which Angular loads a component or feature's code only when
+                the associated route is visited, rather than including all feature code in the initial application load.
+            </p>
+            <p>It can improve initial loading performance for larger applications.</p>
+            <pre>
+                <code [textContent]="lazyLoad"></code>
+            </pre>
+
+            <h4>Preloading strategies</h4>
+            <p>Preloading allows Angular to load lazy routes in the background after the initial application load.</p>
+            <pre>
+                <code [textContent]="preLoad"></code>
+            </pre>
+            <p>This preloads lazy-loaded routes as a strategy to reduce the delay when users navigate to them later. It
+                does not mean that all features are eagerly loaded into the initial bundle.</p>
+            <h4>Interview question: Does lazy loading always improve performance?</h4>
+            <p>Answer: No. It can reduce initial bundle size, but it can also introduce delays when a user first
+                navigates to a lazy-loaded feature. The best strategy depends on application size, usage patterns, and
+                network conditions.</p>
+        </div>
+
+        <div>
+            <h2>8. Route guards</h2>
+            <p>Definition: Route guards control whether navigation to or away from a route is allowed.</p>
+            <p>They are useful for authentication flows, authorization checks, preventing accidental navigation away
+                from unsaved forms, and controlling access to route branches.</p>
+            <p>Angular supports several guard types:</p>
+            <pre>
+                <code>
+Guard	            Purpose
+CanActivate	        Controls whether a route can be activated.
+CanActivateChild	Controls access to child routes.
+CanDeactivate	    Controls whether a user can leave a route.
+CanMatch	        Controls whether a route configuration can match a URL.
+                </code>
+            </pre>
+            <p>In modern Angular, functional guards are commonly used.</p>
+
+            <div>
+                <h4>CanActivate example</h4>
+                <pre>
+                    <code [textContent]="canActivate"></code>
+                </pre>
+                <p>If the user is not logged in, Angular redirects to the login page.</p>
+                <p>This is a simplified frontend example. In a real application, authentication state should be managed
+                    appropriately, and the backend must independently enforce authorization. A route guard is not a
+                    security boundary by itself.</p>
+            </div>
+
+            <div>
+                <h4>CanActivateChild example</h4>
+                <pre>
+                    <code [textContent]="CanActivateChild"></code>
+                </pre>
+                <p>The guard applies to child routes under the admin route.</p>
+            </div>
+
+            <div>
+                <h4>CanDeactivate example</h4>
+                <p>This is especially useful for preventing users from losing unsaved form changes.</p>
+                <pre>
+                    <code [textContent]="CanDeactivate"></code>
+                </pre>
+            </div>
+
+            <div>
+                <h4>CanMatch example</h4>
+                <p>CanMatch determines whether a route can be selected to match the URL.</p>
+                <pre>
+                    <code [textContent]="CanMatch"></code>
+                </pre>
+                <p>It can be used for feature flags or selecting between route configurations. Unlike a failed
+                    CanActivate, a CanMatch result of false allows the router to consider other matching route
+                    configurations.</p>
+            </div>
+
+            <div>
+                <h4>What can a guard return?</h4>
+                <p>A guard can return:</p>
+                <ul>
+                    <li>true to allow navigation.</li>
+                    <li>false to block navigation.</li>
+                    <li>A UrlTree or RedirectCommand to redirect.</li>
+                    <li>A Promise or Observable that resolves to one of the supported results.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Interview question: What is the difference between CanActivate and CanMatch?</h4>
+                <ul>
+                    <li>CanActivate checks whether an already matched route can be activated.</li>
+                    <li>CanMatch checks whether a route configuration can be used to match the requested URL in the
+                        first place.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <h2>9. Route resolvers</h2>
+            <p>Definition: A resolver fetches or prepares data before a route is activated. It is useful when the
+                destination component requires data to render correctly.</p>
+            <p>For example, when navigating to /users/101, the user details may need to be fetched before the details
+                component is activated.</p>
+            <h4>Create a resolver</h4>
+            <pre>
+                <code [textContent]="routeResolver"></code>
+            </pre>
+            <h4>Resolver vs fetching inside the component</h4>
+            <pre>
+                <code>
+Resolver	                        | Component-level fetching
+Runs as part of route activation.	| Runs after the component is created or when its logic triggers it.
+Useful when the route should wait for essential data.	| Useful for optional data, progressive loading, and interactive refreshes.
+Can delay navigation until required data is ready.	| Can display the page immediately with a loading state.
+                </code>
+            </pre>
+
+            <p>Important: Resolvers can fail or take a long time. Real applications should handle errors and loading
+                behavior thoughtfully. Use a resolver only when waiting for data before activating the route is a good
+                user experience.</p>
+        </div>
+
+        <div>
+            <h2>10. Route data and page titles</h2>
+            <p>Static route data can pass configuration to a component or layout without putting it into the URL.</p>
+            <pre>
+                <code [textContent]="routeData"></code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>11. Router events</h2>
+            <p>Angular Router exposes events that help track navigation.</p>
+            <p>Examples include:</p>
+            <ul>
+                <li>NavigationStart</li>
+                <li>RoutesRecognized</li>
+                <li>GuardsCheckStart</li>
+                <li>GuardsCheckEnd</li>
+                <li>ResolveStart</li>
+                <li>ResolveEnd</li>
+                <li>NavigationEnd</li>
+                <li>NavigationCancel</li>
+                <li>NavigationError</li>
+            </ul>
+
+            <pre>
+                <code [textContent]="routerEvents"></code>
+            </pre>
+
+            <h4>Real-world use cases:</h4>
+            <ul>
+                <li>Tracking page views for analytics.</li>
+                <li>Hiding or showing a global loading indicator.</li>
+                <li>Updating layout behavior after navigation.</li>
+                <li>Debugging route-related issues.</li>
+            </ul>
+            <p>Remember to manage subscriptions when they outlive the component. For root-level application services or
+                components that live for the full application lifetime, the subscription lifetime may naturally match
+                the application's lifetime.</p>
+        </div>
+
+        <div>
+            <h2>12. Important Angular Routing interview questions and answers</h2>
+            <h4>Q1. What is Angular Router?</h4>
+            <p>Angular Router is the built-in navigation system that maps URL paths to components and manages navigation
+                in an Angular application.</p>
+
+            <h4>Q2. What is RouterOutlet?</h4>
+            <p>RouterOutlet is a directive that acts as a placeholder where the router displays the component for the
+                active route.</p>
+
+            <h4>Q3. What is the difference between RouterModule.forRoot() and RouterModule.forChild()?</h4>
+            <ul>
+                <li>forRoot() configures the router at the application's root, typically in an NgModule-based
+                    application.</li>
+                <li>forChild() registers additional routes for feature modules without creating a separate root router.
+                </li>
+                <p>In standalone applications, provideRouter() is the common root configuration approach.</p>
+            </ul>
+
+            <h4>Q4. What is a wildcard route?</h4>
+            <p>A wildcard route uses ** to match URLs that have not matched earlier route definitions. It is commonly
+                used for a not-found page.</p>
+
+            <h4>Q5. What is the difference between navigate() and navigateByUrl()?</h4>
+            <p>navigate() accepts route commands, while navigateByUrl() accepts a complete URL or UrlTree.</p>
+
+            <h4>Q6. What is lazy loading?</h4>
+            <p>Lazy loading loads route-associated code only when required instead of including all feature code in the
+                initial loading path.</p>
+
+            <h4>Q7. What is route reuse?</h4>
+            <p>Route reuse is a router mechanism that can reuse existing route components rather than destroying and
+                recreating them during navigation. Angular's default strategy reuses a component when navigating between
+                routes that share the same route configuration, which is why parameter changes may need reactive
+                handling.</p>
+
+            <h2>Intermediate interview questions</h2>
+            <h4>Q8. What happens if a route guard returns false?</h4>
+            <p>Navigation is canceled for that guard. If the guard returns a redirect result, Angular navigates to the
+                specified destination instead.</p>
+
+            <h4>Q9. Can multiple guards be applied to a route?</h4>
+            <p>Yes. Multiple guards can be configured. Angular evaluates them as part of the navigation process, and
+                their results determine whether navigation can proceed.</p>
+
+            <h4>Q10. What is the difference between route parameters and query parameters?</h4>
+            <p>Route parameters are part of the route path and commonly identify a resource. Query parameters are
+                optional URL parameters commonly used for filtering, pagination, sorting, or search.</p>
+
+            <h4>Q11. Can we apply guards to lazy-loaded routes?</h4>
+            <p>Yes. Guards such as CanMatch can control whether a lazy route configuration matches. Other applicable
+                guards can control activation and access to child routes.</p>
+
+            <h4>Q12. What is a resolver in Angular?</h4>
+            <p>A resolver prepares data before activating a route. It is useful when a component needs essential data
+                before it can render.</p>
+
+            <h4>Q13. What is the purpose of ActivatedRoute?</h4>
+            <p>ActivatedRoute provides information about the currently activated route, including parameters, query
+                parameters, route data, and parent or child route information.</p>
+
+            <h4>Q14. How do you pass data while navigating?</h4>
+            <p>You can pass query parameters, route parameters, or navigation state.</p>
+            <pre>
+                <code>
+                    this.router.navigate(['/users'], 
+                    <!-- { -->
+                        state: 
+                        <!-- { -->
+                             source: 'dashboard' 
+                        <!-- } -->
+                    <!-- } -->
+                    );
+                </code>
+            </pre>
+            <p>Navigation state is available through the router's navigation extras and browser history state. It is not
+                a substitute for URL-based data that needs to be shareable or reliably restored.</p>
+
+            <h4>Q15. What is queryParamsHandling: 'merge'?</h4>
+            <p>It merges the supplied query parameters with existing query parameters instead of replacing the existing
+                set.</p>
+        </div>
+
+        <div>
+            <h2>13. Real-world scenario-based interview questions</h2>
+            <h4>Scenario 1: A user should not access the dashboard without logging in. How would you implement it?</h4>
+            <p>Answer: Use a CanActivate guard to check authentication state and redirect unauthenticated users to the
+                login page. Also enforce authorization on the backend, because client-side guards can be bypassed.</p>
+
+            <h4>Scenario 2: A user edits a form and clicks another page without saving. How do you prevent data loss?
+            </h4>
+            <p>Answer: Implement a CanDeactivate guard. Check whether the form is dirty and display a confirmation
+                dialog before allowing navigation.</p>
+
+            <h4>Scenario 3: Your application has 20 feature modules, and its initial load is slow. What would you do?
+            </h4>
+            <p>Answer: Identify large features and introduce lazy loading using loadComponent or loadChildren. Analyze
+                bundle sizes, use preloading where appropriate, and avoid loading rarely used feature code initially.
+            </p>
+
+            <h4>Scenario 4: You navigate from /users/101 to /users/102, but the displayed user information does not
+                change. Why?</h4>
+            <p>Answer: Angular may reuse the same component for both URLs. If the component reads the ID only once using
+                snapshot, it will not automatically respond to the changed ID. Subscribe to paramMap or use a reactive
+                approach such as toSignal().</p>
+
+            <h4>Scenario 5: A user filters a table, opens a record, and then returns. You want to preserve the table
+                filters and page number. How would you do it?</h4>
+            <p>Answer: Store shareable filter and pagination state in query parameters. When returning to the table,
+                read those parameters and restore the relevant state. This also allows users to bookmark or share the
+                filtered URL.</p>
+
+            <h4>Scenario 6: Your admin application has a common sidebar and header, but different content for each menu
+                item. How would you structure routing?</h4>
+            <p>Answer: Create a parent admin layout with a router-outlet, then define child routes for the dashboard,
+                users, reports, and settings. This keeps the shared layout consistent while route-specific components
+                change.</p>
+
+            <h4>Scenario 7: A reports feature is available only to users whose organization has enabled it. How would
+                you handle this?</h4>
+            <p>Answer: Use CanMatch to decide whether the reports route should match based on the feature configuration.
+                Also enforce the relevant access rules on the server.</p>
+
+            <h4>Scenario 8: A route requires data from an API before it should open. What would you use?</h4>
+            <p>Answer: Use a resolver if navigation should wait for essential data. If the page can render with a
+                loading indicator while data loads, fetching in the component or a dedicated data layer may provide a
+                better experience.</p>
+        </div>
     </div>
 
     <div class="sub-section">
         <h2>What are the major modern Angular features you have worked with?</h2>
-        <p>In modern Angular, I have worked with standalone components, Signals, the new control-flow syntax such as @ if, @ for, and @ switch, functional guards and interceptors, lazy loading, dependency injection, RxJS, reactive forms, and modern Angular routing.
+        <p>In modern Angular, I have worked with standalone components, Signals, the new control-flow syntax such as @
+            if, @ for, and @ switch, functional guards and interceptors, lazy loading, dependency injection, RxJS,
+            reactive forms, and modern Angular routing.
 
-        Angular also provides APIs such as inject(), input(), output(), computed(), and effect() that make components more lightweight and reactive.</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Q2. What is a standalone component?</h2>
-        <p>A standalone component doesn't need to be declared inside an NgModule</p>
-        <p>In modern Angular, standalone components are preferred because they simplify application structure and make lazy loading easier.</p>
-        <p>I prefer standalone components for new development because they reduce module boilerplate and make dependencies explicit. However, I can work with NgModule-based applications because many enterprise applications still use them.</p>
+            Angular also provides APIs such as inject(), input(), output(), computed(), and effect() that make
+            components more lightweight and reactive.</p>
     </div>
 
     <div class="sub-section">
         <h2>Q4. What is the new Angular control flow?</h2>
-        <p>Angular provides:  <br>
-        @ if (isLoggedIn)  <br>
-        @ for (user of users; track user.id) </p>
+        <p>Angular provides: <br>
+            @ if (isLoggedIn) <br>
+            @ for (user of users; track user.id) </p>
         <h4>Why is track important?</h4>
         <p>It helps Angular identify which items changed instead of recreating the entire list.</p>
 
@@ -71,26 +2292,556 @@
     </div>
 
     <div class="sub-section">
+        <h2>Section 5: Angular Forms</h2>
+        <p>This section is important for your interviews because forms, validation, dynamic forms,
+            API submission, and error handling are common frontend responsibilities.</p>
+        <div class="section-content">
+            <h4>1. What are Angular Forms?</h4>
+            <p>Angular Forms provide APIs for:</p>
+            <ul>
+                <li>Capturing user input</li>
+                <li>Managing form state</li>
+                <li>Validating user input</li>
+                <li>Displaying validation errors</li>
+                <li>Submitting data</li>
+                <li>Updating form values</li>
+                <li>Handling dynamic fields</li>
+            </ul>
+            <p>For example, a user registration form may contain:</p>
+            <ol>
+                <li>Name</li>
+                <li>Email</li>
+                <li>Password</li>
+                <li>Confirm Password</li>
+                <li>Phone</li>
+                <li>Skills</li>
+                <li>Submit</li>
+            </ol>
+
+            <p>Angular provides two major approaches:</p>
+            <h4>Template-driven forms</h4>
+            <p>Form logic is primarily defined in the HTML template. <br>
+                Uses: FormsModule, ngForm, ngModel, ngModelGroup
+            </p>
+
+            <h4>Reactive forms</h4>
+            <p>Form structure and validation are primarily defined in TypeScript.</p>
+            <p>Uses: ReactiveFormsModule, FormControl, FormGroup, FormBuilder, FormArray</p>
+
+        </div>
+
+        <div class="section-content">
+            <h2>2. Template-driven Forms</h2>
+            <p>Template-driven forms are suitable for relatively simple forms.</p>
+            <h4>Example:</h4>
+            <pre>
+                <code [textContent]="templateForm"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>3. What is ngForm?</h2>
+            <p>When Angular sees a < form> with the forms functionality enabled, NgForm tracks the form.</p>
+            <p>
+                < form #userForm="ngForm">
+                    < / form>
+            </p>
+            <p>Here: #userForm is a template reference variable pointing to the NgForm instance.</p>
+            <p>You can inspect: userForm.valid, userForm.invalid, userForm.dirty, userForm.touched</p>
+        </div>
+
+        <div class="section-content">
+            <h2>4. What is ngModel?</h2>
+            <p>ngModel creates a connection between the form control and the component data.</p>
+            <pre>
+                <code [textContent]="ngModel"></code>
+            </pre>
+
+            <p>If the user types: Santhosh, then: this.username becomes: Santhosh; This is called two-way data binding.
+            </p>
+
+            <h4>Important interview point</h4>
+            <p>For a control inside an Angular form, you normally need a name attribute when using ngModel.</p>
+            <pre>
+                <code>
+                   <  input
+                        name="username"
+                        [(ngModel)]="username"
+                    />
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>5. Template-driven validation</h2>
+            <p>Angular provides built-in validation directives.</p>
+            <p>Example:</p>
+            <pre>
+                <code>
+                    < input
+                        type="email"
+                        name="email"
+                        ngModel
+                        required
+                        email
+                        #email="ngModel"
+                    />
+                </code>
+            </pre>
+            <p>Now you can check:</p>
+            <pre>
+                <code [textContent]="tempValidation"></code>
+            </pre>
+            <p>The control's errors object tells us which validations have failed.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>6. Reactive Forms</h2>
+            <p>For enterprise applications, Reactive Forms are extremely important for interviews.</p>
+            <p>Reactive forms provide a model-driven approach. The form structure is created in TypeScript.</p>
+            <pre>
+                <code [textContent]="reactiveForms"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>7. What is FormControl?</h2>
+            <p>FormControl represents the state and value of a single form field.</p>
+            <p>Example: name = new FormControl(''); <br>
+                <strong> You can access: <br>
+                    this.name.value <br>
+                    this.name.valid <br>
+                    this.name.invalid <br>
+                    this.name.touched <br>
+                    this.name.dirty <br>
+                </strong>
+            </p>
+
+            <p>You can also provide validators:</p>
+            <pre>
+                <code>
+                    email = new FormControl('', [
+                        Validators.required,
+                        Validators.email
+                    ]);
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>8. What is FormGroup?</h2>
+            <p>FormGroup groups multiple form controls together.</p>
+            <pre>
+                <code [textContent]="formGroup"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>9. FormBuilder</h2>
+            <p>Creating large forms using new FormControl() repeatedly can become verbose. <br>
+            FormBuilder provides a convenient API for creating form controls and groups.</p>
+
+            <pre>
+                <code [textContent]="formBuilder"></code>
+            </pre>
+            <p>This is very common in enterprise Angular applications.</p>
+
+            <h4>Interview question</h4>
+            <h4>Q: What is the difference between FormControl, FormGroup and FormBuilder?</h4>
+            <ul>
+                <li>FormControl represents one form field.</li>
+                <li>FormGroup groups multiple controls.</li>
+                <li>FormBuilder is a helper service that makes creating controls, groups, and arrays more concise.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>10. Built-in Validators</h2>
+            <p>Angular provides several built-in validators.</p>
+            <p>Common ones:</p>
+            <ol>
+                <li>Validators.required</li>
+                <li>Validators.requiredTrue</li>
+                <li>Validators.email</li>
+                <li>Validators.minLength()</li>
+                <li>Validators.maxLength()</li>
+                <li>Validators.min()</li>
+                <li>Validators.max()</li>
+                <li>Validators.pattern()</li>
+            </ol>
+            
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="validators"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>11. Displaying validation errors</h2>
+            <p>Suppose we have:</p>
+            <pre>
+                <code [textContent]="displayValidation"></code>
+            </pre>
+            <p>Since you're working with modern Angular, the @ if syntax is preferable in new Angular code.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>12. Important form states</h2>
+            <p>Every Angular form control has several useful states.</p>
+
+            <pre>
+                <code>
+| Property      | Meaning                                           |
+|---            |                                                ---|
+| `valid`       | All validators pass |
+| `invalid`     | At least one validator fails |
+| `touched`     | User has interacted with the control and left it |
+| `untouched`   | User hasn't blurred/interacted with it |
+| `dirty`       | Value has changed |
+| `pristine`    | Value hasn't changed |
+| `enabled`     | Control accepts interaction |
+| `disabled`    | Control is disabled |
+| `pending`     | Async validation is in progress |
+                </code>
+            </pre>
+            <h4>Very common interview question</h4>
+            <h4>What is the difference between touched and dirty?</h4>
+            <p>touched means the user has interacted with the control and it has lost focus. <br>
+            dirty means the control's value has been changed.</p>
+
+            <p>For example: Click input → type nothing → click outside</p>
+            <p>The control can become: <br>
+                touched = true <br>
+                dirty = false
+            </p>
+
+            <p>But: Click input → type something, makes it: dirty = true</p>
+        </div>
+
+        <div class="section-content">
+            <h2>13. setValue() vs patchValue()</h2>
+            <p>This is a very common Angular interview question.</p>
+            <p>Suppose:</p>
+            <h4>setValue() </h4>
+            <p>setValue() expects values for all controls in the group.</p>
+            <pre>
+                <code [textContent]="setValue"></code>
+            </pre>
+
+            <h4>patchValue()</h4>
+            <p>patchValue() updates only the controls you provide.</p>
+            <pre>
+                <code [textContent]="patchValue"></code>
+            </pre>
+            <p>phone remains unchanged.</p>
+            <p><strong>Interview answer: setValue() requires the complete form structure, while patchValue() allows partial updates.</strong></p>
+
+            <p>When loading an existing employee from an API:</p>
+            <pre>
+                <code [textContent]="patchValue"></code>
+            </pre>
+            <p>This is one of the most common practical uses of patchValue().</p>
+        </div>
+
+        <div class="section-content">
+            <h2>14. FormArray</h2>
+            <p>FormArray is used when the number of form controls is dynamic.</p>
+            <p>For example:</p>
+            <pre>
+                <code [textContent]="FormArray"></code>
+            </pre>
+
+            <h2>Interview question</h2>
+            <h4>When would you use FormArray instead of FormGroup?</h4>
+            <p>Use FormGroup when the form has a known set of named controls. <br>
+            Use FormArray when the number of controls or groups can change dynamically.</p>
+
+            <pre>
+                <code>
+FormGroup → name, email, phone
+FormArray → multiple skills
+FormArray → multiple addresses
+FormArray → multiple education records
+FormArray → multiple order items
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>15. Nested FormGroup</h2>
+            <p>Real-world forms often have nested objects. For example:</p>
+            <pre>
+                <code [textContent]="nestedFormGrp"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>16. Enabling and disabling controls</h2>
+            <p>Disable a control:</p>
+            <p>this.employeeForm.get('email')?.disable();</p>
+            <p>Enable it:</p>
+            <p>this.employeeForm.get('email')?.enable();</p>
+            <p>Or during form creation:</p>
+            <pre>
+                <code>
+                    email: [
+                        <!-- { -->
+                            value: 'test@gmail.com',
+                            disabled: true
+                        <!-- } -->
+                    ]
+                </code>
+            </pre>
+            <h4>Important interview point</h4>
+            <p>Disabled controls are excluded from the normal form.value.</p>
+            <p>For example: this.employeeForm.value <br>
+            may not contain disabled controls.</p>
+            <p>If you need the complete raw form value, including disabled controls: <br>
+                this.employeeForm.getRawValue(); This is a useful practical interview question.
+            </p>
+        </div>
+
+        <div class="section-content">
+            <h2>17. valueChanges</h2>
+            <p>valueChanges is an Observable that emits whenever a control or form value changes.</p>
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="valueChanges"></code>
+            </pre>
+
+            <h4>Real-world search example</h4>
+            <pre>
+                <code [textContent]="searchValuechanges"></code>
+            </pre>
+            <p>This is a very common combination of Reactive Forms + RxJS.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>18. statusChanges</h2>
+            <p>statusChanges emits when the validation status changes.</p>
+            <pre>
+                <code [textContent]="statusChanges"></code>
+            </pre>
+            <p>Possible values include: VALID, INVALID, PENDING, DISABLED</p>
+            <p>This can be useful when tracking form validation or async validation.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>19. Custom validators</h2>
+            <p>Built-in validators are not always enough.</p>
+            <p>Suppose your company requires: Password must not contain the username. We can create a custom validator.</p>
+            <pre>
+                <code [textContent]="customValidators"></code>
+            </pre>
+            <p>If validation fails: control.errors</p>
+            <p>contains: noSpaces: true</p>
+            <p>Important rule: A validator returns: null</p>
+            <p>when the value is valid. It returns: ValidationErrors when invalid.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>20. Cross-field validation</h2>
+            <p>Sometimes validation depends on multiple fields.</p>
+            <p>Example: Password & Confirm Password. We need to make sure they match.</p>
+            <p>This validation belongs at the FormGroup level because it compares two controls.</p>
+            <pre>
+                <code [textContent]="crossfieldValidation"></code>
+            </pre>
+            <h4>Why is password matching usually implemented at the FormGroup level?</h4>
+            <p>Because the validation depends on the values of two controls, not just one individual control.</p>
+        </div>
+
+        <div class="section-contet">
+            <h2>21. Async validators</h2>
+            <p>An async validator performs validation asynchronously, commonly by calling an API.</p>
+            <h4>Example:</h4>
+            <pre>
+                <code>
+                    Username
+                        ↓
+                       API
+                        ↓
+                    Is username already taken?
+                </code>
+            </pre>
+
+            <p>Conceptually:</p>
+            <pre>
+                <code>
+                    username: [
+                        '',
+                        Validators.required,
+                        usernameAvailableValidator
+                    ]
+
+                </code>
+            </pre>
+            <p>The validator returns an Observable or Promise.</p>
+            <p>Example structure:</p>
+            <pre>
+                <code [textContent]="asyncValid"></code>
+            </pre>
+            <p>While the async validator is running: control.pending can be true.</p>
+            <p>This is particularly useful for:</p>
+            <ul>
+                <li>Username availability</li>
+                <li>Employee ID uniqueness</li>
+                <li>Email uniqueness</li>
+                <li>Coupon validation</li>
+                <li>Server-side business rules</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>22. Form submission with an API</h2>
+            <p>A very common interview scenario is:</p>
+            <p>"How do you submit a reactive form to an API?"</p>
+            <h4>Example:</h4>
+            <pre>
+                <code [textContent]="FormSubmitApi"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>23. Real-world interview scenario</h2>
+            <h4>You have an employee registration form. The Save button should remain disabled until all required fields are valid. What would you do?</h4>
+            <p>Use Reactive Forms with validators and bind the button's disabled state to the form validity.</p>
+            <pre>
+                <code [textContent]="formSave"></code>
+            </pre>
+
+        </div>
+
+        <div class="section-content">
+            <h2>24. Important Angular Forms interview questions</h2>
+            <h4>Q1. Template-driven vs Reactive Forms?</h4>
+            <p>Template-driven forms are template-centric and simpler for small forms. <br>
+            Reactive forms are model-driven, provide explicit form structure in TypeScript, and are generally better suited to complex enterprise forms, dynamic controls, and advanced validation.</p>
+            
+            <h4>Q2. What is FormControl?</h4>
+            <p>Represents an individual form control and tracks its value, validation state, and interaction state.</p>
+
+            <h4>Q3. What is FormGroup?</h4>
+            <p>A collection of related form controls represented as a group.</p>
+
+            <h4>Q4. What is FormArray?</h4>
+            <p>A dynamic collection of controls or form groups.</p>
+
+            <h4>Q5. What is FormBuilder?</h4>
+            <p>A service that provides convenient methods for creating reactive form controls, groups, and arrays.</p>
+
+            <h4>Q6. setValue() vs patchValue()?</h4>
+            <p>setValue()  → complete structure required <br>
+            patchValue() → partial update allowed</p>
+
+            <h4>Q7. What does markAllAsTouched() do?</h4>
+            <p>It marks all controls in a form as touched.</p>
+            <p><strong>this.employeeForm.markAllAsTouched();</strong></p>
+            <p>This is commonly used when the user submits an invalid form so that validation messages become visible.</p>
+
+            <h4>Q8. What does getRawValue() do?</h4>
+            <p>It returns the form's values including disabled controls.</p>
+            <p>const data = this.employeeForm.getRawValue();</p>
+
+            <h4>Q9. What does a custom validator return?</h4>
+            <p>valid: null</p>
+            <p>Invalid:  errorName: true</p>
+
+            <h4>Q10. What is valueChanges?</h4>
+            <p>An Observable that emits whenever the value of a control or form changes.</p>
+
+            <h4>Q11. What is statusChanges?</h4>
+            <p>An Observable that emits whenever the validation status changes.</p>
+
+            <h4>Q12. What is an async validator?</h4>
+            <p>A validator that performs asynchronous validation, commonly using an API call, and returns an Observable or Promise.</p>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>Section 6: Angular HTTP Client & Interceptors</h2>
+        <div class="section-content">
+            <h2>1. What is HttpClient?</h2>
+            <p>Angular's HttpClient is used to communicate with backend APIs over HTTP.</p>
+            <p>Typical flow:</p>
+            <pre>
+                <code>
+                    Angular Component
+                        ↓
+                    Angular Service
+                        ↓
+                    HttpClient
+                        ↓
+                    REST API
+                        ↓
+                    Backend
+                        ↓
+                    Response
+                        ↓
+                    Angular Service
+                        ↓
+                    Component
+                </code>
+            </pre>
+            <p>For example: GET /api/employees; returns employee data.</p>
+        </div>
+        <div class="section-content">
+            <h2>2. Why should we call APIs from a Service?</h2>
+            <p>You technically can inject HttpClient directly into a component, but in a real application we generally keep API communication in services.</p>
+
+            <h4>Avoid this</h4>
+            <pre>
+                <code [textContent]="compHttp"></code>
+            </pre>
+
+            <h4>Prefer this</h4>
+            <pre>
+                <code [textContent]="serviceHttp"></code>
+            </pre>
+            <h4>Why?</h4>
+            <p>It Provides</p>
+            <ul>
+                <li>Separation of concerns</li>
+                <li>Reusable API methods</li>
+                <li>Easier testing</li>
+                <li>Cleaner components</li>
+                <li>Centralized API logic</li>
+                <li>Easier maintenance</li>
+            </ul>
+        </div>
+        <div class="section-content">
+            <h2>3. Configuring HttpClient</h2>
+            <p>For modern standalone Angular applications, use provideHttpClient().</p>
+            <pre>
+                <code [textContent]="configHttp"></code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="sub-section">
         <h2>2. Signals</h2>
         <h4>What is a Signal?</h4>
-        <p>A Signal is Angular's reactive primitive for holding a value and notifying Angular when that value changes.</p>
+        <p>A Signal is Angular's reactive primitive for holding a value and notifying Angular when that value changes.
+        </p>
         <div>
             <h4>Count example</h4>
-            <p>count = signal(0);</p> 
-            
+            <p>count = signal(0);</p>
+
             <h4> to read </h4>
             <p>this.count()</p>
 
             <h4>to update</h4>
-            <p>this.count.set(10);</p> 
+            <p>this.count.set(10);</p>
             <p>or</p>
             <p>this.count.update(value => value + 1);</p>
         </div>
         <h4>Why were Signals introduced?</h4>
         <p>Signals provide fine-grained reactivity.
-            Instead of Angular having to evaluate a broad component tree during change detection, Signals allow Angular to understand which pieces of state depend on which values.
-            They make state management simpler for many component-level use cases and work particularly well with modern Angular's reactive rendering model.</p>
-    
+            Instead of Angular having to evaluate a broad component tree during change detection, Signals allow Angular
+            to understand which pieces of state depend on which values.
+            They make state management simpler for many component-level use cases and work particularly well with modern
+            Angular's reactive rendering model.</p>
+
         <h4>signal() vs computed() vs effect()?</h4>
         <div> <b>signal()</b> <br>
             Stores state. <br>
@@ -99,7 +2850,7 @@
         <div>
             <b>computed()</b> <br>
             Creates derived/read-only state.
-        <pre>
+            <pre>
             <code>count = signal(10);
             doubleCount = computed(() => this.count() * 2);</code>
         </pre>
@@ -116,219 +2867,25 @@
             </pre>
         </div>
         <h4>Interview answer:</h4>
-        <p>I use Signals for state, computed for derived state, and effects only for side effects such as logging, local storage synchronization, or interacting with an external API. I avoid using effects for normal derived business logic because computed is more appropriate.</p>
+        <p>I use Signals for state, computed for derived state, and effects only for side effects such as logging, local
+            storage synchronization, or interacting with an external API. I avoid using effects for normal derived
+            business logic because computed is more appropriate.</p>
 
     </div>
 
 
-    <div class="sub-section">
-        <h2>What are the building blocks of Angular?</h2>
-        <p>The main building blocks of Angular are: </p>
-        <ul>
-            <li>Components</li>
-            <li>Modules</li>
-            <li>Templates</li>
-            <li>Data Binding</li>
-            <li>Directives</li>
-            <li>Services</li>
-            <li>Dependency Injection</li>
-            <li>Routing</li>
-            <li>Pipes</li>
-            <li></li>
-        </ul>
 
 
-    </div>
 
-    <div class="sub-section">
-        <h2>CHANGE DETECTION & PERFORMANCE</h2>
 
-        <h3>9. How does Angular change detection work?</h3>
-        <p>
-            Angular runs a top-down check of components to detect data changes.
-            Zone.js triggers detection when async tasks complete.
-        </p>
 
-        <h3>10. What is OnPush strategy?</h3>
-        <p>
-            OnPush runs change detection only when:
-            - Input reference changes
-            - Event occurs
-            - Observable emits
-            - markForCheck() is called
-        </p>
-
-        <h3>11. Why is OnPush better for large apps?</h3>
-        <p>
-            It reduces unnecessary DOM checks and improves performance.
-        </p>
-
-        <h3>12. What are common performance mistakes?</h3>
-        <ul>
-            <li>Not using trackBy</li>
-            <li>Mutating objects instead of replacing</li>
-            <li>Too many subscriptions</li>
-            <li>Heavy logic in templates</li>
-        </ul>
-    </div>
-
-    <div class="sub-section">
-        <h2>What are Directives in Angular?</h2>
-        <p>Directives are classes that modify the behavior or appearance of DOM elements.</p>
-        <p>Directives help you change how elements look or behave.</p>
-        
-    </div>
-
-    <div class="sub-section">
-        <h2>Module vs Standalone: Angular 15+ Modules optionals</h2>
-    </div>
-
-    <div class="sub-section">
-        <h2>Data Bindings in ANAGULAR</h2>
-        <p>Angular data binding connects component data with the template using interpolation, property binding, event
-            binding, and two way data binding</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Service</h2>
-        <p>A service holds reusable business logic or shared data and its commonly injected into components or other
-            services</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Dependency Injection</h2>
-        <p>constructor (private data: dataService) // old way <br>
-            data=inject(dataService) is new way Angular 16+</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Routing and wildcard</h2>
-        <p>Angular routing maps paths to components, and wildcard routes handles the unknown urls like 404 page</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Router outlets and multiple router-outlets </h2>
-    </div>
-
-    <div class="sub-section">
-        <h2>Life cycle hooks:</h2>
-        <p>Life cycle hooks let you runs the code at different stages of a componet life, such as initilization, change
-            detections and destruction.</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Lazy loading</h2>
-        <p>Lazy loading loads a feature only when its needed, which improves initial application performanance <br>
-            loadChildren & loadComponent</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Latest Angular Features</h2>
-        <p>standalone components || signals || Improved perfomanance new control flow @ if, @ for || Hydration SSR</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>CRUD Operations: Table with API </h2>
-    </div>
-
-    <div class="sub-section">
-        <h2>Custom Directive & custom pipe (important)</h2>
-    </div>
-
-    <div class="sub-section">
-        <h2>RXJS</h2>
-        <p>Operators: of from map filter switchMap, forkjoin, debounce</p>
-    </div>
-
-    <div class="sub-section">
-        <h2>Create Observables</h2>
-    </div>
-
-    <div class="sub-section">
-        <h2>Subjects and behaviour subject realted topics</h2>
-    </div>
 
 
 
     <div>
         <h2>View More examples</h2>
-
         <div>
             <app-view-more [text]="ptext" [limit]="plimit"></app-view-more>
         </div>
     </div>
-
-    <div class="sub-section">
-        <h2>Angular Important Inerview questions</h2>
-        <p>What are the building blocks of Angular</p>
-        <p>What is Routing</p>
-        <p>What is directives & how to create custom directives and uses?</p>
-        <p>What are pipes and how to create custom pipe and uses?</p>
-        <p>What is service? and dependency injections also?</p>
-        <p>What is differences between Templ and Reactive forms?</p>
-        <p>What is Signals?</p>
-        <p>Waht is standalone application and modules ?</p>
-        <p>What is use of RXJS?</p>
-        <p>How to Unsubscribe? using ngOnDestroy and Async for memory optimizations</p>
-        <p>What is Authentication and Authorization? Role based questions and Gaurds</p>
-        <p>What is Decorators? view child</p>
-        <p>Waht is module?</p>
-        <p>Waht is the use of main.ts</p>
-
-
-        <p>1. What are components and modules</p>
-        <p>2. What is data binding</p>
-        <p>3. What is a directive and can we create custom directive just like *ngIf</p>
-        <p>4. What is a pipe, cmd to create custom pipe</p>
-        <p>5. What is use of service </p>
-        <p>6. Explain why routing is important building block of angular</p>
-        <p>7. How to navigate with query parameters </p>
-        <p>8. Difference between template and reactive forms.</p>
-        <p>9. Various ways to create reactive form</p>
-        <p>10. In your project how you have handled api errors</p>
-
-        <div>
-            Angular Questions (Some were Scenario based)
-            ✅ Building blocks of Angular
-            ✅ Difference between AngularJS and Angular (2+)
-            ✅ What is routing and why it’s needed
-            ✅ With Angular 17+ standalone components, App.Module is gone — what changed?
-            ✅ Template-driven vs Reactive Forms
-            ✅ Purpose of Services
-            ✅ Data sharing between components
-            ✔️ What if components don’t have a parent-child relationship?
-            ✅ Subject vs BehaviorSubject
-            ✅ Opening Bootstrap modal without bootstrap.js
-            ✔️ Expected answer: ViewChild approach
-            ✅ Handling large forms using multi-step / stepper forms
-            ✅ Handling API errors at a single place
-            ✅ Showing loader when API data takes time to load
-            ✅ @HostListener and Renderer
-            ✔️ Explained using a custom directive
-            ✅ Signals – difference between set() and update()
-            Project & Work Culture Questions
-            ✅ Where you Keep your codebase repo
-            ✅ Do you raise PRs and who reviews them
-            ✅ Are you using GitHub Copilot during development
-            ✅ Have you written unit test cases
-        </div>
-
-
-
-        <div>
-            <h4>Angular coding </h4>
-            <p>1. Create reusable component using Input to handle show more show less characters where we will pass text
-                and how many char to Limit and once done asked to can we show complete text as tooltip using title
-                attribute with property binding</p>
-
-            <p>1. Creating a small CRUD application</p>
-            <p>2. Building a reusable component using Input and Output</p>
-            <p>3. Sometime they will just ask you to do API integration and show data in table</p>
-        </div>
-    </div>
-
-
-
 </div>
-
-
