@@ -2816,6 +2816,893 @@ FormArray → multiple order items
                 <code [textContent]="configHttp"></code>
             </pre>
         </div>
+
+        <div class="section-content">
+            <h2>4. GET Request</h2>
+            <p>A GET request retrieves data from the server.</p>
+            <pre>
+                <code [textContent]="getRequest"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>5. POST Request</h2>
+            <p>POST is generally used to create a resource or submit data.</p>
+            <pre>
+                <code [textContent]="postRequest"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>6. PUT vs PATCH</h2>
+            <p>This is a very common interview question.</p>
+            <p>PUT Generally used to replace/update an entire resource representation.</p>
+            <pre>
+                <code [textContent]="putRequest"></code>
+            </pre>
+
+            <h4>PATCH</h4>
+            <p>Generally used for a partial update.</p>
+            <pre>
+                <code [textContent]="patchRequest"></code>
+            </pre>
+            <h4>Interview answer</h4>
+            <p>PUT is generally used when replacing or updating the full resource representation, whereas PATCH is intended for partial updates. <br>
+            The exact behavior is ultimately defined by the backend API.</p>
+        </div>
+
+        <div class="sectio-content">
+            <h2>7. DELETE Request</h2>
+            <p>Used to delete a resource.</p>
+            <pre>
+                <code [textContent]="deleteRequest"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>8. HTTP Parameters</h2>
+            <p>Suppose your API supports: <br>
+            GET /api/employees?page=1&size=10&search=santhosh</p>
+            <p>Use HttpParams.</p>
+            <pre>
+                <code [textContent]="httpParams"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>9. HTTP Headers</h2>
+            <p>Headers contain metadata about the request.</p>
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="httpHeaders"></code>
+            </pre>
+            <p>Common headers include: Authorization, Content-Type, Accept; <br>
+            For authentication, we commonly send: Authorization: Bearer < token ></p>
+            <p>But instead of manually adding this header to every API call, we normally use an HTTP interceptor. <br>
+            We'll get to that shortly.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>10. Request body</h2>
+            <p>For POST, PUT, and PATCH, data is commonly sent in the request body.</p>
+            <pre>
+                <code [textContent]="reqBody"></code>
+            </pre>
+            <p>Angular serializes ordinary JavaScript objects appropriately for JSON requests.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>11. HTTP Response</h2>
+            <p>By default, HttpClient returns the response body.</p>
+            <pre>
+                <code [textContent]="httpResp"></code>
+            </pre>
+            <p>If you need the complete HTTP response, use:</p>
+        </div>
+
+        <div class="section-content">
+            <h2>12. HTTP Status Codes</h2>
+            <p>You should know these for interviews:</p>
+            <pre>
+                <code>
+| Status | Meaning |
+|---    |   ---|
+| `200` | OK |
+| `201` | Created |
+| `204` | No Content |
+| `400` | Bad Request |
+| `401` | Unauthorized / authentication required |
+| `403` | Forbidden |
+| `404` | Not Found |
+| `409` | Conflict |
+| `422` | Unprocessable Content |
+| `500` | Internal Server Error |
+| `503` | Service Unavailable |
+                </code>
+            </pre>
+
+            <h4>Important interview distinction: 401 vs 403</h4>
+            <p>401 generally means the request lacks valid authentication credentials. <br>
+            403 means the server understood the request but refuses access because the authenticated caller doesn't have sufficient permission.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>13. HTTP Error Handling</h2>
+            <p>Angular provides HttpErrorResponse.</p>
+            <pre>
+                <code [textContent]="httpError"></code>
+            </pre>
+            <p>But handling every error independently inside every component can become repetitive.
+            A better architecture is to centralize common error handling using an interceptor or service.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>14. catchError</h2>
+            <p>catchError is an RxJS operator used to handle errors in an Observable pipeline.</p>
+            <pre>
+                <code [textContent]="catchError"></code>
+            </pre>
+            <p>Why return throwError()?</p>
+            <p>If you want the component or another downstream subscriber to know that the request failed, you need to propagate the error. <br>
+            Otherwise, you could transform the error into a fallback value if that is appropriate.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>15. HTTP Interceptors</h2>
+            <p>An HTTP interceptor allows you to inspect or modify HTTP requests and responses globally.</p>
+            <p>Instead of doing this:</p>
+            <pre>
+                <code [textContent]="httpInterceptor"></code>
+            </pre>
+            <p>for every request, an interceptor can automatically add the authentication token.</p>
+            <h4>Common use cases:</h4>
+            <ul>
+                <li>Add authentication token</li>
+                <li>Add common headers</li>
+                <li>Global error handling</li>
+                <li>Global loading spinner</li>
+                <li>Logging</li>
+                <li>Retry logic</li>
+                <li>Request/response transformation</li>
+                <li>Correlation/request IDs</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>16. Functional HTTP Interceptor</h2>
+            <p>Modern Angular applications commonly use functional interceptors.</p>
+            <pre>
+                <code [textContent]="functInterceptors"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>17. Why do we use req.clone()?</h2>
+            <p>Angular HTTP requests are immutable. <br>
+            You don't directly modify: req.headers</p>
+
+            <p>Instead, create a modified copy:</p>
+            <pre>
+                <code [textContent]="reqClone"></code>
+            </pre>
+
+            <h4>Interview question: Why are HttpRequest objects immutable?</h4>
+            <p>Immutability helps make request processing predictable and safe, especially when requests pass through multiple interceptors. To modify a request, we create a clone.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>18. Authentication interceptor — real-world flow</h2>
+            <p>Suppose the user logs in. Backend returns:</p>
+            <pre>
+                <code [textContent]="authInterceptor"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>19. Loading interceptor</h2>
+            <p>You've worked with loading indicators before, so this is especially relevant.</p>
+            <p>Without an interceptor, you might write:</p>
+            <pre>
+                <code [textContent]="loadingInterceptor"></code>
+            </pre>
+
+            <h4>Why finalize()?</h4>
+            <p>finalize() runs when the Observable terminates, whether it:</p>
+            <ul>
+                <li>completes successfully, or</li>
+                <li>errors, or</li>
+                <li>is unsubscribed.</li>
+            </ul>
+            <p>Therefore it is useful for cleanup such as hiding a global loading indicator.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>20. Error interceptor</h2>
+            <p>You can also centralize common HTTP errors.</p>
+            <pre>
+                <code [textContent]="errorInterceptor"></code>
+            </pre>
+            <p>In a production application, the exact authentication/refresh-token strategy should be designed carefully rather than blindly redirecting every 401.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>21. Multiple interceptors</h2>
+            <p>You can register multiple interceptors: provideHttpClient</p>
+            <pre>
+                <code>
+provideHttpClient(
+  withInterceptors([
+    authInterceptor,
+    loadingInterceptor,
+    errorInterceptor
+  ])
+)
+
+Conceptually:
+Request
+   ↓
+Auth Interceptor
+   ↓
+Loading Interceptor
+   ↓
+Error Interceptor
+   ↓
+Backend
+   ↓
+Response
+                </code>
+            </pre>
+            <p>The interceptors form a request/response pipeline.</p>
+            <h4>Interview question: Can we have multiple HTTP interceptors?</h4>
+            <p>Answer: Yes. Multiple interceptors can be registered and participate in the HTTP pipeline. Their configured order matters, so interceptors should be designed with that pipeline behavior in mind.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>22. API Service Architecture</h2>
+            <p>For a professional Angular application, avoid putting all API calls into one giant service.</p>
+            <p>Instead:</p>
+            <pre>
+                <code>
+services/
+│
+├── auth.service.ts
+├── employee.service.ts
+├── user.service.ts
+├── dashboard.service.ts
+└── report.service.ts
+                </code>
+            </pre>
+
+            <pre>
+                <code [textContent]="serviceArchitecture"></code>
+            </pre>
+            <p>This gives you a clean separation:</p>
+            <pre>
+                <code>
+Component
+   ↓
+Service
+   ↓
+HttpClient
+   ↓
+Interceptor
+   ↓
+API
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>23. Retry concepts</h2>
+            <p>Sometimes a request may fail temporarily because of network issues or transient server failures. <br>
+            RxJS provides retry().</p>
+            <pre>
+                <code>
+return this.http
+  .get< Employee[]>('/api/employees')
+  .pipe(
+    retry(2)
+);
+                </code>
+            </pre>
+            <p>This can retry the Observable subscription when an error occurs. <br>
+            But don't blindly retry every HTTP error. <br>
+            For example, retrying:</p>
+            <p>400 Bad Request <br>
+            401 Unauthorized <br>
+            403 Forbidden <br>
+            404 Not Found</p>
+            <p>usually doesn't fix the underlying problem.</p>
+            <p>Retry is more appropriate for carefully selected transient failures, such as certain network or temporary server failures.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>24. Request cancellation</h2>
+            <p>Angular HTTP requests return Observables. <br>
+            If a newer request makes an older request irrelevant, RxJS operators such as switchMap can cancel/unsubscribe from the previous inner request.  <br>
+            This is extremely useful for search.</p>
+            <pre>
+                <code [textContent]="requestCancellation"></code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <div class="section-content">
+            <h2>Section 7: RxJS and Observables in Angular</h2>
+            <h2>1. What is RxJS?</h2>
+            <p>RxJS (Reactive Extensions for JavaScript) is a library for working with asynchronous data streams using Observables and operators. <br>
+            In Angular, RxJS is commonly used for:</p>
+            <ul>
+                <li>Handling HTTP responses</li>
+                <li>Reacting to form value changes</li>
+                <li>Managing search suggestions</li>
+                <li>Combining multiple API calls</li>
+                <li>Handling user events</li>
+                <li>Sharing data between components through services</li>
+                <li>- Managing asynchronous operations and errors</li>
+            </ul>
+            <p>For example, when a user types into a search field, each keystroke creates a sequence of events. RxJS can filter out unnecessary events, wait until typing pauses, and trigger the latest API request.</p>
+        </div>
+        <div class="section-content">
+            <h2>2. What is an Observable?</h2>
+            <p>An Observable represents a stream of values that can arrive over time. <br>
+            For example, an API might return data once, while a search input may emit values repeatedly.</p>
+            <h4>Observable lifecycle</h4>
+            <ol>
+                <li>Observable: Produces values over time</li>
+                <li>Observer: Receives values, errors, and completion</li>
+                <li>next() Emits a value</li>
+                <li>error() Signals failure</li>
+                <li>complete() Signals the end</li>
+            </ol>
+            <p>An Observable can emit zero or more values, followed by either completion or an error. Once it completes or errors, it cannot emit further notifications.</p>
+            <p>Simple example:</p>
+            <pre>
+                <code [textContent]="observableEx"></code>
+            </pre>
+            <p>Interview point: The $ suffix in numbers$ is a naming convention commonly used to indicate that a variable represents an Observable. It is not required by JavaScript or RxJS.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>3. What is an Observer?</h2>
+            <p>An Observer is the object that receives notifications from an Observable. <br>
+            It can define three callbacks:</p>
+            <pre>
+                <code [textContent]="observerEx"></code>
+            </pre>
+            <h4>Observable vs Observer</h4>
+            <ul>
+                <li>Observable: produces notifications.</li>
+                <li>Observer: consumes notifications.</li>
+                <li>- Subscription: represents the execution and gives you a way to unsubscribe.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>4. What is subscribe()?</h2>
+            <p>subscribe() starts listening to an Observable. For a cold Observable such as a typical HttpClient request, subscribing initiates the request.</p>
+            <pre>
+                <code [textContent]="subscribeEx"></code>
+            </pre>
+            <p>For a typical successful HTTP request, the Observable emits the response and completes. If the request fails, it emits an error instead.</p>
+            <h4>What is a Subscription?</h4>
+            <p>A Subscription represents an active subscription and provides unsubscribe().</p>
+            <pre>
+                <code [textContent]="subscribeEx2"></code>
+            </pre>
+            <p>Unsubscribing stops that subscriber from receiving further notifications. For cancellable sources such as Angular HTTP requests, it can also cancel ongoing work.</p>
+            <h4>Interview question: Does every Observable require manual unsubscription?</h4>
+            <p> No. Finite Observables such as typical HTTP requests complete automatically. Long-lived streams, such as form changes or intervals, may need lifecycle-based cleanup.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>5. Observable vs Promise</h2>
+            <pre>
+                <code>
+Observable	                            |Promise
+Can emit multiple values over time.	    |Resolves once or rejects once.
+Supports RxJS operators.	            |Uses methods such as .then() and .catch().
+Can be lazy; execution often starts on subscription.	|The underlying operation usually starts when the Promise is created.
+Can unsubscribe from a subscription.	|A Promise has no built-in cancellation method.
+Supports streams and cancellation patterns.	|Suitable for one eventual result.
+                </code>
+            </pre>
+            <p>Example Promise:</p>
+            <pre>
+                <code [textContent]="promiseEx"></code>
+            </pre>
+            <p>Example Observable:</p>
+            <pre>
+                <code [textContent]="ObservableExm"></code>
+            </pre>
+            <p>Interview answer: Angular uses Observables extensively because they integrate naturally with HTTP requests, reactive forms, event streams, and RxJS operators.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>6. Creating Observables: of, from, interval, timer</h2>
+            <p>These creation functions are frequently asked about in interviews.</p>
+
+            <h4>of()</h4>
+            <p>Emits the supplied arguments as individual values.</p>
+            <pre>
+                <code [textContent]="ofObs"></code>
+            </pre>
+
+            <h4>from()</h4>
+            <p>Converts an iterable or Promise into an Observable.</p>
+            <pre>
+                <code [textContent]="fromObs"></code>
+            </pre>
+
+            <h4>interval()</h4>
+            <p>Emits an increasing sequence of numbers at regular intervals, starting at zero.</p>
+            <pre>
+                <code [textContent]="intervalObs"></code>
+            </pre>
+            <p>This stream does not complete on its own, so manage its subscription lifetime when necessary.</p>
+
+            <h4>timer()</h4>
+            <p>Emits after a specified delay. With a period argument, it can continue emitting.</p>
+            <pre>
+                <code [textContent]="timerObs"></code>
+            </pre>
+
+            <h4>Interview question: What is the difference between of() and from()?</h4>
+            <p>of([1, 2, 3]) emits the entire array as one value. from([1, 2, 3]) emits three individual values.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>7. RxJS operators: map, filter, tap</h2>
+            <p>Operators transform or act on values flowing through an Observable pipeline. The pipe() method connects these operators.</p>
+            <h4>map()</h4>
+            <p>Transforms each emitted value.</p>
+            <pre>
+                <code [textContent]="mapOpr"></code>
+            </pre>
+
+            <h4>filter()</h4>
+            <p>Emits only values satisfying a condition.</p>
+            <pre>
+                <code [textContent]="filterOpr"></code>
+            </pre>
+
+            <h4>tap()</h4>
+            <p>Performs a side effect without changing the emitted value. Useful for logging or debugging.</p>
+            <pre>
+                <code [textContent]="tapOpr"></code>
+            </pre>
+            <p>Interview distinction:</p>
+            <ul>
+                <li>map() transforms values.</li>
+                <li>filter() decides which values pass through.</li>
+                <li>tap() performs side effects without transforming the stream.</li>
+            </ul>
+        </div>
+        <div class="section-content">
+            <h2>8. Subject and its types</h2>
+            <p>A normal Observable does not necessarily allow you to push values into it manually. A Subject is both an Observable and an Observer: you can subscribe to it and call next() to emit values.</p>
+            <pre>
+                <code [textContent]="subjectEx"></code>
+            </pre>
+            <p>A plain Subject does not replay earlier values to new subscribers.</p>
+
+            <h2>BehaviorSubject:</h2>
+            <p>A BehaviorSubject requires an initial value and gives new subscribers the latest value immediately.</p>
+            <pre>
+                <code [textContent]="behaviourSubj"></code>
+            </pre>
+            <p>Real-world use: Sharing the current user, selected theme, or application state between components.</p>
+
+            <h2>ReplaySubject</h2>
+            <p>A ReplaySubject can replay a configured number of previous values to new subscribers.</p>
+            <pre>
+                <code [textContent]="replaySubject"></code>
+            </pre>
+
+            <h2>AsyncSubject</h2>
+            <p>An AsyncSubject emits only the last value, and only when it completes.</p>
+            <pre>
+                <code [textContent]="asyncSubject"></code>
+            </pre>
+
+            <h2>Comparision</h2>
+            <pre>
+                <code>
+Type	        Initial value required?	            What a late subscriber receives
+Subject	                No	                        Future values only
+BehaviorSubject	        Yes	                        Latest value, then future values
+ReplaySubject	        No	                        Configured history, then future values
+AsyncSubject	        No	                        Final value after completion, if one was emitted
+
+                </code>
+            </pre>
+
+            <h4>Interview question: How do you share data between unrelated Angular components?</h4>
+            <p>One approach is to expose a BehaviorSubject or a signal from a shared service. Components subscribe to the stream or read the signal to receive updates. For new Angular applications, signals may be simpler for synchronous shared state, while RxJS remains particularly useful for asynchronous streams.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>9. Higher-order mapping operators</h2>
+            <p>This is one of the highest-priority RxJS interview topics.</p>
+            <p>A higher-order Observable is an Observable that emits other Observables. Mapping operators determine how those inner Observables are handled.</p>
+            <p>The four operators to understand are:</p>
+            <ul>
+                <li>switchMap</li>
+                <li>mergeMap</li>
+                <li>concatMap</li>
+                <li>exhaustMap</li>
+            </ul>
+            <h2>switchMap()</h2>
+            <p>Switches to the latest inner Observable and unsubscribes from the previous inner subscription.</p>
+            <pre>
+                <code [textContent]="switchMap"></code>
+            </pre>
+            <p>Use case: Search boxes, where older searches become irrelevant when a newer term arrives.</p>
+
+            <h2>mergeMap()</h2>
+            <p>Subscribes to multiple inner Observables concurrently.</p>
+            <pre>
+                <code [textContent]="mergeMap"></code>
+            </pre>
+            <p>Use case: Independent API requests that can run concurrently.</p>
+
+            <h2>concatMap()</h2>
+            <p>Processes inner Observables sequentially, waiting for each to complete before starting the next.</p>
+            <pre>
+                <code [textContent]="concatMap"></code>
+            </pre>
+            <p>Use case: Operations that must be processed in order, such as sequential updates.</p>
+
+            <h2>exhaustMap()</h2>
+            <p>Ignores new source emissions while the current inner Observable is still active.</p>
+            <pre>
+                <code [textContent]="exhaustMap"></code>
+            </pre>
+            <p>Use case: Preventing repeated login submissions while one login request is in progress.</p>
+
+            <h4>The most important comparison</h4>
+            <pre>
+                <code>
+Operator	Handles a new emission by…	                    Typical use
+switchMap	Replacing the previous inner subscription	    Search suggestions
+mergeMap	Running concurrently	                        Independent requests
+concatMap	Queueing in order	                            Sequential operations
+exhaustMap	Ignoring it while busy	                        Preventing duplicate submissions
+                </code>
+            </pre>
+
+            <p>Important nuance: Unsubscribing from an Angular HTTP Observable usually aborts the client-side request. It does not guarantee that the backend has stopped processing an operation that it has already received. For important writes, backend-side idempotency and validation still matter.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>10. Combining multiple Observables</h2>
+            <h2>forkJoin()</h2>
+            <p>Waits for all supplied Observables to complete, then emits their final values together.</p>
+            <pre>
+                <code [textContent]="forkJoin"></code>
+            </pre>
+            <p>Use case: Loading several independent API resources before preparing a dashboard.</p>
+            <p>Note that if one source errors, forkJoin errors unless you handle that source's error. If a source never completes, forkJoin does not emit.</p>
+        
+            <h2>combineLatest()</h2>
+            <p>Emits a combined latest-value result whenever any input emits, after every input has emitted at least once.</p>
+            <pre>
+                <code [textContent]="combineLatest"></code>
+            </pre>
+            <p>Use case: Reacting to multiple filters or form controls.</p>
+            <p>If a source is a BehaviorSubject, its current value is emitted immediately to a new subscriber. For form controls, you may use startWith() when you need the current value included.</p>
+        
+            <h2>zip()</h2>
+            <p>Pairs values by their emission index: the first value from each source, then the second from each, and so on.</p>
+            <pre>
+                <code [textContent]="zip"></code>
+            </pre>
+
+            <h4>Comparison</h4>
+            <pre>
+                <code>
+Operator	    Emission behavior	                        Typical use
+forkJoin	    One result after all sources complete	    Initial dashboard data
+combineLatest	Latest values whenever an input changes	    Reactive filters
+zip	            Pairs corresponding emissions by position	Coordinated sequences
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>11. debounceTime() and distinctUntilChanged()</h2>
+            <p>These operators are very common in search and reactive forms.</p>
+
+            <h2>debounceTime()</h2>
+            <p>Waits until a specified period passes without a new emission, then emits the latest value.</p>
+            <pre>
+                <code [textContent]="debounceTime"></code>
+            </pre>
+            <p>This reduces requests while the user is typing.</p>
+
+            <h2>distinctUntilChanged()</h2>
+            <p>Suppresses consecutive duplicate values.</p>
+            <pre>
+                <code [textContent]="distinctUntilChanged"></code>
+            </pre>
+            <p>By default, it uses === comparison, so objects generally require a custom comparator if you want structural comparison.</p>
+            <h4>Interview question: Why use both operators together?</h4>
+            <p>debounceTime() waits for typing to pause. distinctUntilChanged() avoids repeating a request for the same consecutive search value.</p>
+        </div>
+        <div class="section-content">
+            <h2>12. Error handling: catchError(), retry(), finalize()</h2>
+
+            <h2>catchError()</h2>
+            <p>Catches an Observable error and returns another Observable, such as a fallback or a rethrown error.</p>
+            <pre>
+                <code [textContent]="catchErrors"></code>
+            </pre>
+            <p>Here, a failed request becomes an empty array. This is appropriate only if an empty list is a safe fallback for the application; otherwise, preserve the error for the UI to handle.</p>
+
+            <h2>retry()</h2>
+            <p>Resubscribes to the source after an error, for a configured number of attempts.</p>
+            <pre>
+                <code [textContent]="retry"></code>
+            </pre>
+            <p>retry(2) allows up to two retries after the original attempt. Use it selectively for transient errors; don't blindly retry validation failures or non-idempotent write operations.</p>
+        
+            <h2>finalize()</h2>
+            <p>Runs cleanup when the stream completes, errors, or is unsubscribed.</p>
+            <pre>
+                <code [textContent]="finalize"></code>
+            </pre>
+            <p>Remember: catchError() handles errors, retry() retries, and finalize() performs cleanup.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>13. Subscription management and memory leaks</h2>
+            <p>A memory leak can occur when a long-lived Observable subscription remains active after the component is destroyed and continues retaining or updating resources.</p>
+            <h2>Option 1: takeUntilDestroyed() — recommended for modern Angular</h2>
+            <pre>
+                <code [textContent]="takeUntilDestroyed"></code>
+            </pre>
+            <p>The subscription is cleaned up when the component or injection context is destroyed.</p>
+
+            <h2>Option 2: takeUntil()</h2>
+            <p>This traditional pattern uses a notifier Observable to terminate a subscription.</p>
+            <pre>
+                <code [textContent]="takeUntil"></code>
+            </pre>
+
+            <h2>Option 3: take()</h2>
+            <p>Automatically completes after receiving a specified number of values.</p>
+            <pre>
+                <code [textContent]="take"></code>
+            </pre>
+
+            <h4>Interview question: Should we manually unsubscribe from every HTTP request?</h4>
+            <p>Usually not for standard finite Angular HTTP Observables because they complete after their response or error. However, subscriptions to long-lived streams, such as valueChanges, interval, or a Subject, should be managed when their lifetime exceeds the component's lifetime.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>14. Using the async pipe in Angular</h2>
+            <p>The async pipe subscribes to an Observable or Promise in the template and automatically manages the subscription lifecycle.</p>
+            <p>Instead of manually subscribing:</p>
+
+            <pre>
+                <code [textContent]="asyncPipe"></code>
+            </pre>
+
+            <p>This example uses the else branch as a simple loading placeholder. In a production application, distinguish loading, empty, success, and error states explicitly if the UI needs to communicate those states accurately.</p>
+
+            <h4>Interview question: What are the advantages of the async pipe?</h4>
+            <ul>
+                <li>Automatically subscribes to the Observable.</li>
+                <li>Unsubscribes when the view is destroyed or the expression changes.</li>
+                <li>Updates the view when new values arrive.</li>
+                <li>Reduces manual subscription management.</li>
+            </ul>
+        </div>
+        <div class="section-content">
+            <h2>16. Important RxJS interview questions and answers</h2>
+
+            <pre>
+                <code>
+Interview question	            Key answer
+What is RxJS?	                A library for reactive programming with Observables and operators.
+What is an Observable?	        A stream that can emit values over time.
+What is a Subject?	            Both an Observable and an Observer; values can be emitted with next().
+Subject vs BehaviorSubject?	    A BehaviorSubject requires an initial value and provides its latest value to new subscribers.
+Observable vs Promise?	        Observables can emit multiple values and support RxJS operators and unsubscription.
+map vs tap?	                    map transforms values; tap performs side effects.
+switchMap vs mergeMap?	        switchMap replaces the previous inner subscription; mergeMap allows concurrent inner subscriptions.
+concatMap vs exhaustMap?	    concatMap queues emissions; exhaustMap ignores new ones while busy.
+forkJoin vs combineLatest?	    forkJoin waits for completion; combineLatest emits whenever an input changes after all have emitted.
+What is debounceTime?	        Emits after a period without a new value.
+What is catchError?	            Handles errors by returning another Observable.
+What is finalize?	            Runs cleanup on completion, error, or unsubscription.
+What is takeUntilDestroyed?	    Automatically ends a subscription when its Angular context is destroyed.
+What is the async pipe?	        Subscribes and updates the template while managing cleanup.
+How do you avoid duplicate API calls?	Depending on the case, use debouncing, distinct-value filtering, sharing, caching, or suitable higher-order operators.
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>Section 8: Change Detection and OnPush</h2>
+        <div class="section-content">
+            <h2>1. What is change detection?</h2>
+            <p>Definition: Change detection is the process Angular uses to determine whether the data displayed in a component's template needs to be updated.</p>
+            <pre>
+                <code [textContent]="changeDetection2"></code>
+            </pre>
+            <p>When the user clicks the button:</p>
+            <ol>
+                <li>increment() executes.</li>
+                <li>The value of count changes.</li>
+                <li>Angular checks the relevant view.</li>
+                <li>The displayed count updates.</li>
+            </ol>
+            <p>Without a suitable change-detection notification, changing a property alone does not necessarily cause Angular to refresh the view immediately.</p>
+        </div>
+        <div class="section-content">
+            <h2>2. Default change detection</h2>
+            <p>Angular's default strategy checks views as part of its normal change-detection process. In traditional Zone.js-based applications, asynchronous activity such as events, timers, and HTTP responses can trigger a change-detection cycle.</p>
+            <pre>
+                <code [textContent]="defaultCD"></code>
+            </pre>
+            <p>With the default strategy, Angular checks the component's view during its normal change-detection process.</p>
+            <p>Interview point: Change detection does not mean Angular automatically re-renders the entire DOM every time. Angular evaluates bindings and updates the DOM where values have changed.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>3. What is OnPush?</h2>
+            <p>OnPush is a change-detection strategy that allows Angular to skip checking a component subtree in situations where Angular has no reason to check it.</p>
+            <pre>
+                <code [textContent]="onPush2"></code>
+            </pre>
+            <p>With OnPush, Angular can check the component when, for example:</p>
+            <ul>
+                <li>A template-bound input changes according to Angular's input-change semantics.</li>
+                <li>An event occurs in the component's view.</li>
+                <li>A signal read by the template changes.</li>
+                <li>An Observable consumed through AsyncPipe emits.</li>
+                <li>The view is explicitly marked for checking.</li>
+            </ul>
+
+            <pre>
+                <code>
+Default	                                        |OnPush
+Participates in normal change-detection checks.	|Allows Angular to skip eligible subtree checks.
+Convenient for general-purpose components.	    |Useful for optimizing suitable components.
+May perform more checks in complex applications.|Can reduce unnecessary checks when used correctly.
+Works with mutable data patterns more readily.	|Benefits from clear input changes and immutable data patterns]
+                </code>
+            </pre>
+            <p>Important: OnPush does not mean a component is checked only once. Angular can check it again whenever a relevant trigger marks it for checking.</p>
+        </div>
+        <div class="section-content">
+            <h2>4. Why is immutability important with OnPush?</h2>
+            <p>Consider a parent passing an object to a child component.</p>
+            <pre>
+                <code [textContent]="immutableOnpush"></code>
+            </pre>
+            <p>Interview answer: Immutable updates make data flow more predictable and work particularly well with OnPush change detection.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>5. ChangeDetectorRef</h2>
+            <p>ChangeDetectorRef provides APIs for controlling or influencing change detection for a view.</p>
+            <p>The important methods are:</p>
+            <ul>
+                <li>markForCheck()</li>
+                <li>detectChanges()</li>
+                <li>detach()</li>
+                <li>reattach()</li>
+            </ul>
+
+            <h4>markForCheck()</h4>
+            <p>Marks an OnPush view so Angular checks it during a subsequent change-detection cycle.</p>
+            <pre>
+                <code [textContent]="markForCheck2"></code>
+            </pre>
+            <p>This is useful when a value changes through a mechanism that does not otherwise notify Angular to check the view.</p>
+
+            <h4>detectChanges</h4>
+            <p>Immediately performs a local change-detection check for the view and its children.</p>
+            <pre>
+                <code [textContent]="detectChanges"></code>
+            </pre>
+            <p>Use it when a local check is specifically needed, such as with a deliberately detached view. Avoid calling it repeatedly without a clear reason.</p>
+            <pre>
+                <code>
+markForCheck() vs detectChanges()
+
+markForCheck()	                                    detectChanges()
+Marks a view to be checked in a subsequent cycle.	Performs a local check immediately.
+Does not immediately perform the check.	            Checks the view and its children.
+Common with OnPush.	                                Useful for explicit local change-detection control.
+                </code>
+            </pre>
+
+            <h2>detach() and reattach()</h2>
+            <p>detach() removes a view from normal change-detection traversal. reattach() restores it.</p>
+            <pre>
+                <code [textContent]="detachReattach"></code>
+            </pre>
+
+            <p>Detached views aren't checked during normal traversal, even if marked for checking; you can explicitly call detectChanges() to check them locally.</p>
+            <p>Real-world use: A dashboard with a very large, frequently updating data display might detach a view and refresh it on a controlled schedule. This should be used selectively because it adds complexity and can cause stale UI if not managed carefully.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>6. Signals and change detection</h2>
+            <p>Signals are especially important in modern Angular.</p>
+            <p>A signal stores a value and notifies its consumers when the value changes.</p>
+            <pre>
+                <code [textContent]="signalCD"></code>
+            </pre>
+            <p>Here:</p>
+            <ul>
+                <li>signal(0) creates a writable signal.</li>
+                <li>count() reads the current value.</li>
+                <li>update() derives a new value from the current value.</li>
+                <li>Angular tracks the signal read in the template and can schedule the necessary view update when it changes.</li>
+            </ul>
+            <p>This works with OnPush components too.</p>
+            <h4>Why use Signals?</h4>
+            <ul>
+                <li>Reactive state management.</li>
+                <li>Clear dependencies between values.</li>
+                <li>Fine-grained notifications to consumers.</li>
+                <li>Integration with computed values and effects.</li>
+                <li>Convenient state handling in modern Angular components.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>7. computed() and effect()</h2>
+            <p>These are closely related to Signals, so understand the difference before we cover Signals in depth in the next section.</p>
+
+            <h4>computed()</h4>
+            <p>Creates a derived, read-only signal.</p>
+            <pre>
+                <code>
+                    count = signal(2);
+                    doubleCount = computed(() => this.count() * 2);
+                </code>
+            </pre>
+            <p>When count changes, doubleCount() reflects the new value.</p>
+
+            <h4>effect()</h4>
+            <p>Runs a side effect when signals it reads change.</p>
+            <pre>
+                <code [textContent]="effect"></code>
+            </pre>
+            <p>Use computed() for derived state. Use effect() for genuine side effects such as logging or synchronizing with an external system, not as the default way to copy one signal into another.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>8. AsyncPipe and change detection</h2>
+            <p>The AsyncPipe subscribes to an Observable or Promise and exposes its latest value to the template. When a new value arrives, it marks the view for checking.</p>
+            <pre>
+                <code [textContent]="asyncCD"></code>
+            </pre>
+            <p>This is particularly useful with OnPush, because you don't need to manually subscribe and call markForCheck() just to display the stream's latest value.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>10. Zoneless Angular</h2>
+            <p>Zoneless Angular allows Angular to operate without relying on Zone.js to detect asynchronous activity.</p>
+            <p>Modern Angular supports zoneless change detection. In Angular 21, it is the default for newly configured applications, although existing projects may retain their previous configuration.</p>
+            <p>In zoneless applications, Angular relies on explicit notifications, such as:</p>
+            <ul>
+                <li>Updating a signal read by a template.</li>
+                <li>Bound event listeners.</li>
+                <li>AsyncPipe emissions.</li>
+                <li>Marking a view for checking.</li>
+                <li>Other supported Angular change-detection notifications.</li>
+            </ul>
+            <h4>Interview question: Does using Signals automatically mean an application is zoneless?</h4>
+            <p>No. Signals and zoneless change detection are separate concepts. Signals can be used in applications with or without Zone.js.</p>
+        </div>
     </div>
 
     <div class="sub-section">
@@ -2872,14 +3759,6 @@ FormArray → multiple order items
             business logic because computed is more appropriate.</p>
 
     </div>
-
-
-
-
-
-
-
-
 
 
     <div>
