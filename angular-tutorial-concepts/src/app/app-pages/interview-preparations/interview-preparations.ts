@@ -1353,4 +1353,1071 @@ import { inject } from '@angular/core';
 
 private http = inject(HttpClient);
 `
+
+getRequest = `
+getEmployees() {
+  return this.http.get<Employee[]>(
+    '/api/employees'
+  );
+}
+
+Component:
+this.employeeService
+  .getEmployees()
+  .subscribe({
+    next: employees => {
+      console.log(employees);
+    },
+    error: error => {
+      console.error(error);
+    }
+  });
+
+  Why Employee[]?
+  This is a TypeScript type describing the expected response.
+  interface Employee {
+  id: number;
+  name: string;
+  email: string;
+}
+
+Then:
+this.http.get<Employee[]>('/api/employees');
+
+provides compile-time typing for the response.
+
+Important: TypeScript typing does not validate that the backend actually returned that shape at runtime.
+`
+
+postRequest = `
+createEmployee(employee: Employee) {
+  return this.http.post<Employee>(
+    '/api/employees',
+    employee
+  );
+}
+
+Example request body:
+{
+  name: 'Santhosh',
+  email: 'santhosh@gmail.com',
+  department: 'Frontend'
+}
+
+Usage:
+this.employeeService
+  .createEmployee(employee)
+  .subscribe({
+    next: response => {
+      console.log('Created:', response);
+    },
+    error: error => {
+      console.error(error);
+    }
+  });
+`
+
+putRequest = `
+updateEmployee(employee: Employee) {
+  return this.http.put<Employee>(
+  \` /api/employees/$ {employee.id}\`,
+    employee 
+  );
+}
+`
+patchRequest = `
+updateEmployeeEmail(
+  id: number,
+  email: string
+) {
+  return this.http.patch<Employee>(
+    \`/api/employees/$ {id}\`,
+    { email }
+  );
+}
+`
+
+deleteRequest = `
+deleteEmployee(id: number) {
+  return this.http.delete<void>(
+    \`/api/employees/$ {id}\`
+  );
+}
+
+Usage:
+this.employeeService
+  .deleteEmployee(101)
+  .subscribe({
+    next: () => {
+      console.log('Employee deleted');
+    }
+  });
+
+`
+
+httpParams = `
+import { HttpParams } from '@angular/common/http';
+
+getEmployees(
+  page: number,
+  size: number,
+  search: string
+) {
+  const params = new HttpParams()
+    .set('page', page)
+    .set('size', size)
+    .set('search', search);
+
+  return this.http.get<Employee[]>(
+    '/api/employees',
+    { params }
+  );
+}
+
+Angular generates the query string from the parameters.
+
+Important HttpParams is immutable.
+
+So this: params.set('page', 2);
+doesn't mutate the original object unless you assign the returned instance.
+
+Correct:
+params = params.set('page', 2);
+`
+
+httpHeaders = `
+import { HttpHeaders } from '@angular/common/http';
+
+const headers = new HttpHeaders({
+  'Content-Type': 'application/json'
+});
+
+return this.http.post(
+  '/api/employees',
+  employee,
+  { headers }
+);
+`
+reqBody = `
+const employee = {
+  name: 'Santhosh',
+  email: 'santhosh@gmail.com'
+};
+
+this.http.post(
+  '/api/employees',
+  employee
+);
+`
+
+httpResp = `
+this.http.get<Employee[]>('/api/employees');
+
+If you need the complete HTTP response, use:
+this.http.get<Employee[]>(
+  '/api/employees',
+  {
+    observe: 'response'
+  }
+);
+
+Then:
+.subscribe(response => {
+  console.log(response.body);
+  console.log(response.status);
+  console.log(response.headers);
+});
+
+For example:
+HttpResponse
+├── body
+├── headers
+├── status
+├── statusText
+└── url
+
+Q: How can you access HTTP status code and headers instead of only the response body?
+Answer:
+Use:
+{
+  observe: 'response'
+}
+`
+
+httpError = `
+import {
+  HttpErrorResponse
+} from '@angular/common/http';
+
+this.employeeService
+  .getEmployees()
+  .subscribe({
+    next: data => {
+      console.log(data);
+    },
+
+    error: (error: HttpErrorResponse) => {
+      console.error(
+        'Status:',
+        error.status
+      );
+
+      console.error(
+        'Message:',
+        error.message
+      );
+    }
+  });
+`
+
+catchError = `
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+getEmployees() {
+  return this.http
+    .get<Employee[]>('/api/employees')
+    .pipe(
+      catchError(error => {
+        console.error(
+          'API Error',
+          error
+        );
+
+        return throwError(
+          () => error
+        );
+      })
+    );
+}
+`
+
+httpInterceptor = `
+this.http.get(url, {
+  headers: {
+    Authorization: token
+  }
+});
+`
+
+functInterceptors = `
+import {
+  HttpInterceptorFn
+} from '@angular/common/http';
+
+export const authInterceptor: HttpInterceptorFn =
+  (req, next) => {
+
+    const token =
+      localStorage.getItem('token');
+
+    if (!token) {
+      return next(req);
+    }
+
+    const clonedRequest = req.clone({
+      setHeaders: {
+        Authorization: \`Bearer $ {token}\`
+      }
+    });
+
+    return next(clonedRequest);
+  };
+
+Then register it in App Config:
+import {
+  provideHttpClient,
+  withInterceptors
+} from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor
+      ])
+    )
+  ]
+};
+`
+
+reqClone = `
+const clonedRequest = req.clone({
+  setHeaders: {
+    Authorization: \`Bearer $ {token}\`
+  }
+});
+
+Then pass it to:
+return next(clonedRequest);
+`
+
+authInterceptor = `
+{
+  "token": "eyJhbGciOi..."
+}
+
+You store the token:
+localStorage.setItem(
+  'token',
+  response.token
+);
+
+Then the user calls:
+GET /api/employees
+
+The interceptor automatically changes it conceptually to:
+
+GET /api/employees
+
+Authorization:
+Bearer eyJhbGciOi...
+
+Flow:
+
+Component
+    ↓
+EmployeeService
+    ↓
+HttpClient
+    ↓
+Auth Interceptor
+    ↓
+Add Authorization header
+    ↓
+Backend
+
+This is a very strong interview explanation.
+`
+
+loadingInterceptor = `
+this.loadingService.show();
+
+this.http.get(url)
+  .subscribe({
+    next: data => {
+      // ...
+    },
+    error: error => {
+      // ...
+    },
+    complete: () => {
+      this.loadingService.hide();
+    }
+  });
+
+  Doing this for every API call is repetitive.
+  An interceptor can centralize it.
+  export const loadingInterceptor: HttpInterceptorFn =
+  (req, next) => {
+
+    const loadingService =
+      inject(LoadingService);
+
+    loadingService.show();
+
+    return next(req).pipe(
+      finalize(() => {
+        loadingService.hide();
+      })
+    );
+  };
+`
+
+errorInterceptor = `
+export const errorInterceptor: HttpInterceptorFn =
+  (req, next) => {
+
+    const router = inject(Router);
+
+    return next(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+
+        if (error.status === 401) {
+          router.navigate(['/login']);
+        }
+
+        return throwError(
+          () => error
+        );
+      })
+    );
+  };
+
+  For example:
+API returns 401
+       ↓
+Error interceptor
+       ↓
+Clear authentication state
+       ↓
+Navigate to login
+
+`
+
+serviceArchitecture = `
+@Injectable({
+  providedIn: 'root'
+})
+export class EmployeeService {
+
+  private http = inject(HttpClient);
+
+  private readonly apiUrl =
+    '/api/employees';
+
+  getEmployees() {
+    return this.http.get<Employee[]>(
+      this.apiUrl
+    );
+  }
+
+  getEmployee(id: number) {
+    return this.http.get<Employee>(
+      \`$ {this.apiUrl}/$ {id}\`
+    );
+  }
+
+  createEmployee(employee: Employee) {
+    return this.http.post<Employee>(
+      this.apiUrl,
+      employee
+    );
+  }
+
+  updateEmployee(
+    id: number,
+    employee: Employee
+  ) {
+    return this.http.put<Employee>(
+      \`$ {this.apiUrl}/$ {id}\`,
+      employee
+    );
+  }
+
+  deleteEmployee(id: number) {
+    return this.http.delete<void>(
+      \`$ {this.apiUrl}/$ {id}\`
+    );
+  }
+}
+`
+
+requestCancellation = `
+this.searchControl.valueChanges
+  .pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    switchMap(term =>
+      this.employeeService.search(term)
+    )
+  )
+  .subscribe(results => {
+    this.results = results;
+  });
+
+  Flow:
+  User types "san"
+       ↓
+API request
+
+User types "sant"
+       ↓
+Previous request becomes unnecessary
+       ↓
+switchMap switches to latest request
+`
+
+observableEx = `
+import { Observable } from 'rxjs';
+
+const numbers$ = new Observable<number>(observer => {
+  observer.next(10);
+  observer.next(20);
+  observer.next(30);
+  observer.complete();
+});
+
+numbers$.subscribe({
+  next: value => console.log(value),
+  error: error => console.error(error),
+  complete: () => console.log('Completed')
+});
+
+Output:
+10
+20
+30
+Completed
+`
+
+observerEx = `
+const observer = {
+  next: (value: number) => console.log(value),
+  error: (err: unknown) => console.error(err),
+  complete: () => console.log('Completed')
+};
+
+Subscribe using it:
+numbers$.subscribe(observer);
+
+You can also provide only the callbacks you need:
+numbers$.subscribe(value => console.log(value));
+`
+
+subscribeEx = `
+this.http.get<Employee[]>('/api/employees')
+  .subscribe({
+    next: employees => {
+      console.log(employees);
+    },
+    error: error => {
+      console.error(error);
+    },
+    complete: () => {
+      console.log('Request completed');
+    }
+  });
+`
+
+subscribeEx2 = `
+const subscription = numbers$.subscribe(value => {
+  console.log(value);
+});
+
+subscription.unsubscribe();
+`
+
+promiseEx = `
+const promise = fetch('/api/employees');
+
+promise.then(response => {
+  console.log(response);
+});
+`
+
+ObservableExm = `
+this.http.get<Employee[]>('/api/employees')
+  .pipe(
+    map(employees => employees.filter(e => e.active))
+  )
+  .subscribe(activeEmployees => {
+    console.log(activeEmployees);
+  });
+`
+
+ofObs = `
+import { of } from 'rxjs';
+
+of(10, 20, 30).subscribe(console.log);
+Output: 
+10
+20
+30
+`
+
+fromObs = `
+import { from } from 'rxjs';
+
+from([10, 20, 30]).subscribe(console.log);
+
+Output:
+10
+20
+30
+`
+
+intervalObs = `
+import { interval } from 'rxjs';
+
+interval(1000).subscribe(value => {
+  console.log(value);
+});
+
+Output over time:
+0
+1
+2
+3
+...
+`
+
+timerObs = `
+import { timer } from 'rxjs';
+
+timer(3000).subscribe(() => {
+  console.log('Executed after 3 seconds');
+});
+`
+
+mapOpr = `
+import { of, map } from 'rxjs';
+
+of(1, 2, 3)
+  .pipe(map(value => value * 10))
+  .subscribe(console.log);
+
+  Output: 10, 20, 30
+`
+
+filterOpr = `
+import { of, filter } from 'rxjs';
+
+of(1, 2, 3, 4, 5, 6)
+  .pipe(filter(value => value % 2 === 0))
+  .subscribe(console.log);
+
+  Output: 2, 4, 6
+`
+
+tapOpr = `
+import { of, tap, map } from 'rxjs';
+
+of(5)
+  .pipe(
+    tap(value => console.log('Before:', value)),
+    map(value => value * 2),
+    tap(value => console.log('After:', value))
+  )
+  .subscribe();
+
+  Output:
+  Before: 5
+  After: 10
+`
+
+subjectEx = `
+import { Subject } from 'rxjs';
+
+const subject = new Subject<string>();
+
+subject.subscribe(value => console.log('A:', value));
+
+subject.next('Hello');
+subject.next('Angular');
+
+Output:
+A: Hello
+A: Angular
+`
+
+behaviourSubj = `
+import { BehaviorSubject } from 'rxjs';
+
+const userSubject = new BehaviorSubject<string>('Guest');
+
+userSubject.subscribe(value => console.log('A:', value));
+
+userSubject.next('Santhosh');
+
+userSubject.subscribe(value => console.log('B:', value));
+
+Output:
+A: Guest
+A: Santhosh
+B: Santhosh
+`
+
+replaySubject = `
+import { ReplaySubject } from 'rxjs';
+
+const subject = new ReplaySubject<number>(2);
+
+subject.next(10);
+subject.next(20);
+subject.next(30);
+
+subject.subscribe(console.log);
+
+Output:
+20
+30
+`
+
+asyncSubject = `
+import { AsyncSubject } from 'rxjs';
+
+const subject = new AsyncSubject<number>();
+
+subject.subscribe(console.log);
+
+subject.next(10);
+subject.next(20);
+subject.complete();
+
+Output:
+20
+`
+
+switchMap = `
+this.searchControl.valueChanges
+  .pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    switchMap(term =>
+      this.employeeService.search(term)
+    )
+  )
+  .subscribe(results => {
+    this.results = results;
+  });
+`
+
+mergeMap = `
+from([1, 2, 3])
+  .pipe(
+    mergeMap(id =>
+      this.employeeService.getEmployee(id)
+    )
+  )
+  .subscribe(console.log);
+`
+
+concatMap = `
+from([1, 2, 3])
+  .pipe(
+    concatMap(id =>
+      this.employeeService.updateEmployeeStatus(id)
+    )
+  )
+  .subscribe(console.log);
+`
+
+exhaustMap = `
+this.loginClicks$
+  .pipe(
+    exhaustMap(() =>
+      this.authService.login()
+    )
+  )
+  .subscribe();
+`
+
+forkJoin = `
+forkJoin({
+  employees: this.employeeService.getEmployees(),
+  departments: this.departmentService.getDepartments(),
+  roles: this.roleService.getRoles()
+}).subscribe(({ employees, departments, roles }) => {
+  this.employees = employees;
+  this.departments = departments;
+  this.roles = roles;
+});
+`
+
+combineLatest = `
+combineLatest([
+  this.searchControl.valueChanges,
+  this.categoryControl.valueChanges
+]).subscribe(([search, category]) => {
+  console.log({ search, category });
+});
+`
+
+zip = `
+zip(
+  of('A', 'B', 'C'),
+  of(1, 2, 3)
+).subscribe(console.log);
+
+Output:
+['A', 1]
+['B', 2]
+['C', 3]
+`
+
+debounceTime = `
+this.searchControl.valueChanges
+  .pipe(
+    debounceTime(300)
+  )
+  .subscribe(term => {
+    this.searchEmployees(term);
+  });
+`
+
+distinctUntilChanged = `
+of('Angular', 'Angular', 'React', 'React', 'Vue')
+  .pipe(distinctUntilChanged())
+  .subscribe(console.log);
+
+  Output:
+Angular
+React
+Vue
+`
+
+catchErrors = `
+this.employeeService.getEmployees()
+  .pipe(
+    catchError(error => {
+      console.error(error);
+      return of([]);
+    })
+  )
+  .subscribe(employees => {
+    this.employees = employees;
+  });
+`
+
+retry = `
+this.employeeService.getEmployees()
+  .pipe(
+    retry(2),
+    catchError(error => {
+      console.error('Request failed', error);
+      return throwError(() => error);
+    })
+  )
+  .subscribe();
+`
+
+finalize = `
+this.loadingService.show();
+
+this.employeeService.getEmployees()
+  .pipe(
+    finalize(() => this.loadingService.hide())
+  )
+  .subscribe({
+    next: data => this.employees = data,
+    error: error => console.error(error)
+  });
+`
+
+takeUntilDestroyed = `
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef, inject } from '@angular/core';
+
+private destroyRef = inject(DestroyRef);
+
+ngOnInit(): void {
+  this.searchControl.valueChanges
+    .pipe(
+      takeUntilDestroyed(this.destroyRef)
+    )
+    .subscribe(value => {
+      console.log(value);
+    });
+}
+`
+
+takeUntil = `
+private destroy$ = new Subject<void>();
+
+ngOnInit(): void {
+  this.searchControl.valueChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(value => console.log(value));
+}
+
+ngOnDestroy(): void {
+  this.destroy$.next();
+  this.destroy$.complete();
+}
+`
+
+take = `
+interval(1000)
+  .pipe(take(3))
+  .subscribe(console.log);
+
+Output:
+0
+1
+2
+`
+
+asyncPipe = `
+employees: Employee[] = [];
+
+ngOnInit(): void {
+  this.employeeService.getEmployees()
+    .subscribe(data => {
+      this.employees = data;
+    });
+}
+
+You can expose the Observable:
+employees$ = this.employeeService.getEmployees();
+
+Then use the template:
+
+@if (employees$ | async; as employees) {
+  @for (employee of employees; track employee.id) {
+    <p>{{ employee.name }}</p>
+  }
+} @else {
+  <p>Loading employees...</p>
+}
+`
+
+changeDetection2 = `
+export class CounterComponent {
+  count = 0;
+
+  increment(): void {
+    this.count++;
+  }
+}
+
+<p>Count: {{ count }}</p>
+<button (click)="increment()">Increment</button>
+`
+
+defaultCD = `
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  template: \`
+    <p>{{ count }}</p>
+    <button (click)="increment()">Increment</button>
+  \`
+})
+export class CounterComponent {
+  count = 0;
+
+  increment(): void {
+    this.count++;
+  }
+}
+`
+
+onPush2 = `
+import {
+  ChangeDetectionStrategy,
+  Component
+} from '@angular/core';
+
+@Component({
+  selector: 'app-user-card',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: \`
+    <h3>{{ user.name }}</h3>
+    <p>{{ user.role }}</p>
+  \`
+})
+export class UserCardComponent {
+  @Input() user!: User;
+}
+`
+
+immutableOnpush = `
+user = {
+  name: 'Santhosh',
+  role: 'Developer'
+};
+
+changeRole(): void {
+  this.user.role = 'Senior Developer';
+}
+
+The parent mutates the existing object. Its reference remains the same, so the child might not be checked just because a nested property changed.
+
+A better approach is to create a new object:
+
+changeRole(): void {
+  this.user = {
+    ...this.user,
+    role: 'Senior Developer'
+  };
+}
+
+The reference changes, allowing Angular to recognize the changed input and check the child.
+`
+
+markForCheck2 = `
+import {
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  Component,
+  inject
+} from '@angular/core';
+
+@Component({
+  selector: 'app-status',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: \`<p>{{ status }}</p>\`
+})
+export class StatusComponent {
+  private cdr = inject(ChangeDetectorRef);
+
+  status = 'Waiting';
+
+  updateStatus(): void {
+    this.status = 'Completed';
+    this.cdr.markForCheck();
+  }
+}
+`
+
+detectChanges = `
+private cdr = inject(ChangeDetectorRef);
+
+refreshView(): void {
+  this.cdr.detectChanges();
+}
+`
+
+detachReattach = `
+private cdr = inject(ChangeDetectorRef);
+
+pauseChecks(): void {
+  this.cdr.detach();
+}
+
+resumeChecks(): void {
+  this.cdr.reattach();
+}
+`
+
+signalCD = `
+import { Component, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  template: \`
+    <p>Count: {{ count() }}</p>
+    <button (click)="increment()">Increment</button>
+  \`
+})
+export class CounterComponent {
+  count = signal(0);
+
+  increment(): void {
+    this.count.update(value => value + 1);
+  }
+}
+`
+
+effect = `
+constructor() {
+  effect(() => {
+    console.log('Count:', this.count());
+  });
+}
+`
+
+asyncCD = `
+@Component({
+  selector: 'app-employees',
+  standalone: true,
+  imports: [AsyncPipe],
+  template: \`
+    @if (employees$ | async; as employees) {
+      @for (employee of employees; track employee.id) {
+        <p>{{ employee.name }}</p>
+      }
+    }
+  \`
+})
+export class EmployeesComponent {
+  private employeeService = inject(EmployeeService);
+
+  employees$ = this.employeeService.getEmployees();
+}
+`
 }
