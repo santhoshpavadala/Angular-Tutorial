@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { PreloadAllModules, provideRouter, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -9,13 +9,26 @@ import { provideStore } from '@ngrx/store';
 import { userReducer } from './ngrx/userReducer';
 import { provideEffects } from '@ngrx/effects';
 import { UserEffects } from './ngrx/userEffects';
+import { counterReducer } from './ngrx/counter-reducer';
+import { employeeReducer } from './ngrx/employee-reducer';
+import { loadEmployeesEffect } from './ngrx/employee-effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([authInterceptor])),
-    provideStore({ user: userReducer }), //ngrx reducer imports
-    provideEffects([UserEffects])
+    provideStore({ 
+      user: userReducer,
+      counter: counterReducer,
+      employees: employeeReducer
+     }), //ngrx reducer imports
+  //  provideEffects([UserEffects]),
+  //  provideEffects(loadEmployeesEffect)
+
+   provideEffects({
+    // UserEffects,
+      loadEmployeesEffect
+    })
 ]
 };
