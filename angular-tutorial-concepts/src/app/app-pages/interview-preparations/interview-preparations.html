@@ -3702,63 +3702,716 @@ Common with OnPush.	                                Useful for explicit local ch
             </ul>
             <h4>Interview question: Does using Signals automatically mean an application is zoneless?</h4>
             <p>No. Signals and zoneless change detection are separate concepts. Signals can be used in applications with or without Zone.js.</p>
+
+            <pre>
+                <code>
+11. Important interview questions
+1. What is change detection in Angular?
+2. What is the difference between Default and OnPush?
+3. When does Angular check an OnPush component?
+4. Why is immutability useful with OnPush?
+5. What is ChangeDetectorRef?
+6. markForCheck() vs detectChanges()?
+7. What do detach() and reattach() do?
+8. How does AsyncPipe work with change detection?
+9. How do Signals trigger template updates?
+10. What causes ExpressionChangedAfterItHasBeenCheckedError?
+11. What is zoneless Angular?
+12. How would you optimize change detection in a large dashboard?
+                </code>
+            </pre>
+        </div>
+
+    </div>
+
+    <div class="sub-section">
+        <h2>Section 9: Angular Signals and Zoneless Angular</h2>
+        <p>This section is especially important for you because you're working with modern Angular, including Angular 21. We'll focus on how Signals work, when to use them instead of RxJS, and the interview questions that test real-world understanding.</p>
+        <div class="section-content">
+            <h2>1. What are Angular Signals?</h2>
+            <p>Definition: Signals are a reactive state-management primitive that holds a value and notifies Angular and other reactive consumers when that value changes.</p>
+            <p>Traditional property: count = 0;</p>
+            <p>Signal: count = signal(0);</p>
+            <p>With a normal property, Angular doesn't automatically track every assignment as a reactive dependency. A Signal explicitly tracks reads and notifies its consumers when its value changes.</p>
+            <h4>Basic example</h4>
+            <pre>
+                <code [textContent]="signalEx"></code>
+            </pre>
+            <h4>How it works</h4>
+            <ol>
+                <li>signal(0) creates a writable signal with an initial value of 0.</li>
+                <li>count() reads its current value.</li>
+                <li>update() changes the value.</li>
+                <li>Angular tracks the signal read in the template and can update the view when the signal changes.</li>
+            </ol>
+            <p>Interview answer: Signals provide fine-grained reactivity by tracking where values are read and notifying consumers when those values change.</p>
+        </div>
+        <div class="section-content">
+            <h2>2. Writable signals: signal()</h2>
+            <p>A writable signal supports reading and updating its value.</p>
+            <pre>
+                <code [textContent]="writableSignal"></code>
+            </pre>
+            <h4>set() vs update()</h4>
+            <pre>
+                <code>
+set()	                                        update()
+Sets a specific value.	                        Calculates a new value from the current value.
+Useful when the replacement is already known.	Useful for counters and state transitions.
+
+count.set(10);
+
+count.update(value =>  value + 1);
+The resulting count is 11.
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>3. computed() — derived state</h2>
+            <p>A computed signal creates a read-only value derived from one or more other signals.</p>
+            <pre>
+                <code [textContent]="computedSignal"></code>
+            </pre>
+            <p>Angular tracks the signals read inside the computation. When a dependency changes, the computed value is recalculated when needed.</p>
+            <h4>Real-world example: shopping cart</h4>
+            <pre>
+                <code [textContent]="shopingCartEx"></code>
+            </pre>
+            <p>Important: A computed signal is read-only. You cannot use totalPrice.set(100).</p>
+
+            <h4>Interview question: computed() vs effect()</h4>
+            <ul>
+                <li>computed() derives a value from other signals.</li>
+                <li>effect() performs a side effect when signals it reads change.</li>
+            </ul>
+            <p>Use computed() for derived application state, rather than an effect that manually copies values into another signal.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>4. effect() — responding to signal changes</h2>
+            <p>An effect runs a callback when the signals it reads change. It is intended for side effects, such as logging or synchronizing with an external system.</p>
+            <pre>
+                <code [textContent]="effectSignal"></code>
+            </pre>
+            <p>The effect reads count(), so Angular tracks it as a dependency.</p>
+            <h4>Important interview points</h4>
+            <ul>
+                <li>An effect runs initially and again when its tracked signal dependencies change.</li>
+                <li>Effects are intended for side effects, not routine derived-state calculations.</li>
+                <li>Effects need an appropriate Angular injection context unless an injector is explicitly provided.</li>
+                <li>Avoid creating feedback loops by repeatedly writing to signals from effects.</li>
+            </ul>
+            <p>Common mistake: Using effect() just to keep two signals synchronized. Prefer computed() when one value can be derived from another.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>5. Signals in component communication</h2>
+            <p>Modern Angular provides signal-based APIs for component inputs and outputs.</p>
+            <h4>input() — signal-based input</h4>
+            <pre>
+                <code [textContent]="signalInput"></code>
+            </pre>
+
+            <h4>output() — component events</h4>
+            <pre>
+                <code [textContent]="signalOutput"></code>
+            </pre>
+            <p>output() provides the modern output API. The traditional @Input() and @Output() decorators remain supported and are still important for interviews and existing projects.</p>
+        
+            <h4>input() vs model()</h4>
+            <p>Angular also provides model() for two-way component APIs, where a child can update a value that is bound by the parent using banana-in-a-box syntax.</p>
+            <p>value = model(0);</p>
+            <p>Parent usage:</p>
+            <p>< app-counter [(value)]="count" /></p>
+            <p>Use model() when the component genuinely needs a two-way binding API; otherwise, a one-way input and explicit output are often clearer.</p>
+
+            <h4>6. Signals vs Observables</h4>
+            <p>This is one of the most common modern Angular interview questions.</p>
+            <pre>
+                <code>
+Signals	                                Observables
+Hold and expose a current value.	    Represent streams of values over time.
+Read synchronously using mySignal().	Consume through subscription or operators.
+Track reactive dependencies.	        Use RxJS operators to transform and combine streams.
+Excellent for component state and derived values.	Excellent for asynchronous workflows and event streams.
+No manual subscription is needed to read a signal.	Subscriptions may need lifecycle management.
+                </code>
+            </pre>
+            <h4>When should you use Signals?</h4>
+            <p>Use Signals for:</p>
+            <ul>
+                <li>Selected tabs and filters</li>
+                <li>Component UI state</li>
+                <li>Derived values</li>
+                <li>Counters and totals</li>
+                <li>Synchronous application state</li>
+            </ul>
+            <p>Use RxJS for:</p>
+            <ul>
+                <li>HTTP and asynchronous workflows</li>
+                <li>Search with debounceTime() and switchMap()</li>
+                <li>Combining API requests</li>
+                <li>WebSocket streams</li>
+                <li>Cancellation and retry patterns</li>
+            </ul>
+            <p>Experienced-developer answer: Signals and RxJS solve related but different problems. I use Signals for reactive state and derived UI values, and RxJS for asynchronous streams and more complex event orchestration. They can be combined rather than treated as alternatives.</p>
+        </div>
+        <div class="section-content">
+            <h2>7. RxJS and Signals interoperability</h2>
+            <p>Angular provides utilities in @angular/core/rxjs-interop for integrating the two reactive systems.</p>
+            <h4>toSignal()</h4>
+            <p>Converts an Observable into a signal, allowing the latest emitted value to be read synchronously.</p>
+            <pre>
+                <code [textContent]="toSignal"></code>
+            </pre>
+            <p>toSignal() subscribes to the Observable and normally cleans up that subscription with its owning injection context. It should not be recreated repeatedly inside a template or frequently called method.</p>
+        
+            <h4>toObservable()</h4>
+            <p>Converts a signal into an Observable.</p>
+            <pre>
+                <code [textContent]="toObservable"></code>
+            </pre>
+            <p>This is a useful pattern when the UI state is represented by a signal but the workflow needs RxJS operators.</p>
+
+            <h4>When would you use toSignal() instead of subscribe()?</h4>
+            <p>When the component needs to read an Observable's latest value as reactive state, especially in the template. It can simplify code and avoid managing a manual subscription just to display data.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>8. Signal-based state management</h2>
+            <p>You can create a lightweight state service using Signals without introducing NgRx.</p>
+            <p>Example: selected user state.</p>
+            <pre>
+                <code [textContent]="signalStatemanagement"></code>
+            </pre>
+
+            <h4>Why asReadonly()?</h4>
+            <p>It prevents consumers from calling set() or update() on the exposed signal. The service retains control over state updates through its methods.</p>
+            <p>Important: Read-only signals prevent consumers from directly setting the signal value, but they don't make nested objects deeply immutable. Use immutable updates and appropriate data modeling.</p>
+            <h4>Signals vs NgRx</h4>
+            <ul>
+                <li>Signals alone are often sufficient for local component state or straightforward shared state.</li>
+                <li>NgRx can be useful for large applications requiring structured state transitions, effects, selectors, tooling, and consistent team conventions.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>9. What is zoneless Angular?</h2>
+            <p>Traditionally, Angular commonly used Zone.js to observe asynchronous activity and help determine when change detection should run.</p>
+
+            <p>Zoneless Angular operates without relying on Zone.js for those notifications. Instead, Angular uses supported notifications, including signal updates, bound events, AsyncPipe emissions, and explicit view marking.</p>
+            <p>In Angular 21, zoneless change detection is the default for newly configured applications. Existing applications may have different configurations depending on how they were created or upgraded.</p>
+            <h4>Why use zoneless Angular?</h4>
+            <ul>
+                <li>Reduces reliance on Zone.js.</li>
+                <li>Can reduce unnecessary change-detection work.</li>
+                <li>Encourages explicit, trackable update notifications.</li>
+                <li>- Can improve application startup and runtime characteristics in suitable applications.</li>
+            </ul>
+            <p>Zoneless does not automatically guarantee better performance; results depend on the application and how its state updates are designed.</p>
+            <p>Do Signals require zoneless Angular? <br>
+            No. Signals work in both Zone.js-based and zoneless applications.</p>
+        </div>
+        <div class="section-content">
+            <h2>10. Configuring zoneless change detection</h2>
+            <p>For an application that needs explicit zoneless configuration, Angular provides provideZonelessChangeDetection().</p>
+
+            <pre>
+                <code [textContent]="zonelessCD"></code>
+            </pre>
+
+            <p>For a newly created Angular 21 application, zoneless is already the default, so you generally don't need to add this provider again. Check your application's existing configuration before changing it.</p>
+
+            <p>When using zoneless Angular, make sure your UI updates are driven by supported Angular notifications, such as:</p>
+            <ul>
+                <li>Updating a signal read by the template.</li>
+                <li>Bound event handlers.</li>
+                <li>AsyncPipe emissions.</li>
+                <li>Calling markForCheck() when appropriate.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>12. Important interview questions</h2>
+            <pre>
+                <code>
+1. What are Angular Signals?
+2. What is the difference between signal() and computed()?
+3. What is the difference between set() and update()?
+4. When should you use effect()?
+5. Signals vs Observables — when would you use each?
+6. What are input() and output()?
+7. What is model()?
+8. What does toSignal() do?
+9. What does toObservable() do?
+10. How can Signals be used for state management?
+11. What is zoneless Angular?
+12. Do Signals require Zone.js?
+13. How does Angular update an OnPush component when a signal read by its template changes?
+14. When would you choose NgRx instead of a signal-based service?
+15. Why should effects generally not be used to derive state?
+                </code>
+            </pre>
         </div>
     </div>
 
     <div class="sub-section">
-        <h2>2. Signals</h2>
-        <h4>What is a Signal?</h4>
-        <p>A Signal is Angular's reactive primitive for holding a value and notifying Angular when that value changes.
-        </p>
-        <div>
-            <h4>Count example</h4>
-            <p>count = signal(0);</p>
-
-            <h4> to read </h4>
-            <p>this.count()</p>
-
-            <h4>to update</h4>
-            <p>this.count.set(10);</p>
-            <p>or</p>
-            <p>this.count.update(value => value + 1);</p>
-        </div>
-        <h4>Why were Signals introduced?</h4>
-        <p>Signals provide fine-grained reactivity.
-            Instead of Angular having to evaluate a broad component tree during change detection, Signals allow Angular
-            to understand which pieces of state depend on which values.
-            They make state management simpler for many component-level use cases and work particularly well with modern
-            Angular's reactive rendering model.</p>
-
-        <h4>signal() vs computed() vs effect()?</h4>
-        <div> <b>signal()</b> <br>
-            Stores state. <br>
-            count = signal(10);
-        </div>
-        <div>
-            <b>computed()</b> <br>
-            Creates derived/read-only state.
-            <pre>
-            <code>count = signal(10);
-            doubleCount = computed(() => this.count() * 2);</code>
-        </pre>
-        </div>
-        <div>
-            <b>effect()</b> <br>
-            Runs side effects when signals it reads change.
+        <h2>Section 10: NgRx & State Management</h2>
+        <div class="section-content">
+            <h2>1. What is state management in Angular?</h2>
+            <p>State is the data that an application needs to remember and display as users interact with it.</p>
+            <p>Examples in an enterprise Angular application:</p>
+            <ul>
+                <li>Logged-in user details and permissions.</li>
+                <li>Employee lists retrieved from REST APIs.</li>
+                <li>Dashboard filters and selected assets.</li>
+                <li>Loading, success, and error states.</li>
+                <li>Shopping cart items or application settings.</li>
+            </ul>
+            <p>State management is the process of storing, updating, sharing, and tracking that data predictably across an application.</p>
+            <h4>Different ways to manage state</h4>
             <pre>
                 <code>
-                    effect(() => 
-        console.log(this.count());
-        );
+Approach	            Best suited for
+Component properties	Data used by one component
+@Input() / @Output()	Parent-child communication
+Angular service	        Shared data and business logic
+Signals in a service	Reactive shared state with relatively little boilerplate
+NgRx Store	            Complex, shared state with predictable updates
+NgRx Effects	        Asynchronous operations such as API requests
+                </code>
+            </pre>
+            <p>Interview tip: Don't say every Angular application needs NgRx. Choose the simplest approach that meets the application's complexity, testing, and maintenance needs.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>2. What is NgRx?</h2>
+            <p>NgRx is a state-management library for Angular inspired by Redux and built around RxJS. It helps manage shared application state through predictable, centralized updates.</p>
+
+            <h4>The core NgRx Store pattern uses five important concepts:</h4>
+
+            <ol>
+                <li>Component: Dispatches an action</li>
+                <li>Action: Describes what happened</li>
+                <li>Reducer: Calculates the next state immutably</li>
+                <li>Store: Holds the updated application state</li>
+                <li>Selector: Selects the data needed by the component</li>
+                <li>Component updates its UI</li>
+                <li>Effects handle side effects such as HTTP requests and dispatch success or failure actions. <br>
+                Effects work alongside the action/reducer flow; they are not a step every action must pass through.</li>
+            </ol>
+
+
+        </div>
+
+        <div class="section-content">
+            <h2>3. The five main NgRx concepts</h2>
+            <app-my-card [cardTitle]="'1. Actions'">
+                <h2 #title> 1. Actions </h2>
+                <p>Plain descriptions of events or intentions, such as increment, loadEmployees, or loadEmployeesSuccess. <br>
+                They don't directly modify state.</p>
+            </app-my-card>
+
+            <app-my-card [cardTitle]="'2. Reducers'">
+                <h2 #title> 2. Reducers </h2>
+                <p>Pure functions that receive the current state and an action, then return the next state without mutating the original.</p>
+            </app-my-card>
+
+            <app-my-card [cardTitle]="'3. Store'">
+                <h2 #title> 3. Store </h2>
+                <p>The central container that holds application state and exposes APIs to dispatch actions and select state.</p>
+            </app-my-card>
+            <app-my-card [cardTitle]="'4. Selectors'">
+                <h2 #title> 4. Selectors </h2>
+                <p>Reusable functions for reading specific parts of the state. Memoized selectors can avoid unnecessary recalculation when their inputs haven't changed.</p>
+            </app-my-card>
+            <app-my-card [cardTitle]="'5. Effects'">
+                <h2 #title> 5. Effects </h2>
+                <p>Handle side effects such as API calls, then dispatch new actions containing the results or errors.</p>
+            </app-my-card>
+        </div>
+
+        <div class="section-content">
+            <h2>4. Create a simple NgRx Counter example</h2>
+            <p>Let's understand the complete flow using a counter before moving to real API data.</p>
+
+            <h4>Step 1: Create actions</h4>
+            <p>Go to File: counter.actions.ts</p>
+            <p>Explanation: createAction() creates an action. The text in square brackets identifies the source or feature, making actions easier to debug.</p>
+            <p>If an action needs to carry data, use props():</p>
+            <p>Go to File: counter.actions.ts</p>
+            <p>Dispatching setCount count: 10 sends the value 10 with the action.</p>
+
+            <h4>Step 2: Create the reducer</h4>
+            <p>Go to File: counter.reducer.ts</p>
+            <p>How it works:</p>
+            <ul>
+                <li>createReducer() defines how the state changes.</li>
+                <li>on() associates an action with its state-update logic.</li>
+                <li>state + 1 returns a new number; it doesn't mutate an object.</li>
+                <li>setCount receives the action payload through  count .</li>
+            </ul>
+            <p>Reducers must be pure functions: no API calls, timers, random values, or direct mutations.</p>
+
+            <h4>Step 3: Register the Store</h4>
+            <p>In a standalone Angular application, register the reducer using provideStore().</p>
+            <p>Go to File: app.config.ts</p>
+            <p>The Store now has a counter state property.</p>
+
+            <h4>Step 4: Read the state in a component</h4>
+            <p>Go to File: counter.component.ts</p>
+
+            <p>This example uses the async pipe to subscribe to the selected state and manage the subscription automatically.</p>
+
+            <h4>Complete flow</h4>
+            <ol>
+                <li>The user clicks Increment.</li>
+                <li>The component dispatches the increment action.</li>
+                <li>The reducer calculates the next value.</li>
+                <li>The Store publishes the updated state.</li>
+                <li>The component receives the new value and Angular updates the UI.</li>
+            </ol>
+
+            <h4>Interview question: Why do we dispatch an action instead of changing the Store value directly?</h4>
+            <p>Answer: Actions describe events in a predictable way. The reducer handles state changes immutably, which makes application behavior easier to debug, test, and maintain.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>5. Selectors in NgRx</h2>
+            <p>Selectors are used to read specific state data. They help components avoid depending on the entire Store structure.</p>
+            <p>Suppose the state looks like this:</p>
+            <pre>
+                <code [textContent]="selectorNgrx"></code>
+            </pre>
+
+            <h4>Why use createSelector()?</h4>
+            <ul>
+                <li>It creates reusable state queries.</li>
+                <li>It supports memoization, so the projector function can reuse its previous result when its input references have not changed.</li>
+                <li>It keeps data-selection logic outside components.</li>
+                <li>It makes selectors easier to test independently.</li>
+            </ul>
+            <p>Important: Memoization doesn't mean every state change is ignored. When the selector's input changes, the derived result may be recalculated.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>6. NgRx Effects — handling API calls</h2>
+            <p>This is one of the most important parts of NgRx interviews.</p>
+            <p>Effects handle side effects outside reducers, such as REST API calls, and emit actions based on their results.</p>
+
+            <h4>Consider an employee dashboard. We want to:</h4>
+            <ul>
+                <li>Request employees from an API.</li>
+                <li>Show a loading indicator.</li>
+                <li>Store the returned employees.</li>
+                <li>Display an error if the request fails.</li>
+            </ul>
+
+            <p>The flow is:</p>
+            <ol>
+                <li>loadEmployees - action</li>
+                <li>Effect calls EmployeeService</li>
+                <li>Success: loadEmployeesSuccess; Failure: loadEmployeesFailure</li>
+                <li>Reducer updates Store state</li>
+                <li>Selectors update the UI</li>
+            </ol>
+
+            <h4>Step 1: Create employee actions</h4>
+            <p>Go to File: employee.actions.ts</p>
+
+            <h4>Step 2: Create the service</h4>
+            <p>File: UserService</p>
+
+           <h4>Step 3: Create the effect</h4>
+           <p>File: employee.effects.ts</p>
+
+           <h4>Understand the operators:</h4>
+           <ul>
+            <li>Actions provides the stream of dispatched actions.</li>
+            <li>ofType(loadEmployees) listens only for the matching action.</li>
+            <li>switchMap() subscribes to the HTTP Observable and switches away from a previous request when a new load action arrives.</li>
+            <li>map() converts the API response into a success action.</li>
+            <li>catchError() converts a request failure into a failure action.</li>
+            <li>of() emits that failure action as an Observable.</li>
+           </ul>
+           <p>For other operations, select the flattening operator based on the use case: exhaustMap() is often useful for ignoring 
+            repeated submissions while a request is running; concatMap() preserves request order; mergeMap() allows concurrent work.</p>
+
+            <h4>Step 4: Create the reducer</h4>
+            <p>File: employee.reducer.ts</p>
+
+            <p>Notice that the reducer returns a new object using the spread operator rather than mutating state.</p>
+
+            <h4>Step 5: Register the feature Store and Effects</h4>
+            <p>In your standalone Angular application, update app.config.ts:</p>
+
+            <h4>Step 6: Use the Store in a component</h4>
+            <p>File: employee-list.component.ts</p>
+
+            <p>The component doesn't call the API directly. It dispatches an action, and the Effect handles the request.</p>
+            <p>Real-world interview explanation: In an employee-management application, I would keep shared employee data, loading status, and errors in the Store when multiple screens need the same state. Effects would handle API calls, reducers would update state, and selectors would provide the data required by each component.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>7. NgRx Entity</h2>
+            <p>@ngrx/entity helps manage collections of similar records, such as employees, products, or users.</p>
+            <h4>Instead of repeatedly managing arrays manually, it provides helpers such as:</h4>
+            <ul>
+                <li>createEntityAdapter()</li>
+                <li>addOne()</li>
+                <li>addMany()</li>
+                <li>updateOne()</li>
+                <li>removeOne()</li>
+                <li>setAll()</li>
+            </ul>
+            <h4>Example:</h4>
+            <pre>
+                <code [textContent]="ngrxEntity"></code>
+            </pre>
+            <p>The adapter adds normalized collection state, typically using ids and entities, and provides reducer helpers to update it consistently.</p>
+            <p>When should you use it? When the application has a substantial collection with frequent additions, updates, removals, or entity lookups. For a small, simple list, a normal array may be enough.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>8. NgRx vs Signals vs Services</h2>
+            <p>This is a common architectural interview question.</p>
+            <pre>
+                <code>
+Feature	                Service	                        Signals	                            NgRx Store
+Setup	                Simple	                        Simple to moderate	                More structure
+Reactive updates	    Depends on implementation	    Built in	                        Store selectors
+Shared state	        Yes	                        Yes, through shared services	    Yes
+Async API handling	    Service methods/RxJS	        Service methods and RxJS	        Commonly Effects
+Predictable 
+action-based flow	    Must be designed	            Must be designed	                Built into the pattern
+Best use	            Shared logic and data access	Reactive local/shared state	    Complex, application-wide state
+                </code>
+            </pre>
+
+            <p>Signals and NgRx are not mutually exclusive. You can use Signals for local UI state and NgRx for shared application state. Angular also supports converting between Signals and Observables when needed.</p>
+            <p>My recommendation for your interview: Be ready to explain why you would choose a simple service or signal-based service first, and when a centralized NgRx Store becomes worthwhile.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>9. Important NgRx interview questions and answers</h2>
+
+            <pre>
+                <code>
+Q1. What is the difference between an action and a reducer?
+Answer: An action describes an event that occurred. A reducer defines how the current state changes in response to that action.
+
+Q2. Why must reducers be pure functions?
+Answer: Pure reducers produce predictable state updates, are straightforward to test, and avoid hidden side effects. They should not mutate existing state or perform HTTP requests.
+
+Q3. What is the difference between a selector and an effect?
+Answer: A selector reads or derives state. An Effect handles side effects such as API requests and can dispatch a resulting action.
+
+Q4. Can we call an API inside a reducer?
+Answer: No. Reducers must remain pure and synchronous. API requests belong in services, orchestrated by Effects when using NgRx.
+
+Q5. What is the difference between createAction() and createReducer()?
+Answer: createAction() defines an event, while createReducer() defines the state transitions associated with actions.
+
+Q6. Why use props()?
+Answer: props() defines the payload an action can carry, such as an employee ID, form data, or an API response.
+
+Q7. What happens when an API request fails in an Effect?
+Answer: The Effect should handle the error and emit a failure action. The reducer can then update the error and loading state. Handling the error inside the request's inner Observable also allows the outer Effect stream to continue listening for future actions.
+
+Q8. What is memoization in NgRx selectors?
+Answer: A memoized selector can reuse a previous derived result when its input values or references have not changed. This avoids unnecessary calculations.
+
+Q9. What is the difference between switchMap() and exhaustMap() in an Effect?
+Answer: switchMap() switches to the latest inner Observable and unsubscribes from the previous one. exhaustMap() ignores new source emissions while the current inner Observable is active.
+
+Q10. Is NgRx required in every Angular project?
+Answer: No. For simple applications, component state, services, or Signals may be sufficient. NgRx is useful when shared state, complex workflows, debugging, and predictable state transitions justify the additional structure.
                 </code>
             </pre>
         </div>
-        <h4>Interview answer:</h4>
-        <p>I use Signals for state, computed for derived state, and effects only for side effects such as logging, local
-            storage synchronization, or interacting with an external API. I avoid using effects for normal derived
-            business logic because computed is more appropriate.</p>
 
+        <div class="sub-section">
+            <h2>Section 11 — Angular Performance Optimization</h2>
+            <div class="section-content">
+                <h2></h2>
+                <p>Performance optimization means improving how quickly an application starts, renders its content, responds to user actions, and processes data—without breaking functionality.</p>
+                <h4>For interviews, remember these four areas:</h4>
+                <ul>
+                    <li>Initial load: How quickly the application starts.</li>
+                    <li>Rendering: How efficiently Angular updates the DOM.</li>
+                    <li>Runtime: How smoothly the application responds to user interactions.</li>
+                    <li>Network: How efficiently APIs, images, JavaScript and other resources are loaded.</li>
+                </ul>
+                <h2>11.1 Change detection optimization</h2>
+                <p>Angular change detection determines when components need to be checked and their rendered views updated.</p>
+                <pre>
+                    <code>
+Default          vs OnPush
+Default strategy	OnPush strategy
+Checks components according to the normal change-detection traversal and applicable triggers	Allows Angular to skip eligible component subtrees when they don't need checking
+Convenient for simple applications	Useful for predictable, component-oriented rendering
+Can perform unnecessary work if components are poorly structured	Works particularly well with immutable data and reactive state
+                    </code>
+                </pre>
+            </div>
+
+            <div class="section-content">
+                <h2>11.2 Lazy loading vs eager loading</h2>
+                <p>Eager loading loads feature code as part of the initial application loading path.</p>
+                <p>Lazy loading defers loading feature code until it is required, such as when a user navigates to a route.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.3 Preloading strategies</h2>
+                <p>Preloading fetches lazy-loaded route code in the background after the initial application load.</p>
+                <p>Angular supports strategies such as:</p>
+                <ul>
+                    <li>NoPreloading — do not automatically preload lazy routes.</li>
+                    <li>PreloadAllModules — preload eligible lazy-loaded routes.</li>
+                </ul>
+
+                <pre>
+                    <code>
+                        import  provideRouter, withPreloading, PreloadAllModules  from '@angular/router';
+                        providers: [
+                        provideRouter(
+                            routes,
+                            withPreloading(PreloadAllModules)
+                        )
+                        ]
+                    </code>
+                </pre>
+                <p>Important: This is not a guarantee that every resource in every route is loaded immediately. It applies to eligible lazy route configurations.</p>
+                <h4>Interview question: If lazy loading reduces initial bundle size, why would you preload?</h4>
+                <p>Because users may navigate to a feature shortly after the application starts. Preloading can reduce the wait when they navigate, at the cost of additional background network and processing work.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.4 The @ defer block</h2>
+                <p>@ defer allows Angular to defer eligible template dependencies until a trigger occurs.</p>
+                <p>For example, a dashboard may contain a large chart that users only see after scrolling.</p>
+                <pre>
+                    <code [textContent]="defer"></code>
+                </pre>
+                <p>A deferred block can improve perceived performance, but dependencies must be eligible for deferral. If the same dependency is used eagerly elsewhere, it may already be loaded.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.5 Optimize large lists with track</h2>
+                <p>When rendering arrays, Angular needs to identify which item corresponds to which DOM element.</p>
+                <h4>Use a stable ID:</h4>
+
+                <pre>
+                    <code [textContent]="track"></code>
+                </pre>
+
+                <p>Without stable tracking, updates can lead to unnecessary DOM work.</p>
+                <p>Best practice: Prefer a stable, unique key such as an employee ID over $index when items can be inserted, deleted, or reordered.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.6 Virtual scrolling</h2>
+                <p>Definition: Virtual scrolling renders only the visible portion of a large list rather than creating DOM elements for every item.</p>
+                <p>Use Angular CDK's ScrollingModule:</p>
+                <pre>
+                    <code [textContent]="virtualScroll"></code>
+                </pre>
+                <p>This example uses the CDK's *cdkVirtualFor directive. Import ScrollingModule in the standalone component's imports.</p>
+                <p><strong>Use it when: A table or list contains thousands of rows and rendering every row is expensive. <br>
+                Trade-off: Virtual scrolling requires suitable viewport and item-size configuration. It is not always appropriate for variable-height items, complex nested layouts, or small lists.</strong></p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.7 Debouncing and throttling</h2>
+                <p>These are JavaScript/RxJS techniques for reducing excessive work triggered by frequent events.</p>
+                <p>Debouncing: Waits until events stop arriving for a specified duration.</p>
+                <p>Throttling: Limits how often an operation is allowed to run over time.</p>
+                <h4>Example: Search while typing.</h4>
+                <pre>
+                    <code [textContent]="debounce"></code>
+                </pre>
+                <p>Why use these operators together?</p>
+                <ul>
+                    <li>debounceTime(300) waits for a 300 ms pause.</li>
+                    <li>distinctUntilChanged() skips consecutive duplicate values.</li>
+                    <li>switchMap() switches to the newest request when a new search value arrives.</li>
+                </ul>
+                <p>This is useful for autocomplete, filtering, and search forms.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.8 Bundle size and tree shaking</h2>
+                <p>Bundle size refers to the JavaScript, CSS and other resources required to run the application.</p>
+                <p>Tree shaking removes unused code when the build system can determine that it is safe to eliminate.</p>
+                <p>Other optimization techniques include:</p>
+                <ul>
+                    <li>Avoiding unnecessary large dependencies.</li>
+                    <li>Importing only what the application needs.</li>
+                    <li>Lazy-loading feature routes.</li>
+                    <li>Using production builds.</li>
+                    <li>Inspecting build output and bundle reports.</li>
+                    <li>Compressing resources on the server where supported.</li>
+                </ul>
+                <p>Useful commands:ng build, ng build --configuration production</p>
+                <p>The production build applies the configured production optimizations.</p>
+
+                <h4>Interview question: What would you do if your Angular bundle is too large?</h4>
+                <p>Answer: Inspect the bundle report, identify large dependencies, remove unused imports and libraries, lazy-load features, defer heavy components, and verify the effect by comparing production build output.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.9 Memory leaks and subscriptions</h2>
+                <p>A memory leak occurs when objects or subscriptions remain reachable longer than intended, retaining resources unnecessarily.</p>
+                <h4>For Angular subscriptions, useful approaches include:</h4>
+                <ul>
+                    <li>Using AsyncPipe in templates.</li>
+                    <li>Using takeUntilDestroyed() for imperative subscriptions.</li>
+                    <li>Explicitly unsubscribing from long-lived subscriptions when necessary.</li>
+                    <li>Cleaning up event listeners and timers.</li>
+                    <li>Avoiding accidental retention of large objects.</li>
+                </ul>
+                <pre>
+                    <code [textContent]="memoryLeak"></code>
+                </pre>
+                <p>The example assumes EmployeeService.getUpdates() returns an Observable. The subscription is automatically cleaned up when this component is destroyed.</p>
+            </div>
+
+            <div class="section-content">
+                <h2>11.10 Performance profiling</h2>
+                <p>Don't optimize based only on guesses. Measure first.</p>
+                <p>Useful tools:</p>
+                <ul>
+                    <li>Chrome DevTools Performance panel — identifies long tasks and expensive runtime operations.</li>
+                    <li>Network panel — shows slow API requests, large resources, and repeated requests.</li>
+                    <li>Angular DevTools — helps inspect the component tree and profile change detection.</li>
+                    <li>Angular CLI build output — helps assess bundle size.</li>
+                </ul>
+
+                <h4>Real-world interview scenario</h4>
+                <h4>Question: A dashboard containing 20 charts and a table with 5,000 records is slow. How would you improve it?</h4>
+                <pre>
+                    <code>
+A strong answer:
+1. Profile the application to identify whether the bottleneck is network, JavaScript, rendering, or change detection.
+2. Defer below-the-fold charts using @ defer.
+3. Use stable tracking for table rows and virtual scrolling if appropriate.
+4. Reduce redundant API calls and introduce suitable caching where the data requirements allow it.
+5. Use lazy-loaded routes and review large dependencies.
+6. Apply OnPush or reactive state patterns where useful.
+7. Measure again to confirm the improvements.
+                    </code>
+                </pre>
+            </div>
+        </div>
+
+        <div class="sub-section">
+            <h2>Section 12 — Angular Material & UI Architecture</h2>
+        </div>
     </div>
+
+
+    
 
 
     <div>

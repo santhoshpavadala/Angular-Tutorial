@@ -1,0 +1,19 @@
+<h2>Employees</h2>
+
+    <button (click)="loadData()">Load Employees</button>
+
+    @if (loading$ | async) {
+      <p>Loading employees...</p>
+    }
+
+    @if (error$ | async; as error) {
+      <p>{{ error }}</p>
+    }
+
+    @if (employees$ | async; as employees) {
+      @for (employee of employees; track employee.id) {
+        <p>{{ employee.name }} - {{ employee.email }}</p>
+      } @empty {
+        <p>No employees found.</p>
+      }
+    }

@@ -238,6 +238,16 @@ export class Sidenav implements OnInit {
       route: '/ngrx'
     },
 
+    {
+      label: 'NGRX-Counter',
+      route: '/ngrx-counter'
+    },
+
+    {
+      label: 'NGRX-Employees',
+      route: '/ngrx-employees'
+    },
+
 
     // Common
 

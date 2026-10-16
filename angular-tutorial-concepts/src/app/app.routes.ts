@@ -50,6 +50,8 @@ import { Search } from './app-pages/search/search';
 import { RxjsMapDashboard } from './app-pages/rxjs/RXJS-Opearators-Examples/rxjs-map-dashboard/rxjs-map-dashboard';
 import { RxjsFilterDashboard } from './app-pages/rxjs/RXJS-Opearators-Examples/rxjs-filter-dashboard/rxjs-filter-dashboard';
 import { adminMatchGuard } from './gaurds/admin-match-guard';
+import { Counter } from './app-pages/counter/counter';
+import { Employees } from './app-pages/employees/employees';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -102,6 +104,8 @@ export const routes: Routes = [
       { path: 'material-template-forms', component: MaterialTemplateForms },
       { path: 'lifecycle-parent', component: LifecycleParent },
       { path: 'ngrx', component: Ngrx },
+      { path: 'ngrx-counter', component: Counter},
+      { path: 'ngrx-employees', component: Employees},
       { path: 'signals', component: Signals },
       { path: 'change-detection', component: ChangeDetection},
       // Nested or child routes
