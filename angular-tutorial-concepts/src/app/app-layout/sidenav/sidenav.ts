@@ -248,6 +248,11 @@ export class Sidenav implements OnInit {
       route: '/ngrx-employees'
     },
 
+    {
+      label: 'Angular-Material',
+      route: '/ang-material'
+    },
+
 
     // Common
 
