@@ -1,0 +1,205 @@
+<div class="section">
+    <h1>Section 12 — Angular Material & UI Architecture</h1>
+
+    <div class="sub-section">
+        <div class="section-content">
+            <p>This section is particularly relevant to your Angular frontend experience. Interviewers may ask how you
+                build
+                reusable UI components, manage API-driven tables, handle dialogs, and maintain consistent layouts across
+                multiple application modules.</p>
+            <h2>12.1 Angular Material fundamentals</h2>
+            <p>Angular Material provides ready-made Angular components for common interface patterns.</p>
+            <pre>
+                    <code>
+    Component	        Common use
+    MatTable	        Display structured data
+    MatPaginator	    Navigate between pages
+    MatSort	            Sort table columns
+    MatDialog	        Confirmation and editing dialogs
+    MatSnackBar	        Temporary success/error messages
+    MatFormField	    Consistent form-field layout
+    MatInput	        Text input
+    MatSelect	        Dropdown selection
+    MatMenu	            Context menus and action menus
+    MatProgressSpinner	Loading indicator
+    MatTooltip	        Additional contextual information
+    MatSidenav	        Navigation drawer or side panel
+                    </code>
+                </pre>
+            <p>For standalone components, import the relevant Material modules or standalone directives/components
+                supported
+                by your installed Angular Material version.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>12.2 Material table with pagination and sorting</h2>
+            <p>A table has several responsibilities: defining columns, rendering rows, handling sorting, and controlling
+                pagination.</p>
+
+
+                <div class="page-container">
+  <h2>Users Management</h2>
+  <p class="subtitle">Users fetched from JSONPlaceholder API</p>
+
+  @if (isLoading) {
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading users...</p>
+    </div>
+  } @else if (errorMessage) {
+    <div class="error-message">
+      {{ errorMessage }}
+      <button mat-button (click)="loadUsers()">Retry</button>
+    </div>
+  } @else {
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+          <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+          <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+          <td mat-cell *matCellDef="let user">{{ user.address.city }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef>Phone</th>
+          <td mat-cell *matCellDef="let user">{{ user.phone }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <tr *matNoDataRow>
+          <td [attr.colspan]="displayedColumns.length">
+            No users found.
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator
+        [pageSize]="5"
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  }
+</div>
+
+
+
+
+
+
+
+
+
+            <!-- <div class="page-container">
+                <h2>Users Management</h2>
+                <p class="subtitle">User details fetched from JSONPlaceholder API</p>
+
+                @if (isLoading()) {
+                <div class="loading-container">
+                    <mat-spinner diameter="40"></mat-spinner>
+                    <p>Loading users...</p>
+                </div>
+                } @else if (errorMessage()) {
+                <div class="error-message">
+                    {{ errorMessage() }}
+                    <button mat-button (click)="loadUsers()">Retry</button>
+                </div>
+                } @else {
+                <div class="table-container">
+                    <table mat-table [dataSource]="dataSource" matSort class="users-table">
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                ID
+                            </th>
+                            <td mat-cell *matCellDef="let user">
+                                {{ user.id }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Full Name
+                            </th>
+                            <td mat-cell *matCellDef="let user">
+                                {{ user.name }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="username">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Username
+                            </th>
+                            <td mat-cell *matCellDef="let user">
+                                {{ user.username }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Email
+                            </th>
+                            <td mat-cell *matCellDef="let user">
+                                {{ user.email }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="city">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                                City
+                            </th>
+                            <td mat-cell *matCellDef="let user">
+                                {{ user.address.city }}
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="phone">
+                            <th mat-header-cell *matHeaderCellDef>
+                                Phone
+                            </th>
+                            <td mat-cell *matCellDef="let user">
+                                {{ user.phone }}
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+                        <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell empty-state" [attr.colspan]="displayedColumns.length">
+                                No users found.
+                            </td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                        aria-label="Select users page">
+                    </mat-paginator>
+                </div>
+                }
+            </div> -->
+        </div>
+    </div>
+</div>

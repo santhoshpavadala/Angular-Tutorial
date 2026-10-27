@@ -52,6 +52,7 @@ import { RxjsFilterDashboard } from './app-pages/rxjs/RXJS-Opearators-Examples/r
 import { adminMatchGuard } from './gaurds/admin-match-guard';
 import { Counter } from './app-pages/counter/counter';
 import { Employees } from './app-pages/employees/employees';
+import { AngMaterial } from './app-pages/ang-material/ang-material';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -108,6 +109,7 @@ export const routes: Routes = [
       { path: 'ngrx-employees', component: Employees},
       { path: 'signals', component: Signals },
       { path: 'change-detection', component: ChangeDetection},
+      { path: 'ang-material', component: AngMaterial },
       // Nested or child routes
       {
         path: 'routings',
