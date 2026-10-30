@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 interface MenuItem {
@@ -14,6 +14,8 @@ interface MenuItem {
   styleUrl: './sidenav.scss'
 })
 export class Sidenav implements OnInit {
+  @Input() isOpen = false;
+  @Output() closeRequested = new EventEmitter<void>();
 
   // ==========================================
   // Logged-in user role
@@ -27,11 +29,6 @@ export class Sidenav implements OnInit {
   // ==========================================
 
   userMenuItems: MenuItem[] = [
-
-    {
-      label: 'Basics',
-      route: '/basics'
-    },
 
     {
       label: 'Angular - Interview',

@@ -1,6 +1,23 @@
-<app-header></app-header>
+<app-header
+  [isDarkTheme]="isDarkTheme"
+  [isSidenavOpen]="isSidenavOpen"
+  (menuToggle)="toggleSidenav()"
+  (themeToggle)="toggleTheme()">
+</app-header>
 <div class="app-layout">
-  <app-sidenav class="sidenav"></app-sidenav>
+  <button
+    type="button"
+    class="sidenav-backdrop"
+    [class.is-visible]="isSidenavOpen"
+    aria-label="Close navigation menu"
+    (click)="closeSidenav()">
+  </button>
+  <app-sidenav
+    class="sidenav"
+    [class.is-open]="isSidenavOpen"
+    [isOpen]="isSidenavOpen"
+    (closeRequested)="closeSidenav()">
+  </app-sidenav>
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>

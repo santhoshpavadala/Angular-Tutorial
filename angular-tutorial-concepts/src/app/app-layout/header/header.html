@@ -1,31 +1,47 @@
-<header>
-    <div class="leftHeader">My Logo</div>
-    <div class="rightHeader">
-        <a routerLink="/products" routerLinkActive="active">All</a>
-        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Laptops'}">Laptops</a>
-        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Tabs'}">Tabs</a>
-        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Mobiles'}">Mobiles</a>
-        <a routerLink="/products" routerLinkActive="active" [queryParams]="{'category': 'Electronics'}">Electronics</a>
+<header class="app-header">
+    <div class="header-brand">
+        <button
+            type="button"
+            class="menu-toggle"
+            aria-label="Toggle navigation menu"
+            aria-controls="app-sidenav"
+            [attr.aria-expanded]="isSidenavOpen"
+            (click)="menuToggle.emit()">
+            <span></span><span></span><span></span>
+        </button>
+        <a class="brand-mark" routerLink="/home" aria-label="Angular Studio home">S</a>
+        <span class="brand-name">Santhosh <strong>Studio</strong></span>
+    </div>
 
+    <nav class="header-categories" aria-label="Product categories">
+        <a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">All</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{ category: 'Laptops' }">Laptops</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{ category: 'Tabs' }">Tabs</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{ category: 'Mobiles' }">Mobiles</a>
+        <a routerLink="/products" routerLinkActive="active" [queryParams]="{ category: 'Electronics' }">Electronics</a>
+    </nav>
+
+    <div class="header-actions">
         <div class="tooltipContainer">
-            <button class="btn btn-secondary" (click)="navigate()">Btn Route</button>
-            <p class="tooltiptext">Navigate function is used to route the compoent with the help of angular router service</p>
+            <button type="button" class="header-action-button" (click)="navigate()">Route demo</button>
+            <p class="tooltiptext">Demonstrates programmatic navigation with route parameters.</p>
         </div>
-
-        <div>
-            <select name="" id="" (change)="onRoleChange($event)">
+        <label class="role-select-label">
+            <span class="visually-hidden">Select role</span>
+            <select aria-label="Select role" (change)="onRoleChange($event)">
                 <option value="Guest">Guest</option>
                 <option value="Admin">Admin</option>
                 <option value="Super Admin">Super Admin</option>
             </select>
-        </div>
-
-        <div>
-            <button type="button" (click)="goToAdmin()" class="btn btn-primary">Admin</button>
-        </div>
-
-        <div>
-            <button type="button" (click)="onLogout()" class="btn btn-primary">LogOut</button>
-        </div>
+        </label>
+        <button type="button" class="header-action-button" (click)="goToAdmin()">Dashboard</button>
+        <button
+            type="button"
+            class="theme-toggle"
+            [attr.aria-pressed]="isDarkTheme"
+            (click)="themeToggle.emit()">
+            {{ isDarkTheme ? 'Light mode' : 'Dark mode' }}
+        </button>
+        <button type="button" class="logout-button" (click)="onLogout()">Log out</button>
     </div>
 </header>

@@ -1,70 +1,106 @@
-<div class="login-wrapper d-flex align-items-center justify-content-center">
-  <div class="login-card shadow-lg p-4">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold">Welcome Back</h2>
-      <p class="text-muted">Sign in to continue</p>
+<main class="login-wrapper">
+  <section class="login-showcase" aria-label="Welcome to Angular Studio">
+    <a class="login-brand" routerLink="/home">
+      <span class="brand-mark">A</span>
+      <span>Angular <strong>Studio</strong></span>
+    </a>
+    <div class="showcase-copy">
+      <span class="eyebrow">LEARN · BUILD · GROW</span>
+      <h1>Build your next big idea.</h1>
+      <p>Your hands-on workspace for exploring Angular, one concept at a time.</p>
+      <div class="showcase-decoration" aria-hidden="true">
+        <span class="decoration-orbit orbit-one"></span>
+        <span class="decoration-orbit orbit-two"></span>
+        <span class="decoration-core">A</span>
+      </div>
     </div>
+    <p class="showcase-footer">A practical space for curious developers.</p>
+  </section>
 
-    <div class="d-flex align-item-center flex-column gap-2 text-muted">
-      <!-- <p>Username: admin@gmail.com</p> -->
-      <p class="mb-0">Username: sant@gmail.com</p>
-      <p>Password: 112233</p>
-    </div>
-
-    <form #loginForm = "ngForm" (ngSubmit)="onLogin()" >
-      <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="email" placeholder="name@example.com"
-        [(ngModel)]="loginObj.emailId" name="email" #email="ngModel" required email>
-        <label for="email">Email address</label>
-
-        @if (email.touched || email.dirty || isFormSubmitted) {
-          <div>
-            @if (email.errors?.['required']) {
-            <small class="text-danger">
-              Email Id is required
-            </small>
-            } @else if (email.errors?.['email']) {
-              <small class="text-danger">Email format is Incorrect</small>
-            }
-          </div>
-        }
+  <section class="login-panel">
+    <div class="login-card">
+      <div class="login-heading">
+        <span class="eyebrow">YOUR WORKSPACE AWAITS</span>
+        <h2>Welcome back Santhosh</h2>
+        <p>Sign in to continue learning and building.</p>
       </div>
 
-      <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" placeholder="Password"
-        [(ngModel)]="loginObj.password" name="password" #password="ngModel" required minlength="5">
-        <label for="password">Password</label>
-        @if (password.touched || password.dirty || isFormSubmitted) {
-          <div>
-            @if (password.errors?.['required']) {
-            <small class="text-danger">
-              Password Id is required
-            </small>
-            } @else if (password.errors?.['email']) {
-              <small class="text-danger">Min 5 Characters required</small>
-            }
-          </div>
-        }
+      <div class="demo-hint">
+        <span class="demo-hint-icon" aria-hidden="true">i</span>
+        <p>Demo User: <strong>sant@gmail.com</strong> <br>
+          Demo Admin: <strong>sant-admin@gmail.com</strong>
+          <br>Demo Password: <strong>112233</strong></p>
       </div>
 
-      <div class="d-flex justify-content-between mb-3">
-        <div>
-          <input type="checkbox" id="remember">
-          <label for="remember" class="ms-1">Remember me</label>
+      <form #loginForm="ngForm" (ngSubmit)="onLogin()">
+        <div class="login-field">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            autocomplete="username"
+            [(ngModel)]="loginObj.emailId"
+            name="email"
+            #email="ngModel"
+            required
+            email>
+          @if (email.touched || email.dirty || isFormSubmitted) {
+            <div class="field-error">
+              @if (email.errors?.['required']) {
+                <small>Email address is required.</small>
+              } @else if (email.errors?.['email']) {
+                <small>Enter a valid email address.</small>
+              }
+            </div>
+          }
         </div>
-        <a href="#" class="text-decoration-none">Forgot password?</a>
-      </div>
 
-      <button type="submit" class="btn btn-primary w-100 mb-3 login-btn" 
-      [disabled]="isFormSubmitted || loginForm.invalid">
-         {{ isFormSubmitted ? 'Logging in...' : 'Login' }}
-      </button>
+        <div class="login-field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            [(ngModel)]="loginObj.password"
+            name="password"
+            #password="ngModel"
+            required
+            minlength="5">
+          @if (password.touched || password.dirty || isFormSubmitted) {
+            <div class="field-error">
+              @if (password.errors?.['required']) {
+                <small>Password is required.</small>
+              } @else if (password.errors?.['minlength']) {
+                <small>Password must be at least 5 characters.</small>
+              }
+            </div>
+          }
+        </div>
 
-      <div class="text-center">
-        <small>Don't have an account? 
-          <a routerLink="/register" class="fw-bold text-decoration-none">Register</a>
-        </small>
-      </div>
-    </form>
-  </div>
-</div>
+        <div class="login-options">
+          <label class="remember-option">
+            <input type="checkbox" id="remember">
+            <span>Remember me</span>
+          </label>
+          <span class="forgot-password">Secure sign in</span>
+        </div>
+
+        <button
+          type="submit"
+          class="login-btn"
+          [disabled]="isFormSubmitted || loginForm.invalid">
+          {{ isFormSubmitted ? 'Signing in…' : 'Sign in' }}
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <p class="register-prompt">
+          New to the workspace?
+          <a routerLink="/register">Create an account</a>
+        </p>
+      </form>
+    </div>
+    <p class="login-copyright">© Angular Studio · Learn by doing</p>
+  </section>
+</main>

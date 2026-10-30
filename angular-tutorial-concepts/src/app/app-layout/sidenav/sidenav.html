@@ -1,4 +1,4 @@
-<aside>
+<aside id="app-sidenav" [class.is-open]="isOpen" aria-label="Main navigation">
 
   <nav>
 
@@ -24,6 +24,7 @@
           [routerLinkActiveOptions]="{
             exact: true
           }"
+          (click)="closeRequested.emit()"
         >
 
           {{ item.label }}
@@ -57,6 +58,7 @@
           [routerLinkActiveOptions]="{
             exact: item.exact ?? false
           }"
+          (click)="closeRequested.emit()"
         >
 
           {{ item.label }}
