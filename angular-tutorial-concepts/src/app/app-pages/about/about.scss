@@ -1,0 +1,75 @@
+.profile-page {
+  display: grid;
+  gap: 1rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.profile-intro,
+.profile-section {
+  margin: 0;
+  border-top: 3px solid var(--color-primary);
+}
+
+.profile-eyebrow {
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+}
+
+.profile-intro h1 {
+  margin: 0.5rem 0 0.7rem;
+}
+
+.profile-lead {
+  max-width: 780px;
+  color: var(--color-text-muted) !important;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.profile-section h2 {
+  margin-top: 0;
+}
+
+.profile-skills,
+.profile-projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.profile-skill,
+.profile-project {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: var(--color-page);
+}
+
+.profile-skill h3,
+.profile-project h3 {
+  margin: 0 0 0.45rem;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.profile-skill p,
+.profile-project p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.profile-project a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--color-primary);
+  font-weight: 650;
+}
+
+.profile-project a:hover {
+  text-decoration: underline;
+}
