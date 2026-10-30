@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ObserableData } from '../../services/obserable-data';
 
@@ -9,6 +9,11 @@ import { ObserableData } from '../../services/obserable-data';
   styleUrl: './header.scss'
 })
 export class Header {
+  @Input() isDarkTheme = false;
+  @Input() isSidenavOpen = false;
+  @Output() menuToggle = new EventEmitter<void>();
+  @Output() themeToggle = new EventEmitter<void>();
+
   // BehaviourSubject:
   obsServ = inject(ObserableData);
 
