@@ -1,10 +1,11 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 import { ObserableData } from '../../services/obserable-data';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule ],
+  imports: [RouterModule, MatMenuModule],
   templateUrl: './header.html',
   styleUrl: './header.scss'
 })
@@ -13,6 +14,9 @@ export class Header {
   @Input() isSidenavOpen = false;
   @Output() menuToggle = new EventEmitter<void>();
   @Output() themeToggle = new EventEmitter<void>();
+
+  readonly profileName = 'Santhosh Pavadala';
+  profilePhotoUrl: string | null = '/assets/profile/Santhosh_Dp.png';
 
   // BehaviourSubject:
   obsServ = inject(ObserableData);

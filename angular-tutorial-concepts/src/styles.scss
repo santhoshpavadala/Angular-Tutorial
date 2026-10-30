@@ -527,6 +527,17 @@ input.ng-touched.ng-invalid {
   color: #ffffff;
 }
 
+.profile-menu-panel {
+  --mat-menu-container-color: var(--color-surface);
+  --mat-menu-item-label-text-color: var(--color-text);
+}
+
+.profile-menu-panel .profile-menu-name {
+  color: var(--color-text);
+  font-weight: 700;
+  opacity: 1;
+}
+
 .cardContainer {
   display: flex;
   flex-wrap: wrap;

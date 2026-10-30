@@ -9,7 +9,7 @@
             (click)="menuToggle.emit()">
             <span></span><span></span><span></span>
         </button>
-        <a class="brand-mark" routerLink="/home" aria-label="Angular Studio home">S</a>
+        <a class="brand-mark" routerLink="/about" aria-label="Angular Studio home">S</a>
         <span class="brand-name">Santhosh <strong>Studio</strong></span>
     </div>
 
@@ -38,10 +38,40 @@
         <button
             type="button"
             class="theme-toggle"
+            [class.theme-toggle-dark]="isDarkTheme"
             [attr.aria-pressed]="isDarkTheme"
+            [attr.aria-label]="isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'"
+            [attr.title]="isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'"
             (click)="themeToggle.emit()">
-            {{ isDarkTheme ? 'Light mode' : 'Dark mode' }}
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.5"></circle>
+                <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.6 8.6 0 1 0 20.2 15.1Z"></path>
+            </svg>
+        </button>
+        <button
+            type="button"
+            class="profile-menu-trigger"
+            [matMenuTriggerFor]="profileMenu"
+            [attr.aria-label]="'Open profile menu for ' + profileName">
+            @if (profilePhotoUrl) {
+                <img
+                    class="profile-avatar"
+                    [src]="profilePhotoUrl"
+                    [alt]="profileName"
+                    (error)="profilePhotoUrl = null">
+            } @else {
+                <span class="profile-avatar profile-avatar-initials" aria-hidden="true">SP</span>
+            }
         </button>
         <button type="button" class="logout-button" (click)="onLogout()">Log out</button>
     </div>
 </header>
+
+<mat-menu #profileMenu="matMenu" panelClass="profile-menu-panel">
+    <button mat-menu-item disabled class="profile-menu-name">{{ profileName }}</button>
+    <a mat-menu-item routerLink="/about">About</a>
+    <a mat-menu-item routerLink="/contact">Contact</a>
+</mat-menu>

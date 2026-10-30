@@ -9,14 +9,13 @@ export class RoutegaurdAuth implements CanActivate {
   // This is the older version with in servie we have the acanactivate
   constructor(private r: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    // return true;
-    let isloggedIn = false;
-    if(isloggedIn) {
+  canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const isloggedIn = localStorage.getItem('loggedUserId') !== null;
+    if (isloggedIn) {
       return true;
-    } else {
-      this.r.navigate(['/login']);
-      return false;
     }
+
+    this.r.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    return false;
   }
 }
