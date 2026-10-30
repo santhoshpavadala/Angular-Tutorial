@@ -1,61 +1,134 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card p-4 shadow-lg" style="width: 400px; border-radius: 15px;">
-    
-    <h3 class="text-center mb-4">Create Account</h3>
-
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-      <!-- Name -->
-      <div class="mb-3">
-        <label class="form-label">Full Name</label>
-        <input type="text" class="form-control" formControlName="name" placeholder="Enter your name">
-        <!-- <small class="text-danger" *ngIf="registerForm.controls.name.touched && registerForm.controls.name.invalid">
-          Name is required (min 3 chars)
-        </small> -->
+<main class="login-wrapper">
+  <section class="login-showcase" aria-label="Welcome to Angular Studio">
+    <a class="login-brand" routerLink="/home">
+      <span class="brand-mark">A</span>
+      <span>Angular <strong>Studio</strong></span>
+    </a>
+    <div class="showcase-copy">
+      <span class="eyebrow">LEARN · BUILD · GROW</span>
+      <h1>Build your next big idea.</h1>
+      <p>Your hands-on workspace for exploring Angular, one concept at a time.</p>
+      <div class="showcase-decoration" aria-hidden="true">
+        <span class="decoration-orbit orbit-one"></span>
+        <span class="decoration-orbit orbit-two"></span>
+        <span class="decoration-core">A</span>
       </div>
-
-      <!-- Email -->
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
-        <!-- <small class="text-danger" *ngIf="registerForm.controls.email.touched && registerForm.controls.email.invalid">
-          Enter valid email
-        </small> -->
-      </div>
-
-      <!-- Mobile -->
-      <div class="mb-3">
-        <label class="form-label">Mobile</label>
-        <input type="text" class="form-control" formControlName="mobile" placeholder="Enter mobile number">
-        <!-- <small class="text-danger" *ngIf="registerForm.controls.['mobile'].touched && registerForm.controls.mobile.invalid">
-          Enter valid 10 digit number
-        </small> -->
-      </div>
-
-      <!-- Password -->
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" class="form-control" formControlName="password" placeholder="Enter password">
-      </div>
-
-      <!-- Confirm Password -->
-      <div class="mb-3">
-        <label class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm password">
-      </div>
-
-      <!-- Button -->
-      <button type="submit" class="btn btn-primary w-100">Register</button>
-
-    </form>
-
-    <!-- Login Redirect -->
-    <div class="text-center mt-3">
-      <small>
-        Already have an account?
-        <a routerLink="/login" class="fw-bold text-decoration-none">Login</a>
-      </small>
     </div>
+    <p class="showcase-footer">A practical space for curious developers.</p>
+  </section>
 
-  </div>
-</div>
+  <section class="login-panel">
+    <div class="login-card">
+      <div class="login-heading">
+        <span class="eyebrow">START YOUR JOURNEY</span>
+        <h2>Create your account</h2>
+        <p>Join Angular Studio and start learning by doing.</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="login-field">
+          <label for="name">Full name</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Enter your name"
+            autocomplete="name">
+          @if (registerForm.controls['name'].touched && registerForm.controls['name'].invalid) {
+            <div class="field-error">
+              @if (registerForm.controls['name'].errors?.['required']) {
+                <small>Full name is required.</small>
+              } @else if (registerForm.controls['name'].errors?.['minlength']) {
+                <small>Name must be at least 3 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="login-field">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            placeholder="you@example.com"
+            autocomplete="email">
+          @if (registerForm.controls['email'].touched && registerForm.controls['email'].invalid) {
+            <div class="field-error">
+              @if (registerForm.controls['email'].errors?.['required']) {
+                <small>Email address is required.</small>
+              } @else if (registerForm.controls['email'].errors?.['email']) {
+                <small>Enter a valid email address.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="login-field">
+          <label for="mobile">Mobile number</label>
+          <input
+            type="tel"
+            id="mobile"
+            formControlName="mobile"
+            placeholder="10-digit mobile number"
+            autocomplete="tel"
+            inputmode="numeric">
+          @if (registerForm.controls['mobile'].touched && registerForm.controls['mobile'].invalid) {
+            <div class="field-error">
+              @if (registerForm.controls['mobile'].errors?.['required']) {
+                <small>Mobile number is required.</small>
+              } @else if (registerForm.controls['mobile'].errors?.['pattern']) {
+                <small>Enter a valid 10-digit mobile number.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="login-field">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Create a password"
+            autocomplete="new-password">
+          @if (registerForm.controls['password'].touched && registerForm.controls['password'].invalid) {
+            <div class="field-error">
+              @if (registerForm.controls['password'].errors?.['required']) {
+                <small>Password is required.</small>
+              } @else if (registerForm.controls['password'].errors?.['minlength']) {
+                <small>Password must be at least 6 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="login-field">
+          <label for="confirmPassword">Confirm password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+            autocomplete="new-password">
+          @if (registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].invalid) {
+            <div class="field-error">
+              <small>Please confirm your password.</small>
+            </div>
+          }
+        </div>
+
+        <button type="submit" class="login-btn" [disabled]="registerForm.invalid">
+          Create account
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <p class="register-prompt">
+          Already have an account?
+          <a routerLink="/login">Sign in</a>
+        </p>
+      </form>
+    </div>
+    <p class="login-copyright">© Angular Studio · Learn by doing</p>
+  </section>
+</main>
