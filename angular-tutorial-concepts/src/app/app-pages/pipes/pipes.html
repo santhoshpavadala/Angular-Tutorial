@@ -1,10 +1,118 @@
 <div class="section">
-  <h1>Angular Pipes</h1>
+  <h1>Topic 4: Angular Pipes</h1>
+
+  <div class="sub-section">
+    <h2>Pipes</h2>
+    <h2>Q1. What is a pipe in Angular?</h2>
+    <p>In Angular, a Pipe is used to transform data in the template before displaying it in the UI.
+      It does NOT change the original data, it only transforms it for display.</p>
+    <p>Built-in examples:name | uppercase; price | currency; today | date; value | number</p>
+    <ul>Common built-in pipes include:
+      <li>DatePipe</li>
+      <li>CurrencyPipe</li>
+      <li>DecimalPipe</li>
+      <li>PercentPipe</li>
+      <li>UpperCasePipe</li>
+      <li>LowerCasePipe</li>
+      <li>JsonPipe</li>
+      <li>SlicePipe</li>
+    </ul>
+
+    <div>
+      <h2>Q2. How do you use built-in pipes?</h2>
+      <pre>
+                <code>
+                    export class ProductComponent 
+                    <!-- { -->
+                        today = new Date();
+                        price = 1500;
+                        percentage = 0.75;
+                        productName = 'laptop';
+                    <!-- } -->
+
+                    <p> today | date:'dd-MM-yyyy' </p>
+                    <p> price | currency:'INR' </p>
+                    <p> percentage | percent </p>
+                    <p> productName | uppercase </p>
+                </code>
+            </pre>
+    </div>
+
+    <div class="sub-section">
+      <h2>Q3. What is a custom pipe?</h2>
+      <p>A custom pipe is created when the built-in pipes do not meet a particular display-transformation
+        requirement.</p>
+      <pre>
+                <code [textContent]="custompipe"></code>
+                <p> description | truncate:20 </p>
+            </pre>
+    </div>
+
+    <h2>Q4. Pure vs Impure Pipes</h2>
+    <p>A pure pipe is the default. It executes when Angular detects a change to its input value or reference. An
+      impure pipe can execute during every relevant change-detection cycle.</p>
+    <pre>
+            <code>
+                Pure pipe	                    Impure pipe
+                Default	                        Requires pure: false
+                Runs on input changes	        Can run frequently
+                Usually more efficient	        May be more expensive
+                Good for most transformations	Appropriate only for specific cases
+            </code>
+        </pre>
+
+
+    <p>A Pure Pipe is a pipe that Angular executes only when the input value or input reference changes.
+      Pure pipes are optimized for performance because Angular avoids running them unnecessarily.
+      By default, all Angular pipes are Pure Pipes.</p>
+    <pre>
+                <code>@Pipe(
+                name: 'myPipe',
+                pure: true
+                )</code>
+            </pre>
+
+    <p>An Impure Pipe is a pipe that Angular executes during every change detection cycle, regardless of whether the
+      input reference changed or not.
+      Impure pipes are useful when data changes internally without creating a new object or array reference. <br>
+      The important part: <br>
+      pure: false <br>
+      This tells Angular to run the pipe on every change detection cycle.</p>
+    <pre>
+                <code>@Pipe(
+                name: 'myPipe',
+                pure: false
+                )</code>
+            </pre>
+
+    <div>
+      <h2>Q5. Can we chain pipes?</h2>
+      <p>Yes. The output of one pipe can be passed to another.</p>
+      <pre>
+                    <code><p> today | date:'fullDate' | uppercase </p></code>
+                </pre>
+
+      <h2>Q6. Can pipes accept parameters?</h2>
+      <p>Yes. Parameters are passed after the pipe name using colons.</p>
+      <pre><code><p> amount | number:'1.2-2' </p></code></pre>
+
+      <h2>Q7. Why should expensive operations be avoided inside pipes?</h2>
+      <p>Pipes can be evaluated as part of template update processing. Expensive transformations, especially in
+        impure pipes, can affect rendering performance. Complex calculations may be better placed in a service
+        or derived state.</p>
+
+      <h2>Q. You need to filter and sort a large table. Would you use a custom pipe?</h2>
+      <p>For a small, simple list, a pure custom pipe may be appropriate. For large data, frequent updates, or
+        server-backed filtering, I would consider derived state, a dedicated data-processing layer, or
+        server-side operations to avoid repeated expensive calculations.</p>
+    </div>
+
+  </div>
 
   <div>
     <h2>Angular Pipes</h2>
     <p>In Angular, a Pipe is used to transform data in the template before displaying it in the UI. <br>
-    It does NOT change the original data, it only transforms it for display.</p>
+      It does NOT change the original data, it only transforms it for display.</p>
     <!-- <p>{{ value | pipeName }}</p>
     {{ value | pipeName:arg1:arg2 }} -->
 
@@ -80,19 +188,19 @@
     <h2>Async Pipes</h2>
     <table>
       <thead>
-        <tr >
+        <tr>
           @for (item of tableHeaders; track item) {
-            <th>{{item}}</th>
+          <th>{{item}}</th>
           }
         </tr>
       </thead>
       <tbody>
-        @for (user of usersData | async; track  $index) {
-          <tr>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.phone }}</td>
-          </tr>
+        @for (user of usersData | async; track $index) {
+        <tr>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+        </tr>
         }
       </tbody>
 
@@ -114,14 +222,14 @@
         <p>Uppercase</p>
         <h4>{{firName | uppercase}}</h4>
         <p>Tax of salary/p>
-          <h4>{{salary | tax}}</h4>
-          <p>Angular recalculates only if salary changes.</p>
+        <h4>{{salary | tax}}</h4>
+        <p>Angular recalculates only if salary changes.</p>
       </div>
 
       <div>
         <h3>Pure Pipe with Arrays</h3>
         <h4>Users Count: {{users | usersCount}}</h4>
-        
+
       </div>
 
       <div>
@@ -137,8 +245,9 @@
 
     <div>
       <h2>2. Impure Pipe</h2>
-      <p>An Impure Pipe is a pipe that Angular executes during every change detection cycle, regardless of whether the input reference changed or not. <br>
-      Impure pipes are useful when data changes internally without creating a new object or array reference.</p>
+      <p>An Impure Pipe is a pipe that Angular executes during every change detection cycle, regardless of whether the
+        input reference changed or not. <br>
+        Impure pipes are useful when data changes internally without creating a new object or array reference.</p>
 
       <p>The important part:</p>
       <pre>pure: false</pre>
@@ -148,9 +257,9 @@
         <input type="text" [(ngModel)]="searchText">
 
         @for (emp of employees | search : searchText; track emp.id) {
-          <div>
-            {{emp.name}}
-          </div>
+        <div>
+          {{emp.name}}
+        </div>
         }
       </div>
 
@@ -173,8 +282,10 @@
     </div>
 
     <div>
-      <p><b>A Pure Pipe executes only when Angular detects a change in the input value or reference. It is the default pipe type and provides better performance.</b></p>
-      <p><b>An Impure Pipe executes on every Angular change detection cycle, even if the reference does not change. It is useful for real-time filtering and dynamic data updates but can impact performance.</b></p>
+      <p><b>A Pure Pipe executes only when Angular detects a change in the input value or reference. It is the default
+          pipe type and provides better performance.</b></p>
+      <p><b>An Impure Pipe executes on every Angular change detection cycle, even if the reference does not change. It
+          is useful for real-time filtering and dynamic data updates but can impact performance.</b></p>
     </div>
   </div>
 </div>

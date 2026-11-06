@@ -1,7 +1,137 @@
 <div class="section">
-    <h1>Angular Change Detection</h1>
+    <h1>Topic 7: Angular Change Detection</h1>
+
     <div class="sub-section">
-        <h2>What is Chnage Detection?</h2>
+        <h2>CHANGE DETECTION & PERFORMANCE</h2>
+
+        <p>Change detection is the mechanism Angular uses to determine when the component view needs to be updated to
+            reflect changes in application state.</p>
+        <p>For example, when a user clicks a button and a component property changes, Angular can update the displayed
+            value.</p>
+
+
+
+        <h3>9. How does Angular change detection work?</h3>
+        <p>
+            Angular runs a top-down check of components to detect data changes.
+            Zone.js triggers detection when async tasks complete.
+        </p>
+        <p>Consider this example:</p>
+        <pre>
+            <code [textContent]="changeDetection"></code>
+        </pre>
+        <p>When the button is clicked:</p>
+        <ol>
+            <li>Angular handles the event.</li>
+            <li>The component's count value changes.</li>
+            <li>Angular performs the necessary change-detection work.</li>
+            <li>The view updates to show the new count.</li>
+        </ol>
+
+        <h3>10. What is OnPush strategy?</h3>
+        <p>
+            OnPush runs change detection only when:
+            - Input reference changes
+            - Event occurs
+            - Observable emits
+            - markForCheck() is called
+        </p>
+
+        <h3>11. Why is OnPush better for large apps?</h3>
+        <p>
+            It reduces unnecessary DOM checks and improves performance.
+        </p>
+
+        <h3>Default and OnPush strategies</h3>
+        <p>Angular provides two component change-detection strategies.</p>
+        <pre>
+            <code>
+Default (Eager)	                                                OnPush
+1.Checks the component during applicable change-detection runs	1.Uses more selective triggers to determine when to check
+2.Useful for straightforward component behavior	                2.Useful for optimizing component trees
+3.May result in more checks across a large tree	                3.Can reduce unnecessary checks when used correctly
+            </code>
+        </pre>
+
+        <h4>Example of OnPush:</h4>
+        <pre>
+            <code [textContent]="onPush"></code>
+        </pre>
+
+        <p>With OnPush, Angular can check the component when, among other triggers:</p>
+        <ul>
+            <li>A bound input receives a new value.</li>
+            <li>An event is handled in the component's view.</li>
+            <li>A signal read by the template changes.</li>
+            <li>The component is explicitly marked for checking.</li>
+        </ul>
+
+        <h3>12. What are common performance mistakes?</h3>
+        <ul>
+            <li>Not using trackBy</li>
+            <li>Mutating objects instead of replacing</li>
+            <li>Too many subscriptions</li>
+            <li>Heavy logic in templates</li>
+        </ul>
+
+        <div>
+            <h2>9.3 markForCheck() and detectChanges()</h2>
+            <p>These APIs allow explicit control over change-detection behavior.</p>
+            <h4>markForCheck()</h4>
+            <p>Marks a component so that Angular checks it during a subsequent change-detection run.</p>
+            <pre>
+                <code [textContent]="markForCheck"></code>
+            </pre>
+
+            <h4>detectChanges()</h4>
+            <p>Immediately checks the view and its relevant child views.</p>
+            <p>It can be useful for specialized cases, but frequent manual calls can make an application harder to
+                reason about.</p>
+        </div>
+
+        <div>
+            <h2>9.4 Change detection and Signals</h2>
+            <p>Signals integrate with Angular's change-detection system.</p>
+            <pre>
+                <code [textContent]="signalChnageDetection"></code>
+            </pre>
+            <p>When the signal changes, Angular knows that the template depends on it and can schedule the necessary
+                update.</p>
+        </div>
+
+        <h2>9.5 Zone.js and zoneless Angular</h2>
+        <p>Traditionally, Angular has commonly used Zone.js to help detect asynchronous activity and initiate change
+            detection.</p>
+        <p>Modern Angular also supports zoneless change detection, where Angular relies on explicit notifications such
+            as signal updates, template events and other supported mechanisms rather than Zone.js patching asynchronous
+            APIs.</p>
+
+
+        <div>
+            <pre>
+                <code>
+ Interview questions
+Q1. What is change detection in Angular?
+It is the process Angular uses to synchronize the component state with the rendered view.
+
+Q2. What is the difference between markForCheck() and detectChanges()?
+markForCheck() marks a view for checking during a later change-detection run. detectChanges() immediately performs change detection for the view and its children.
+
+Q3. Why is OnPush used?
+It helps reduce unnecessary checks by making component checking more selective. It is particularly useful in large applications with reusable component trees.
+
+Q4. Does OnPush mean a component will never update unless its input reference changes?
+No. Events within its view, changes to signals read in its template, explicit marking and other supported notifications can also cause it to update.
+
+Q5. What happens if you mutate an object passed to an OnPush child?
+If the object reference remains unchanged, the input change alone will not trigger the child to be checked. Prefer immutable updates or use an appropriate reactive state mechanism.
+                </code>
+            </pre>
+        </div>
+    </div>
+    
+    <div class="sub-section">
+        <h2>What is Change Detection?</h2>
         <p>Change Detection is the process Angular uses to detect data changes and update the DOM automatically. <br>
         Angular continuously checks if component data has changed and updates the UI.</p>
         <p>Change Detection checks whether component data has changed and updates the UI accordingly.</p>

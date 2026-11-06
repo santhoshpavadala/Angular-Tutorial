@@ -1,7 +1,7 @@
 
 
 <div class="section">
-  <h1>Decerators</h1>
+  <h1>Topic 2: Decerators</h1>
 
   <!-- By Using Reusable component -->
   <app-alert [alertMessage]="msg" [alertType]="alrtType"></app-alert>
@@ -40,6 +40,176 @@
     <h4>@ViewChild</h4>
     <p>Used to access a child component or DOM element from the parent component.</p>
   </div>
+
+  <div class="sub-section">
+        <h2>Topic 2: What is a Decorator in Angular?</h2>
+        <p>A Decorator is a special TypeScript function that adds metadata to a class, method, property, or parameter.
+            <br>
+            In Angular, decorators tell Angular how a class or property should behave.
+        </p>
+        <p>A decorator is a function that adds metadata to a class, property, method, or parameter so Angular knows how
+            to process and use it.</p>
+        <ul>Angular uses decorators to define things like:
+            <li>@Component</li>
+            <li>@Directive</li>
+            <li>@Pipe</li>
+            <li>@Injectable</li>
+            <li>@Input</li>
+            <li>@Output</li>
+            <li>@HostListener</li>
+            <li>@HostBinding</li>
+        </ul>
+
+        <h4>Types of Angular Decorators</h4>
+        <p>Angular decorators are mainly 4 types:</p>
+        <ul>
+            <li>Class Decorators: <span>Applied to classes: </span> <span><b> @Component, @Directive, @Pipe,
+                        @Injectable, @NgModule</b></span></li>
+            <li>Property Decorators: <span>Applied to class properties: </span> <span><b> @Input, @Output, @ViewChild
+                    </b></span></li>
+            <li>Method Decorators: <span>Applied to methods: </span> <span><b>@HostListener </b></span></li>
+            <li>Parameter Decorators: <span>Applied to constructor parameters: </span> <span><b>@Inject, @Optional
+                    </b></span></li>
+        </ul>
+
+        <h2>Property Decorators: These decorators are applied to class properties.</h2>
+        <h4>@Input Decorators:</h4>
+        <p>@Input allows data from parent component to child component.</p>
+
+        <h4>@Output Decorators:</h4>
+        <p>@Output is used to send data from child component to parent component.</p>
+
+        <h4>@ViewChild</h4>
+        <p>Used to access a child component or DOM element from the parent component.</p>
+
+        <h2>12. Decerators: @Input and @Output</h2>
+        <p>Parent → Child:</p>
+        <pre>
+            <code>
+                Parent
+                ↓
+                @Input()
+                ↓
+                Child
+
+                In Parent
+                app-child [userName]="name"> /app-child>
+                In Child:
+                @Input() userName = '';
+            </code>
+        </pre>
+
+        <p>Child → Parent:</p>
+        <pre>
+            <code>
+                Child
+                ↓
+                @Output()
+                ↓
+                Parent
+
+                Child:
+                @Output() userSelected = new EventEmitter string>();
+
+                    selectUser() 
+                    this.userSelected.emit('Santhosh');
+                    
+                Parent:
+                app-child
+                    (userSelected)="handleUser($event)">
+                /app-child>
+            </code>
+        </pre>
+        <h4>Q3. What is the purpose of @Component?</h4>
+        <p>@Component defines metadata such as the selector, template, styles, imports, and other configuration that
+            Angular needs to create and use a component.</p>
+        <h4>Q4. What are @Input and @Output?</h4>
+        <p>@Input allows a parent component to pass data to a child component. @Output allows a child component to emit
+            events that the parent can handle.</p>
+        <pre>
+            <code>
+                import 
+                Component,
+                Input,
+                Output,
+                EventEmitter
+                 from '@angular/core';
+
+                @Component(
+                selector: 'app-user-card',
+                standalone: true,
+                template: `
+                    <p> name </p>
+                    <button click=select()>Select</button>
+                `
+                )
+                export class UserCardComponent 
+                @Input() name = '';
+
+                @Output() selected = new EventEmitter< string>();
+
+                select() 
+                    this.selected.emit(this.name);
+                
+
+            Parent template:
+            app-user-card [name]="userName" (selected)="onUserSelected($event)"/>
+            </code>
+        </pre>
+
+        <h4>Q5. What is the difference between @Input and signal-based input()?</h4>
+        <p>Both define component inputs. Decorator-based @Input exposes a property that receives a value from the
+            parent. Signal-based input() exposes the input as a read-only Signal, allowing reactive reads using
+            function-call syntax.</p>
+        <pre>
+            <code>
+                import Component, input from '@angular/core';
+                @Component(
+                selector: 'app-user',
+                standalone: true,
+                template: `<p>name()</p>`
+                )
+                export class UserComponent 
+                name = input('Guest');
+            </code>
+        </pre>
+        <h4>Q6. What is the difference between @Component and @Directive?</h4>
+        <p>A component is a directive with its own template. A directive adds behavior to an existing element or
+            controls view structure without defining its own component template.</p>
+        <h4>Q7. What are @HostListener and @HostBinding?</h4>
+        <p>@HostListener listens to events on a directive or component's host element. @HostBinding binds a class
+            property to a property, attribute, or class on the host element.</p>
+        <pre>
+            <code>
+                import 
+                    Directive,
+                    HostListener,
+                    HostBinding
+                 from '@angular/core';
+
+                @Directive(
+                    selector: '[appHover]',
+                    standalone: true
+                )
+                    export class HoverDirective 
+                    @HostBinding('class.active') isActive = false;
+
+                    @HostListener('mouseenter')
+                    onMouseEnter() 
+                        this.isActive = true;
+                    
+
+                    @HostListener('mouseleave')
+                    onMouseLeave() 
+                        this.isActive = false;
+            </code>
+        </pre>
+
+        <h4>Q. How would you design a reusable modal component?</h4>
+        <p>I would build a component with clear inputs for title, visibility, and configuration, and outputs for close
+            or confirmation events. For more advanced use cases, I would consider Angular CDK Dialog or Material Dialog
+            rather than manually implementing focus management and accessibility behavior.</p>
+    </div>
 
 
   <div class="sub-section">

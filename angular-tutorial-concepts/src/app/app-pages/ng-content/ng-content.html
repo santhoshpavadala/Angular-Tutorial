@@ -1,5 +1,26 @@
 <div class="section">
-  <h1>Angular - Ng-Content</h1>
+  <h1>Topic 6: Angular - Ng-Content</h1>
+
+  <div class="sub-section">
+        <h2>Content Child</h2>
+        <p>@ContentChild is used to access content projected from a parent component into a child component via
+            ng-content.
+            It is commonly used in reusable components such as cards, modals, widgets, and form wrappers, and is
+            typically accessed inside ngAfterContentInit().</p>
+
+        <p>@ContentChild is used to access content projected into a component using ng-content.
+            It allows a child component to access elements, directives, or components
+            that are passed from the parent through content projection.
+        </p>
+        <app-my-card>
+            <h2 #title>
+                User Information
+            </h2>
+        </app-my-card>
+    </div>
+
+
+
   <div class="sub-section">
     <h2>CONTENT PROJECTION (ng-content)</h2>
     <p>ng-content is used to project content from a parent component into a child component template. <br>

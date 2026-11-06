@@ -120,4 +120,12 @@ export class Directives {
     padding: '10px'
   }
 
+  className = "ngClass";
+  styles = {
+    color: 'white',
+    'background-color': '#996600',
+    'font-size': '20px',
+    padding: '5px'
+  }
+
 }
