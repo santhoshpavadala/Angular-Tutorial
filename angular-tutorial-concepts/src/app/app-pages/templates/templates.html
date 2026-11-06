@@ -1,6 +1,43 @@
 <div class="section">
-    <h1>Templates</h1>
-    <div class="suubSection">
+  <h1>Topic 5: Template Reference Variable</h1>
+
+  <div class="sub-section">
+    <h2 class="section-heading">Template Reference Variable</h2>
+    <p>A Template Reference Variable in Angular is used to get a reference to an HTML element, Angular component, directive, or ng-template inside an HTML template. <br>
+    We create a template reference variable using the # symbol.</p>
+    <p>Syntax: < input #username /></p>
+    <ul>Here:
+        <li>#username creates a template reference variable.</li>
+        <li>username is the variable name.</li>
+        <li>We can access the input element using this variable inside the template.</li>
+    </ul>
+
+    <h4>1. Access HTML Elements</h4>  
+    <p>Example: Get the input value when clicking a button.</p>
+    <pre>
+        <code [textContent]="tempHtml">
+        </code>
+    </pre>
+
+    <h4>2. Template Reference Variable with Forms</h4>
+    <p>We can use template reference variables to access form values and form status.</p>
+    <pre>
+        <code [textContent]="tempForm">
+        </code>
+    </pre>
+
+    <h4>3. Template Reference Variable with Components</h4>
+    <p>We can access a child component's public properties and methods through its template reference variable.</p>
+
+    <pre>
+        <code [textContent]="tempComponent">
+        </code>
+    </pre>
+
+
+  </div>
+
+    <div class="sub-section">
         <h2>Template Reference Variable</h2>
         <div>
             <input type="text" placeholder="Enter Text" value="abc@gmail.com" #e>

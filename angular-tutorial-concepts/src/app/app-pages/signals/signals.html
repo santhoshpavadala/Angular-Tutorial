@@ -1,5 +1,239 @@
 <div class="section">
-    <h2>Angular Signals(16+)</h2>
+    <h1>Topic 11: Angular Signals(16+)</h1>
+
+    <div class="sub-section">
+        <h2>Angular Signals and Zoneless Angular</h2>
+        <p>This section is especially important for you because you're working with modern Angular, including Angular 21. We'll focus on how Signals work, when to use them instead of RxJS, and the interview questions that test real-world understanding.</p>
+        <div class="section-content">
+            <h2>1. What are Angular Signals?</h2>
+            <p>Definition: Signals are a reactive state-management primitive that holds a value and notifies Angular and other reactive consumers when that value changes.</p>
+            <p>Traditional property: count = 0;</p>
+            <p>Signal: count = signal(0);</p>
+            <p>With a normal property, Angular doesn't automatically track every assignment as a reactive dependency. A Signal explicitly tracks reads and notifies its consumers when its value changes.</p>
+            <h4>Basic example</h4>
+            <pre>
+                <code [textContent]="signalEx"></code>
+            </pre>
+            <h4>How it works</h4>
+            <ol>
+                <li>signal(0) creates a writable signal with an initial value of 0.</li>
+                <li>count() reads its current value.</li>
+                <li>update() changes the value.</li>
+                <li>Angular tracks the signal read in the template and can update the view when the signal changes.</li>
+            </ol>
+            <p>Interview answer: Signals provide fine-grained reactivity by tracking where values are read and notifying consumers when those values change.</p>
+        </div>
+        <div class="section-content">
+            <h2>2. Writable signals: signal()</h2>
+            <p>A writable signal supports reading and updating its value.</p>
+            <pre>
+                <code [textContent]="writableSignal"></code>
+            </pre>
+            <h4>set() vs update()</h4>
+            <pre>
+                <code>
+set()	                                        update()
+Sets a specific value.	                        Calculates a new value from the current value.
+Useful when the replacement is already known.	Useful for counters and state transitions.
+
+count.set(10);
+
+count.update(value =>  value + 1);
+The resulting count is 11.
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>3. computed() — derived state</h2>
+            <p>A computed signal creates a read-only value derived from one or more other signals.</p>
+            <pre>
+                <code [textContent]="computedSignal"></code>
+            </pre>
+            <p>Angular tracks the signals read inside the computation. When a dependency changes, the computed value is recalculated when needed.</p>
+            <h4>Real-world example: shopping cart</h4>
+            <pre>
+                <code [textContent]="shopingCartEx"></code>
+            </pre>
+            <p>Important: A computed signal is read-only. You cannot use totalPrice.set(100).</p>
+
+            <h4>Interview question: computed() vs effect()</h4>
+            <ul>
+                <li>computed() derives a value from other signals.</li>
+                <li>effect() performs a side effect when signals it reads change.</li>
+            </ul>
+            <p>Use computed() for derived application state, rather than an effect that manually copies values into another signal.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>4. effect() — responding to signal changes</h2>
+            <p>An effect runs a callback when the signals it reads change. It is intended for side effects, such as logging or synchronizing with an external system.</p>
+            <pre>
+                <code [textContent]="effectSignal"></code>
+            </pre>
+            <p>The effect reads count(), so Angular tracks it as a dependency.</p>
+            <h4>Important interview points</h4>
+            <ul>
+                <li>An effect runs initially and again when its tracked signal dependencies change.</li>
+                <li>Effects are intended for side effects, not routine derived-state calculations.</li>
+                <li>Effects need an appropriate Angular injection context unless an injector is explicitly provided.</li>
+                <li>Avoid creating feedback loops by repeatedly writing to signals from effects.</li>
+            </ul>
+            <p>Common mistake: Using effect() just to keep two signals synchronized. Prefer computed() when one value can be derived from another.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>5. Signals in component communication</h2>
+            <p>Modern Angular provides signal-based APIs for component inputs and outputs.</p>
+            <h4>input() — signal-based input</h4>
+            <pre>
+                <code [textContent]="signalInput"></code>
+            </pre>
+
+            <h4>output() — component events</h4>
+            <pre>
+                <code [textContent]="signalOutput"></code>
+            </pre>
+            <p>output() provides the modern output API. The traditional @Input() and @Output() decorators remain supported and are still important for interviews and existing projects.</p>
+        
+            <h4>input() vs model()</h4>
+            <p>Angular also provides model() for two-way component APIs, where a child can update a value that is bound by the parent using banana-in-a-box syntax.</p>
+            <p>value = model(0);</p>
+            <p>Parent usage:</p>
+            <p>< app-counter [(value)]="count" /></p>
+            <p>Use model() when the component genuinely needs a two-way binding API; otherwise, a one-way input and explicit output are often clearer.</p>
+
+            <h4>6. Signals vs Observables</h4>
+            <p>This is one of the most common modern Angular interview questions.</p>
+            <pre>
+                <code>
+Signals	                                Observables
+Hold and expose a current value.	    Represent streams of values over time.
+Read synchronously using mySignal().	Consume through subscription or operators.
+Track reactive dependencies.	        Use RxJS operators to transform and combine streams.
+Excellent for component state and derived values.	Excellent for asynchronous workflows and event streams.
+No manual subscription is needed to read a signal.	Subscriptions may need lifecycle management.
+                </code>
+            </pre>
+            <h4>When should you use Signals?</h4>
+            <p>Use Signals for:</p>
+            <ul>
+                <li>Selected tabs and filters</li>
+                <li>Component UI state</li>
+                <li>Derived values</li>
+                <li>Counters and totals</li>
+                <li>Synchronous application state</li>
+            </ul>
+            <p>Use RxJS for:</p>
+            <ul>
+                <li>HTTP and asynchronous workflows</li>
+                <li>Search with debounceTime() and switchMap()</li>
+                <li>Combining API requests</li>
+                <li>WebSocket streams</li>
+                <li>Cancellation and retry patterns</li>
+            </ul>
+            <p>Experienced-developer answer: Signals and RxJS solve related but different problems. I use Signals for reactive state and derived UI values, and RxJS for asynchronous streams and more complex event orchestration. They can be combined rather than treated as alternatives.</p>
+        </div>
+        <div class="section-content">
+            <h2>7. RxJS and Signals interoperability</h2>
+            <p>Angular provides utilities in @angular/core/rxjs-interop for integrating the two reactive systems.</p>
+            <h4>toSignal()</h4>
+            <p>Converts an Observable into a signal, allowing the latest emitted value to be read synchronously.</p>
+            <pre>
+                <code [textContent]="toSignal"></code>
+            </pre>
+            <p>toSignal() subscribes to the Observable and normally cleans up that subscription with its owning injection context. It should not be recreated repeatedly inside a template or frequently called method.</p>
+        
+            <h4>toObservable()</h4>
+            <p>Converts a signal into an Observable.</p>
+            <pre>
+                <code [textContent]="toObservable"></code>
+            </pre>
+            <p>This is a useful pattern when the UI state is represented by a signal but the workflow needs RxJS operators.</p>
+
+            <h4>When would you use toSignal() instead of subscribe()?</h4>
+            <p>When the component needs to read an Observable's latest value as reactive state, especially in the template. It can simplify code and avoid managing a manual subscription just to display data.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>8. Signal-based state management</h2>
+            <p>You can create a lightweight state service using Signals without introducing NgRx.</p>
+            <p>Example: selected user state.</p>
+            <pre>
+                <code [textContent]="signalStatemanagement"></code>
+            </pre>
+
+            <h4>Why asReadonly()?</h4>
+            <p>It prevents consumers from calling set() or update() on the exposed signal. The service retains control over state updates through its methods.</p>
+            <p>Important: Read-only signals prevent consumers from directly setting the signal value, but they don't make nested objects deeply immutable. Use immutable updates and appropriate data modeling.</p>
+            <h4>Signals vs NgRx</h4>
+            <ul>
+                <li>Signals alone are often sufficient for local component state or straightforward shared state.</li>
+                <li>NgRx can be useful for large applications requiring structured state transitions, effects, selectors, tooling, and consistent team conventions.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>9. What is zoneless Angular?</h2>
+            <p>Traditionally, Angular commonly used Zone.js to observe asynchronous activity and help determine when change detection should run.</p>
+
+            <p>Zoneless Angular operates without relying on Zone.js for those notifications. Instead, Angular uses supported notifications, including signal updates, bound events, AsyncPipe emissions, and explicit view marking.</p>
+            <p>In Angular 21, zoneless change detection is the default for newly configured applications. Existing applications may have different configurations depending on how they were created or upgraded.</p>
+            <h4>Why use zoneless Angular?</h4>
+            <ul>
+                <li>Reduces reliance on Zone.js.</li>
+                <li>Can reduce unnecessary change-detection work.</li>
+                <li>Encourages explicit, trackable update notifications.</li>
+                <li>- Can improve application startup and runtime characteristics in suitable applications.</li>
+            </ul>
+            <p>Zoneless does not automatically guarantee better performance; results depend on the application and how its state updates are designed.</p>
+            <p>Do Signals require zoneless Angular? <br>
+            No. Signals work in both Zone.js-based and zoneless applications.</p>
+        </div>
+        <div class="section-content">
+            <h2>10. Configuring zoneless change detection</h2>
+            <p>For an application that needs explicit zoneless configuration, Angular provides provideZonelessChangeDetection().</p>
+
+            <pre>
+                <code [textContent]="zonelessCD"></code>
+            </pre>
+
+            <p>For a newly created Angular 21 application, zoneless is already the default, so you generally don't need to add this provider again. Check your application's existing configuration before changing it.</p>
+
+            <p>When using zoneless Angular, make sure your UI updates are driven by supported Angular notifications, such as:</p>
+            <ul>
+                <li>Updating a signal read by the template.</li>
+                <li>Bound event handlers.</li>
+                <li>AsyncPipe emissions.</li>
+                <li>Calling markForCheck() when appropriate.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>12. Important interview questions</h2>
+            <pre>
+                <code>
+1. What are Angular Signals?
+2. What is the difference between signal() and computed()?
+3. What is the difference between set() and update()?
+4. When should you use effect()?
+5. Signals vs Observables — when would you use each?
+6. What are input() and output()?
+7. What is model()?
+8. What does toSignal() do?
+9. What does toObservable() do?
+10. How can Signals be used for state management?
+11. What is zoneless Angular?
+12. Do Signals require Zone.js?
+13. How does Angular update an OnPush component when a signal read by its template changes?
+14. When would you choose NgRx instead of a signal-based service?
+15. Why should effects generally not be used to derive state?
+                </code>
+            </pre>
+        </div>
+    </div>
+
+
     <div class="sub-section">
         <h2>Signals:</h2>
         <p>A Signal in Angular is a reactive state container that holds a value and automatically notifies Angular to update the UI whenever that value changes.</p>

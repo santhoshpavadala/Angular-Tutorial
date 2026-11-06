@@ -1,96 +1,127 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-data-binding',
   imports: [CommonModule, FormsModule],
   templateUrl: './data-binding.html',
-  styleUrl: './data-binding.scss'
+  styleUrl: './data-binding.scss',
 })
 export class DataBinding {
-stringInterpolation: string='String Interpolation';
-title={
-  "name": "Santhosh",
-  "age": 32
-}
-srcPath: string="https://cdn.pixabay.com/photo/2024/03/20/12/36/tokyo-skytree-8645455_1280.jpg";
-className: string = "special"
-Date: string = new Date().toLocaleString();
+  name: string = 'Santhosh';
+  inputName: string = 'Input text';
+  imageUrl =
+    'https://cdn.pixabay.com/photo/2024/03/20/12/36/tokyo-skytree-8645455_1280.jpg';
+  classNameNg = 'ngClass';
+  styles = {
+    color: 'white',
+    'background-color': '#996600',
+    'font-size': '20px',
+    padding: '5px',
+  };
 
-currentDate: Date = new Date();
-cityName: string[]=["A", "B", "C"];
-rollNumber: number[]=[1, 2, 3, 4];
-students = {
-  name: "Santhosh",
-  email: "abc@gmail.com",
-  mobile: "123456"
-}
-
-studentList = [
-  {
-    id:1,
-    name: "Santhosh",
-    email: "abc@gmail.com",
-    mobile: "123456"
-  },
-  {
-    id:2,
-    name: "Ravi",
-    email: "ravi@gmail.com",
-    mobile: "789012"
+  @ViewChild('inputFocus') inputFocus!: ElementRef;
+  focusInput() {
+    this.inputFocus.nativeElement.focus();
   }
-]
+  @ViewChild('ipValue') ipValue!: ElementRef;
+  inputRead: string = 'Enter Value';
+  readValue() {
+    this.inputRead = this.ipValue.nativeElement.value;
+  }
 
+  ptext: string =
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste molestias omnis doloribus Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste molestias omnis doloribus  Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste molestias omnis doloribus';
+  plimit: number = 100;
 
-functionValue = "fnValue"
+  x: number = 10;
+
+  save() {
+    alert('Button clicked');
+  }
+
+  stringInterpolation: string = 'String Interpolation';
+  title = {
+    name: 'Santhosh',
+    age: 32,
+  };
+  srcPath: string =
+    'https://cdn.pixabay.com/photo/2024/03/20/12/36/tokyo-skytree-8645455_1280.jpg';
+  className: string = 'special';
+  Date: string = new Date().toLocaleString();
+
+  currentDate: Date = new Date();
+  cityName: string[] = ['A', 'B', 'C'];
+  rollNumber: number[] = [1, 2, 3, 4];
+  students = {
+    name: 'Santhosh',
+    email: 'abc@gmail.com',
+    mobile: '123456',
+  };
+
+  studentList = [
+    {
+      id: 1,
+      name: 'Santhosh',
+      email: 'abc@gmail.com',
+      mobile: '123456',
+    },
+    {
+      id: 2,
+      name: 'Ravi',
+      email: 'ravi@gmail.com',
+      mobile: '789012',
+    },
+  ];
+
+  functionValue = 'fnValue';
   functionCall() {
-    return this.functionValue
+    return this.functionValue;
   }
 
   // Property Binding
-  isDisable: boolean =true;
+  isDisable: boolean = true;
   isHidden: boolean = false;
 
   // Class Binding
-  isActive: boolean=true;
-  isClassApply: boolean=true;
-  
-  cval:string='red';
-  styleObject: object={
+  isActive: boolean = true;
+  isClassApply: boolean = true;
+
+  cval: string = 'red';
+  styleObject: object = {
     color: 'white',
     background: 'grey',
-    border: '2px solid white'
-  }
-  hasError: boolean=true;
+    border: '2px solid white',
+  };
+  hasError: boolean = true;
 
   // Event Binding
   OnSubmit() {
-    alert('Button Event fired')
+    alert('Button Event fired');
   }
-  counterValue: number=0
+  counterValue: number = 0;
   increment() {
-    this.counterValue+=1; //counterValue=counterValue+1
+    this.counterValue += 1; //counterValue=counterValue+1
   }
   decrement() {
-    this.counterValue-=1; //counterValue=counterValue-1
+    this.counterValue -= 1; //counterValue=counterValue-1
   }
-  userName='xyz';
-  changeName(e:any) {
+  userName = 'xyz';
+  changeName(e: any) {
     console.log(e);
     console.log(e.target);
     console.log(e.target.value);
-    this.userName=e.target.value;
+    this.userName = e.target.value;
   }
 
   onCityChange() {
-    alert("City Has Changed")
+    alert('City Has Changed');
   }
 
   // Two Way Data Binding - ngModel;
-  city="Hyderabad";
+  city = 'Hyderabad';
   updateCity() {
-    this.city="Bengalore"
+    this.city = 'Bengalore';
   }
-
 }

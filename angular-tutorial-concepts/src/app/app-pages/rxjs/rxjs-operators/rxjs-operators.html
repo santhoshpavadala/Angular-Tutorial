@@ -1,5 +1,404 @@
 <div class="section">
-  <h1 class="text-center text-primary">Rxjs-Operators</h1>
+  <h1>Topic 13: Rxjs-Operators</h1>
+
+  <div class="sub-section">
+        <div class="section-content">
+            <h2>RxJS and Observables in Angular</h2>
+            <h2>1. What is RxJS?</h2>
+            <p>RxJS (Reactive Extensions for JavaScript) is a library for working with asynchronous data streams using Observables and operators. <br>
+            In Angular, RxJS is commonly used for:</p>
+            <ul>
+                <li>Handling HTTP responses</li>
+                <li>Reacting to form value changes</li>
+                <li>Managing search suggestions</li>
+                <li>Combining multiple API calls</li>
+                <li>Handling user events</li>
+                <li>Sharing data between components through services</li>
+                <li>- Managing asynchronous operations and errors</li>
+            </ul>
+            <p>For example, when a user types into a search field, each keystroke creates a sequence of events. RxJS can filter out unnecessary events, wait until typing pauses, and trigger the latest API request.</p>
+        </div>
+        <div class="section-content">
+            <h2>2. What is an Observable?</h2>
+            <p>An Observable represents a stream of values that can arrive over time. <br>
+            For example, an API might return data once, while a search input may emit values repeatedly.</p>
+            <h4>Observable lifecycle</h4>
+            <ol>
+                <li>Observable: Produces values over time</li>
+                <li>Observer: Receives values, errors, and completion</li>
+                <li>next() Emits a value</li>
+                <li>error() Signals failure</li>
+                <li>complete() Signals the end</li>
+            </ol>
+            <p>An Observable can emit zero or more values, followed by either completion or an error. Once it completes or errors, it cannot emit further notifications.</p>
+            <p>Simple example:</p>
+            <pre>
+                <code [textContent]="observableEx"></code>
+            </pre>
+            <p>Interview point: The $ suffix in numbers$ is a naming convention commonly used to indicate that a variable represents an Observable. It is not required by JavaScript or RxJS.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>3. What is an Observer?</h2>
+            <p>An Observer is the object that receives notifications from an Observable. <br>
+            It can define three callbacks:</p>
+            <pre>
+                <code [textContent]="observerEx"></code>
+            </pre>
+            <h4>Observable vs Observer</h4>
+            <ul>
+                <li>Observable: produces notifications.</li>
+                <li>Observer: consumes notifications.</li>
+                <li>- Subscription: represents the execution and gives you a way to unsubscribe.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>4. What is subscribe()?</h2>
+            <p>subscribe() starts listening to an Observable. For a cold Observable such as a typical HttpClient request, subscribing initiates the request.</p>
+            <pre>
+                <code [textContent]="subscribeEx"></code>
+            </pre>
+            <p>For a typical successful HTTP request, the Observable emits the response and completes. If the request fails, it emits an error instead.</p>
+            <h4>What is a Subscription?</h4>
+            <p>A Subscription represents an active subscription and provides unsubscribe().</p>
+            <pre>
+                <code [textContent]="subscribeEx2"></code>
+            </pre>
+            <p>Unsubscribing stops that subscriber from receiving further notifications. For cancellable sources such as Angular HTTP requests, it can also cancel ongoing work.</p>
+            <h4>Interview question: Does every Observable require manual unsubscription?</h4>
+            <p> No. Finite Observables such as typical HTTP requests complete automatically. Long-lived streams, such as form changes or intervals, may need lifecycle-based cleanup.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>5. Observable vs Promise</h2>
+            <pre>
+                <code>
+Observable	                            |Promise
+Can emit multiple values over time.	    |Resolves once or rejects once.
+Supports RxJS operators.	            |Uses methods such as .then() and .catch().
+Can be lazy; execution often starts on subscription.	|The underlying operation usually starts when the Promise is created.
+Can unsubscribe from a subscription.	|A Promise has no built-in cancellation method.
+Supports streams and cancellation patterns.	|Suitable for one eventual result.
+                </code>
+            </pre>
+            <p>Example Promise:</p>
+            <pre>
+                <code [textContent]="promiseEx"></code>
+            </pre>
+            <p>Example Observable:</p>
+            <pre>
+                <code [textContent]="ObservableExm"></code>
+            </pre>
+            <p>Interview answer: Angular uses Observables extensively because they integrate naturally with HTTP requests, reactive forms, event streams, and RxJS operators.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>6. Creating Observables: of, from, interval, timer</h2>
+            <p>These creation functions are frequently asked about in interviews.</p>
+
+            <h4>of()</h4>
+            <p>Emits the supplied arguments as individual values.</p>
+            <pre>
+                <code [textContent]="ofObs"></code>
+            </pre>
+
+            <h4>from()</h4>
+            <p>Converts an iterable or Promise into an Observable.</p>
+            <pre>
+                <code [textContent]="fromObs"></code>
+            </pre>
+
+            <h4>interval()</h4>
+            <p>Emits an increasing sequence of numbers at regular intervals, starting at zero.</p>
+            <pre>
+                <code [textContent]="intervalObs"></code>
+            </pre>
+            <p>This stream does not complete on its own, so manage its subscription lifetime when necessary.</p>
+
+            <h4>timer()</h4>
+            <p>Emits after a specified delay. With a period argument, it can continue emitting.</p>
+            <pre>
+                <code [textContent]="timerObs"></code>
+            </pre>
+
+            <h4>Interview question: What is the difference between of() and from()?</h4>
+            <p>of([1, 2, 3]) emits the entire array as one value. from([1, 2, 3]) emits three individual values.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>7. RxJS operators: map, filter, tap</h2>
+            <p>Operators transform or act on values flowing through an Observable pipeline. The pipe() method connects these operators.</p>
+            <h4>map()</h4>
+            <p>Transforms each emitted value.</p>
+            <pre>
+                <code [textContent]="mapOpr"></code>
+            </pre>
+
+            <h4>filter()</h4>
+            <p>Emits only values satisfying a condition.</p>
+            <pre>
+                <code [textContent]="filterOpr"></code>
+            </pre>
+
+            <h4>tap()</h4>
+            <p>Performs a side effect without changing the emitted value. Useful for logging or debugging.</p>
+            <pre>
+                <code [textContent]="tapOpr"></code>
+            </pre>
+            <p>Interview distinction:</p>
+            <ul>
+                <li>map() transforms values.</li>
+                <li>filter() decides which values pass through.</li>
+                <li>tap() performs side effects without transforming the stream.</li>
+            </ul>
+        </div>
+        <div class="section-content">
+            <h2>8. Subject and its types</h2>
+            <p>A normal Observable does not necessarily allow you to push values into it manually. A Subject is both an Observable and an Observer: you can subscribe to it and call next() to emit values.</p>
+            <pre>
+                <code [textContent]="subjectEx"></code>
+            </pre>
+            <p>A plain Subject does not replay earlier values to new subscribers.</p>
+
+            <h2>BehaviorSubject:</h2>
+            <p>A BehaviorSubject requires an initial value and gives new subscribers the latest value immediately.</p>
+            <pre>
+                <code [textContent]="behaviourSubj"></code>
+            </pre>
+            <p>Real-world use: Sharing the current user, selected theme, or application state between components.</p>
+
+            <h2>ReplaySubject</h2>
+            <p>A ReplaySubject can replay a configured number of previous values to new subscribers.</p>
+            <pre>
+                <code [textContent]="replaySubject"></code>
+            </pre>
+
+            <h2>AsyncSubject</h2>
+            <p>An AsyncSubject emits only the last value, and only when it completes.</p>
+            <pre>
+                <code [textContent]="asyncSubject"></code>
+            </pre>
+
+            <h2>Comparision</h2>
+            <pre>
+                <code>
+Type	        Initial value required?	            What a late subscriber receives
+Subject	                No	                        Future values only
+BehaviorSubject	        Yes	                        Latest value, then future values
+ReplaySubject	        No	                        Configured history, then future values
+AsyncSubject	        No	                        Final value after completion, if one was emitted
+
+                </code>
+            </pre>
+
+            <h4>Interview question: How do you share data between unrelated Angular components?</h4>
+            <p>One approach is to expose a BehaviorSubject or a signal from a shared service. Components subscribe to the stream or read the signal to receive updates. For new Angular applications, signals may be simpler for synchronous shared state, while RxJS remains particularly useful for asynchronous streams.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>9. Higher-order mapping operators</h2>
+            <p>This is one of the highest-priority RxJS interview topics.</p>
+            <p>A higher-order Observable is an Observable that emits other Observables. Mapping operators determine how those inner Observables are handled.</p>
+            <p>The four operators to understand are:</p>
+            <ul>
+                <li>switchMap</li>
+                <li>mergeMap</li>
+                <li>concatMap</li>
+                <li>exhaustMap</li>
+            </ul>
+            <h2>switchMap()</h2>
+            <p>Switches to the latest inner Observable and unsubscribes from the previous inner subscription.</p>
+            <pre>
+                <code [textContent]="switchMap"></code>
+            </pre>
+            <p>Use case: Search boxes, where older searches become irrelevant when a newer term arrives.</p>
+
+            <h2>mergeMap()</h2>
+            <p>Subscribes to multiple inner Observables concurrently.</p>
+            <pre>
+                <code [textContent]="mergeMap"></code>
+            </pre>
+            <p>Use case: Independent API requests that can run concurrently.</p>
+
+            <h2>concatMap()</h2>
+            <p>Processes inner Observables sequentially, waiting for each to complete before starting the next.</p>
+            <pre>
+                <code [textContent]="concatMap"></code>
+            </pre>
+            <p>Use case: Operations that must be processed in order, such as sequential updates.</p>
+
+            <h2>exhaustMap()</h2>
+            <p>Ignores new source emissions while the current inner Observable is still active.</p>
+            <pre>
+                <code [textContent]="exhaustMap"></code>
+            </pre>
+            <p>Use case: Preventing repeated login submissions while one login request is in progress.</p>
+
+            <h4>The most important comparison</h4>
+            <pre>
+                <code>
+Operator	Handles a new emission by…	                    Typical use
+switchMap	Replacing the previous inner subscription	    Search suggestions
+mergeMap	Running concurrently	                        Independent requests
+concatMap	Queueing in order	                            Sequential operations
+exhaustMap	Ignoring it while busy	                        Preventing duplicate submissions
+                </code>
+            </pre>
+
+            <p>Important nuance: Unsubscribing from an Angular HTTP Observable usually aborts the client-side request. It does not guarantee that the backend has stopped processing an operation that it has already received. For important writes, backend-side idempotency and validation still matter.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>10. Combining multiple Observables</h2>
+            <h2>forkJoin()</h2>
+            <p>Waits for all supplied Observables to complete, then emits their final values together.</p>
+            <pre>
+                <code [textContent]="forkJoin"></code>
+            </pre>
+            <p>Use case: Loading several independent API resources before preparing a dashboard.</p>
+            <p>Note that if one source errors, forkJoin errors unless you handle that source's error. If a source never completes, forkJoin does not emit.</p>
+        
+            <h2>combineLatest()</h2>
+            <p>Emits a combined latest-value result whenever any input emits, after every input has emitted at least once.</p>
+            <pre>
+                <code [textContent]="combineLatest"></code>
+            </pre>
+            <p>Use case: Reacting to multiple filters or form controls.</p>
+            <p>If a source is a BehaviorSubject, its current value is emitted immediately to a new subscriber. For form controls, you may use startWith() when you need the current value included.</p>
+        
+            <h2>zip()</h2>
+            <p>Pairs values by their emission index: the first value from each source, then the second from each, and so on.</p>
+            <pre>
+                <code [textContent]="zip"></code>
+            </pre>
+
+            <h4>Comparison</h4>
+            <pre>
+                <code>
+Operator	    Emission behavior	                        Typical use
+forkJoin	    One result after all sources complete	    Initial dashboard data
+combineLatest	Latest values whenever an input changes	    Reactive filters
+zip	            Pairs corresponding emissions by position	Coordinated sequences
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>11. debounceTime() and distinctUntilChanged()</h2>
+            <p>These operators are very common in search and reactive forms.</p>
+
+            <h2>debounceTime()</h2>
+            <p>Waits until a specified period passes without a new emission, then emits the latest value.</p>
+            <pre>
+                <code [textContent]="debounceTime"></code>
+            </pre>
+            <p>This reduces requests while the user is typing.</p>
+
+            <h2>distinctUntilChanged()</h2>
+            <p>Suppresses consecutive duplicate values.</p>
+            <pre>
+                <code [textContent]="distinctUntilChanged"></code>
+            </pre>
+            <p>By default, it uses === comparison, so objects generally require a custom comparator if you want structural comparison.</p>
+            <h4>Interview question: Why use both operators together?</h4>
+            <p>debounceTime() waits for typing to pause. distinctUntilChanged() avoids repeating a request for the same consecutive search value.</p>
+        </div>
+        <div class="section-content">
+            <h2>12. Error handling: catchError(), retry(), finalize()</h2>
+
+            <h2>catchError()</h2>
+            <p>Catches an Observable error and returns another Observable, such as a fallback or a rethrown error.</p>
+            <pre>
+                <code [textContent]="catchErrors"></code>
+            </pre>
+            <p>Here, a failed request becomes an empty array. This is appropriate only if an empty list is a safe fallback for the application; otherwise, preserve the error for the UI to handle.</p>
+
+            <h2>retry()</h2>
+            <p>Resubscribes to the source after an error, for a configured number of attempts.</p>
+            <pre>
+                <code [textContent]="retry"></code>
+            </pre>
+            <p>retry(2) allows up to two retries after the original attempt. Use it selectively for transient errors; don't blindly retry validation failures or non-idempotent write operations.</p>
+        
+            <h2>finalize()</h2>
+            <p>Runs cleanup when the stream completes, errors, or is unsubscribed.</p>
+            <pre>
+                <code [textContent]="finalize"></code>
+            </pre>
+            <p>Remember: catchError() handles errors, retry() retries, and finalize() performs cleanup.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>13. Subscription management and memory leaks</h2>
+            <p>A memory leak can occur when a long-lived Observable subscription remains active after the component is destroyed and continues retaining or updating resources.</p>
+            <h2>Option 1: takeUntilDestroyed() — recommended for modern Angular</h2>
+            <pre>
+                <code [textContent]="takeUntilDestroyed"></code>
+            </pre>
+            <p>The subscription is cleaned up when the component or injection context is destroyed.</p>
+
+            <h2>Option 2: takeUntil()</h2>
+            <p>This traditional pattern uses a notifier Observable to terminate a subscription.</p>
+            <pre>
+                <code [textContent]="takeUntil"></code>
+            </pre>
+
+            <h2>Option 3: take()</h2>
+            <p>Automatically completes after receiving a specified number of values.</p>
+            <pre>
+                <code [textContent]="take"></code>
+            </pre>
+
+            <h4>Interview question: Should we manually unsubscribe from every HTTP request?</h4>
+            <p>Usually not for standard finite Angular HTTP Observables because they complete after their response or error. However, subscriptions to long-lived streams, such as valueChanges, interval, or a Subject, should be managed when their lifetime exceeds the component's lifetime.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>14. Using the async pipe in Angular</h2>
+            <p>The async pipe subscribes to an Observable or Promise in the template and automatically manages the subscription lifecycle.</p>
+            <p>Instead of manually subscribing:</p>
+
+            <pre>
+                <code [textContent]="asyncPipe"></code>
+            </pre>
+
+            <p>This example uses the else branch as a simple loading placeholder. In a production application, distinguish loading, empty, success, and error states explicitly if the UI needs to communicate those states accurately.</p>
+
+            <h4>Interview question: What are the advantages of the async pipe?</h4>
+            <ul>
+                <li>Automatically subscribes to the Observable.</li>
+                <li>Unsubscribes when the view is destroyed or the expression changes.</li>
+                <li>Updates the view when new values arrive.</li>
+                <li>Reduces manual subscription management.</li>
+            </ul>
+        </div>
+        <div class="section-content">
+            <h2>16. Important RxJS interview questions and answers</h2>
+
+            <pre>
+                <code>
+Interview question	            Key answer
+What is RxJS?	                A library for reactive programming with Observables and operators.
+What is an Observable?	        A stream that can emit values over time.
+What is a Subject?	            Both an Observable and an Observer; values can be emitted with next().
+Subject vs BehaviorSubject?	    A BehaviorSubject requires an initial value and provides its latest value to new subscribers.
+Observable vs Promise?	        Observables can emit multiple values and support RxJS operators and unsubscription.
+map vs tap?	                    map transforms values; tap performs side effects.
+switchMap vs mergeMap?	        switchMap replaces the previous inner subscription; mergeMap allows concurrent inner subscriptions.
+concatMap vs exhaustMap?	    concatMap queues emissions; exhaustMap ignores new ones while busy.
+forkJoin vs combineLatest?	    forkJoin waits for completion; combineLatest emits whenever an input changes after all have emitted.
+What is debounceTime?	        Emits after a period without a new value.
+What is catchError?	            Handles errors by returning another Observable.
+What is finalize?	            Runs cleanup on completion, error, or unsubscription.
+What is takeUntilDestroyed?	    Automatically ends a subscription when its Angular context is destroyed.
+What is the async pipe?	        Subscribes and updates the template while managing cleanup.
+How do you avoid duplicate API calls?	Depending on the case, use debouncing, distinct-value filtering, sharing, caching, or suitable higher-order operators.
+                </code>
+            </pre>
+        </div>
+    </div>
+
   <div class="sub-section">
     <h2>Opearors:</h2>
     <p>RxJS operators are functions that transform, filter, combine, or control Observables.</p>

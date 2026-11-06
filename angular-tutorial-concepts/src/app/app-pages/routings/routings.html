@@ -1,5 +1,541 @@
 <div class="section">
-    <h1>Routing Examples Component</h1>
+    <h1>Topic 8: Routing Examples Component</h1>
+
+    <div class="sub-section">
+        <h2>Angular Routing</h2>
+        <p>Routing is the mechanism that enables navigation between different views/components in an Angular application
+            without reloading the browser.
+            Angular uses the Router to map URLs to Components.
+            Angular loads: without refreshing the page.</p>
+
+        <p>Definition: Angular Routing is a mechanism that allows users to navigate between different views or
+            components of a single-page application (SPA) without reloading the entire page.</p>
+        <p>For example, an application might have these routes:</p>
+        <pre>
+            <code>
+URL	        Component
+/home	    HomeComponent
+/users	    UsersComponent
+/users/101	UserDetailsComponent
+/login	    LoginComponent
+            </code>
+        </pre>
+        <p>When the URL changes, Angular Router determines which component should be displayed.</p>
+
+        <h4>Why do we use routing?</h4>
+        <ul>
+            <li>To navigate between pages without a full page reload.</li>
+            <li>To organize large applications into feature routes.</li>
+            <li>To support route parameters and query parameters.</li>
+            <li>To protect routes with guards.</li>
+            <li>To load feature code only when required.</li>
+        </ul>
+
+        <div>
+            <h2>2. Router setup in Angular</h2>
+            <p>In modern standalone Angular applications, routing is commonly configured using provideRouter().</p>
+
+            <h4>Step 1: Create components</h4>
+            <p>For example, assume these standalone components already exist:</p>
+            <ul>
+                <li>HomeComponent</li>
+                <li>UsersComponent</li>
+                <li>LoginComponent</li>
+                <li>NotFoundComponent</li>
+            </ul>
+
+            <h4>Step 2: Define routes</h4>
+            <p>app.routes.ts</p>
+            <pre>
+                <code [textContent]="routing"></code>
+            </pre>
+            <p>The wildcard route ** handles URLs that do not match any earlier route. Keep it at the end because
+                Angular checks routes in order.</p>
+
+            <h4>Step 3: Register the router</h4>
+            <p>app.config.ts</p>
+            <pre>
+                <code [textContent]="routing2"></code>
+            </pre>
+
+            <h4>Step 4: Add the router outlet</h4>
+            <p>app.component.html</p>
+            <pre>
+                <code [textContent]="routing3"></code>
+            </pre>
+            <p>RouterOutlet is the placeholder where Angular renders the component matching the current URL.</p>
+
+            <p>For standalone components, import the router directives used in the template:</p>
+
+            <pre>
+                <code [textContent]="routing4"></code>
+            </pre>
+            <p>In older NgModule-based applications, the equivalent setup commonly uses RouterModule.forRoot(routes) and
+                imports RouterModule into the relevant module.</p>
+        </div>
+
+        <div>
+            <h2>3. RouterLink and RouterLinkActive</h2>
+            <p>These are directives used for navigation and highlighting the active route.</p>
+            <h4>RouterLink</h4>
+            <p>RouterLink navigates to a route without reloading the page.</p>
+            <pre>
+                <code>
+< a routerLink="/home">Home < / a>
+< a routerLink="/users">Users< / a>
+
+< a [routerLink]="['/users', 101]">
+  View User
+< /a>
+                </code>
+            </pre>
+
+            <h4>RouterLinkActive</h4>
+            <p>RouterLinkActive applies a CSS class when the associated route is active.</p>
+
+            <pre>
+                <code>
+                    < a
+                    routerLink="/home"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]=" exact: true "
+                    >
+                    Home
+                    < /a>
+
+                    active css class
+                    .active 
+                    <!-- { -->
+                        color: blue;
+                        font-weight: bold;
+                    <!-- } -->
+                </code>
+            </pre>
+            <p>exact: true ensures the link is active only when the URL matches exactly. Without it, a link can also be
+                considered active for matching child paths.</p>
+            <h4>Interview question: What is the difference between RouterLink and RouterLinkActive?</h4>
+            <p>RouterLink performs navigation to a specified route.</p>
+            <p>- RouterLinkActive applies a CSS class or other active state when a route matches the current URL.</p>
+        </div>
+
+        <div>
+            <h2>4. Programmatic navigation</h2>
+            <p>Sometimes navigation needs to happen after a user action, such as a successful login or saving a form.
+                <br>
+                Angular provides Router for programmatic navigation.</p>
+
+            <pre>
+                <code>
+import  Component, inject  from '@angular/core';
+import  Router  from '@angular/router';
+
+@Component(
+  selector: 'app-login',
+  standalone: true,
+  template: `
+    button (click)="login()">Login button
+  `
+)
+export class LoginComponent 
+  private router = inject(Router);
+
+  login(): void 
+    // Example only: assume login succeeds.
+    this.router.navigate(['/home']);
+                </code>
+            </pre>
+
+            <p>navigate() vs navigateByUrl()</p>
+            <p>this.router.navigate(['/users', 101]);
+                this.router.navigateByUrl('/users/101');</p>
+
+            <pre>
+                <code>
+navigate()	                                | navigateByUrl()
+Accepts an array of route commands.	        | Accepts a URL string or UrlTree.
+Convenient for building paths dynamically.	|Useful when the complete URL is already available.
+Supports relative navigation through        | Can navigate directly to a prepared URL.
+navigation extras.	
+
+Interview question: How do you navigate relative to the current route?
+
+this.router.navigate(['../settings'], 
+  relativeTo: this.route
+);
+
+Here, this.route is an ActivatedRoute instance injected into the component.
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>5. Route parameters</h2>
+            <p>Route Parameters are dynamic values passed through the URL path and are typically used to identify a
+                specific resource.</p>
+            <p>For example: /users/101; Here, 101 is a route parameter representing a user ID.</p>
+
+            <h4>Define a parameterized route</h4>
+
+            <pre>
+                <code [textContent]="routeParam"></code>
+            </pre>
+            <p>The snapshot approach reads the parameter at the time the component is initialized.</p>
+            <p>However, if Angular reuses the same component while the parameter changes, the snapshot value will not
+                update automatically. Use the observable instead:</p>
+            <pre>
+                <code [textContent]="routeParam2"></code>
+            </pre>
+            <p>For modern Angular, you can also convert the observable into a signal using toSignal() from
+                @angular/core/rxjs-interop when reactive template updates are useful.</p>
+        </div>
+        <div>
+            <h2>Query Parameters</h2>
+            <p>Query Parameters are optional key-value pairs appended to the URL after ?. <br>
+                /users?page=1 page = 1 is a Query Parameter.</p>
+        </div>
+
+        <div>
+            <h2>Route parameters vs query parameters</h2>
+            <pre>
+                <code>
+Route parameters	            |Query parameters
+Part of the route path.	        |Appear after ? in the URL.
+Commonly identify a resource.	|Commonly represent filters, sorting, pagination, or optional settings.
+Example: /users/101	            |Example: /users?page=2&search=santhosh
+Access through paramMap.	    |Access through queryParamMap.
+                </code>
+            </pre>
+
+            <h4>Read query parameters:</h4>
+            <pre>
+                <code [textContent]="queryParam">
+                </code>
+            </pre>
+
+            <h4>Interview question: What is the difference between snapshot and observable route parameters?</h4>
+            <ul>
+                <li>snapshot provides the current parameter value as a one-time read.</li>
+                <li>Observable route parameters emit when the parameters change, making them suitable for reused
+                    components and reactive updates.</li>
+            </ul>
+        </div>
+
+        <div>
+            <h2>6. Child and nested routes</h2>
+            <p>Nested routes help structure applications with shared layouts.</p>
+            <p>for example, an admin dashboard might contain:</p>
+            <ul>
+                <li>/admin/dashboard</li>
+                <li>/admin/users</li>
+                <li>/admin/settings</li>
+            </ul>
+            <h4>Route configuration</h4>
+            <pre>
+                <code [textContent]="nestedRoutes"></code>
+            </pre>
+            <p>The parent layout must contain a router-outlet for its child route components.</p>
+            <pre>
+                <code [textContent]="nestedRoutes2"></code>
+            </pre>
+            <p>The parent layout remains displayed while Angular renders the selected child component inside its outlet.
+            </p>
+            <p>Real-world scenario: In an enterprise application, the sidebar and header can remain constant while only
+                the main content changes based on the selected route.</p>
+        </div>
+
+        <div>
+            <h2>7. Lazy loading</h2>
+            <p>Definition: Lazy loading is a technique in which Angular loads a component or feature's code only when
+                the associated route is visited, rather than including all feature code in the initial application load.
+            </p>
+            <p>It can improve initial loading performance for larger applications.</p>
+            <pre>
+                <code [textContent]="lazyLoad"></code>
+            </pre>
+
+            <h4>Preloading strategies</h4>
+            <p>Preloading allows Angular to load lazy routes in the background after the initial application load.</p>
+            <pre>
+                <code [textContent]="preLoad"></code>
+            </pre>
+            <p>This preloads lazy-loaded routes as a strategy to reduce the delay when users navigate to them later. It
+                does not mean that all features are eagerly loaded into the initial bundle.</p>
+            <h4>Interview question: Does lazy loading always improve performance?</h4>
+            <p>Answer: No. It can reduce initial bundle size, but it can also introduce delays when a user first
+                navigates to a lazy-loaded feature. The best strategy depends on application size, usage patterns, and
+                network conditions.</p>
+        </div>
+
+        <div>
+            <h2>8. Route guards</h2>
+            <p>Definition: Route guards control whether navigation to or away from a route is allowed.</p>
+            <p>They are useful for authentication flows, authorization checks, preventing accidental navigation away
+                from unsaved forms, and controlling access to route branches.</p>
+            <p>Angular supports several guard types:</p>
+            <pre>
+                <code>
+Guard	            Purpose
+CanActivate	        Controls whether a route can be activated.
+CanActivateChild	Controls access to child routes.
+CanDeactivate	    Controls whether a user can leave a route.
+CanMatch	        Controls whether a route configuration can match a URL.
+                </code>
+            </pre>
+            <p>In modern Angular, functional guards are commonly used.</p>
+
+            <div>
+                <h4>CanActivate example</h4>
+                <pre>
+                    <code [textContent]="canActivate"></code>
+                </pre>
+                <p>If the user is not logged in, Angular redirects to the login page.</p>
+                <p>This is a simplified frontend example. In a real application, authentication state should be managed
+                    appropriately, and the backend must independently enforce authorization. A route guard is not a
+                    security boundary by itself.</p>
+            </div>
+
+            <div>
+                <h4>CanActivateChild example</h4>
+                <pre>
+                    <code [textContent]="CanActivateChild"></code>
+                </pre>
+                <p>The guard applies to child routes under the admin route.</p>
+            </div>
+
+            <div>
+                <h4>CanDeactivate example</h4>
+                <p>This is especially useful for preventing users from losing unsaved form changes.</p>
+                <pre>
+                    <code [textContent]="CanDeactivate"></code>
+                </pre>
+            </div>
+
+            <div>
+                <h4>CanMatch example</h4>
+                <p>CanMatch determines whether a route can be selected to match the URL.</p>
+                <pre>
+                    <code [textContent]="CanMatch"></code>
+                </pre>
+                <p>It can be used for feature flags or selecting between route configurations. Unlike a failed
+                    CanActivate, a CanMatch result of false allows the router to consider other matching route
+                    configurations.</p>
+            </div>
+
+            <div>
+                <h4>What can a guard return?</h4>
+                <p>A guard can return:</p>
+                <ul>
+                    <li>true to allow navigation.</li>
+                    <li>false to block navigation.</li>
+                    <li>A UrlTree or RedirectCommand to redirect.</li>
+                    <li>A Promise or Observable that resolves to one of the supported results.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Interview question: What is the difference between CanActivate and CanMatch?</h4>
+                <ul>
+                    <li>CanActivate checks whether an already matched route can be activated.</li>
+                    <li>CanMatch checks whether a route configuration can be used to match the requested URL in the
+                        first place.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <h2>9. Route resolvers</h2>
+            <p>Definition: A resolver fetches or prepares data before a route is activated. It is useful when the
+                destination component requires data to render correctly.</p>
+            <p>For example, when navigating to /users/101, the user details may need to be fetched before the details
+                component is activated.</p>
+            <h4>Create a resolver</h4>
+            <pre>
+                <code [textContent]="routeResolver"></code>
+            </pre>
+            <h4>Resolver vs fetching inside the component</h4>
+            <pre>
+                <code>
+Resolver	                        | Component-level fetching
+Runs as part of route activation.	| Runs after the component is created or when its logic triggers it.
+Useful when the route should wait for essential data.	| Useful for optional data, progressive loading, and interactive refreshes.
+Can delay navigation until required data is ready.	| Can display the page immediately with a loading state.
+                </code>
+            </pre>
+
+            <p>Important: Resolvers can fail or take a long time. Real applications should handle errors and loading
+                behavior thoughtfully. Use a resolver only when waiting for data before activating the route is a good
+                user experience.</p>
+        </div>
+
+        <div>
+            <h2>10. Route data and page titles</h2>
+            <p>Static route data can pass configuration to a component or layout without putting it into the URL.</p>
+            <pre>
+                <code [textContent]="routeData"></code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>11. Router events</h2>
+            <p>Angular Router exposes events that help track navigation.</p>
+            <p>Examples include:</p>
+            <ul>
+                <li>NavigationStart</li>
+                <li>RoutesRecognized</li>
+                <li>GuardsCheckStart</li>
+                <li>GuardsCheckEnd</li>
+                <li>ResolveStart</li>
+                <li>ResolveEnd</li>
+                <li>NavigationEnd</li>
+                <li>NavigationCancel</li>
+                <li>NavigationError</li>
+            </ul>
+
+            <pre>
+                <code [textContent]="routerEvents"></code>
+            </pre>
+
+            <h4>Real-world use cases:</h4>
+            <ul>
+                <li>Tracking page views for analytics.</li>
+                <li>Hiding or showing a global loading indicator.</li>
+                <li>Updating layout behavior after navigation.</li>
+                <li>Debugging route-related issues.</li>
+            </ul>
+            <p>Remember to manage subscriptions when they outlive the component. For root-level application services or
+                components that live for the full application lifetime, the subscription lifetime may naturally match
+                the application's lifetime.</p>
+        </div>
+
+        <div>
+            <h2>12. Important Angular Routing interview questions and answers</h2>
+            <h4>Q1. What is Angular Router?</h4>
+            <p>Angular Router is the built-in navigation system that maps URL paths to components and manages navigation
+                in an Angular application.</p>
+
+            <h4>Q2. What is RouterOutlet?</h4>
+            <p>RouterOutlet is a directive that acts as a placeholder where the router displays the component for the
+                active route.</p>
+
+            <h4>Q3. What is the difference between RouterModule.forRoot() and RouterModule.forChild()?</h4>
+            <ul>
+                <li>forRoot() configures the router at the application's root, typically in an NgModule-based
+                    application.</li>
+                <li>forChild() registers additional routes for feature modules without creating a separate root router.
+                </li>
+                <p>In standalone applications, provideRouter() is the common root configuration approach.</p>
+            </ul>
+
+            <h4>Q4. What is a wildcard route?</h4>
+            <p>A wildcard route uses ** to match URLs that have not matched earlier route definitions. It is commonly
+                used for a not-found page.</p>
+
+            <h4>Q5. What is the difference between navigate() and navigateByUrl()?</h4>
+            <p>navigate() accepts route commands, while navigateByUrl() accepts a complete URL or UrlTree.</p>
+
+            <h4>Q6. What is lazy loading?</h4>
+            <p>Lazy loading loads route-associated code only when required instead of including all feature code in the
+                initial loading path.</p>
+
+            <h4>Q7. What is route reuse?</h4>
+            <p>Route reuse is a router mechanism that can reuse existing route components rather than destroying and
+                recreating them during navigation. Angular's default strategy reuses a component when navigating between
+                routes that share the same route configuration, which is why parameter changes may need reactive
+                handling.</p>
+
+            <h2>Intermediate interview questions</h2>
+            <h4>Q8. What happens if a route guard returns false?</h4>
+            <p>Navigation is canceled for that guard. If the guard returns a redirect result, Angular navigates to the
+                specified destination instead.</p>
+
+            <h4>Q9. Can multiple guards be applied to a route?</h4>
+            <p>Yes. Multiple guards can be configured. Angular evaluates them as part of the navigation process, and
+                their results determine whether navigation can proceed.</p>
+
+            <h4>Q10. What is the difference between route parameters and query parameters?</h4>
+            <p>Route parameters are part of the route path and commonly identify a resource. Query parameters are
+                optional URL parameters commonly used for filtering, pagination, sorting, or search.</p>
+
+            <h4>Q11. Can we apply guards to lazy-loaded routes?</h4>
+            <p>Yes. Guards such as CanMatch can control whether a lazy route configuration matches. Other applicable
+                guards can control activation and access to child routes.</p>
+
+            <h4>Q12. What is a resolver in Angular?</h4>
+            <p>A resolver prepares data before activating a route. It is useful when a component needs essential data
+                before it can render.</p>
+
+            <h4>Q13. What is the purpose of ActivatedRoute?</h4>
+            <p>ActivatedRoute provides information about the currently activated route, including parameters, query
+                parameters, route data, and parent or child route information.</p>
+
+            <h4>Q14. How do you pass data while navigating?</h4>
+            <p>You can pass query parameters, route parameters, or navigation state.</p>
+            <pre>
+                <code>
+                    this.router.navigate(['/users'], 
+                    <!-- { -->
+                        state: 
+                        <!-- { -->
+                             source: 'dashboard' 
+                        <!-- } -->
+                    <!-- } -->
+                    );
+                </code>
+            </pre>
+            <p>Navigation state is available through the router's navigation extras and browser history state. It is not
+                a substitute for URL-based data that needs to be shareable or reliably restored.</p>
+
+            <h4>Q15. What is queryParamsHandling: 'merge'?</h4>
+            <p>It merges the supplied query parameters with existing query parameters instead of replacing the existing
+                set.</p>
+        </div>
+
+        <div>
+            <h2>13. Real-world scenario-based interview questions</h2>
+            <h4>Scenario 1: A user should not access the dashboard without logging in. How would you implement it?</h4>
+            <p>Answer: Use a CanActivate guard to check authentication state and redirect unauthenticated users to the
+                login page. Also enforce authorization on the backend, because client-side guards can be bypassed.</p>
+
+            <h4>Scenario 2: A user edits a form and clicks another page without saving. How do you prevent data loss?
+            </h4>
+            <p>Answer: Implement a CanDeactivate guard. Check whether the form is dirty and display a confirmation
+                dialog before allowing navigation.</p>
+
+            <h4>Scenario 3: Your application has 20 feature modules, and its initial load is slow. What would you do?
+            </h4>
+            <p>Answer: Identify large features and introduce lazy loading using loadComponent or loadChildren. Analyze
+                bundle sizes, use preloading where appropriate, and avoid loading rarely used feature code initially.
+            </p>
+
+            <h4>Scenario 4: You navigate from /users/101 to /users/102, but the displayed user information does not
+                change. Why?</h4>
+            <p>Answer: Angular may reuse the same component for both URLs. If the component reads the ID only once using
+                snapshot, it will not automatically respond to the changed ID. Subscribe to paramMap or use a reactive
+                approach such as toSignal().</p>
+
+            <h4>Scenario 5: A user filters a table, opens a record, and then returns. You want to preserve the table
+                filters and page number. How would you do it?</h4>
+            <p>Answer: Store shareable filter and pagination state in query parameters. When returning to the table,
+                read those parameters and restore the relevant state. This also allows users to bookmark or share the
+                filtered URL.</p>
+
+            <h4>Scenario 6: Your admin application has a common sidebar and header, but different content for each menu
+                item. How would you structure routing?</h4>
+            <p>Answer: Create a parent admin layout with a router-outlet, then define child routes for the dashboard,
+                users, reports, and settings. This keeps the shared layout consistent while route-specific components
+                change.</p>
+
+            <h4>Scenario 7: A reports feature is available only to users whose organization has enabled it. How would
+                you handle this?</h4>
+            <p>Answer: Use CanMatch to decide whether the reports route should match based on the feature configuration.
+                Also enforce the relevant access rules on the server.</p>
+
+            <h4>Scenario 8: A route requires data from an API before it should open. What would you use?</h4>
+            <p>Answer: Use a resolver if navigation should wait for essential data. If the page can render with a
+                loading indicator while data loads, fetching in the component or a dedicated data layer may provide a
+                better experience.</p>
+        </div>
+    </div>
 
     <div class="sub-section">
         <h2>What is Routing?</h2>

@@ -1,5 +1,472 @@
 <div class="section">
-  <h1>Angular Forms</h1>
+  <h1>Topic 14: Angular Forms</h1>
+
+  <div class="sub-section">
+        <h2>Angular Forms</h2>
+        <p>This section is important for your interviews because forms, validation, dynamic forms,
+            API submission, and error handling are common frontend responsibilities.</p>
+        <div class="section-content">
+            <h4>1. What are Angular Forms?</h4>
+            <p>Angular Forms provide APIs for:</p>
+            <ul>
+                <li>Capturing user input</li>
+                <li>Managing form state</li>
+                <li>Validating user input</li>
+                <li>Displaying validation errors</li>
+                <li>Submitting data</li>
+                <li>Updating form values</li>
+                <li>Handling dynamic fields</li>
+            </ul>
+            <p>For example, a user registration form may contain:</p>
+            <ol>
+                <li>Name</li>
+                <li>Email</li>
+                <li>Password</li>
+                <li>Confirm Password</li>
+                <li>Phone</li>
+                <li>Skills</li>
+                <li>Submit</li>
+            </ol>
+
+            <p>Angular provides two major approaches:</p>
+            <h4>Template-driven forms</h4>
+            <p>Form logic is primarily defined in the HTML template. <br>
+                Uses: FormsModule, ngForm, ngModel, ngModelGroup
+            </p>
+
+            <h4>Reactive forms</h4>
+            <p>Form structure and validation are primarily defined in TypeScript.</p>
+            <p>Uses: ReactiveFormsModule, FormControl, FormGroup, FormBuilder, FormArray</p>
+
+        </div>
+
+        <div class="section-content">
+            <h2>2. Template-driven Forms</h2>
+            <p>Template-driven forms are suitable for relatively simple forms.</p>
+            <h4>Example:</h4>
+            <pre>
+                <code [textContent]="templateForm"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>3. What is ngForm?</h2>
+            <p>When Angular sees a < form> with the forms functionality enabled, NgForm tracks the form.</p>
+            <p>
+                < form #userForm="ngForm">
+                    < / form>
+            </p>
+            <p>Here: #userForm is a template reference variable pointing to the NgForm instance.</p>
+            <p>You can inspect: userForm.valid, userForm.invalid, userForm.dirty, userForm.touched</p>
+        </div>
+
+        <div class="section-content">
+            <h2>4. What is ngModel?</h2>
+            <p>ngModel creates a connection between the form control and the component data.</p>
+            <pre>
+                <code [textContent]="ngModel"></code>
+            </pre>
+
+            <p>If the user types: Santhosh, then: this.username becomes: Santhosh; This is called two-way data binding.
+            </p>
+
+            <h4>Important interview point</h4>
+            <p>For a control inside an Angular form, you normally need a name attribute when using ngModel.</p>
+            <pre>
+                <code>
+                   <  input
+                        name="username"
+                        [(ngModel)]="username"
+                    />
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>5. Template-driven validation</h2>
+            <p>Angular provides built-in validation directives.</p>
+            <p>Example:</p>
+            <pre>
+                <code>
+                    < input
+                        type="email"
+                        name="email"
+                        ngModel
+                        required
+                        email
+                        #email="ngModel"
+                    />
+                </code>
+            </pre>
+            <p>Now you can check:</p>
+            <pre>
+                <code [textContent]="tempValidation"></code>
+            </pre>
+            <p>The control's errors object tells us which validations have failed.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>6. Reactive Forms</h2>
+            <p>For enterprise applications, Reactive Forms are extremely important for interviews.</p>
+            <p>Reactive forms provide a model-driven approach. The form structure is created in TypeScript.</p>
+            <pre>
+                <code [textContent]="reactiveForms"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>7. What is FormControl?</h2>
+            <p>FormControl represents the state and value of a single form field.</p>
+            <p>Example: name = new FormControl(''); <br>
+                <strong> You can access: <br>
+                    this.name.value <br>
+                    this.name.valid <br>
+                    this.name.invalid <br>
+                    this.name.touched <br>
+                    this.name.dirty <br>
+                </strong>
+            </p>
+
+            <p>You can also provide validators:</p>
+            <pre>
+                <code>
+                    email = new FormControl('', [
+                        Validators.required,
+                        Validators.email
+                    ]);
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>8. What is FormGroup?</h2>
+            <p>FormGroup groups multiple form controls together.</p>
+            <pre>
+                <code [textContent]="formGroup"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>9. FormBuilder</h2>
+            <p>Creating large forms using new FormControl() repeatedly can become verbose. <br>
+            FormBuilder provides a convenient API for creating form controls and groups.</p>
+
+            <pre>
+                <code [textContent]="formBuilder"></code>
+            </pre>
+            <p>This is very common in enterprise Angular applications.</p>
+
+            <h4>Interview question</h4>
+            <h4>Q: What is the difference between FormControl, FormGroup and FormBuilder?</h4>
+            <ul>
+                <li>FormControl represents one form field.</li>
+                <li>FormGroup groups multiple controls.</li>
+                <li>FormBuilder is a helper service that makes creating controls, groups, and arrays more concise.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>10. Built-in Validators</h2>
+            <p>Angular provides several built-in validators.</p>
+            <p>Common ones:</p>
+            <ol>
+                <li>Validators.required</li>
+                <li>Validators.requiredTrue</li>
+                <li>Validators.email</li>
+                <li>Validators.minLength()</li>
+                <li>Validators.maxLength()</li>
+                <li>Validators.min()</li>
+                <li>Validators.max()</li>
+                <li>Validators.pattern()</li>
+            </ol>
+            
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="validators"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>11. Displaying validation errors</h2>
+            <p>Suppose we have:</p>
+            <pre>
+                <code [textContent]="displayValidation"></code>
+            </pre>
+            <p>Since you're working with modern Angular, the @ if syntax is preferable in new Angular code.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>12. Important form states</h2>
+            <p>Every Angular form control has several useful states.</p>
+
+            <pre>
+                <code>
+| Property      | Meaning                                           |
+|---            |                                                ---|
+| `valid`       | All validators pass |
+| `invalid`     | At least one validator fails |
+| `touched`     | User has interacted with the control and left it |
+| `untouched`   | User hasn't blurred/interacted with it |
+| `dirty`       | Value has changed |
+| `pristine`    | Value hasn't changed |
+| `enabled`     | Control accepts interaction |
+| `disabled`    | Control is disabled |
+| `pending`     | Async validation is in progress |
+                </code>
+            </pre>
+            <h4>Very common interview question</h4>
+            <h4>What is the difference between touched and dirty?</h4>
+            <p>touched means the user has interacted with the control and it has lost focus. <br>
+            dirty means the control's value has been changed.</p>
+
+            <p>For example: Click input → type nothing → click outside</p>
+            <p>The control can become: <br>
+                touched = true <br>
+                dirty = false
+            </p>
+
+            <p>But: Click input → type something, makes it: dirty = true</p>
+        </div>
+
+        <div class="section-content">
+            <h2>13. setValue() vs patchValue()</h2>
+            <p>This is a very common Angular interview question.</p>
+            <p>Suppose:</p>
+            <h4>setValue() </h4>
+            <p>setValue() expects values for all controls in the group.</p>
+            <pre>
+                <code [textContent]="setValue"></code>
+            </pre>
+
+            <h4>patchValue()</h4>
+            <p>patchValue() updates only the controls you provide.</p>
+            <pre>
+                <code [textContent]="patchValue"></code>
+            </pre>
+            <p>phone remains unchanged.</p>
+            <p><strong>Interview answer: setValue() requires the complete form structure, while patchValue() allows partial updates.</strong></p>
+
+            <p>When loading an existing employee from an API:</p>
+            <pre>
+                <code [textContent]="patchValue"></code>
+            </pre>
+            <p>This is one of the most common practical uses of patchValue().</p>
+        </div>
+
+        <div class="section-content">
+            <h2>14. FormArray</h2>
+            <p>FormArray is used when the number of form controls is dynamic.</p>
+            <p>For example:</p>
+            <pre>
+                <code [textContent]="FormArray"></code>
+            </pre>
+
+            <h2>Interview question</h2>
+            <h4>When would you use FormArray instead of FormGroup?</h4>
+            <p>Use FormGroup when the form has a known set of named controls. <br>
+            Use FormArray when the number of controls or groups can change dynamically.</p>
+
+            <pre>
+                <code>
+FormGroup → name, email, phone
+FormArray → multiple skills
+FormArray → multiple addresses
+FormArray → multiple education records
+FormArray → multiple order items
+                </code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>15. Nested FormGroup</h2>
+            <p>Real-world forms often have nested objects. For example:</p>
+            <pre>
+                <code [textContent]="nestedFormGrp"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>16. Enabling and disabling controls</h2>
+            <p>Disable a control:</p>
+            <p>this.employeeForm.get('email')?.disable();</p>
+            <p>Enable it:</p>
+            <p>this.employeeForm.get('email')?.enable();</p>
+            <p>Or during form creation:</p>
+            <pre>
+                <code>
+                    email: [
+                        <!-- { -->
+                            value: 'test@gmail.com',
+                            disabled: true
+                        <!-- } -->
+                    ]
+                </code>
+            </pre>
+            <h4>Important interview point</h4>
+            <p>Disabled controls are excluded from the normal form.value.</p>
+            <p>For example: this.employeeForm.value <br>
+            may not contain disabled controls.</p>
+            <p>If you need the complete raw form value, including disabled controls: <br>
+                this.employeeForm.getRawValue(); This is a useful practical interview question.
+            </p>
+        </div>
+
+        <div class="section-content">
+            <h2>17. valueChanges</h2>
+            <p>valueChanges is an Observable that emits whenever a control or form value changes.</p>
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="valueChanges"></code>
+            </pre>
+
+            <h4>Real-world search example</h4>
+            <pre>
+                <code [textContent]="searchValuechanges"></code>
+            </pre>
+            <p>This is a very common combination of Reactive Forms + RxJS.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>18. statusChanges</h2>
+            <p>statusChanges emits when the validation status changes.</p>
+            <pre>
+                <code [textContent]="statusChanges"></code>
+            </pre>
+            <p>Possible values include: VALID, INVALID, PENDING, DISABLED</p>
+            <p>This can be useful when tracking form validation or async validation.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>19. Custom validators</h2>
+            <p>Built-in validators are not always enough.</p>
+            <p>Suppose your company requires: Password must not contain the username. We can create a custom validator.</p>
+            <pre>
+                <code [textContent]="customValidators"></code>
+            </pre>
+            <p>If validation fails: control.errors</p>
+            <p>contains: noSpaces: true</p>
+            <p>Important rule: A validator returns: null</p>
+            <p>when the value is valid. It returns: ValidationErrors when invalid.</p>
+        </div>
+
+        <div class="section-content">
+            <h2>20. Cross-field validation</h2>
+            <p>Sometimes validation depends on multiple fields.</p>
+            <p>Example: Password & Confirm Password. We need to make sure they match.</p>
+            <p>This validation belongs at the FormGroup level because it compares two controls.</p>
+            <pre>
+                <code [textContent]="crossfieldValidation"></code>
+            </pre>
+            <h4>Why is password matching usually implemented at the FormGroup level?</h4>
+            <p>Because the validation depends on the values of two controls, not just one individual control.</p>
+        </div>
+
+        <div class="section-contet">
+            <h2>21. Async validators</h2>
+            <p>An async validator performs validation asynchronously, commonly by calling an API.</p>
+            <h4>Example:</h4>
+            <pre>
+                <code>
+                    Username
+                        ↓
+                       API
+                        ↓
+                    Is username already taken?
+                </code>
+            </pre>
+
+            <p>Conceptually:</p>
+            <pre>
+                <code>
+                    username: [
+                        '',
+                        Validators.required,
+                        usernameAvailableValidator
+                    ]
+
+                </code>
+            </pre>
+            <p>The validator returns an Observable or Promise.</p>
+            <p>Example structure:</p>
+            <pre>
+                <code [textContent]="asyncValid"></code>
+            </pre>
+            <p>While the async validator is running: control.pending can be true.</p>
+            <p>This is particularly useful for:</p>
+            <ul>
+                <li>Username availability</li>
+                <li>Employee ID uniqueness</li>
+                <li>Email uniqueness</li>
+                <li>Coupon validation</li>
+                <li>Server-side business rules</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>22. Form submission with an API</h2>
+            <p>A very common interview scenario is:</p>
+            <p>"How do you submit a reactive form to an API?"</p>
+            <h4>Example:</h4>
+            <pre>
+                <code [textContent]="FormSubmitApi"></code>
+            </pre>
+        </div>
+
+        <div class="section-content">
+            <h2>23. Real-world interview scenario</h2>
+            <h4>You have an employee registration form. The Save button should remain disabled until all required fields are valid. What would you do?</h4>
+            <p>Use Reactive Forms with validators and bind the button's disabled state to the form validity.</p>
+            <pre>
+                <code [textContent]="formSave"></code>
+            </pre>
+
+        </div>
+
+        <div class="section-content">
+            <h2>24. Important Angular Forms interview questions</h2>
+            <h4>Q1. Template-driven vs Reactive Forms?</h4>
+            <p>Template-driven forms are template-centric and simpler for small forms. <br>
+            Reactive forms are model-driven, provide explicit form structure in TypeScript, and are generally better suited to complex enterprise forms, dynamic controls, and advanced validation.</p>
+            
+            <h4>Q2. What is FormControl?</h4>
+            <p>Represents an individual form control and tracks its value, validation state, and interaction state.</p>
+
+            <h4>Q3. What is FormGroup?</h4>
+            <p>A collection of related form controls represented as a group.</p>
+
+            <h4>Q4. What is FormArray?</h4>
+            <p>A dynamic collection of controls or form groups.</p>
+
+            <h4>Q5. What is FormBuilder?</h4>
+            <p>A service that provides convenient methods for creating reactive form controls, groups, and arrays.</p>
+
+            <h4>Q6. setValue() vs patchValue()?</h4>
+            <p>setValue()  → complete structure required <br>
+            patchValue() → partial update allowed</p>
+
+            <h4>Q7. What does markAllAsTouched() do?</h4>
+            <p>It marks all controls in a form as touched.</p>
+            <p><strong>this.employeeForm.markAllAsTouched();</strong></p>
+            <p>This is commonly used when the user submits an invalid form so that validation messages become visible.</p>
+
+            <h4>Q8. What does getRawValue() do?</h4>
+            <p>It returns the form's values including disabled controls.</p>
+            <p>const data = this.employeeForm.getRawValue();</p>
+
+            <h4>Q9. What does a custom validator return?</h4>
+            <p>valid: null</p>
+            <p>Invalid:  errorName: true</p>
+
+            <h4>Q10. What is valueChanges?</h4>
+            <p>An Observable that emits whenever the value of a control or form changes.</p>
+
+            <h4>Q11. What is statusChanges?</h4>
+            <p>An Observable that emits whenever the validation status changes.</p>
+
+            <h4>Q12. What is an async validator?</h4>
+            <p>A validator that performs asynchronous validation, commonly using an API call, and returns an Observable or Promise.</p>
+        </div>
+    </div>
   <div class="sub-section">
     <h2>Forms</h2>
     <p>In Angular, Forms are used to collect, validate, track, and submit user input.</p>

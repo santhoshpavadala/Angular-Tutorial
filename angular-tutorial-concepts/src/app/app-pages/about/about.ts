@@ -4,7 +4,7 @@ import { Tabs } from '../../app-shared/tabs/tabs';
 
 @Component({
   selector: 'app-about',
-  imports: [Alert, Tabs],
+  imports: [],
   templateUrl: './about.html',
   styleUrl: './about.scss'
 })

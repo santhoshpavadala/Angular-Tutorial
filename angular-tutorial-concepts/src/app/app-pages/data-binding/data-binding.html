@@ -1,9 +1,55 @@
 <div class="section">
-  <h1>Angular - Data Binding Examples</h1>
+  <h1>Topic 1: Angular - Data Binding Examples</h1>
+
+  <div class="sub-section">
+    <h2>Data Binding</h2>
+    <h2>Q1. What is data binding in Angular?</h2>
+    <p>Data binding connects component data and behavior to a template. It allows Angular to display values, set
+      element properties, respond to events, and synchronize values between the component and the view.</p>
+
+
+    <h2>Q2. What are the different types of data binding?</h2>
+    <p>Angular supports four commonly discussed types:</p>
+    <ol>
+      <li>Interpolation</li>
+      <li>Property binding.</li>
+      <li>Event binding.</li>
+      <li>Two-way binding.</li>
+    </ol>
+
+    <div>
+      <h2>Q3. What is interpolation?</h2>
+      <p>Interpolation uses double curly braces to display an expression's result as text in a template.</p>
+      <h4>1. Interpolation: {{ name }}</h4>
+    </div>
+    <div>
+      <h2>Q4. What is property binding?</h2>
+      <p>Property binding sets a DOM property or component input using an expression from the component.</p>
+      <img [src]="imageUrl" width="100px">
+    </div>
+    <div>
+      <h2>Q5. What is event binding?</h2>
+      <p>Event binding listens for an event and executes a template expression when the event occurs.</p>
+      <button (click)="save()">Save</button>
+    </div>
+    <div>
+      <h2>Q6. What is two-way data binding?</h2>
+      <p>Two-way binding combines a value flowing from the component to the view with an event that updates the
+        component from the view.</p>
+      <input [(ngModel)]="inputName">
+      <p>This is called banana-in-a-box syntax.</p>
+    </div>
+
+    <h4>Q. You have a search input that should filter a table as the user types. How would you implement it?</h4>
+    <p>For a simple local table, I would use event binding or a form control to capture the search term and derive
+      the filtered list. For API-based search, I would use an input stream with operators such as debounceTime,
+      distinctUntilChanged, and switchMap to avoid unnecessary requests.</p>
+  </div>
 
   <div class="sub-section">
     <h2>What is Data Binding?</h2>
-    <p>Data Binding is the process of connecting component data with the template to keep the UI synchronized automatically.</p>
+    <p>Data Binding is the process of connecting component data with the template to keep the UI synchronized
+      automatically.</p>
 
     <ul>Data binding is two types in angular:
       <li>One-Way Data Binding in Angular</li>
@@ -36,9 +82,10 @@
   <div class="sub-section">
     <h2> 1.1 Interpolation</h2>
     <p>Interpolation is a one-way binding technique used to display data from the component to the template. <br>
-    It uses double curly braces.</p>
-    <p>Interpolation is a one-way data binding technique used to display component data in the template using double curly braces syntax.</p>
-    
+      It uses double curly braces.</p>
+    <p>Interpolation is a one-way data binding technique used to display component data in the template using double
+      curly braces syntax.</p>
+
     <h4>Examples</h4>
     <p>{{stringInterpolation}}</p>
     <div>{{functionCall()}}</div>
@@ -125,9 +172,9 @@
     <p>Two-way data binding allows data to flow both directions between component and template.</p>
     <p>Changes in the component update the UI. <br>
       Changes in the UI update the component.</p>
-      
-      <pre>"ngModel"</pre>
-      This syntax is called Banana in a Box.
+
+    <pre>"ngModel"</pre>
+    This syntax is called Banana in a Box.
 
     <h4>Examples</h4>
     <div>
@@ -145,14 +192,14 @@
 
     <p> Array String and Number Variable </p>
     @for (item of cityName; track item) {
-      <div>
-        <div>{{item}}</div>
-      </div>
+    <div>
+      <div>{{item}}</div>
+    </div>
     }
     @for (item of rollNumber; track item) {
-      <div>
-        <div>{{item}}</div>
-      </div>
+    <div>
+      <div>{{item}}</div>
+    </div>
     }
 
     <h3>Object Student List</h3>
@@ -165,31 +212,31 @@
 
     <!-- WHile forloop its used of keyvalue present forloop -->
     @for (student of students | keyvalue; track student) {
-      <div>
-        <strong>{{ student.key }}:</strong> {{ student.value }}
-      </div>
+    <div>
+      <strong>{{ student.key }}:</strong> {{ student.value }}
+    </div>
     }
 
     @for (student of students | keyvalue; track student.key) {
-      <div>
-        <strong>{{ student.key }}:</strong> {{ student.value }}
-      </div>
+    <div>
+      <strong>{{ student.key }}:</strong> {{ student.value }}
+    </div>
     }
 
 
     <h3>Array Of ObjectStudent List</h3>
 
     @for (student of studentList; track student.id; let i = $index) {
-      <div>
-        <p>Index: {{ i }}</p>
-        <p>Id: {{student.id}}</p>
-        <p>Name: {{ student.name }}</p>
-        <p>Email: {{ student.email }}</p>
-        <p>Mobile: {{ student.mobile }}</p>
-        <hr />
-      </div>
-      } @empty {
-      <p>No students found</p>
+    <div>
+      <p>Index: {{ i }}</p>
+      <p>Id: {{student.id}}</p>
+      <p>Name: {{ student.name }}</p>
+      <p>Email: {{ student.email }}</p>
+      <p>Mobile: {{ student.mobile }}</p>
+      <hr />
+    </div>
+    } @empty {
+    <p>No students found</p>
     }
   </div>
 </div>

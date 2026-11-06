@@ -1,5 +1,177 @@
 <div class="section">
-  <h1>Lifecycle-Hooks</h1>
+  <h1>Topic 10: Lifecycle-Hooks</h1>
+
+  <div class="sub-section">
+        <h2>Topic 11: Angular Lifecycle Hooks</h2>
+        <div>
+            <h2>What are Lifecycle Hooks in Angular?</h2>
+            <p>Lifecycle hooks are methods that allow developers to execute code at specific stages of a component or
+                directive's lifecycle. <br>
+                They are useful for initializing data, responding to input changes, accessing initialized views, and
+                cleaning up resources.</p>
+
+            <p>In Angular, a component is born, updated, and destroyed. <br />
+                Angular gives us lifecycle hooks — special methods that let us tap into
+                each stage of that component’s life. <br />
+                Think of them like checkpoints: <br />
+                “Component created” → “Data changed” → “View rendered” → “Component
+                destroyed”
+            </p>
+            <p>
+                Lifecycle hooks are special methods that Angular calls at specific moments
+                in a component's life - from creation to destruction. They let you tap
+                into key moments and run custom logic.
+            </p>
+
+            <h2>Q2. Explain the Angular lifecycle hooks.</h2>
+            <pre>
+                <code>
+Hook	                Purpose
+ngOnChanges	            Responds to changes in input properties
+ngOnInit	            Runs once after initial input setup
+ngDoCheck	            Allows custom change checking
+ngAfterContentInit	    Runs after projected content is initialized
+ngAfterContentChecked	Runs after projected content is checked
+ngAfterViewInit	        Runs after the component view is initialized
+ngAfterViewChecked	    Runs after the component view is checked
+ngOnDestroy	            Runs before the component or directive is destroyed
+                </code>
+            </pre>
+
+
+
+
+
+            <h4>Full Lifecycle Order (Big Picture)</h4>
+            <ul>
+                <li>constructor() → Component instance created</li>
+                <li>ngOnChanges() → Input() properties change, Called when an @Input() value changes.</li>
+                <pre>
+                    <code>
+                        ngOnChanges(changes: SimpleChanges) 
+                            console.log(changes);
+                        
+                    </code>
+                </pre>
+                <li>ngOnInit() → Component initialized (called once)</li>
+                <pre>
+                    <code>
+                        ngOnInit() 
+                            this.loadUsers();
+                        
+                    </code>
+                </pre>
+                <li>ngDoCheck() → Custom change detection</li>
+                <li>ngAfterContentInit() → Content projection initialized</li>
+                <li>ngAfterContentChecked() → Content projection checked</li>
+                <li>ngAfterViewInit() → View initialized, Runs after component view initialization. @ViewChild()</li>
+                <pre>
+                    <code>
+                        @ViewChild()
+                    </code>
+                </pre>
+                <li>ngAfterViewChecked() → View checked</li>
+                <li>ngOnDestroy() → Component destroyed, Used for cleanup.</li>
+                <pre>
+                    <code>
+                        ngOnDestroy() 
+                            this.subscription.unsubscribe();
+                        
+                    </code>
+                </pre>
+            </ul>
+        </div>
+
+        <h2>Q3. What is the difference between constructor and ngOnInit?</h2>
+        <p>The constructor is a TypeScript class initialization method. It is commonly used for dependency injection and
+            simple initialization. <br>
+            ngOnInit is an Angular lifecycle hook. It runs after Angular has initialized the component's input
+            properties.</p>
+
+        <h2>Q4. What is the difference between ngOnChanges and ngOnInit?</h2>
+        <p>ngOnChanges runs when input properties change. It can run during initial setup before ngOnInit, and it may
+            run again for later input changes. <br>
+            ngOnInit runs once after the initial input setup.</p>
+
+        <pre>
+            <code>
+import 
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+ from '@angular/core';
+
+@Component(
+  selector: 'app-user',
+  standalone: true,
+  template: `<p> name </p>`
+)
+export class UserComponent implements OnChanges, OnInit 
+  @Input() name = '';
+
+  ngOnChanges(changes: SimpleChanges) 
+    console.log('Input changed', changes);
+  
+
+  ngOnInit() 
+    console.log('Component initialized');
+            </code>
+        </pre>
+
+        <h2>Q5. What is the difference between ngAfterViewInit and ngAfterContentInit?</h2>
+        <p>ngAfterViewInit runs after the component's own view and view children are initialized. <br>
+            ngAfterContentInit runs after content projected into the component using content projection has been
+            initialized.</p>
+
+        <h2>Q6. What is the purpose of ngOnDestroy?</h2>
+        <p>ngOnDestroy allows a component or directive to release resources before destruction. Common cleanup tasks
+            include unsubscribing from long-lived Observables, removing manually registered event listeners, and
+            clearing other resources.</p>
+
+        <h2>Q7. What is the difference between ngDoCheck and ngOnChanges?</h2>
+        <p>ngOnChanges responds to Angular-detected changes in input properties. ngDoCheck allows custom change checking
+            and runs during relevant change-detection cycles. <br>
+            ngDoCheck should be used cautiously because it can execute frequently.</p>
+
+        <h2>Q8. How do you prevent memory leaks from subscriptions?</h2>
+        <p>Use appropriate cleanup strategies based on the subscription lifecycle. Common approaches include the async
+            pipe, takeUntilDestroyed(), and the takeUntil pattern.</p>
+        <pre>
+            <code>
+import 
+  Component,
+  DestroyRef,
+  inject,
+  OnInit
+ from '@angular/core';
+import  takeUntilDestroyed  from '@angular/core/rxjs-interop';
+import  interval  from 'rxjs';
+
+@Component(
+  selector: 'app-timer',
+  standalone: true,
+  template: `<p>Timer component</p>`
+)
+export class TimerComponent implements OnInit 
+  private destroyRef = inject(DestroyRef);
+
+  ngOnInit() 
+    interval(1000)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => console.log(value));
+            </code>
+        </pre>
+        <p>The subscription is automatically cleaned up when the component is destroyed.</p>
+
+        <h2>Q. You subscribe to a continuously running WebSocket stream in a component. What happens if you do not clean
+            up the subscription?</h2>
+        <p>The subscription may continue receiving data after the component is destroyed, potentially causing memory
+            leaks, unnecessary processing, or attempts to update state that is no longer relevant. I would use an
+            appropriate cleanup strategy or manage the stream at a longer-lived service level if the data needs to
+            remain active across views.</p>
+    </div>
   <div class="sub-section">
     <h2>What are Lifecycle Hooks in Angular?</h2>
     <p>

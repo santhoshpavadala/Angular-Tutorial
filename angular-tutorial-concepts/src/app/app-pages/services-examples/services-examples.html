@@ -1,5 +1,409 @@
 <div class="section">
-  <h1>Angular Services Examples</h1>
+  <h1>Topic 12: Angular Services Examples</h1>
+
+   <div class="sub-section">
+        <h2>Services</h2>
+        <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing, and
+            common functionality across multiple components.</p>
+        <p> In Angular, a Service is a class used to share data, logic, or functionality across multiple components.
+        </p>
+        <p>For example, in an employee management application, multiple components may need employee data. Instead of
+            writing API calls in every component, create an EmployeeService and reuse it.</p>
+        <p>It follows the Singleton pattern (when provided in root), meaning one shared instance across the application.
+        </p>
+        <ul>We use services for:
+            <li>API calls (HTTP requests)& Improve maintainability and testability.</li>
+            <li>Reuse business logic across components: Share data between components.</li>
+            <li>State management</li>
+            <li>Data sharing between components: Centralize API communication.</li>
+            <li>Reusable utility functions<: Separate UI logic from application logic./li>
+            <li>Authentication & authorization logic</li>
+        </ul>
+
+        <div>
+            <p>A Service is a TypeScript class used to store: <br>
+                Business Logic <br>
+                API Calls <br>
+                Shared Data <br>
+                Reusable Functions <br>
+                Services help keep components clean and focused on UI logic.</p>
+
+            <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing,
+                and
+                common functionality across multiple components.</p>
+
+            <h4>Example: Creating an Angular service <br>
+                Create a service using the Angular CLI:</h4>
+            <p><strong>ng generate service services/employee</strong></p>
+            <pre>
+                    <code [textContent]="serviceExample"></code>
+                </pre>
+            <p>Here:</p>
+            <ul>
+                <li>@Injectable() makes the class available for Angular's dependency injection system.</li>
+                <li>providedIn: 'root' registers the service with the root injector.</li>
+                <li>getEmployees() returns the employee list.</li>
+                <li>getEmployeeById() finds an employee by ID.</li>
+            </ul>
+
+            <p>Using the service in a component: in code section above</p>
+            <p>The component receives an instance of EmployeeService through its constructor rather than creating the
+                service manually.</p>
+
+            <div>
+                <h2>Interview questions</h2>
+                <h4>Q1. Why do we use services in Angular?</h4>
+                <p>Services help separate concerns, reuse logic, share data and centralize functionality such as API
+                    calls and business rules.</p>
+                <h4>Q2. Can we use a service without @Injectable()?</h4>
+                <p>A class without @Injectable() can sometimes be injected if it has no dependencies and is provided
+                    appropriately. However, @Injectable() is the standard and recommended approach for services,
+                    particularly when they have dependencies or use Angular's DI features.</p>
+                <h4>Q3. Should all business logic be written in services?</h4>
+                <p>Not necessarily. Component-specific UI behavior belongs in components. Reusable business logic and
+                    data operations are good candidates for services. The goal is clear responsibility, not moving every
+                    method out of a component.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="sub-section">
+        <h2>15. Dependency Injection</h2>
+        <p>Dependency Injection (DI) is a design pattern used by Angular to provide the dependencies required by a class
+            instead of the class creating those dependencies itself.</p>
+        <p>DI means Angular creates and provides the objects/services that a component, service, directive, or other
+            class needs.</p>
+        <p>Instead of creating manually for each service in component, Angular provides Constructor or Inject menthods
+            to call the required services to a component</p>
+        <div>
+            <pre>
+                <code>
+                    export class UserComponent 
+                        userService = new UserService();
+                        authService = new AuthService();
+                        loggerService = new LoggerService();
+                </code>
+            </pre>
+
+            <pre>
+                <code>
+                    export class UserComponent 
+                    constructor (
+                        private userService: UserService,
+                        private authService: AuthService,
+                        private loggerService: LoggerService
+                    ) 
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>@Injectable() in Angular</h2>
+            <p>@Injectable() tells Angular that a class can participate in Angular's dependency injection system.</p>
+            <pre>
+                <code>
+                    @Injectable(
+                        providedIn: 'root'
+                    )
+                        export class UserService 
+                </code>
+            </pre>
+
+            <h4>providedIn: 'root' and Service Providers</h4>
+            <p>A provider tells Angular how to resolve a dependency. For services, the provider configuration determines
+                where the service is registered and which instances are available.</p>
+        </div>
+
+        <p>This tells Angular to provide the service at the root application injector. <br>
+            Therefore, normally the service behaves as a singleton within that application injector.</p>
+
+        <p>DI with inject():
+            Modern Angular also supports the inject() function.</p>
+        <p>Instead of : constructor(private userService: UserService) </p>
+        <p>We can write: private userService = inject(UserService);</p>
+
+        <div>
+            <h2>Interview questions</h2>
+            <h4>Q1. What is the difference between providedIn: 'root' and component-level providers?</h4>
+            <p>providedIn: 'root' registers a service application-wide through the root injector. Component-level
+                providers register a service in a particular component's injector, allowing a separate instance for that
+                component subtree.</p>
+
+            <h4>Q2. What is providedIn: 'platform'?</h4>
+            <p>It registers a service in the platform injector, which can be shared by applications running on the same
+                Angular platform instance. It is a specialized option rather than the usual choice for ordinary
+                application services.</p>
+
+            <h4>Q3. What is tree-shakable dependency injection?</h4>
+            <p>When services are provided using mechanisms such as providedIn: 'root', Angular's build tools can
+                eliminate unused services from the production bundle when they are not referenced by the application.
+            </p>
+        </div>
+
+        <div>
+            <h2>4. Hierarchical Dependency Injection</h2>
+            <p>Angular DI is hierarchical. Instead of having only one injector, Angular has injector hierarchies that
+                determine which provider supplies a dependency.</p>
+            <p>For modern standalone Angular applications, the main concepts are:</p>
+            <ul>
+                <li>Environment injectors: Used for application-level and route-level provider scopes.</li>
+                <li>Element injectors: Associated with components and directives in the component tree.</li>
+            </ul>
+            <p>A component can resolve dependencies from its own injector or from an ancestor injector.</p>
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="hirarchialDI"></code>
+            </pre>
+
+            <p>Here, the parent component has its own NotificationService provider. The child resolves the service from
+                the nearest matching provider in its injector hierarchy, so it receives the parent's instance rather
+                than the root instance.</p>
+        </div>
+
+        <div>
+            <h2>Resolution modifiers</h2>
+            <p>Angular provides DI modifiers that change how a dependency is resolved.</p>
+            <pre>
+                <code>
+Modifier	    Purpose
+self	        Look only in the current injector
+skipSelf	    Start searching from the parent injector
+optional	    Return null if no provider is found
+host	        Restrict resolution to the relevant host boundary
+                </code>
+            </pre>
+
+            <p>Example:</p>
+            <pre>
+                <code [textContent]="resModifier"></code>
+            </pre>
+            <p>This requests the service from an ancestor injector and allows the dependency to be absent.</p>
+
+
+        </div>
+
+        <div>
+            <h2>Interview questions</h2>
+            <h4>Q1. What is hierarchical dependency injection?</h4>
+            <p>It is Angular's mechanism for organizing providers across injector hierarchies. It allows different parts
+                of an application to share services or use scoped instances.</p>
+
+            <h4>Q2. What happens if the same service is provided in root and in a child component?</h4>
+            <p>The child component and descendants resolving from its provider get the child-scoped instance. Other
+                parts of the application resolving from the root continue to use the root instance.</p>
+
+            <h4>Q3. Why is hierarchical DI useful?</h4>
+            <p>It supports scoped state and behavior. For example, separate instances of a form-state service can be
+                created for different editor components without sharing their internal state.</p>
+        </div>
+
+        <div>
+            <h2>5. InjectionToken</h2>
+            <p>An InjectionToken allows Angular to inject values or dependencies that are not represented by a class.
+            </p>
+            <p>This is useful for injecting:</p>
+            <ul>
+                <li>Configuration objects.</li>
+                <li>API base URLs.</li>
+                <li>Feature flags.</li>
+                <li>Interfaces and other TypeScript types.</li>
+                <li>- Abstract dependencies with different implementations.</li>
+            </ul>
+            <p>TypeScript interfaces disappear during compilation, so they cannot directly act as Angular DI tokens.</p>
+            <p>Example: API configuration: app.config.ts or a configuration file</p>
+
+            <pre><code [textContent]="injectionToken"></code></pre>
+            <p>Register the token:</p>
+
+            <pre>
+                <code [textContent]="injectionToken2"></code>
+            </pre>
+
+            <p>Inject the configuration:</p>
+            <pre><code [textContent]="injectionToken3"></code></pre>
+
+            <h4>Provider strategies</h4>
+            <p>Angular providers support several strategies.</p>
+            <pre>
+                <code>
+Strategy	Purpose
+useClass	Provide an instance of a class
+useValue	Provide a fixed value
+useFactory	Create a dependency using a factory function
+useExisting	Create an alias for another provider
+
+Example: 
+providers: [
+  <!-- { -->
+    provide: APP_CONFIG,
+    useFactory: () => (
+        <!-- { -->
+      apiUrl: '/api',
+      production: true
+    <!-- } -->
+    )
+  <!-- } -->
+]
+                </code>
+            </pre>
+
+
+            <div>
+                <h2>Interview questions</h2>
+                <h4>Q1. Why do we need InjectionToken?</h4>
+                <p>It provides a runtime token for dependencies that are not classes, such as interfaces, configuration
+                    values and primitive types.</p>
+
+                <h4>Q2. What is the difference between useClass and useExisting?</h4>
+                <p>useClass tells Angular to instantiate a class for a token. useExisting aliases an existing provider
+                    token, so both tokens resolve to the same instance when they refer to that provider.</p>
+
+                <h4>Q3. When would you use useFactory?</h4>
+                <p>Use it when the provided value depends on runtime conditions, configuration, or other injected
+                    dependencies and needs to be created by a function.</p>
+            </div>
+
+        </div>
+
+        <div>
+            <h2>6. inject() vs Constructor Injection</h2>
+            <p>Angular supports two common ways to obtain dependencies.</p>
+            <h4>Constructor injection</h4>
+            <p>constructor(private employeeService: EmployeeService)</p>
+            <p>The dependency is declared as a constructor parameter.</p>
+
+            <h4>The inject() function</h4>
+            <p>private employeeService = inject(EmployeeService);</p>
+            <p>inject() retrieves a dependency from the active injection context. It is commonly used in field
+                initializers, provider factories, guards and other supported injection contexts.</p>
+
+            <h2>Interview questions</h2>
+            <h4>Q1. Which is better: constructor injection or inject()?</h4>
+            <p>Both are valid. Constructor injection is familiar and explicit, while inject() can make field-based
+                dependencies and functional APIs more convenient. Follow the conventions of the codebase and choose the
+                approach that keeps dependencies clear.</p>
+            <h4>Q2. Can inject() be called inside any method?</h4>
+            <p>No. It must be called in an Angular injection context, such as a constructor, field initializer, provider
+                factory or supported functional API. Calling it later in an arbitrary method usually produces an
+                injection-context error.</p>
+            <h4>Q3. Can we use inject() in a functional route guard?</h4>
+            <p>Yes. Functional route guards execute in an injection context, so they can use inject() to obtain
+                services.</p>
+            <pre>
+                <code>
+                    export const authGuard: CanActivateFn = () => 
+                        const authService = inject(AuthService);
+                        const router = inject(Router);
+
+                        return authService.isLoggedIn
+                            ? true
+                            : router.createUrlTree(['/login']);
+                        ;
+                </code>
+            </pre>
+        </div>
+
+        <div>
+            <h2>7. Sharing Data Between Components Using Services</h2>
+            <p>A shared service is useful when components are unrelated in the component tree or when multiple
+                components need access to the same application state.</p>
+            <p>For modern Angular, Signals provide a convenient way to expose reactive state.</p>
+
+            <h4>Example: Shared cart service</h4>
+            <p>cart.service.ts</p>
+            <pre>
+                <code>
+import  Injectable, signal, computed  from '@angular/core';
+
+@Injectable(
+  providedIn: 'root'
+)
+export class CartService 
+  private itemsState = signal < string[]>([]);
+
+  items = this.itemsState.asReadonly();
+
+  itemCount = computed(() => this.items().length);
+
+  addItem(item: string) 
+  <!-- { -->
+    this.itemsState.update(items => [...items, item]);
+  <!-- } -->
+
+  clearCart() 
+  <!-- { -->
+    this.itemsState.set([]);
+  <!-- } -->
+
+  product component:
+  private cart = inject(CartService);
+
+  addToCart() 
+    this.cart.addItem('Laptop');
+
+  Cart component:
+  cart = inject(CartService);
+
+   h3 Cart Items: cart.itemCount() h3
+
+    @ for (item of cart.items(); track $index) 
+      <p> item </p>
+    
+      Both components resolve the root-provided service, so they observe the same cart state.
+
+                </code>
+            </pre>
+
+            <h2>Interview questions</h2>
+            <h4>Q1. How do you share data between unrelated components?</h4>
+            <p>Use a shared service with Signals, Observables or another state management mechanism. This avoids tightly
+                coupling unrelated components.</p>
+
+            <h4>Q2. What is the difference between using a shared service and using @Input() and @Output()?</h4>
+            <p>Inputs and outputs are suited to direct parent-child communication. A shared service is useful for
+                unrelated components or state that needs to be accessed from multiple places.</p>
+
+            <h4>Q3. Should a shared service expose writable signals publicly?</h4>
+            <p>For state that should be centrally managed, it is often better to keep writable signals private and
+                expose read-only signals. This prevents consumers from changing state without going through the
+                service's intended methods.</p>
+        </div>
+
+        <div>
+            <h2>8. Singleton Services and Service Instances</h2>
+            <p>A singleton service means a service has one shared instance within a particular injector scope. <br>
+                A service with providedIn: 'root' normally behaves as a singleton within that application's root
+                injector. <br>
+                However, singleton does not mean there can only ever be one instance of that service class in the entire
+                application. Providing the same service at component or route level can create additional instances.
+            </p>
+
+            <pre>
+                <code [textContent]="singleTon"></code>
+            </pre>
+
+            <p>Both components use the root-provided service instance, so the count is shared. <br>
+                If you add providers: [CounterService] to CounterAComponent, it gets its own instance instead.</p>
+
+            <div>
+                <h2>Interview questions</h2>
+                <h4>Q1. Is every Angular service a singleton?</h4>
+                <p>No. The instance lifecycle depends on where and how the service is provided.</p>
+
+                <h4>Q2. How can you accidentally create multiple instances of a service?</h4>
+                <p>By providing the service in multiple component injectors or other injector scopes. A common mistake
+                    is adding a root-provided service again to a component's providers array without intending to create
+                    a separate instance.</p>
+
+                <h4>Q3. What is a practical use case for multiple service instances?</h4>
+                <p>A reusable editor component may need its own editing state. Providing an editor-state service at the
+                    editor component level lets each editor maintain independent state.</p>
+            </div>
+
+        </div>
+    </div>
+
   <div class="sub-section">
     <h2>Angular Services – Brief Introduction</h2>
     <p>A Service is a reusable TypeScript class used to handle business logic, API communication, data sharing, and common functionality across multiple components.</p>
